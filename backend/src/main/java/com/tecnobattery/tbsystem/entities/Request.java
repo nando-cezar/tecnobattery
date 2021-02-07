@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 public class Request implements Serializable {
 
   /**
-   *
+   * 
    */
   private static final long serialVersionUID = 1L;
   @Id
@@ -29,9 +30,9 @@ public class Request implements Serializable {
   private LocalDateTime moment;
   private Double total;
   private String description;
-
+  @ManyToOne
   private Client client;
-
+  @ManyToOne
   private User user;
   @ManyToMany
   @JoinTable(name = "tb_request_product", joinColumns = @JoinColumn(name = "request_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))

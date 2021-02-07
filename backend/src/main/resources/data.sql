@@ -25,31 +25,32 @@ INSERT INTO tb_product (name, price, image_Url, description) VALUES ('Macarrão 
 INSERT INTO tb_product (name, price, image_Url, description) VALUES ('Macarrão Fusili', 38.0, 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/macarrao_fusili.jpg', 'Macarrão fusili com toque do chef e especiarias.');
 INSERT INTO tb_product (name, price, image_Url, description) VALUES ('Macarrão Penne', 37.9, 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/macarrao_penne.jpg', 'Macarrão penne fresco ao dente com tempero especial.');
 
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (1, 'Produto BAT 2S2P', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 100, 1);
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (3, 'Produto BAT 4S3P', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', 100, 2);
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (4, 'Produto BAT 1S2P', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', 100, 3);
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (2, 'Produto BAT 3S1P', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', 100, 1);
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (2, 'Produto BAT 5S6P', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', 100, 5);
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (5, 'Produto BAT 4S54P', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z',100, 3);
-INSERT INTO tb_request (client, description, moment, total, user) VALUES (6, 'Produto BAT 1S2P',  TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z',100, 4);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (1, 'Produto BAT 2S2P', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 100, 1);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (3, 'Produto BAT 4S3P', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', 100, 2);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (4, 'Produto BAT 1S2P', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', 100, 3);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (2, 'Produto BAT 3S1P', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', 100, 1);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (2, 'Produto BAT 5S6P', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', 100, 5);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (5, 'Produto BAT 4S54P', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z',100, 3);
+INSERT INTO tb_request (client_id, description, moment, total, user_id) VALUES (6, 'Produto BAT 1S2P',  TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z',100, 4);
 
-INSERT INTO tb_client_request (client_id, request_id) VALUES (1 , 1);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (1 , 4);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (2 , 2);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (2 , 5);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (2 , 7);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (3 , 3);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (3 , 4);
-INSERT INTO tb_client_request (client_id, request_id) VALUES (4 , 2);
+/*
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (1, 1);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (4, 2);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (1, 4);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (5, 2);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (7, 2);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (3, 3);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (4, 3);
+INSERT INTO tb_client_requests (client_id, requests_id) VALUES (2, 4);
 
-INSERT INTO tb_user_request (user_id, request_id) VALUES (1 , 1);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (1 , 4);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (2 , 2);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (2 , 5);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (2 , 7);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (3 , 3);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (3 , 4);
-INSERT INTO tb_user_request (user_id, request_id) VALUES (4 , 2);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (1, 1);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (4, 1);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (2, 2);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (5, 2);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (7, 2);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (3, 3);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (4, 3);
+INSERT INTO tb_user_requests (user_id, requests_id) VALUES (2, 4);
 
 
 INSERT INTO tb_request_product (request_id, product_id) VALUES (1 , 1);

@@ -1,12 +1,17 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,10 @@ public class Product implements Serializable {
   private Double price;
   private String description;
   private String imageUrl;
+
+  @ManyToMany
+  @JoinTable(name = "tb_product_request", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "request_id"))
+  private Set<Product> requests = new HashSet<>();
 
   public Product() {
   }
@@ -76,6 +85,10 @@ public class Product implements Serializable {
     this.imageUrl = imageUrl;
   }
 
+  public Set<Product> getRequests() {
+    return this.requests;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -85,18 +98,20 @@ public class Product implements Serializable {
     }
     Product product = (Product) o;
     return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price)
-        && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl);
+        && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl)
+        && Objects.equals(requests, product.requests);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, price, description, imageUrl);
+    return Objects.hash(id, name, price, description, imageUrl, requests);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", price='" + getPrice() + "'"
-        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
+        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + ", requests='"
+        + getRequests() + "'" + "}";
   }
 
 }

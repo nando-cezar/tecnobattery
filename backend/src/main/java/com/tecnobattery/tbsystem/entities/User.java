@@ -9,9 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,8 +28,7 @@ public class User implements Serializable {
   private String password;
   private TypeUser level;
 
-  @ManyToMany
-  @JoinTable(name = "tb_user_request", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "request_id"))
+  @OneToMany(mappedBy = "user")
   private Set<Request> requests = new HashSet<>();
 
   public User() {
@@ -87,10 +84,6 @@ public class User implements Serializable {
 
   public Set<Request> getRequests() {
     return this.requests;
-  }
-
-  public void setRequests(Set<Request> requests) {
-    this.requests = requests;
   }
 
   @Override
