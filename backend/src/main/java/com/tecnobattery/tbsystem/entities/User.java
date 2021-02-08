@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +30,9 @@ public class User implements Serializable {
   private String password;
   private TypeUser level;
 
-  @OneToMany(mappedBy = "user")
-  private Set<Request> requests = new HashSet<>();
+  @ManyToMany
+  @JoinTable(name = "tb_user_order", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "orderService_id"))
+  private Set<OrderService> orderServices = new HashSet<>();
 
   public User() {
   }
@@ -82,8 +85,12 @@ public class User implements Serializable {
     this.level = level;
   }
 
-  public Set<Request> getRequests() {
-    return this.requests;
+  public Set<OrderService> getOrderServices() {
+    return this.orderServices;
+  }
+
+  public void setOrderServices(Set<OrderService> orderServices) {
+    this.orderServices = orderServices;
   }
 
   @Override
@@ -96,19 +103,19 @@ public class User implements Serializable {
     User user = (User) o;
     return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email)
         && Objects.equals(password, user.password) && Objects.equals(level, user.level)
-        && Objects.equals(requests, user.requests);
+        && Objects.equals(orderServices, user.orderServices);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, email, password, level, requests);
+    return Objects.hash(id, username, email, password, level, orderServices);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
-        + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + ", requests='" + getRequests() + "'"
-        + "}";
+        + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + ", orderServices='"
+        + getOrderServices() + "'" + "}";
   }
 
 }

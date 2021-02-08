@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_client")
-public class Client implements Serializable {
+@Table(name = "tb_provider")
+public class Provider implements Serializable {
 
   /**
    *
@@ -26,10 +26,10 @@ public class Client implements Serializable {
   private String phone;
   private String email;
 
-  public Client() {
+  public Provider() {
   }
 
-  public Client(Long id, String name, String fantasyName, String cnpj, String phone, String email) {
+  public Provider(Long id, String name, String fantasyName, String cnpj, String phone, String email) {
     this.id = id;
     this.name = name;
     this.fantasyName = fantasyName;
@@ -90,13 +90,13 @@ public class Client implements Serializable {
   public boolean equals(Object o) {
     if (o == this)
       return true;
-    if (!(o instanceof Client)) {
+    if (!(o instanceof Provider)) {
       return false;
     }
-    Client client = (Client) o;
-    return Objects.equals(id, client.id) && Objects.equals(name, client.name)
-        && Objects.equals(fantasyName, client.fantasyName) && Objects.equals(cnpj, client.cnpj)
-        && Objects.equals(phone, client.phone) && Objects.equals(email, client.email);
+    Provider provider = (Provider) o;
+    return Objects.equals(id, provider.id) && Objects.equals(name, provider.name)
+        && Objects.equals(fantasyName, provider.fantasyName) && Objects.equals(cnpj, provider.cnpj)
+        && Objects.equals(phone, provider.phone) && Objects.equals(email, provider.email);
   }
 
   @Override

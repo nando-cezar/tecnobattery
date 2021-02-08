@@ -1,17 +1,13 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.time.OffsetDateTime;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,25 +17,28 @@ public class Product implements Serializable {
   /**
    *
    */
-  private static final long serialVersionUID = -6255181520948924390L;
+  private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
+  private Integer totalBattery;
+  private Integer power;
+  private OffsetDateTime moment;
   private Double price;
   private String description;
   private String imageUrl;
 
-  @ManyToMany
-  @JoinTable(name = "tb_product_request", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "request_id"))
-  private Set<Product> requests = new HashSet<>();
-
   public Product() {
   }
 
-  public Product(Long id, String name, Double price, String description, String imageUrl) {
+  public Product(Long id, String name, Integer totalBattery, Integer power, OffsetDateTime moment, Double price,
+      String description, String imageUrl) {
     this.id = id;
     this.name = name;
+    this.totalBattery = totalBattery;
+    this.power = power;
+    this.moment = moment;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
@@ -59,6 +58,30 @@ public class Product implements Serializable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public Integer getTotalBattery() {
+    return this.totalBattery;
+  }
+
+  public void setTotalBattery(Integer totalBattery) {
+    this.totalBattery = totalBattery;
+  }
+
+  public Integer getPower() {
+    return this.power;
+  }
+
+  public void setPower(Integer power) {
+    this.power = power;
+  }
+
+  public OffsetDateTime getMoment() {
+    return this.moment;
+  }
+
+  public void setMoment(OffsetDateTime moment) {
+    this.moment = moment;
   }
 
   public Double getPrice() {
@@ -85,10 +108,6 @@ public class Product implements Serializable {
     this.imageUrl = imageUrl;
   }
 
-  public Set<Product> getRequests() {
-    return this.requests;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -97,21 +116,22 @@ public class Product implements Serializable {
       return false;
     }
     Product product = (Product) o;
-    return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(price, product.price)
-        && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl)
-        && Objects.equals(requests, product.requests);
+    return Objects.equals(id, product.id) && Objects.equals(name, product.name)
+        && Objects.equals(totalBattery, product.totalBattery) && Objects.equals(power, product.power)
+        && Objects.equals(moment, product.moment) && Objects.equals(price, product.price)
+        && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, price, description, imageUrl, requests);
+    return Objects.hash(id, name, totalBattery, power, moment, price, description, imageUrl);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", price='" + getPrice() + "'"
-        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + ", requests='"
-        + getRequests() + "'" + "}";
+    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", totalBattery='" + getTotalBattery() + "'"
+        + ", power='" + getPower() + "'" + ", moment='" + getMoment() + "'" + ", price='" + getPrice() + "'"
+        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
   }
 
 }
