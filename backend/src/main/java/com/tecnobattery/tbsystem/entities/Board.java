@@ -1,12 +1,15 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +31,8 @@ public class Board implements Serializable {
   private Integer height;
   private Integer length;
   private String imageUrl;
+  @OneToMany(mappedBy = "battery")
+  private List<ManagementBattery> managementBatterys = new ArrayList<>();
 
   public Board() {
   }
@@ -117,6 +122,14 @@ public class Board implements Serializable {
     this.imageUrl = imageUrl;
   }
 
+  public List<ManagementBattery> getManagementBatterys() {
+    return this.managementBatterys;
+  }
+
+  public void setManagementBatterys(List<ManagementBattery> managementBatterys) {
+    this.managementBatterys = managementBatterys;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -128,19 +141,21 @@ public class Board implements Serializable {
     return Objects.equals(id, board.id) && Objects.equals(brand, board.brand) && Objects.equals(model, board.model)
         && Objects.equals(power, board.power) && Objects.equals(voltage, board.voltage)
         && Objects.equals(width, board.width) && Objects.equals(height, board.height)
-        && Objects.equals(length, board.length) && Objects.equals(imageUrl, board.imageUrl);
+        && Objects.equals(length, board.length) && Objects.equals(imageUrl, board.imageUrl)
+        && Objects.equals(managementBatterys, board.managementBatterys);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brand, model, power, voltage, width, height, length, imageUrl);
+    return Objects.hash(id, brand, model, power, voltage, width, height, length, imageUrl, managementBatterys);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'" + ", power='"
         + getPower() + "'" + ", voltage='" + getVoltage() + "'" + ", width='" + getWidth() + "'" + ", height='"
-        + getHeight() + "'" + ", length='" + getLength() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
+        + getHeight() + "'" + ", length='" + getLength() + "'" + ", imageUrl='" + getImageUrl() + "'"
+        + ", managementBatterys='" + getManagementBatterys() + "'" + "}";
   }
 
 }

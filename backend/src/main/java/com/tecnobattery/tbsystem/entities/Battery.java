@@ -1,12 +1,15 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +30,8 @@ public class Battery implements Serializable {
   private Integer diameter;
   private Integer height;
   private String imageUrl;
+  @OneToMany(mappedBy = "battery")
+  private List<ManagementBattery> managementBatterys = new ArrayList<>();
 
   public Battery() {
   }
@@ -107,6 +112,14 @@ public class Battery implements Serializable {
     this.imageUrl = imageUrl;
   }
 
+  public List<ManagementBattery> getManagementBatterys() {
+    return this.managementBatterys;
+  }
+
+  public void setManagementBatterys(List<ManagementBattery> managementBatterys) {
+    this.managementBatterys = managementBatterys;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -118,19 +131,21 @@ public class Battery implements Serializable {
     return Objects.equals(id, battery.id) && Objects.equals(brand, battery.brand)
         && Objects.equals(model, battery.model) && Objects.equals(capacity, battery.capacity)
         && Objects.equals(voltage, battery.voltage) && Objects.equals(diameter, battery.diameter)
-        && Objects.equals(height, battery.height) && Objects.equals(imageUrl, battery.imageUrl);
+        && Objects.equals(height, battery.height) && Objects.equals(imageUrl, battery.imageUrl)
+        && Objects.equals(managementBatterys, battery.managementBatterys);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brand, model, capacity, voltage, diameter, height, imageUrl);
+    return Objects.hash(id, brand, model, capacity, voltage, diameter, height, imageUrl, managementBatterys);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'"
         + ", capacity='" + getCapacity() + "'" + ", voltage='" + getVoltage() + "'" + ", diameter='" + getDiameter()
-        + "'" + ", height='" + getHeight() + "'" + ", imageUrl='" + getImageUrl() + "'" + ", products='" + "}";
+        + "'" + ", height='" + getHeight() + "'" + ", imageUrl='" + getImageUrl() + "'" + ", managementBatterys='"
+        + getManagementBatterys() + "'" + "}";
   }
 
 }

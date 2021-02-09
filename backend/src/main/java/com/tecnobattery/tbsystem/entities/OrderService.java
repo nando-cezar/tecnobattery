@@ -37,7 +37,7 @@ public class OrderService implements Serializable {
   private String description;
   private Integer amount;
   private Double price;
-  private RequestStatus status;
+  private OrderStatus status;
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
 
@@ -52,7 +52,7 @@ public class OrderService implements Serializable {
   }
 
   public OrderService(Long id, Client client, Product product, String description, Integer amount, Double price,
-      RequestStatus status, OffsetDateTime opening, OffsetDateTime deadline, Set<User> users) {
+      OrderStatus status, OffsetDateTime opening, OffsetDateTime deadline, Set<User> users) {
     this.id = id;
     this.client = client;
     this.product = product;
@@ -113,11 +113,11 @@ public class OrderService implements Serializable {
     this.price = price;
   }
 
-  public RequestStatus getStatus() {
+  public OrderStatus getStatus() {
     return this.status;
   }
 
-  public void setStatus(RequestStatus status) {
+  public void setStatus(OrderStatus status) {
     this.status = status;
   }
 

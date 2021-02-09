@@ -1,12 +1,15 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +28,10 @@ public class Provider implements Serializable {
   private String cnpj;
   private String phone;
   private String email;
+  @OneToMany(mappedBy = "provider")
+  private List<ManagementBattery> managementBatterys = new ArrayList<>();
+  @OneToMany(mappedBy = "provider")
+  private List<ManagementBoard> managementBoards = new ArrayList<>();
 
   public Provider() {
   }
@@ -86,6 +93,22 @@ public class Provider implements Serializable {
     this.email = email;
   }
 
+  public List<ManagementBattery> getManagementBatterys() {
+    return this.managementBatterys;
+  }
+
+  public void setManagementBatterys(List<ManagementBattery> managementBatterys) {
+    this.managementBatterys = managementBatterys;
+  }
+
+  public List<ManagementBoard> getManagementBoards() {
+    return this.managementBoards;
+  }
+
+  public void setManagementBoards(List<ManagementBoard> managementBoards) {
+    this.managementBoards = managementBoards;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -96,18 +119,22 @@ public class Provider implements Serializable {
     Provider provider = (Provider) o;
     return Objects.equals(id, provider.id) && Objects.equals(name, provider.name)
         && Objects.equals(fantasyName, provider.fantasyName) && Objects.equals(cnpj, provider.cnpj)
-        && Objects.equals(phone, provider.phone) && Objects.equals(email, provider.email);
+        && Objects.equals(phone, provider.phone) && Objects.equals(email, provider.email)
+        && Objects.equals(managementBatterys, provider.managementBatterys)
+        && Objects.equals(managementBoards, provider.managementBoards);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, fantasyName, cnpj, phone, email);
+    return Objects.hash(id, name, fantasyName, cnpj, phone, email, managementBatterys, managementBoards);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", fantasyName='" + getFantasyName() + "'"
-        + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "}";
+        + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'"
+        + ", managementBatterys='" + getManagementBatterys() + "'" + ", managementBoards='" + getManagementBoards()
+        + "'" + "}";
   }
 
 }

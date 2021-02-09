@@ -1,7 +1,6 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -24,7 +23,6 @@ public class Product implements Serializable {
   private String name;
   private Integer totalBattery;
   private Integer power;
-  private OffsetDateTime moment;
   private Double price;
   private String description;
   private String imageUrl;
@@ -32,13 +30,12 @@ public class Product implements Serializable {
   public Product() {
   }
 
-  public Product(Long id, String name, Integer totalBattery, Integer power, OffsetDateTime moment, Double price,
-      String description, String imageUrl) {
+  public Product(Long id, String name, Integer totalBattery, Integer power, Double price, String description,
+      String imageUrl) {
     this.id = id;
     this.name = name;
     this.totalBattery = totalBattery;
     this.power = power;
-    this.moment = moment;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
@@ -76,14 +73,6 @@ public class Product implements Serializable {
     this.power = power;
   }
 
-  public OffsetDateTime getMoment() {
-    return this.moment;
-  }
-
-  public void setMoment(OffsetDateTime moment) {
-    this.moment = moment;
-  }
-
   public Double getPrice() {
     return this.price;
   }
@@ -118,20 +107,20 @@ public class Product implements Serializable {
     Product product = (Product) o;
     return Objects.equals(id, product.id) && Objects.equals(name, product.name)
         && Objects.equals(totalBattery, product.totalBattery) && Objects.equals(power, product.power)
-        && Objects.equals(moment, product.moment) && Objects.equals(price, product.price)
-        && Objects.equals(description, product.description) && Objects.equals(imageUrl, product.imageUrl);
+        && Objects.equals(price, product.price) && Objects.equals(description, product.description)
+        && Objects.equals(imageUrl, product.imageUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, totalBattery, power, moment, price, description, imageUrl);
+    return Objects.hash(id, name, totalBattery, power, price, description, imageUrl);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", totalBattery='" + getTotalBattery() + "'"
-        + ", power='" + getPower() + "'" + ", moment='" + getMoment() + "'" + ", price='" + getPrice() + "'"
-        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
+        + ", power='" + getPower() + "'" + ", price='" + getPrice() + "'" + ", description='" + getDescription() + "'"
+        + ", imageUrl='" + getImageUrl() + "'" + "}";
   }
 
 }
