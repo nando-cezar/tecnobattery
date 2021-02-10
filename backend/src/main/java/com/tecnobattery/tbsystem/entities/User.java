@@ -1,10 +1,13 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +31,7 @@ public class User implements Serializable {
   private Long id;
   private String username;
   private String email;
+  private String phone;
   private String password;
   private TypeUser level;
 
@@ -34,13 +39,17 @@ public class User implements Serializable {
   @JoinTable(name = "tb_user_order", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "orderService_id"))
   private Set<OrderService> orderServices = new HashSet<>();
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<Comment> comments = new ArrayList<>();
+
   public User() {
   }
 
-  public User(Long id, String username, String email, String password, TypeUser level) {
+  public User(Long id, String username, String email, String phone, String password, TypeUser level) {
     this.id = id;
     this.username = username;
     this.email = email;
+    this.phone = phone;
     this.password = password;
     this.level = level;
   }
@@ -69,6 +78,14 @@ public class User implements Serializable {
     this.email = email;
   }
 
+  public String getPhone() {
+    return this.phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
   public String getPassword() {
     return this.password;
   }
@@ -93,6 +110,14 @@ public class User implements Serializable {
     this.orderServices = orderServices;
   }
 
+  public List<Comment> getComments() {
+    return this.comments;
+  }
+
+  public void setComments(List<Comment> comments) {
+    this.comments = comments;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -102,20 +127,21 @@ public class User implements Serializable {
     }
     User user = (User) o;
     return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email)
-        && Objects.equals(password, user.password) && Objects.equals(level, user.level)
-        && Objects.equals(orderServices, user.orderServices);
+        && Objects.equals(phone, user.phone) && Objects.equals(password, user.password)
+        && Objects.equals(level, user.level) && Objects.equals(orderServices, user.orderServices)
+        && Objects.equals(comments, user.comments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, email, password, level, orderServices);
+    return Objects.hash(id, username, email, phone, password, level, orderServices, comments);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
-        + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + ", orderServices='"
-        + getOrderServices() + "'" + "}";
+        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'"
+        + ", orderServices='" + getOrderServices() + "'" + ", comments='" + getComments() + "'" + "}";
   }
 
 }

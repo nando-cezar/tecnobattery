@@ -32,14 +32,15 @@ public class OrderService implements Serializable {
   private Long id;
   @ManyToOne
   private Client client;
-  @ManyToOne
-  private Product product;
   private String description;
-  private Integer amount;
   private Double price;
   private OrderStatus status;
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
+
+  @ManyToMany
+  @JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "orderService_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+  private List<Product> products = new ArrayList<>();
 
   @ManyToMany
   @JoinTable(name = "tb_order_user", joinColumns = @JoinColumn(name = "orderService_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -51,17 +52,16 @@ public class OrderService implements Serializable {
   public OrderService() {
   }
 
-  public OrderService(Long id, Client client, Product product, String description, Integer amount, Double price,
-      OrderStatus status, OffsetDateTime opening, OffsetDateTime deadline, Set<User> users) {
+  public OrderService(Long id, Client client, String description, Double price, OrderStatus status,
+      OffsetDateTime opening, OffsetDateTime deadline, List<Product> products, Set<User> users) {
     this.id = id;
     this.client = client;
-    this.product = product;
     this.description = description;
-    this.amount = amount;
     this.price = price;
     this.status = status;
     this.opening = opening;
     this.deadline = deadline;
+    this.products = products;
     this.users = users;
   }
 
@@ -81,28 +81,12 @@ public class OrderService implements Serializable {
     this.client = client;
   }
 
-  public Product getProduct() {
-    return this.product;
-  }
-
-  public void setProduct(Product product) {
-    this.product = product;
-  }
-
   public String getDescription() {
     return this.description;
   }
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Integer getAmount() {
-    return this.amount;
-  }
-
-  public void setAmount(Integer amount) {
-    this.amount = amount;
   }
 
   public Double getPrice() {
@@ -137,6 +121,14 @@ public class OrderService implements Serializable {
     this.deadline = deadline;
   }
 
+  public List<Product> getProducts() {
+    return this.products;
+  }
+
+  public void setProducts(List<Product> products) {
+    this.products = products;
+  }
+
   public Set<User> getUsers() {
     return this.users;
   }
@@ -162,24 +154,23 @@ public class OrderService implements Serializable {
     }
     OrderService orderService = (OrderService) o;
     return Objects.equals(id, orderService.id) && Objects.equals(client, orderService.client)
-        && Objects.equals(product, orderService.product) && Objects.equals(description, orderService.description)
-        && Objects.equals(amount, orderService.amount) && Objects.equals(price, orderService.price)
+        && Objects.equals(description, orderService.description) && Objects.equals(price, orderService.price)
         && Objects.equals(status, orderService.status) && Objects.equals(opening, orderService.opening)
-        && Objects.equals(deadline, orderService.deadline) && Objects.equals(users, orderService.users)
-        && Objects.equals(comments, orderService.comments);
+        && Objects.equals(deadline, orderService.deadline) && Objects.equals(products, orderService.products)
+        && Objects.equals(users, orderService.users) && Objects.equals(comments, orderService.comments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, client, product, description, amount, price, status, opening, deadline, users, comments);
+    return Objects.hash(id, client, description, price, status, opening, deadline, products, users, comments);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", client='" + getClient() + "'" + ", product='" + getProduct() + "'"
-        + ", description='" + getDescription() + "'" + ", amount='" + getAmount() + "'" + ", price='" + getPrice() + "'"
-        + ", status='" + getStatus() + "'" + ", opening='" + getOpening() + "'" + ", deadline='" + getDeadline() + "'"
-        + ", users='" + getUsers() + "'" + ", comments='" + getComments() + "'" + "}";
+    return "{" + " id='" + getId() + "'" + ", client='" + getClient() + "'" + ", description='" + getDescription() + "'"
+        + ", price='" + getPrice() + "'" + ", status='" + getStatus() + "'" + ", opening='" + getOpening() + "'"
+        + ", deadline='" + getDeadline() + "'" + ", products='" + getProducts() + "'" + ", users='" + getUsers() + "'"
+        + ", comments='" + getComments() + "'" + "}";
   }
 
 }

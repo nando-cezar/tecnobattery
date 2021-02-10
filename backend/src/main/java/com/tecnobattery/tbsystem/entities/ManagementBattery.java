@@ -4,11 +4,13 @@ import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +26,7 @@ public class ManagementBattery implements Serializable {
   private Long id;
   @ManyToOne
   private Provider provider;
-  @ManyToOne
+  @OneToOne(cascade = CascadeType.ALL)
   private Battery battery;
   private OffsetDateTime moment;
   private Integer amount;

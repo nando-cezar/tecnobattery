@@ -7,11 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.Table;;
 
 @Entity
-@Table(name = "tb_board")
-public class Board implements Serializable {
+@Table(name = "tb_loader")
+public class Loader implements Serializable {
 
   /**
    *
@@ -29,10 +29,10 @@ public class Board implements Serializable {
   private Integer length;
   private String imageUrl;
 
-  public Board() {
+  public Loader() {
   }
 
-  public Board(Long id, String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
+  public Loader(Long id, String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
       Integer length, String imageUrl) {
     this.id = id;
     this.brand = brand;
@@ -121,10 +121,10 @@ public class Board implements Serializable {
   public boolean equals(Object o) {
     if (o == this)
       return true;
-    if (!(o instanceof Board)) {
+    if (!(o instanceof Loader)) {
       return false;
     }
-    Board board = (Board) o;
+    Loader board = (Loader) o;
     return Objects.equals(id, board.id) && Objects.equals(brand, board.brand) && Objects.equals(model, board.model)
         && Objects.equals(power, board.power) && Objects.equals(voltage, board.voltage)
         && Objects.equals(width, board.width) && Objects.equals(height, board.height)

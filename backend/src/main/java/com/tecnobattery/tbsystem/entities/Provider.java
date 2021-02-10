@@ -1,15 +1,17 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,21 +30,26 @@ public class Provider implements Serializable {
   private String cnpj;
   private String phone;
   private String email;
+  @OneToOne(cascade = CascadeType.ALL)
+  private Address address;
   @OneToMany(mappedBy = "provider")
-  private List<ManagementBattery> managementBatterys = new ArrayList<>();
+  private Set<ManagementBattery> managementBatterys = new HashSet<>();
   @OneToMany(mappedBy = "provider")
-  private List<ManagementBoard> managementBoards = new ArrayList<>();
+  private Set<ManagementBoard> managementBoards = new HashSet<>();
+  @OneToMany(mappedBy = "provider")
+  private Set<ManagementLoader> managementLoaders = new HashSet<>();
 
   public Provider() {
   }
 
-  public Provider(Long id, String name, String fantasyName, String cnpj, String phone, String email) {
+  public Provider(Long id, String name, String fantasyName, String cnpj, String phone, String email, Address address) {
     this.id = id;
     this.name = name;
     this.fantasyName = fantasyName;
     this.cnpj = cnpj;
     this.phone = phone;
     this.email = email;
+    this.address = address;
   }
 
   public Long getId() {
@@ -93,20 +100,36 @@ public class Provider implements Serializable {
     this.email = email;
   }
 
-  public List<ManagementBattery> getManagementBatterys() {
+  public Address getAddress() {
+    return this.address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public Set<ManagementBattery> getManagementBatterys() {
     return this.managementBatterys;
   }
 
-  public void setManagementBatterys(List<ManagementBattery> managementBatterys) {
+  public void setManagementBatterys(Set<ManagementBattery> managementBatterys) {
     this.managementBatterys = managementBatterys;
   }
 
-  public List<ManagementBoard> getManagementBoards() {
+  public Set<ManagementBoard> getManagementBoards() {
     return this.managementBoards;
   }
 
-  public void setManagementBoards(List<ManagementBoard> managementBoards) {
+  public void setManagementBoards(Set<ManagementBoard> managementBoards) {
     this.managementBoards = managementBoards;
+  }
+
+  public Set<ManagementLoader> getManagementLoaders() {
+    return this.managementLoaders;
+  }
+
+  public void setManagementLoaders(Set<ManagementLoader> managementLoaders) {
+    this.managementLoaders = managementLoaders;
   }
 
   @Override
@@ -120,21 +143,23 @@ public class Provider implements Serializable {
     return Objects.equals(id, provider.id) && Objects.equals(name, provider.name)
         && Objects.equals(fantasyName, provider.fantasyName) && Objects.equals(cnpj, provider.cnpj)
         && Objects.equals(phone, provider.phone) && Objects.equals(email, provider.email)
-        && Objects.equals(managementBatterys, provider.managementBatterys)
-        && Objects.equals(managementBoards, provider.managementBoards);
+        && Objects.equals(address, provider.address) && Objects.equals(managementBatterys, provider.managementBatterys)
+        && Objects.equals(managementBoards, provider.managementBoards)
+        && Objects.equals(managementLoaders, provider.managementLoaders);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, fantasyName, cnpj, phone, email, managementBatterys, managementBoards);
+    return Objects.hash(id, name, fantasyName, cnpj, phone, email, address, managementBatterys, managementBoards,
+        managementLoaders);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", fantasyName='" + getFantasyName() + "'"
-        + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'"
-        + ", managementBatterys='" + getManagementBatterys() + "'" + ", managementBoards='" + getManagementBoards()
-        + "'" + "}";
+        + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", address='"
+        + getAddress() + "'" + ", managementBatterys='" + getManagementBatterys() + "'" + ", managementBoards='"
+        + getManagementBoards() + "'" + ", managementLoaders='" + getManagementLoaders() + "'" + "}";
   }
 
 }

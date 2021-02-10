@@ -14,8 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_management_board")
-public class ManagementBoard implements Serializable {
+@Table(name = "tb_management_loader")
+public class ManagementLoader implements Serializable {
 
   /**
    *
@@ -27,17 +27,17 @@ public class ManagementBoard implements Serializable {
   @ManyToOne
   private Provider provider;
   @OneToOne(cascade = CascadeType.ALL)
-  private Board board;
+  private Loader loader;
   private OffsetDateTime moment;
   private Integer amount;
 
-  public ManagementBoard() {
+  public ManagementLoader() {
   }
 
-  public ManagementBoard(Long id, Provider provider, Board board, OffsetDateTime moment, Integer amount) {
+  public ManagementLoader(Long id, Provider provider, Loader loader, OffsetDateTime moment, Integer amount) {
     this.id = id;
     this.provider = provider;
-    this.board = board;
+    this.loader = loader;
     this.moment = moment;
     this.amount = amount;
   }
@@ -58,12 +58,12 @@ public class ManagementBoard implements Serializable {
     this.provider = provider;
   }
 
-  public Board getBoard() {
-    return this.board;
+  public Loader getLoader() {
+    return this.loader;
   }
 
-  public void setBoard(Board board) {
-    this.board = board;
+  public void setLoader(Loader loader) {
+    this.loader = loader;
   }
 
   public OffsetDateTime getMoment() {
@@ -86,23 +86,23 @@ public class ManagementBoard implements Serializable {
   public boolean equals(Object o) {
     if (o == this)
       return true;
-    if (!(o instanceof ManagementBoard)) {
+    if (!(o instanceof ManagementLoader)) {
       return false;
     }
-    ManagementBoard managementBoard = (ManagementBoard) o;
-    return Objects.equals(id, managementBoard.id) && Objects.equals(provider, managementBoard.provider)
-        && Objects.equals(board, managementBoard.board) && Objects.equals(moment, managementBoard.moment)
-        && Objects.equals(amount, managementBoard.amount);
+    ManagementLoader managementLoader = (ManagementLoader) o;
+    return Objects.equals(id, managementLoader.id) && Objects.equals(provider, managementLoader.provider)
+        && Objects.equals(loader, managementLoader.loader) && Objects.equals(moment, managementLoader.moment)
+        && Objects.equals(amount, managementLoader.amount);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, provider, board, moment, amount);
+    return Objects.hash(id, provider, loader, moment, amount);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", provider='" + getProvider() + "'" + ", board='" + getBoard() + "'"
+    return "{" + " id='" + getId() + "'" + ", provider='" + getProvider() + "'" + ", loader='" + getLoader() + "'"
         + ", moment='" + getMoment() + "'" + ", amount='" + getAmount() + "'" + "}";
   }
 

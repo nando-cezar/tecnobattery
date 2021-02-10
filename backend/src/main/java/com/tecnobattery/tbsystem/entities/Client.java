@@ -1,12 +1,17 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,22 +25,27 @@ public class Client implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  private String cnpj;
   private String name;
   private String fantasyName;
-  private String cnpj;
   private String phone;
   private String email;
+  @OneToOne(cascade = CascadeType.ALL)
+  private Address address;
+  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+  private Set<OrderService> orderServices = new HashSet<>();
 
   public Client() {
   }
 
-  public Client(Long id, String name, String fantasyName, String cnpj, String phone, String email) {
+  public Client(Long id, String cnpj, String name, String fantasyName, String phone, String email, Address address) {
     this.id = id;
+    this.cnpj = cnpj;
     this.name = name;
     this.fantasyName = fantasyName;
-    this.cnpj = cnpj;
     this.phone = phone;
     this.email = email;
+    this.address = address;
   }
 
   public Long getId() {
@@ -44,6 +54,14 @@ public class Client implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getCnpj() {
+    return this.cnpj;
+  }
+
+  public void setCnpj(String cnpj) {
+    this.cnpj = cnpj;
   }
 
   public String getName() {
@@ -62,14 +80,6 @@ public class Client implements Serializable {
     this.fantasyName = fantasyName;
   }
 
-  public String getCnpj() {
-    return this.cnpj;
-  }
-
-  public void setCnpj(String cnpj) {
-    this.cnpj = cnpj;
-  }
-
   public String getPhone() {
     return this.phone;
   }
@@ -86,6 +96,22 @@ public class Client implements Serializable {
     this.email = email;
   }
 
+  public Address getAddress() {
+    return this.address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+
+  public Set<OrderService> getOrderServices() {
+    return this.orderServices;
+  }
+
+  public void setOrderServices(Set<OrderService> orderServices) {
+    this.orderServices = orderServices;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -96,18 +122,20 @@ public class Client implements Serializable {
     Client client = (Client) o;
     return Objects.equals(id, client.id) && Objects.equals(name, client.name)
         && Objects.equals(fantasyName, client.fantasyName) && Objects.equals(cnpj, client.cnpj)
-        && Objects.equals(phone, client.phone) && Objects.equals(email, client.email);
+        && Objects.equals(phone, client.phone) && Objects.equals(email, client.email)
+        && Objects.equals(address, client.address) && Objects.equals(orderServices, client.orderServices);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, fantasyName, cnpj, phone, email);
+    return Objects.hash(id, name, fantasyName, cnpj, phone, email, address, orderServices);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", fantasyName='" + getFantasyName() + "'"
-        + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "}";
+        + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", address='"
+        + getAddress() + "'" + ", orderServices='" + getOrderServices() + "'" + "}";
   }
 
 }

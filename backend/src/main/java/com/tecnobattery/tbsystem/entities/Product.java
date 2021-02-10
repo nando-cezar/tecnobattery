@@ -21,8 +21,9 @@ public class Product implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private Integer totalBattery;
   private Integer power;
+  private Integer capacity;
+  private Integer voltage;
   private Double price;
   private String description;
   private String imageUrl;
@@ -30,12 +31,13 @@ public class Product implements Serializable {
   public Product() {
   }
 
-  public Product(Long id, String name, Integer totalBattery, Integer power, Double price, String description,
-      String imageUrl) {
+  public Product(Long id, String name, Integer power, Integer capacity, Integer voltage, Double price,
+      String description, String imageUrl) {
     this.id = id;
     this.name = name;
-    this.totalBattery = totalBattery;
     this.power = power;
+    this.capacity = capacity;
+    this.voltage = voltage;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
@@ -57,20 +59,28 @@ public class Product implements Serializable {
     this.name = name;
   }
 
-  public Integer getTotalBattery() {
-    return this.totalBattery;
-  }
-
-  public void setTotalBattery(Integer totalBattery) {
-    this.totalBattery = totalBattery;
-  }
-
   public Integer getPower() {
     return this.power;
   }
 
   public void setPower(Integer power) {
     this.power = power;
+  }
+
+  public Integer getCapacity() {
+    return this.capacity;
+  }
+
+  public void setCapacity(Integer capacity) {
+    this.capacity = capacity;
+  }
+
+  public Integer getVoltage() {
+    return this.voltage;
+  }
+
+  public void setVoltage(Integer voltage) {
+    this.voltage = voltage;
   }
 
   public Double getPrice() {
@@ -105,22 +115,22 @@ public class Product implements Serializable {
       return false;
     }
     Product product = (Product) o;
-    return Objects.equals(id, product.id) && Objects.equals(name, product.name)
-        && Objects.equals(totalBattery, product.totalBattery) && Objects.equals(power, product.power)
+    return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(power, product.power)
+        && Objects.equals(capacity, product.capacity) && Objects.equals(voltage, product.voltage)
         && Objects.equals(price, product.price) && Objects.equals(description, product.description)
         && Objects.equals(imageUrl, product.imageUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, totalBattery, power, price, description, imageUrl);
+    return Objects.hash(id, name, power, capacity, voltage, price, description, imageUrl);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", totalBattery='" + getTotalBattery() + "'"
-        + ", power='" + getPower() + "'" + ", price='" + getPrice() + "'" + ", description='" + getDescription() + "'"
-        + ", imageUrl='" + getImageUrl() + "'" + "}";
+    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", power='" + getPower() + "'"
+        + ", capacity='" + getCapacity() + "'" + ", voltage='" + getVoltage() + "'" + ", price='" + getPrice() + "'"
+        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
   }
 
 }
