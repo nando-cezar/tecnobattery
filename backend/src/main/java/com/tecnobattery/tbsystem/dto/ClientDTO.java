@@ -1,6 +1,8 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class ClientDTO {
 
@@ -11,12 +13,13 @@ public class ClientDTO {
   private String phone;
   private String email;
   private AddressDTO address;
+  private Set<OrderServiceDTO> orderServices = new HashSet<>();
 
   public ClientDTO() {
   }
 
   public ClientDTO(Long id, String cnpj, String name, String fantasyName, String phone, String email,
-      AddressDTO address) {
+      AddressDTO address, Set<OrderServiceDTO> orderServices) {
     this.id = id;
     this.cnpj = cnpj;
     this.name = name;
@@ -24,6 +27,7 @@ public class ClientDTO {
     this.phone = phone;
     this.email = email;
     this.address = address;
+    this.orderServices = orderServices;
   }
 
   public Long getId() {
@@ -82,6 +86,14 @@ public class ClientDTO {
     this.address = address;
   }
 
+  public Set<OrderServiceDTO> getOrderServices() {
+    return this.orderServices;
+  }
+
+  public void setOrderServices(Set<OrderServiceDTO> orderServices) {
+    this.orderServices = orderServices;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -93,12 +105,19 @@ public class ClientDTO {
     return Objects.equals(id, clientDTO.id) && Objects.equals(cnpj, clientDTO.cnpj)
         && Objects.equals(name, clientDTO.name) && Objects.equals(fantasyName, clientDTO.fantasyName)
         && Objects.equals(phone, clientDTO.phone) && Objects.equals(email, clientDTO.email)
-        && Objects.equals(address, clientDTO.address);
+        && Objects.equals(address, clientDTO.address) && Objects.equals(orderServices, clientDTO.orderServices);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, cnpj, name, fantasyName, phone, email, address);
+    return Objects.hash(id, cnpj, name, fantasyName, phone, email, address, orderServices);
+  }
+
+  @Override
+  public String toString() {
+    return "{" + " id='" + getId() + "'" + ", cnpj='" + getCnpj() + "'" + ", name='" + getName() + "'"
+        + ", fantasyName='" + getFantasyName() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'"
+        + ", address='" + getAddress() + "'" + ", orderServices='" + getOrderServices() + "'" + "}";
   }
 
 }
