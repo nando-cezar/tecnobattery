@@ -1,9 +1,16 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AddressDTO {
+import com.tecnobattery.tbsystem.entities.Address;
 
+public class AddressDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private String postalCode;
   private String publicPlace;
@@ -24,6 +31,16 @@ public class AddressDTO {
     this.neighborhood = neighborhood;
     this.city = city;
     this.state = state;
+  }
+
+  public AddressDTO(Address entity) {
+    this.id = entity.getId();
+    this.postalCode = entity.getPostalCode();
+    this.publicPlace = entity.getPublicPlace();
+    this.complement = entity.getComplement();
+    this.neighborhood = entity.getNeighborhood();
+    this.city = entity.getCity();
+    this.state = entity.getState();
   }
 
   public Long getId() {

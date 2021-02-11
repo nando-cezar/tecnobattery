@@ -1,9 +1,18 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
-public class ProviderDTO {
+import com.tecnobattery.tbsystem.entities.Provider;
 
+public class ProviderDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private String cnpj;
   private String name;
@@ -11,12 +20,16 @@ public class ProviderDTO {
   private String phone;
   private String email;
   private AddressDTO address;
+  private Set<ManagementBatteryDTO> managementBatterys = new HashSet<>();
+  private Set<ManagementBoardDTO> managementBoards = new HashSet<>();
+  private Set<ManagementLoaderDTO> managementLoaders = new HashSet<>();
 
   public ProviderDTO() {
   }
 
   public ProviderDTO(Long id, String cnpj, String name, String fantasyName, String phone, String email,
-      AddressDTO address) {
+      AddressDTO address, Set<ManagementBatteryDTO> managementBatterys, Set<ManagementBoardDTO> managementBoards,
+      Set<ManagementLoaderDTO> managementLoaders) {
     this.id = id;
     this.cnpj = cnpj;
     this.name = name;
@@ -24,6 +37,22 @@ public class ProviderDTO {
     this.phone = phone;
     this.email = email;
     this.address = address;
+    this.managementBatterys = managementBatterys;
+    this.managementBoards = managementBoards;
+    this.managementLoaders = managementLoaders;
+  }
+
+  public ProviderDTO(Provider entity) {
+    this.id = entity.getId();
+    this.cnpj = entity.getCnpj();
+    this.name = entity.getName();
+    this.fantasyName = entity.getFantasyName();
+    this.phone = entity.getPhone();
+    this.email = entity.getEmail();
+    this.address = entity.getAddress();
+    this.managementBatterys = entity.getManagementBatterys();
+    this.managementBoards = entity.getManagementBoards();
+    this.managementLoaders = entity.getManagementLoaders();
   }
 
   public Long getId() {
@@ -82,6 +111,30 @@ public class ProviderDTO {
     this.address = address;
   }
 
+  public Set<ManagementBatteryDTO> getManagementBatterys() {
+    return this.managementBatterys;
+  }
+
+  public void setManagementBatterys(Set<ManagementBatteryDTO> managementBatterys) {
+    this.managementBatterys = managementBatterys;
+  }
+
+  public Set<ManagementBoardDTO> getManagementBoards() {
+    return this.managementBoards;
+  }
+
+  public void setManagementBoards(Set<ManagementBoardDTO> managementBoards) {
+    this.managementBoards = managementBoards;
+  }
+
+  public Set<ManagementLoaderDTO> getManagementLoaders() {
+    return this.managementLoaders;
+  }
+
+  public void setManagementLoaders(Set<ManagementLoaderDTO> managementLoaders) {
+    this.managementLoaders = managementLoaders;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -89,16 +142,29 @@ public class ProviderDTO {
     if (!(o instanceof ProviderDTO)) {
       return false;
     }
-    ProviderDTO clientDTO = (ProviderDTO) o;
-    return Objects.equals(id, clientDTO.id) && Objects.equals(cnpj, clientDTO.cnpj)
-        && Objects.equals(name, clientDTO.name) && Objects.equals(fantasyName, clientDTO.fantasyName)
-        && Objects.equals(phone, clientDTO.phone) && Objects.equals(email, clientDTO.email)
-        && Objects.equals(address, clientDTO.address);
+    ProviderDTO providerDTO = (ProviderDTO) o;
+    return Objects.equals(id, providerDTO.id) && Objects.equals(cnpj, providerDTO.cnpj)
+        && Objects.equals(name, providerDTO.name) && Objects.equals(fantasyName, providerDTO.fantasyName)
+        && Objects.equals(phone, providerDTO.phone) && Objects.equals(email, providerDTO.email)
+        && Objects.equals(address, providerDTO.address)
+        && Objects.equals(managementBatterys, providerDTO.managementBatterys)
+        && Objects.equals(managementBoards, providerDTO.managementBoards)
+        && Objects.equals(managementLoaders, providerDTO.managementLoaders);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, cnpj, name, fantasyName, phone, email, address);
+    return Objects.hash(id, cnpj, name, fantasyName, phone, email, address, managementBatterys, managementBoards,
+        managementLoaders);
+  }
+
+  @Override
+  public String toString() {
+    return "{" + " id='" + getId() + "'" + ", cnpj='" + getCnpj() + "'" + ", name='" + getName() + "'"
+        + ", fantasyName='" + getFantasyName() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'"
+        + ", address='" + getAddress() + "'" + ", managementBatterys='" + getManagementBatterys() + "'"
+        + ", managementBoards='" + getManagementBoards() + "'" + ", managementLoaders='" + getManagementLoaders() + "'"
+        + "}";
   }
 
 }

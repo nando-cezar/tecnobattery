@@ -1,9 +1,16 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class BatteryDTO {
+import com.tecnobattery.tbsystem.entities.Battery;
 
+public class BatteryDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private String brand;
   private String model;
@@ -26,6 +33,17 @@ public class BatteryDTO {
     this.diameter = diameter;
     this.height = height;
     this.imageUrl = imageUrl;
+  }
+
+  public BatteryDTO(Battery entity) {
+    this.id = entity.getId();
+    this.brand = entity.getBrand();
+    this.model = entity.getModel();
+    this.capacity = entity.getCapacity();
+    this.voltage = entity.getVoltage();
+    this.diameter = entity.getDiameter();
+    this.height = entity.getHeight();
+    this.imageUrl = entity.getImageUrl();
   }
 
   public Long getId() {

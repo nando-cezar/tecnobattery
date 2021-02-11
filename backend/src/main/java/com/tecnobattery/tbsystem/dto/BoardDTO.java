@@ -1,9 +1,16 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class BoardDTO {
+import com.tecnobattery.tbsystem.entities.Board;
 
+public class BoardDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private String brand;
   private String model;
@@ -28,6 +35,18 @@ public class BoardDTO {
     this.height = height;
     this.length = length;
     this.imageUrl = imageUrl;
+  }
+
+  public BoardDTO(Board entity) {
+    this.id = entity.getId();
+    this.brand = entity.getBrand();
+    this.model = entity.getModel();
+    this.power = entity.getPower();
+    this.voltage = entity.getVoltage();
+    this.width = entity.getWidth();
+    this.height = entity.getHeight();
+    this.length = entity.getLength();
+    this.imageUrl = entity.getImageUrl();
   }
 
   public Long getId() {

@@ -1,10 +1,17 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-public class CommentDTO {
+import com.tecnobattery.tbsystem.entities.Comment;
 
+public class CommentDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private OrderServiceDTO orderService;
   private UserDTO user;
@@ -20,6 +27,14 @@ public class CommentDTO {
     this.user = user;
     this.description = description;
     this.moment = moment;
+  }
+
+  public CommentDTO(Comment entity) {
+    this.id = entity.getId();
+    this.orderService = entity.getOrderService();
+    this.user = entity.getUser();
+    this.description = entity.getDescription();
+    this.moment = entity.getMoment();
   }
 
   public Long getId() {

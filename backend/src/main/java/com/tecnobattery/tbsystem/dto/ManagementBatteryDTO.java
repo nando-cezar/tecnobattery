@@ -1,9 +1,17 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-public class ManagementBatteryDTO {
+import com.tecnobattery.tbsystem.entities.ManagementBattery;
+
+public class ManagementBatteryDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private ProviderDTO provider;
   private BatteryDTO battery;
@@ -20,6 +28,14 @@ public class ManagementBatteryDTO {
     this.battery = battery;
     this.moment = moment;
     this.amount = amount;
+  }
+
+  public ManagementBatteryDTO(ManagementBattery entity) {
+    this.id = entity.getId();
+    this.provider = entity.getProvider();
+    this.battery = entity.getBattery();
+    this.moment = entity.getMoment();
+    this.amount = entity.getAmount();
   }
 
   public Long getId() {

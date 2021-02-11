@@ -1,5 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -7,10 +8,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import com.tecnobattery.tbsystem.entities.OrderService;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 
-public class OrderServiceDTO {
+public class OrderServiceDTO implements Serializable {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private ClientDTO client;
   private String description;
@@ -38,6 +44,19 @@ public class OrderServiceDTO {
     this.products = products;
     this.users = users;
     this.comments = comments;
+  }
+
+  public OrderServiceDTO(OrderService entity) {
+    this.id = entity.getId();
+    this.client = entity.getClient();
+    this.description = entity.getDescription();
+    this.price = entity.getPrice();
+    this.status = entity.getStatus();
+    this.opening = entity.getOpening();
+    this.deadline = entity.getDeadline();
+    this.products = entity.getProducts();
+    this.users = entity.getUsers();
+    this.comments = entity.getComments();
   }
 
   public Long getId() {

@@ -1,10 +1,17 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.Objects;
 
-public class ManagementBoardDTO {
+import com.tecnobattery.tbsystem.entities.ManagementBoard;
 
+public class ManagementBoardDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private ProviderDTO provider;
   private BoardDTO board;
@@ -20,6 +27,14 @@ public class ManagementBoardDTO {
     this.board = board;
     this.moment = moment;
     this.amount = amount;
+  }
+
+  public ManagementBoardDTO(ManagementBoard entity) {
+    this.id = entity.getId();
+    this.provider = entity.getProvider();
+    this.board = entity.getBoard();
+    this.moment = entity.getMoment();
+    this.amount = entity.getAmount();
   }
 
   public Long getId() {

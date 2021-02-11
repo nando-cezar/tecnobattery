@@ -1,5 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,9 +8,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.tecnobattery.tbsystem.entities.TypeUser;
+import com.tecnobattery.tbsystem.entities.User;
 
-public class UserDTO {
+public class UserDTO implements Serializable {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private String username;
   private String email;
@@ -32,6 +38,17 @@ public class UserDTO {
     this.level = level;
     this.orderServices = orderServices;
     this.comments = comments;
+  }
+
+  public UserDTO(User entity) {
+    this.id = entity.getId();
+    this.username = entity.getUsername();
+    this.email = entity.getEmail();
+    this.phone = entity.getPhone();
+    this.password = entity.getPassword();
+    this.level = entity.getLevel();
+    this.orderServices = entity.getOrderServices();
+    this.comments = entity.getComments();
   }
 
   public Long getId() {

@@ -1,11 +1,18 @@
 package com.tecnobattery.tbsystem.dto;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public class ClientDTO {
+import com.tecnobattery.tbsystem.entities.Client;
 
+public class ClientDTO implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   private String cnpj;
   private String name;
@@ -28,6 +35,17 @@ public class ClientDTO {
     this.email = email;
     this.address = address;
     this.orderServices = orderServices;
+  }
+
+  public ClientDTO(Client entity) {
+    this.id = entity.getId();
+    this.cnpj = entity.getCnpj();
+    this.name = entity.getName();
+    this.fantasyName = entity.getFantasyName();
+    this.phone = entity.getPhone();
+    this.email = entity.getEmail();
+    this.address = entity.getAddress();
+    this.orderServices = entity.getOrderServices();
   }
 
   public Long getId() {
