@@ -1,9 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.Product;
 
 public class ProductDTO implements Serializable {
 
@@ -19,32 +16,6 @@ public class ProductDTO implements Serializable {
   private Double price;
   private String description;
   private String imageUrl;
-
-  public ProductDTO() {
-  }
-
-  public ProductDTO(Long id, String name, Integer power, Integer capacity, Integer voltage, Double price,
-      String description, String imageUrl) {
-    this.id = id;
-    this.name = name;
-    this.power = power;
-    this.capacity = capacity;
-    this.voltage = voltage;
-    this.price = price;
-    this.description = description;
-    this.imageUrl = imageUrl;
-  }
-
-  public ProductDTO(Product entity) {
-    this.id = entity.getId();
-    this.name = entity.getName();
-    this.power = entity.getPower();
-    this.capacity = entity.getCapacity();
-    this.voltage = entity.getVoltage();
-    this.price = entity.getPrice();
-    this.description = entity.getDescription();
-    this.imageUrl = entity.getImageUrl();
-  }
 
   public Long getId() {
     return this.id;
@@ -109,31 +80,4 @@ public class ProductDTO implements Serializable {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof ProductDTO)) {
-      return false;
-    }
-    ProductDTO productDTO = (ProductDTO) o;
-    return Objects.equals(id, productDTO.id) && Objects.equals(name, productDTO.name)
-        && Objects.equals(power, productDTO.power) && Objects.equals(capacity, productDTO.capacity)
-        && Objects.equals(voltage, productDTO.voltage) && Objects.equals(price, productDTO.price)
-        && Objects.equals(description, productDTO.description) && Objects.equals(imageUrl, productDTO.imageUrl);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, power, capacity, voltage, price, description, imageUrl);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", power='" + getPower() + "'"
-        + ", capacity='" + getCapacity() + "'" + ", voltage='" + getVoltage() + "'" + ", price='" + getPrice() + "'"
-        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
-  }
-
 }

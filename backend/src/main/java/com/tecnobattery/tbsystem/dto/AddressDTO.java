@@ -1,9 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.Address;
 
 public class AddressDTO implements Serializable {
 
@@ -18,30 +15,6 @@ public class AddressDTO implements Serializable {
   private String neighborhood;
   private String city;
   private String state;
-
-  public AddressDTO() {
-  }
-
-  public AddressDTO(Long id, String postalCode, String publicPlace, String complement, String neighborhood, String city,
-      String state) {
-    this.id = id;
-    this.postalCode = postalCode;
-    this.publicPlace = publicPlace;
-    this.complement = complement;
-    this.neighborhood = neighborhood;
-    this.city = city;
-    this.state = state;
-  }
-
-  public AddressDTO(Address entity) {
-    this.id = entity.getId();
-    this.postalCode = entity.getPostalCode();
-    this.publicPlace = entity.getPublicPlace();
-    this.complement = entity.getComplement();
-    this.neighborhood = entity.getNeighborhood();
-    this.city = entity.getCity();
-    this.state = entity.getState();
-  }
 
   public Long getId() {
     return this.id;
@@ -97,25 +70,6 @@ public class AddressDTO implements Serializable {
 
   public void setState(String state) {
     this.state = state;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof AddressDTO)) {
-      return false;
-    }
-    AddressDTO addressDTO = (AddressDTO) o;
-    return Objects.equals(id, addressDTO.id) && Objects.equals(postalCode, addressDTO.postalCode)
-        && Objects.equals(publicPlace, addressDTO.publicPlace) && Objects.equals(complement, addressDTO.complement)
-        && Objects.equals(neighborhood, addressDTO.neighborhood) && Objects.equals(city, addressDTO.city)
-        && Objects.equals(state, addressDTO.state);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, postalCode, publicPlace, complement, neighborhood, city, state);
   }
 
 }

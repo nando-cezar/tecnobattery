@@ -1,9 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.Loader;
 
 public class LoaderDTO implements Serializable {
 
@@ -20,34 +17,6 @@ public class LoaderDTO implements Serializable {
   private Integer height;
   private Integer length;
   private String imageUrl;
-
-  public LoaderDTO() {
-  }
-
-  public LoaderDTO(Long id, String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
-      Integer length, String imageUrl) {
-    this.id = id;
-    this.brand = brand;
-    this.model = model;
-    this.power = power;
-    this.voltage = voltage;
-    this.width = width;
-    this.height = height;
-    this.length = length;
-    this.imageUrl = imageUrl;
-  }
-
-  public LoaderDTO(Loader entity) {
-    this.id = entity.getId();
-    this.brand = entity.getBrand();
-    this.model = entity.getModel();
-    this.power = entity.getPower();
-    this.voltage = entity.getVoltage();
-    this.width = entity.getWidth();
-    this.height = entity.getHeight();
-    this.length = entity.getLength();
-    this.imageUrl = entity.getImageUrl();
-  }
 
   public Long getId() {
     return this.id;
@@ -119,33 +88,6 @@ public class LoaderDTO implements Serializable {
 
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof LoaderDTO)) {
-      return false;
-    }
-    LoaderDTO loaderDTO = (LoaderDTO) o;
-    return Objects.equals(id, loaderDTO.id) && Objects.equals(brand, loaderDTO.brand)
-        && Objects.equals(model, loaderDTO.model) && Objects.equals(power, loaderDTO.power)
-        && Objects.equals(voltage, loaderDTO.voltage) && Objects.equals(width, loaderDTO.width)
-        && Objects.equals(height, loaderDTO.height) && Objects.equals(length, loaderDTO.length)
-        && Objects.equals(imageUrl, loaderDTO.imageUrl);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, brand, model, power, voltage, width, height, length, imageUrl);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'" + ", power='"
-        + getPower() + "'" + ", voltage='" + getVoltage() + "'" + ", width='" + getWidth() + "'" + ", height='"
-        + getHeight() + "'" + ", length='" + getLength() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
   }
 
 }

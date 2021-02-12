@@ -1,9 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.Battery;
 
 public class BatteryDTO implements Serializable {
 
@@ -19,32 +16,6 @@ public class BatteryDTO implements Serializable {
   private Integer diameter;
   private Integer height;
   private String imageUrl;
-
-  public BatteryDTO() {
-  }
-
-  public BatteryDTO(Long id, String brand, String model, Integer capacity, Integer voltage, Integer diameter,
-      Integer height, String imageUrl) {
-    this.id = id;
-    this.brand = brand;
-    this.model = model;
-    this.capacity = capacity;
-    this.voltage = voltage;
-    this.diameter = diameter;
-    this.height = height;
-    this.imageUrl = imageUrl;
-  }
-
-  public BatteryDTO(Battery entity) {
-    this.id = entity.getId();
-    this.brand = entity.getBrand();
-    this.model = entity.getModel();
-    this.capacity = entity.getCapacity();
-    this.voltage = entity.getVoltage();
-    this.diameter = entity.getDiameter();
-    this.height = entity.getHeight();
-    this.imageUrl = entity.getImageUrl();
-  }
 
   public Long getId() {
     return this.id;
@@ -108,32 +79,6 @@ public class BatteryDTO implements Serializable {
 
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof BatteryDTO)) {
-      return false;
-    }
-    BatteryDTO batteryDTO = (BatteryDTO) o;
-    return Objects.equals(id, batteryDTO.id) && Objects.equals(brand, batteryDTO.brand)
-        && Objects.equals(model, batteryDTO.model) && Objects.equals(capacity, batteryDTO.capacity)
-        && Objects.equals(voltage, batteryDTO.voltage) && Objects.equals(diameter, batteryDTO.diameter)
-        && Objects.equals(height, batteryDTO.height) && Objects.equals(imageUrl, batteryDTO.imageUrl);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, brand, model, capacity, voltage, diameter, height, imageUrl);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'"
-        + ", capacity='" + getCapacity() + "'" + ", voltage='" + getVoltage() + "'" + ", diameter='" + getDiameter()
-        + "'" + ", height='" + getHeight() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
   }
 
 }

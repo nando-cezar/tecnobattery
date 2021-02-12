@@ -4,11 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import com.tecnobattery.tbsystem.entities.TypeUser;
-import com.tecnobattery.tbsystem.entities.User;
 
 public class UserDTO implements Serializable {
 
@@ -24,32 +22,6 @@ public class UserDTO implements Serializable {
   private TypeUser level;
   private Set<OrderServiceDTO> orderServices = new HashSet<>();
   private List<CommentDTO> comments = new ArrayList<>();
-
-  public UserDTO() {
-  }
-
-  public UserDTO(Long id, String username, String email, String phone, String password, TypeUser level,
-      Set<OrderServiceDTO> orderServices, List<CommentDTO> comments) {
-    this.id = id;
-    this.username = username;
-    this.email = email;
-    this.phone = phone;
-    this.password = password;
-    this.level = level;
-    this.orderServices = orderServices;
-    this.comments = comments;
-  }
-
-  public UserDTO(User entity) {
-    this.id = entity.getId();
-    this.username = entity.getUsername();
-    this.email = entity.getEmail();
-    this.phone = entity.getPhone();
-    this.password = entity.getPassword();
-    this.level = entity.getLevel();
-    this.orderServices = entity.getOrderServices();
-    this.comments = entity.getComments();
-  }
 
   public Long getId() {
     return this.id;
@@ -113,32 +85,6 @@ public class UserDTO implements Serializable {
 
   public void setComments(List<CommentDTO> comments) {
     this.comments = comments;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof UserDTO)) {
-      return false;
-    }
-    UserDTO userDTO = (UserDTO) o;
-    return Objects.equals(id, userDTO.id) && Objects.equals(username, userDTO.username)
-        && Objects.equals(email, userDTO.email) && Objects.equals(phone, userDTO.phone)
-        && Objects.equals(password, userDTO.password) && Objects.equals(level, userDTO.level)
-        && Objects.equals(orderServices, userDTO.orderServices) && Objects.equals(comments, userDTO.comments);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, username, email, phone, password, level, orderServices, comments);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
-        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'"
-        + ", orderServices='" + getOrderServices() + "'" + ", comments='" + getComments() + "'" + "}";
   }
 
 }

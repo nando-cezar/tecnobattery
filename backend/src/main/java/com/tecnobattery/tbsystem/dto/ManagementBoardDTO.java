@@ -2,9 +2,6 @@ package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.ManagementBoard;
 
 public class ManagementBoardDTO implements Serializable {
 
@@ -17,25 +14,6 @@ public class ManagementBoardDTO implements Serializable {
   private BoardDTO board;
   private OffsetDateTime moment;
   private Integer amount;
-
-  public ManagementBoardDTO() {
-  }
-
-  public ManagementBoardDTO(Long id, ProviderDTO provider, BoardDTO board, OffsetDateTime moment, Integer amount) {
-    this.id = id;
-    this.provider = provider;
-    this.board = board;
-    this.moment = moment;
-    this.amount = amount;
-  }
-
-  public ManagementBoardDTO(ManagementBoard entity) {
-    this.id = entity.getId();
-    this.provider = entity.getProvider();
-    this.board = entity.getBoard();
-    this.moment = entity.getMoment();
-    this.amount = entity.getAmount();
-  }
 
   public Long getId() {
     return this.id;
@@ -76,29 +54,4 @@ public class ManagementBoardDTO implements Serializable {
   public void setAmount(Integer amount) {
     this.amount = amount;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof ManagementBoardDTO)) {
-      return false;
-    }
-    ManagementBoardDTO managementBoardDTO = (ManagementBoardDTO) o;
-    return Objects.equals(id, managementBoardDTO.id) && Objects.equals(provider, managementBoardDTO.provider)
-        && Objects.equals(board, managementBoardDTO.board) && Objects.equals(moment, managementBoardDTO.moment)
-        && Objects.equals(amount, managementBoardDTO.amount);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, provider, board, moment, amount);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", provider='" + getProvider() + "'" + ", board='" + getBoard() + "'"
-        + ", moment='" + getMoment() + "'" + ", amount='" + getAmount() + "'" + "}";
-  }
-
 }

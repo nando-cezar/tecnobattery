@@ -1,9 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.Board;
 
 public class BoardDTO implements Serializable {
 
@@ -20,34 +17,6 @@ public class BoardDTO implements Serializable {
   private Integer height;
   private Integer length;
   private String imageUrl;
-
-  public BoardDTO() {
-  }
-
-  public BoardDTO(Long id, String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
-      Integer length, String imageUrl) {
-    this.id = id;
-    this.brand = brand;
-    this.model = model;
-    this.power = power;
-    this.voltage = voltage;
-    this.width = width;
-    this.height = height;
-    this.length = length;
-    this.imageUrl = imageUrl;
-  }
-
-  public BoardDTO(Board entity) {
-    this.id = entity.getId();
-    this.brand = entity.getBrand();
-    this.model = entity.getModel();
-    this.power = entity.getPower();
-    this.voltage = entity.getVoltage();
-    this.width = entity.getWidth();
-    this.height = entity.getHeight();
-    this.length = entity.getLength();
-    this.imageUrl = entity.getImageUrl();
-  }
 
   public Long getId() {
     return this.id;
@@ -120,32 +89,4 @@ public class BoardDTO implements Serializable {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof BoardDTO)) {
-      return false;
-    }
-    BoardDTO boardDTO = (BoardDTO) o;
-    return Objects.equals(id, boardDTO.id) && Objects.equals(brand, boardDTO.brand)
-        && Objects.equals(model, boardDTO.model) && Objects.equals(power, boardDTO.power)
-        && Objects.equals(voltage, boardDTO.voltage) && Objects.equals(width, boardDTO.width)
-        && Objects.equals(height, boardDTO.height) && Objects.equals(length, boardDTO.length)
-        && Objects.equals(imageUrl, boardDTO.imageUrl);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, brand, model, power, voltage, width, height, length, imageUrl);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'" + ", power='"
-        + getPower() + "'" + ", voltage='" + getVoltage() + "'" + ", width='" + getWidth() + "'" + ", height='"
-        + getHeight() + "'" + ", length='" + getLength() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
-  }
-
 }

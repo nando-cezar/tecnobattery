@@ -2,9 +2,6 @@ package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
-
-import com.tecnobattery.tbsystem.entities.Comment;
 
 public class CommentDTO implements Serializable {
 
@@ -17,25 +14,6 @@ public class CommentDTO implements Serializable {
   private UserDTO user;
   private String description;
   private OffsetDateTime moment;
-
-  public CommentDTO() {
-  }
-
-  public CommentDTO(Long id, OrderServiceDTO orderService, UserDTO user, String description, OffsetDateTime moment) {
-    this.id = id;
-    this.orderService = orderService;
-    this.user = user;
-    this.description = description;
-    this.moment = moment;
-  }
-
-  public CommentDTO(Comment entity) {
-    this.id = entity.getId();
-    this.orderService = entity.getOrderService();
-    this.user = entity.getUser();
-    this.description = entity.getDescription();
-    this.moment = entity.getMoment();
-  }
 
   public Long getId() {
     return this.id;
@@ -75,30 +53,6 @@ public class CommentDTO implements Serializable {
 
   public void setMoment(OffsetDateTime moment) {
     this.moment = moment;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof CommentDTO)) {
-      return false;
-    }
-    CommentDTO commentDTO = (CommentDTO) o;
-    return Objects.equals(id, commentDTO.id) && Objects.equals(orderService, commentDTO.orderService)
-        && Objects.equals(user, commentDTO.user) && Objects.equals(description, commentDTO.description)
-        && Objects.equals(moment, commentDTO.moment);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, orderService, user, description, moment);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", orderService='" + getOrderService() + "'" + ", user='" + getUser() + "'"
-        + ", description='" + getDescription() + "'" + ", moment='" + getMoment() + "'" + "}";
   }
 
 }
