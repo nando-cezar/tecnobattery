@@ -23,7 +23,7 @@ public class Comment implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @ManyToOne
-  private OrderService orderService;
+  private Order order;
   @ManyToOne
   private User user;
   private String description;
@@ -32,9 +32,9 @@ public class Comment implements Serializable {
   public Comment() {
   }
 
-  public Comment(Long id, OrderService orderService, User user, String description, OffsetDateTime moment) {
+  public Comment(Long id, Order order, User user, String description, OffsetDateTime moment) {
     this.id = id;
-    this.orderService = orderService;
+    this.order = order;
     this.user = user;
     this.description = description;
     this.moment = moment;
@@ -48,12 +48,12 @@ public class Comment implements Serializable {
     this.id = id;
   }
 
-  public OrderService getOrderService() {
-    return this.orderService;
+  public Order getOrder() {
+    return this.order;
   }
 
-  public void setOrderService(OrderService orderService) {
-    this.orderService = orderService;
+  public void setOrderService(Order order) {
+    this.order = order;
   }
 
   public User getUser() {
@@ -88,19 +88,18 @@ public class Comment implements Serializable {
       return false;
     }
     Comment comment = (Comment) o;
-    return Objects.equals(id, comment.id) && Objects.equals(orderService, comment.orderService)
-        && Objects.equals(user, comment.user) && Objects.equals(description, comment.description)
-        && Objects.equals(moment, comment.moment);
+    return Objects.equals(id, comment.id) && Objects.equals(order, comment.order) && Objects.equals(user, comment.user)
+        && Objects.equals(description, comment.description) && Objects.equals(moment, comment.moment);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, orderService, user, description, moment);
+    return Objects.hash(id, order, user, description, moment);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", orderService='" + getOrderService() + "'" + ", user='" + getUser() + "'"
+    return "{" + " id='" + getId() + "'" + ", order='" + getOrder() + "'" + ", user='" + getUser() + "'"
         + ", description='" + getDescription() + "'" + ", moment='" + getMoment() + "'" + "}";
   }
 

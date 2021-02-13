@@ -20,7 +20,7 @@ public class UserDTO implements Serializable {
   private String phone;
   private String password;
   private TypeUser level;
-  private Set<OrderServiceDTO> orderServices = new HashSet<>();
+  private Set<OrderDTO> orderServices = new HashSet<>();
   private List<CommentDTO> comments = new ArrayList<>();
 
   public Long getId() {
@@ -71,11 +71,11 @@ public class UserDTO implements Serializable {
     this.level = level;
   }
 
-  public Set<OrderServiceDTO> getOrderServices() {
+  public Set<OrderDTO> getOrderServices() {
     return this.orderServices;
   }
 
-  public void setOrderServices(Set<OrderServiceDTO> orderServices) {
+  public void setOrderServices(Set<OrderDTO> orderServices) {
     this.orderServices = orderServices;
   }
 

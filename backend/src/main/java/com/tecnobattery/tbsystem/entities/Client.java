@@ -33,7 +33,7 @@ public class Client implements Serializable {
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
   @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-  private Set<OrderService> orderServices = new HashSet<>();
+  private Set<Order> orderServices = new HashSet<>();
 
   public Client() {
   }
@@ -104,11 +104,11 @@ public class Client implements Serializable {
     this.address = address;
   }
 
-  public Set<OrderService> getOrderServices() {
+  public Set<Order> getOrderServices() {
     return this.orderServices;
   }
 
-  public void setOrderServices(Set<OrderService> orderServices) {
+  public void setOrderServices(Set<Order> orderServices) {
     this.orderServices = orderServices;
   }
 

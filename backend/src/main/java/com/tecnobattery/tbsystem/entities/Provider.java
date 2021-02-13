@@ -32,11 +32,11 @@ public class Provider implements Serializable {
   private String email;
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
-  @OneToMany(mappedBy = "provider")
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
   private Set<ManagementBattery> managementBatterys = new HashSet<>();
-  @OneToMany(mappedBy = "provider")
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
   private Set<ManagementBoard> managementBoards = new HashSet<>();
-  @OneToMany(mappedBy = "provider")
+  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
   private Set<ManagementLoader> managementLoaders = new HashSet<>();
 
   public Provider() {

@@ -11,6 +11,7 @@ import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BoardService {
@@ -21,9 +22,10 @@ public class BoardService {
   @Autowired
   private ModelMapper mapper;
 
+  @Transactional(readOnly = true)
   public List<BoardDTO> findAll() {
-    List<Board> batterys = boardRepository.findAll();
-    return toCollectionDTO(batterys);
+    List<Board> boards = boardRepository.findAll();
+    return toCollectionDTO(boards);
   }
 
   private BoardDTO toModel(Board board) {

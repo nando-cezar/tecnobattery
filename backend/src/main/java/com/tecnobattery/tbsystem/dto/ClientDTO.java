@@ -17,7 +17,7 @@ public class ClientDTO implements Serializable {
   private String phone;
   private String email;
   private AddressDTO address;
-  private Set<OrderServiceDTO> orderServices = new HashSet<>();
+  private Set<OrderDTO> orderServices = new HashSet<>();
 
   public Long getId() {
     return this.id;
@@ -75,11 +75,11 @@ public class ClientDTO implements Serializable {
     this.address = address;
   }
 
-  public Set<OrderServiceDTO> getOrderServices() {
+  public Set<OrderDTO> getOrderServices() {
     return this.orderServices;
   }
 
-  public void setOrderServices(Set<OrderServiceDTO> orderServices) {
+  public void setOrderServices(Set<OrderDTO> orderServices) {
     this.orderServices = orderServices;
   }
 

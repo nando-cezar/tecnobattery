@@ -10,7 +10,10 @@ import com.tecnobattery.tbsystem.repositories.ManagementBoardRepository;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ManagementBoardService {
 
   @Autowired
@@ -19,6 +22,7 @@ public class ManagementBoardService {
   @Autowired
   private ModelMapper mapper;
 
+  @Transactional(readOnly = true)
   public List<ManagementBoardDTO> findAll() {
     List<ManagementBoard> boards = boardRepository.findAll();
     return toCollectionDTO(boards);

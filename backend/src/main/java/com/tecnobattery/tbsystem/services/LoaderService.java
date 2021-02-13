@@ -11,6 +11,7 @@ import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class LoaderService {
@@ -21,9 +22,10 @@ public class LoaderService {
   @Autowired
   private ModelMapper mapper;
 
+  @Transactional(readOnly = true)
   public List<LoaderDTO> findAll() {
-    List<Loader> batterys = loaderRepository.findAll();
-    return toCollectionDTO(batterys);
+    List<Loader> loaders = loaderRepository.findAll();
+    return toCollectionDTO(loaders);
   }
 
   private LoaderDTO toModel(Loader loader) {

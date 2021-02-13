@@ -36,8 +36,8 @@ public class User implements Serializable {
   private TypeUser level;
 
   @ManyToMany
-  @JoinTable(name = "tb_user_order", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "orderService_id"))
-  private Set<OrderService> orderServices = new HashSet<>();
+  @JoinTable(name = "tb_user_order", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
+  private Set<Order> orderServices = new HashSet<>();
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Comment> comments = new ArrayList<>();
@@ -102,11 +102,11 @@ public class User implements Serializable {
     this.level = level;
   }
 
-  public Set<OrderService> getOrderServices() {
+  public Set<Order> getOrderServices() {
     return this.orderServices;
   }
 
-  public void setOrderServices(Set<OrderService> orderServices) {
+  public void setOrderServices(Set<Order> orderServices) {
     this.orderServices = orderServices;
   }
 

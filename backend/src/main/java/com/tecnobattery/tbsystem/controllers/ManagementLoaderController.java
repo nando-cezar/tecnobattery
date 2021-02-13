@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagementLoaderController {
 
   @Autowired
-  private ManagementLoaderService clientService;
+  private ManagementLoaderService managementLoaderService;
 
   @GetMapping
   public ResponseEntity<List<ManagementLoaderDTO>> findAll() {
-    List<ManagementLoaderDTO> list = clientService.findAll();
+    List<ManagementLoaderDTO> list = managementLoaderService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

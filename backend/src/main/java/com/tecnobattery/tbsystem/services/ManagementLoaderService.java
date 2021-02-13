@@ -10,7 +10,10 @@ import com.tecnobattery.tbsystem.repositories.ManagementLoaderRepository;
 import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class ManagementLoaderService {
 
   @Autowired
@@ -19,6 +22,7 @@ public class ManagementLoaderService {
   @Autowired
   private ModelMapper mapper;
 
+  @Transactional(readOnly = true)
   public List<ManagementLoaderDTO> findAll() {
     List<ManagementLoader> loaders = loaderRepository.findAll();
     return toCollectionDTO(loaders);

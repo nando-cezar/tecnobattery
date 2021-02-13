@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 
-public class OrderServiceDTO implements Serializable {
+public class OrderDTO implements Serializable {
 
   /**
    *

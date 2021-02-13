@@ -11,6 +11,7 @@ import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientService {
@@ -21,6 +22,7 @@ public class ClientService {
   @Autowired
   private ModelMapper mapper;
 
+  @Transactional(readOnly = true)
   public List<ClientDTO> findAll() {
     List<Client> clients = clientRepository.findAll();
     return toCollectionDTO(clients);

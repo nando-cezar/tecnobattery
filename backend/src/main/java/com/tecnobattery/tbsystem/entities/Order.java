@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_order_service")
-public class OrderService implements Serializable {
+@Table(name = "tb_order")
+public class Order implements Serializable {
 
   /**
    * 
@@ -38,22 +39,22 @@ public class OrderService implements Serializable {
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
 
-  @ManyToMany
-  @JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "orderService_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
   private List<Product> products = new ArrayList<>();
 
-  @ManyToMany
-  @JoinTable(name = "tb_order_user", joinColumns = @JoinColumn(name = "orderService_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name = "tb_order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<User> users = new HashSet<>();
 
-  @OneToMany(mappedBy = "orderService")
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
   private List<Comment> comments = new ArrayList<>();
 
-  public OrderService() {
+  public Order() {
   }
 
-  public OrderService(Long id, Client client, String description, Double price, OrderStatus status,
-      OffsetDateTime opening, OffsetDateTime deadline, List<Product> products, Set<User> users) {
+  public Order(Long id, Client client, String description, Double price, OrderStatus status, OffsetDateTime opening,
+      OffsetDateTime deadline, List<Product> products, Set<User> users) {
     this.id = id;
     this.client = client;
     this.description = description;
@@ -149,10 +150,10 @@ public class OrderService implements Serializable {
   public boolean equals(Object o) {
     if (o == this)
       return true;
-    if (!(o instanceof OrderService)) {
+    if (!(o instanceof Order)) {
       return false;
     }
-    OrderService orderService = (OrderService) o;
+    Order orderService = (Order) o;
     return Objects.equals(id, orderService.id) && Objects.equals(client, orderService.client)
         && Objects.equals(description, orderService.description) && Objects.equals(price, orderService.price)
         && Objects.equals(status, orderService.status) && Objects.equals(opening, orderService.opening)

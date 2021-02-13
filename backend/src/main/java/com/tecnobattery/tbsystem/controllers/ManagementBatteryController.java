@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class ManagementBatteryController {
 
   @Autowired
-  private ManagementBatteryService clientService;
+  private ManagementBatteryService managementBatteryService;
 
   @GetMapping
   public ResponseEntity<List<ManagementBatteryDTO>> findAll() {
-    List<ManagementBatteryDTO> list = clientService.findAll();
+    List<ManagementBatteryDTO> list = managementBatteryService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }
