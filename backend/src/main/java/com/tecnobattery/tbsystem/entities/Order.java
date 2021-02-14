@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,7 @@ public class Order implements Serializable {
   private Client client;
   private String description;
   private Double price;
+  @Enumerated(EnumType.STRING)
   private OrderStatus status;
   private OffsetDateTime opening;
   private OffsetDateTime deadline;

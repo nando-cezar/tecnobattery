@@ -16,6 +16,7 @@ public class BoardDTO implements Serializable {
   private Integer width;
   private Integer height;
   private Integer length;
+  private Integer weight;
   private String imageUrl;
 
   public Long getId() {
@@ -80,6 +81,14 @@ public class BoardDTO implements Serializable {
 
   public void setLength(Integer length) {
     this.length = length;
+  }
+
+  public Integer getWeight() {
+    return this.weight;
+  }
+
+  public void setWeight(Integer weight) {
+    this.weight = weight;
   }
 
   public String getImageUrl() {

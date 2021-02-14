@@ -20,7 +20,7 @@ public class OrderController {
 
   @GetMapping
   public ResponseEntity<List<OrderDTO>> findAll() {
-    List<OrderDTO> list = orderService.findOrderAll();
+    List<OrderDTO> list = orderService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

@@ -15,6 +15,7 @@ public class BatteryDTO implements Serializable {
   private Integer voltage;
   private Integer diameter;
   private Integer height;
+  private Integer weight;
   private String imageUrl;
 
   public Long getId() {
@@ -71,6 +72,14 @@ public class BatteryDTO implements Serializable {
 
   public void setHeight(Integer height) {
     this.height = height;
+  }
+
+  public Integer getWeight() {
+    return this.weight;
+  }
+
+  public void setWeight(Integer weight) {
+    this.weight = weight;
   }
 
   public String getImageUrl() {

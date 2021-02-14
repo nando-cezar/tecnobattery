@@ -1,11 +1,11 @@
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('a123456', 'teste1@teste.com', '123345456', 'teste1', 0);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('b123456', 'teste2@teste.com', '123345456', 'teste2', 1);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('c123456', 'teste3@teste.com', '123345456', 'teste3', 0);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('d123456', 'teste4@teste.com', '123345456', 'teste4', 1);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('e123456', 'teste5@teste.com', '123345456', 'teste5', 0);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('f123456', 'teste6@teste.com', '123345456', 'teste6', 1);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('g123456', 'teste7@teste.com', '123345456', 'teste7', 0);
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('h123456', 'teste8@teste.com', '123345456', 'teste8', 1);
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('a123456', 'teste1@teste.com', '123345456', 'teste1', 'ADMINISTRADOR');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('b123456', 'teste2@teste.com', '123345456', 'teste2', 'ADMINISTRADOR');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('c123456', 'teste3@teste.com', '123345456', 'teste3', 'ADMINISTRADOR');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('d123456', 'teste4@teste.com', '123345456', 'teste4', 'PADRAO');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('e123456', 'teste5@teste.com', '123345456', 'teste5', 'PADRAO');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('f123456', 'teste6@teste.com', '123345456', 'teste6', 'ADMINISTRADOR');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('g123456', 'teste7@teste.com', '123345456', 'teste7', 'ADMINISTRADOR');
+INSERT INTO tb_user (username, email, phone, password, level) VALUES ('h123456', 'teste8@teste.com', '123345456', 'teste8', 'ADMINISTRADOR');
  
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace2', 'Complement2', 'Neighborhood2', 'City2', 'State2');
@@ -68,13 +68,13 @@ INSERT INTO tb_product (name, power, capacity, voltage, price, description, imag
 INSERT INTO tb_product (name, power, capacity, voltage, price, description, image_Url) VALUES ('Macarrão Fusili',    38, 38, 4000, 4000, 'fsdf', 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/macarrao_fusili.jpg');
 INSERT INTO tb_product (name, power, capacity, voltage, price, description, image_Url) VALUES ('Macarrão Penne',     37, 37, 4000, 4000, 'fsdf', 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/macarrao_penne.jpg');
 
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (1, 'Produto BAT 2S2P', 100,  0, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (3, 'Produto BAT 4S3P', 100,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (4, 'Produto BAT 1S2P', 100,  0, TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 3S1P', 100,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 5S6P', 100,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (5, 'Produto BAT 4S4P', 100,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (6, 'Produto BAT 1S2P', 100,  1, TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (1, 'Produto BAT 2S2P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (3, 'Produto BAT 4S3P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (4, 'Produto BAT 1S2P', 100,  'ENTREGUE', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 3S1P', 100,  'ENTREGUE', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 5S6P', 100,  'FABRICANDO', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (5, 'Produto BAT 4S4P', 100,  'FABRICANDO', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (6, 'Produto BAT 1S2P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z');
 
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (1,  1, 'Title1',   'Commentario 1', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (2,  1, 'Title2',   'Commentario 2', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');

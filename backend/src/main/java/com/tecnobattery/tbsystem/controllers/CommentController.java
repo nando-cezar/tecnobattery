@@ -5,6 +5,7 @@ import java.util.List;
 import com.tecnobattery.tbsystem.dto.CommentDTO;
 import com.tecnobattery.tbsystem.dto.OrderDTO;
 import com.tecnobattery.tbsystem.entities.Comment;
+import com.tecnobattery.tbsystem.services.CommentService;
 import com.tecnobattery.tbsystem.services.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
   @Autowired
+  private CommentService commentService;
+
+  @Autowired
   private OrderService orderService;
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public CommentDTO create(@PathVariable Long orderId, @PathVariable Long userId, @RequestBody Comment comment)
+  public CommentDTO save(@PathVariable Long orderId, @PathVariable Long userId, @RequestBody Comment comment)
       throws Exception {
-    return orderService.createComment(orderId, userId, comment.getTitle(), comment.getDescription());
+    return commentService.save(orderId, userId, comment.getTitle(), comment.getDescription());
   }
 
   @GetMapping

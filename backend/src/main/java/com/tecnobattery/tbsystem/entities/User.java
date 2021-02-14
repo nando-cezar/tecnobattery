@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,6 +26,7 @@ public class User implements Serializable {
   private String email;
   private String phone;
   private String password;
+  @Enumerated(EnumType.STRING)
   private TypeUser level;
 
   public User() {
