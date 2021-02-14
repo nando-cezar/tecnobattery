@@ -5,10 +5,9 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,22 +38,22 @@ public class Order implements Serializable {
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany
   @JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-  private List<Product> products = new ArrayList<>();
+  private Set<Product> products = new HashSet<>();
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany
   @JoinTable(name = "tb_order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<User> users = new HashSet<>();
 
-  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "order")
   private List<Comment> comments = new ArrayList<>();
 
   public Order() {
   }
 
   public Order(Long id, Client client, String description, Double price, OrderStatus status, OffsetDateTime opening,
-      OffsetDateTime deadline, List<Product> products, Set<User> users) {
+      OffsetDateTime deadline, Set<Product> products, Set<User> users) {
     this.id = id;
     this.client = client;
     this.description = description;
@@ -122,11 +121,11 @@ public class Order implements Serializable {
     this.deadline = deadline;
   }
 
-  public List<Product> getProducts() {
+  public Set<Product> getProducts() {
     return this.products;
   }
 
-  public void setProducts(List<Product> products) {
+  public void setProducts(Set<Product> products) {
     this.products = products;
   }
 
@@ -158,12 +157,12 @@ public class Order implements Serializable {
         && Objects.equals(description, orderService.description) && Objects.equals(price, orderService.price)
         && Objects.equals(status, orderService.status) && Objects.equals(opening, orderService.opening)
         && Objects.equals(deadline, orderService.deadline) && Objects.equals(products, orderService.products)
-        && Objects.equals(users, orderService.users) && Objects.equals(comments, orderService.comments);
+        && Objects.equals(users, orderService.users);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, client, description, price, status, opening, deadline, products, users, comments);
+    return Objects.hash(id, client, description, price, status, opening, deadline, products, users);
   }
 
   @Override
@@ -171,7 +170,7 @@ public class Order implements Serializable {
     return "{" + " id='" + getId() + "'" + ", client='" + getClient() + "'" + ", description='" + getDescription() + "'"
         + ", price='" + getPrice() + "'" + ", status='" + getStatus() + "'" + ", opening='" + getOpening() + "'"
         + ", deadline='" + getDeadline() + "'" + ", products='" + getProducts() + "'" + ", users='" + getUsers() + "'"
-        + ", comments='" + getComments() + "'" + "}";
+        + "}";
   }
 
 }

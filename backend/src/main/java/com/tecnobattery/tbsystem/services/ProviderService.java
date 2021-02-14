@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.ProviderDTO;
 import com.tecnobattery.tbsystem.entities.Provider;
 import com.tecnobattery.tbsystem.repositories.ProviderRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class ProviderService {
   }
 
   private ProviderDTO toModel(Provider provider) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     return mapper.map(provider, ProviderDTO.class);
   }
 

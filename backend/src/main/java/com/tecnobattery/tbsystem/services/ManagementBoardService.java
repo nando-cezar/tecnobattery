@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.ManagementBoardDTO;
 import com.tecnobattery.tbsystem.entities.ManagementBoard;
 import com.tecnobattery.tbsystem.repositories.ManagementBoardRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class ManagementBoardService {
   }
 
   private ManagementBoardDTO toModel(ManagementBoard managementBoard) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     return mapper.map(managementBoard, ManagementBoardDTO.class);
   }
 

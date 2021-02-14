@@ -1,21 +1,12 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,13 +25,6 @@ public class User implements Serializable {
   private String phone;
   private String password;
   private TypeUser level;
-
-  @ManyToMany
-  @JoinTable(name = "tb_user_order", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "order_id"))
-  private Set<Order> orderServices = new HashSet<>();
-
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private List<Comment> comments = new ArrayList<>();
 
   public User() {
   }
@@ -102,22 +86,6 @@ public class User implements Serializable {
     this.level = level;
   }
 
-  public Set<Order> getOrderServices() {
-    return this.orderServices;
-  }
-
-  public void setOrderServices(Set<Order> orderServices) {
-    this.orderServices = orderServices;
-  }
-
-  public List<Comment> getComments() {
-    return this.comments;
-  }
-
-  public void setComments(List<Comment> comments) {
-    this.comments = comments;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -128,20 +96,19 @@ public class User implements Serializable {
     User user = (User) o;
     return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email)
         && Objects.equals(phone, user.phone) && Objects.equals(password, user.password)
-        && Objects.equals(level, user.level) && Objects.equals(orderServices, user.orderServices)
-        && Objects.equals(comments, user.comments);
+        && Objects.equals(level, user.level);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, email, phone, password, level, orderServices, comments);
+    return Objects.hash(id, username, email, phone, password, level);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
-        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'"
-        + ", orderServices='" + getOrderServices() + "'" + ", comments='" + getComments() + "'" + "}";
+        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + "'"
+        + "'" + "}";
   }
 
 }

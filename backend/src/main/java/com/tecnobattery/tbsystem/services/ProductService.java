@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.ProductDTO;
 import com.tecnobattery.tbsystem.entities.Product;
 import com.tecnobattery.tbsystem.repositories.ProductRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class ProductService {
   }
 
   private ProductDTO toModel(Product product) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     return mapper.map(product, ProductDTO.class);
   }
 

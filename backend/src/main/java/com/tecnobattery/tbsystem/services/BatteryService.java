@@ -7,7 +7,7 @@ import com.tecnobattery.tbsystem.dto.BatteryDTO;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.repositories.BatteryRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
+//import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,8 @@ public class BatteryService {
   }
 
   private BatteryDTO toModel(Battery battery) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
+    // mapper.getConfiguration().setPropertyCondition(context ->
+    // !(context.getSource() instanceof PersistentCollection));
     return mapper.map(battery, BatteryDTO.class);
   }
 

@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.UserDTO;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class UserService {
   }
 
   private UserDTO toModel(User user) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     return mapper.map(user, UserDTO.class);
   }
 

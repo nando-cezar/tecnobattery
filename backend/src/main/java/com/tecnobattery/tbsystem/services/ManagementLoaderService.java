@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.ManagementLoaderDTO;
 import com.tecnobattery.tbsystem.entities.ManagementLoader;
 import com.tecnobattery.tbsystem.repositories.ManagementLoaderRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class ManagementLoaderService {
   }
 
   private ManagementLoaderDTO toModel(ManagementLoader managementLoader) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     return mapper.map(managementLoader, ManagementLoaderDTO.class);
   }
 

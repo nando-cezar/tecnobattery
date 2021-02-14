@@ -1,8 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ProviderDTO implements Serializable {
 
@@ -17,9 +15,6 @@ public class ProviderDTO implements Serializable {
   private String phone;
   private String email;
   private AddressDTO address;
-  private Set<ManagementBatteryDTO> managementBatterys = new HashSet<>();
-  private Set<ManagementBoardDTO> managementBoards = new HashSet<>();
-  private Set<ManagementLoaderDTO> managementLoaders = new HashSet<>();
 
   public Long getId() {
     return this.id;
@@ -77,27 +72,4 @@ public class ProviderDTO implements Serializable {
     this.address = address;
   }
 
-  public Set<ManagementBatteryDTO> getManagementBatterys() {
-    return this.managementBatterys;
-  }
-
-  public void setManagementBatterys(Set<ManagementBatteryDTO> managementBatterys) {
-    this.managementBatterys = managementBatterys;
-  }
-
-  public Set<ManagementBoardDTO> getManagementBoards() {
-    return this.managementBoards;
-  }
-
-  public void setManagementBoards(Set<ManagementBoardDTO> managementBoards) {
-    this.managementBoards = managementBoards;
-  }
-
-  public Set<ManagementLoaderDTO> getManagementLoaders() {
-    return this.managementLoaders;
-  }
-
-  public void setManagementLoaders(Set<ManagementLoaderDTO> managementLoaders) {
-    this.managementLoaders = managementLoaders;
-  }
 }

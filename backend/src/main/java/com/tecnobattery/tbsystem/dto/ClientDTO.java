@@ -1,8 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ClientDTO implements Serializable {
 
@@ -17,7 +15,6 @@ public class ClientDTO implements Serializable {
   private String phone;
   private String email;
   private AddressDTO address;
-  private Set<OrderDTO> orderServices = new HashSet<>();
 
   public Long getId() {
     return this.id;
@@ -73,14 +70,6 @@ public class ClientDTO implements Serializable {
 
   public void setAddress(AddressDTO address) {
     this.address = address;
-  }
-
-  public Set<OrderDTO> getOrderServices() {
-    return this.orderServices;
-  }
-
-  public void setOrderServices(Set<OrderDTO> orderServices) {
-    this.orderServices = orderServices;
   }
 
 }

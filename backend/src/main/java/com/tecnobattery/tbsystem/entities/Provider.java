@@ -1,8 +1,6 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -10,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,12 +29,6 @@ public class Provider implements Serializable {
   private String email;
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
-  private Set<ManagementBattery> managementBatterys = new HashSet<>();
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
-  private Set<ManagementBoard> managementBoards = new HashSet<>();
-  @OneToMany(mappedBy = "provider", cascade = CascadeType.ALL)
-  private Set<ManagementLoader> managementLoaders = new HashSet<>();
 
   public Provider() {
   }
@@ -108,30 +99,6 @@ public class Provider implements Serializable {
     this.address = address;
   }
 
-  public Set<ManagementBattery> getManagementBatterys() {
-    return this.managementBatterys;
-  }
-
-  public void setManagementBatterys(Set<ManagementBattery> managementBatterys) {
-    this.managementBatterys = managementBatterys;
-  }
-
-  public Set<ManagementBoard> getManagementBoards() {
-    return this.managementBoards;
-  }
-
-  public void setManagementBoards(Set<ManagementBoard> managementBoards) {
-    this.managementBoards = managementBoards;
-  }
-
-  public Set<ManagementLoader> getManagementLoaders() {
-    return this.managementLoaders;
-  }
-
-  public void setManagementLoaders(Set<ManagementLoader> managementLoaders) {
-    this.managementLoaders = managementLoaders;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -143,23 +110,19 @@ public class Provider implements Serializable {
     return Objects.equals(id, provider.id) && Objects.equals(name, provider.name)
         && Objects.equals(fantasyName, provider.fantasyName) && Objects.equals(cnpj, provider.cnpj)
         && Objects.equals(phone, provider.phone) && Objects.equals(email, provider.email)
-        && Objects.equals(address, provider.address) && Objects.equals(managementBatterys, provider.managementBatterys)
-        && Objects.equals(managementBoards, provider.managementBoards)
-        && Objects.equals(managementLoaders, provider.managementLoaders);
+        && Objects.equals(address, provider.address);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, fantasyName, cnpj, phone, email, address, managementBatterys, managementBoards,
-        managementLoaders);
+    return Objects.hash(id, name, fantasyName, cnpj, phone, email, address);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", fantasyName='" + getFantasyName() + "'"
         + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", address='"
-        + getAddress() + "'" + ", managementBatterys='" + getManagementBatterys() + "'" + ", managementBoards='"
-        + getManagementBoards() + "'" + ", managementLoaders='" + getManagementLoaders() + "'" + "}";
+        + getAddress() + "'" + ", managementBatterys='";
   }
 
 }

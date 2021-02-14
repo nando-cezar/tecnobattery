@@ -10,8 +10,9 @@ public class CommentDTO implements Serializable {
    */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private OrderDTO orderService;
+  private OrderDTO order;
   private UserDTO user;
+  private String title;
   private String description;
   private OffsetDateTime moment;
 
@@ -23,12 +24,12 @@ public class CommentDTO implements Serializable {
     this.id = id;
   }
 
-  public OrderDTO getOrderService() {
-    return this.orderService;
+  public OrderDTO getOrder() {
+    return this.order;
   }
 
-  public void setOrderService(OrderDTO orderService) {
-    this.orderService = orderService;
+  public void setOrder(OrderDTO order) {
+    this.order = order;
   }
 
   public UserDTO getUser() {
@@ -37,6 +38,14 @@ public class CommentDTO implements Serializable {
 
   public void setUser(UserDTO user) {
     this.user = user;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public String getDescription() {

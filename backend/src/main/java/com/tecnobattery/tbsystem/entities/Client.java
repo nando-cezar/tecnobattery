@@ -1,16 +1,13 @@
 package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,8 +29,6 @@ public class Client implements Serializable {
   private String email;
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
-  @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-  private Set<Order> orderServices = new HashSet<>();
 
   public Client() {
   }
@@ -104,14 +99,6 @@ public class Client implements Serializable {
     this.address = address;
   }
 
-  public Set<Order> getOrderServices() {
-    return this.orderServices;
-  }
-
-  public void setOrderServices(Set<Order> orderServices) {
-    this.orderServices = orderServices;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -123,19 +110,19 @@ public class Client implements Serializable {
     return Objects.equals(id, client.id) && Objects.equals(name, client.name)
         && Objects.equals(fantasyName, client.fantasyName) && Objects.equals(cnpj, client.cnpj)
         && Objects.equals(phone, client.phone) && Objects.equals(email, client.email)
-        && Objects.equals(address, client.address) && Objects.equals(orderServices, client.orderServices);
+        && Objects.equals(address, client.address);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, fantasyName, cnpj, phone, email, address, orderServices);
+    return Objects.hash(id, name, fantasyName, cnpj, phone, email, address);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", fantasyName='" + getFantasyName() + "'"
         + ", cnpj='" + getCnpj() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", address='"
-        + getAddress() + "'" + ", orderServices='" + getOrderServices() + "'" + "}";
+        + getAddress() + "'" + "}";
   }
 
 }

@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.LoaderDTO;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.repositories.LoaderRepository;
 
-import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +28,6 @@ public class LoaderService {
   }
 
   private LoaderDTO toModel(Loader loader) {
-    mapper.getConfiguration().setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     return mapper.map(loader, LoaderDTO.class);
   }
 

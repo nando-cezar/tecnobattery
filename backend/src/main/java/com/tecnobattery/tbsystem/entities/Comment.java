@@ -26,16 +26,18 @@ public class Comment implements Serializable {
   private Order order;
   @ManyToOne
   private User user;
+  private String title;
   private String description;
   private OffsetDateTime moment;
 
   public Comment() {
   }
 
-  public Comment(Long id, Order order, User user, String description, OffsetDateTime moment) {
+  public Comment(Long id, Order order, User user, String title, String description, OffsetDateTime moment) {
     this.id = id;
     this.order = order;
     this.user = user;
+    this.title = title;
     this.description = description;
     this.moment = moment;
   }
@@ -52,7 +54,7 @@ public class Comment implements Serializable {
     return this.order;
   }
 
-  public void setOrderService(Order order) {
+  public void setOrder(Order order) {
     this.order = order;
   }
 
@@ -62,6 +64,14 @@ public class Comment implements Serializable {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public String getDescription() {

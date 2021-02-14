@@ -1,10 +1,6 @@
 package com.tecnobattery.tbsystem.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import com.tecnobattery.tbsystem.entities.TypeUser;
 
@@ -20,8 +16,6 @@ public class UserDTO implements Serializable {
   private String phone;
   private String password;
   private TypeUser level;
-  private Set<OrderDTO> orderServices = new HashSet<>();
-  private List<CommentDTO> comments = new ArrayList<>();
 
   public Long getId() {
     return this.id;
@@ -69,22 +63,6 @@ public class UserDTO implements Serializable {
 
   public void setLevel(TypeUser level) {
     this.level = level;
-  }
-
-  public Set<OrderDTO> getOrderServices() {
-    return this.orderServices;
-  }
-
-  public void setOrderServices(Set<OrderDTO> orderServices) {
-    this.orderServices = orderServices;
-  }
-
-  public List<CommentDTO> getComments() {
-    return this.comments;
-  }
-
-  public void setComments(List<CommentDTO> comments) {
-    this.comments = comments;
   }
 
 }
