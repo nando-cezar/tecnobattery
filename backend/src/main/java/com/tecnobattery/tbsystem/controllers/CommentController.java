@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tecnobattery.tbsystem.dto.CommentDTO;
 import com.tecnobattery.tbsystem.dto.OrderDTO;
-import com.tecnobattery.tbsystem.entities.Comment;
+import com.tecnobattery.tbsystem.dto.input.CommentInput;
 import com.tecnobattery.tbsystem.services.CommentService;
 import com.tecnobattery.tbsystem.services.OrderService;
 
@@ -30,7 +30,7 @@ public class CommentController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public CommentDTO save(@PathVariable Long orderId, @PathVariable Long userId, @RequestBody Comment comment)
+  public CommentDTO save(@PathVariable Long orderId, @PathVariable Long userId, @RequestBody CommentInput comment)
       throws Exception {
     return commentService.save(orderId, userId, comment.getTitle(), comment.getDescription());
   }
@@ -40,5 +40,4 @@ public class CommentController {
     OrderDTO order = orderService.findById(orderId);
     return order.getComments();
   }
-
 }

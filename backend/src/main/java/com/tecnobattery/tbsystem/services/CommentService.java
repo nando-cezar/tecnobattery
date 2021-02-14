@@ -42,7 +42,7 @@ public class CommentService {
     comment.setDescription(description);
     comment.setMoment(OffsetDateTime.now());
 
-    return toModel(comment);
+    return toModel(commentRepository.save(comment));
   }
 
   @Transactional(readOnly = true)
