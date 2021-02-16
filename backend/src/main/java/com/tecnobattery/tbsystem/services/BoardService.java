@@ -21,6 +21,21 @@ public class BoardService {
   @Autowired
   private ModelMapper mapper;
 
+  public BoardDTO save(String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
+      Integer length, String imageUrl) {
+    Board board = new Board();
+    board.setBrand(brand);
+    board.setModel(model);
+    board.setPower(power);
+    board.setVoltage(voltage);
+    board.setWidth(width);
+    board.setHeight(height);
+    board.setLength(length);
+    board.setImageUrl(imageUrl);
+
+    return toModel(boardRepository.save(board));
+  }
+
   @Transactional(readOnly = true)
   public List<BoardDTO> findAll() {
     List<Board> boards = boardRepository.findAll();

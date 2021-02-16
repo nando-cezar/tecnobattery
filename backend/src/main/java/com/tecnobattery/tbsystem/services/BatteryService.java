@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.dto.BatteryDTO;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.repositories.BatteryRepository;
 
-//import org.hibernate.collection.spi.PersistentCollection;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,20 @@ public class BatteryService {
   @Autowired
   private ModelMapper mapper;
 
+  public BatteryDTO save(String brand, String model, Integer capacity, Integer voltage, Integer diameter,
+      Integer height, String imageUrl) {
+    Battery battery = new Battery();
+    battery.setBrand(brand);
+    battery.setModel(model);
+    battery.setCapacity(capacity);
+    battery.setVoltage(voltage);
+    battery.setDiameter(diameter);
+    battery.setHeight(height);
+    battery.setImageUrl(imageUrl);
+
+    return toModel(batteryRepository.save(battery));
+  }
+
   @Transactional(readOnly = true)
   public List<BatteryDTO> findAll() {
     List<Battery> batterys = batteryRepository.findAll();
@@ -29,8 +42,6 @@ public class BatteryService {
   }
 
   private BatteryDTO toModel(Battery battery) {
-    // mapper.getConfiguration().setPropertyCondition(context ->
-    // !(context.getSource() instanceof PersistentCollection));
     return mapper.map(battery, BatteryDTO.class);
   }
 
