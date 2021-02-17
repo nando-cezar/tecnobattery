@@ -9,7 +9,7 @@ import com.tecnobattery.tbsystem.entities.Comment;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.repositories.CommentRepository;
-import com.tecnobattery.tbsystem.repositories.OrderServiceRepository;
+import com.tecnobattery.tbsystem.repositories.OrderRepository;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
 
 import org.modelmapper.ModelMapper;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
   @Autowired
-  private OrderServiceRepository orderServiceRepository;
+  private OrderRepository orderRepository;
 
   @Autowired
   private UserRepository userRepository;
@@ -33,7 +33,7 @@ public class CommentService {
   private ModelMapper mapper;
 
   public CommentDTO save(Long orderId, Long userId, String title, String description) throws Exception {
-    Order order = orderServiceRepository.findById(orderId).orElseThrow(() -> new Exception("Order: not found"));
+    Order order = orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order: not found"));
     User user = userRepository.findById(userId).orElseThrow(() -> new Exception("User: not found"));
     Comment comment = new Comment();
     comment.setOrder(order);

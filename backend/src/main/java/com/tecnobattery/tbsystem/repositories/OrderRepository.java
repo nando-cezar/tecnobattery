@@ -4,6 +4,6 @@ import com.tecnobattery.tbsystem.entities.Order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderServiceRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
 }
