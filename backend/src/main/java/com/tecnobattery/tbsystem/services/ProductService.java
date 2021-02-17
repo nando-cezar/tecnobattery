@@ -21,6 +21,20 @@ public class ProductService {
   @Autowired
   private ModelMapper mapper;
 
+  public ProductDTO save(String name, Integer power, Integer capacity, Integer voltage, Double price,
+      String description, String imageUrl) {
+    Product product = new Product();
+    product.setName(name);
+    product.setPower(power);
+    product.setCapacity(capacity);
+    product.setVoltage(voltage);
+    product.setPrice(price);
+    product.setDescription(description);
+    product.setImageUrl(imageUrl);
+
+    return toModel(productRepository.save(product));
+  }
+
   @Transactional(readOnly = true)
   public List<ProductDTO> findAll() {
     List<Product> products = productRepository.findAll();
