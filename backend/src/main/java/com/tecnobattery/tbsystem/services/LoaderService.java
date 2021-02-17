@@ -21,6 +21,21 @@ public class LoaderService {
   @Autowired
   private ModelMapper mapper;
 
+  public LoaderDTO save(String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
+      Integer length, String imageUrl) {
+    Loader loader = new Loader();
+    loader.setBrand(brand);
+    loader.setModel(model);
+    loader.setPower(power);
+    loader.setVoltage(voltage);
+    loader.setWidth(width);
+    loader.setHeight(height);
+    loader.setLength(length);
+    loader.setImageUrl(imageUrl);
+
+    return toModel(loaderRepository.save(loader));
+  }
+
   @Transactional(readOnly = true)
   public List<LoaderDTO> findAll() {
     List<Loader> loaders = loaderRepository.findAll();

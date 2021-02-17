@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.UserDTO;
+import com.tecnobattery.tbsystem.entities.TypeUser;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
 
@@ -20,6 +21,17 @@ public class UserService {
 
   @Autowired
   private ModelMapper mapper;
+
+  public UserDTO save(String username, String email, String phone, String password, TypeUser level) {
+    User user = new User();
+    user.setUsername(username);
+    user.setEmail(email);
+    user.setPhone(phone);
+    user.setPassword(password);
+    user.setLevel(level);
+
+    return toModel(userRepository.save(user));
+  }
 
   @Transactional(readOnly = true)
   public List<UserDTO> findAll() {
