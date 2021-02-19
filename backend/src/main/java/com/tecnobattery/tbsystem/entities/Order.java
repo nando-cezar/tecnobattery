@@ -43,7 +43,7 @@ public class Order implements Serializable {
 
   @ManyToMany
   @JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-  private Set<Product> products = new HashSet<>();
+  private List<Product> products = new ArrayList<>();
 
   @ManyToMany
   @JoinTable(name = "tb_order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -56,7 +56,7 @@ public class Order implements Serializable {
   }
 
   public Order(Long id, Client client, String description, Double price, OrderStatus status, OffsetDateTime opening,
-      OffsetDateTime deadline, Set<Product> products, Set<User> users) {
+      OffsetDateTime deadline, List<Product> products, Set<User> users) {
     this.id = id;
     this.client = client;
     this.description = description;
@@ -124,11 +124,11 @@ public class Order implements Serializable {
     this.deadline = deadline;
   }
 
-  public Set<Product> getProducts() {
+  public List<Product> getProducts() {
     return this.products;
   }
 
-  public void setProducts(Set<Product> products) {
+  public void setProducts(List<Product> products) {
     this.products = products;
   }
 

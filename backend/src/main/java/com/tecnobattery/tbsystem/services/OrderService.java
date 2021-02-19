@@ -31,16 +31,16 @@ public class OrderService {
   @Autowired
   private ModelMapper mapper;
 
-  public OrderDTO save(Long clientId, String description, Double price, OrderStatus status, OffsetDateTime opening,
-      OffsetDateTime deadline, Set<Product> products, Set<User> users) throws Exception {
+  public OrderDTO save(Long clientId, String description, Double price, List<Product> products, Set<User> users)
+      throws Exception {
     Client client = clientRepository.findById(clientId).orElseThrow(() -> new Exception("Client: not found"));
     Order order = new Order();
     order.setClient(client);
     order.setDescription(description);
     order.setPrice(price);
-    order.setStatus(status);
-    order.setOpening(opening);
-    order.setDeadline(deadline);
+    order.setStatus(OrderStatus.PENDENTE);
+    order.setOpening(OffsetDateTime.now());
+    order.setDeadline(null);
     order.setProducts(products);
     order.setUsers(users);
 
