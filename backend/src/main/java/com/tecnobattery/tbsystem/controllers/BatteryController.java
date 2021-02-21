@@ -2,6 +2,8 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.tecnobattery.tbsystem.dto.BatteryDTO;
 import com.tecnobattery.tbsystem.dto.input.BatteryInput;
 import com.tecnobattery.tbsystem.entities.Battery;
@@ -29,7 +31,7 @@ public class BatteryController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public BatteryDTO save(@RequestBody BatteryInput batteryInput) {
+  public BatteryDTO save(@Valid @RequestBody BatteryInput batteryInput) {
     Battery battery = new Battery();
     battery.setBrand(batteryInput.getBrand());
     battery.setModel(batteryInput.getModel());
@@ -57,7 +59,8 @@ public class BatteryController {
   }
 
   @PutMapping("/{batteryId}")
-  public ResponseEntity<BatteryDTO> update(@PathVariable Long batteryId, @RequestBody BatteryInput batteryInput) {
+  public ResponseEntity<BatteryDTO> update(@Valid @PathVariable Long batteryId,
+      @RequestBody BatteryInput batteryInput) {
 
     if (!batteryService.existsById(batteryId)) {
       return ResponseEntity.notFound().build();

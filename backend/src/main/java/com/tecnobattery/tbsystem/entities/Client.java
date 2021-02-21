@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_client")
@@ -26,6 +29,9 @@ public class Client implements Serializable {
   private String name;
   private String fantasyName;
   private String phone;
+  @NotBlank
+  @Email
+  @Size(max = 255)
   private String email;
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
