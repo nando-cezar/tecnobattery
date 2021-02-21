@@ -1,10 +1,12 @@
 package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.LoaderDTO;
 import com.tecnobattery.tbsystem.entities.Loader;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.LoaderRepository;
 
 import org.modelmapper.ModelMapper;
@@ -21,18 +23,13 @@ public class LoaderService {
   @Autowired
   private ModelMapper mapper;
 
-  public LoaderDTO save(String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
-      Integer length, String imageUrl) {
-    Loader loader = new Loader();
-    loader.setBrand(brand);
-    loader.setModel(model);
-    loader.setPower(power);
-    loader.setVoltage(voltage);
-    loader.setWidth(width);
-    loader.setHeight(height);
-    loader.setLength(length);
-    loader.setImageUrl(imageUrl);
+  public LoaderDTO save(Loader loader) {
 
+    Loader loaderExists = loaderRepository.findByModel(loader.getModel());
+
+    if (loaderExists != null && !loaderExists.equals(loader)) {
+      throw new BusinessException("Já existe uma placa cadastrada com este modelo.");
+    }
     return toModel(loaderRepository.save(loader));
   }
 
@@ -40,6 +37,24 @@ public class LoaderService {
   public List<LoaderDTO> findAll() {
     List<Loader> loaders = loaderRepository.findAll();
     return toCollectionDTO(loaders);
+  }
+
+  @Transactional(readOnly = true)
+  public LoaderDTO findById(Long loaderId) {
+    Optional<Loader> loader = loaderRepository.findById(loaderId);
+    if (loader.isPresent()) {
+      return toModel(loader.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long loaderId) {
+    return loaderRepository.existsById(loaderId);
+  }
+
+  public void deleteById(Long loaderId) {
+    loaderRepository.deleteById(loaderId);
   }
 
   private LoaderDTO toModel(Loader loader) {

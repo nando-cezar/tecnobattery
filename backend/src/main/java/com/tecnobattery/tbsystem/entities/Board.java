@@ -27,13 +27,14 @@ public class Board implements Serializable {
   private Integer width;
   private Integer height;
   private Integer length;
+  private Integer weight;
   private String imageUrl;
 
   public Board() {
   }
 
   public Board(Long id, String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
-      Integer length, String imageUrl) {
+      Integer length, Integer weight, String imageUrl) {
     this.id = id;
     this.brand = brand;
     this.model = model;
@@ -42,6 +43,7 @@ public class Board implements Serializable {
     this.width = width;
     this.height = height;
     this.length = length;
+    this.weight = weight;
     this.imageUrl = imageUrl;
   }
 
@@ -109,6 +111,14 @@ public class Board implements Serializable {
     this.length = length;
   }
 
+  public Integer getWeight() {
+    return this.weight;
+  }
+
+  public void setWeight(Integer weight) {
+    this.weight = weight;
+  }
+
   public String getImageUrl() {
     return this.imageUrl;
   }
@@ -128,19 +138,21 @@ public class Board implements Serializable {
     return Objects.equals(id, board.id) && Objects.equals(brand, board.brand) && Objects.equals(model, board.model)
         && Objects.equals(power, board.power) && Objects.equals(voltage, board.voltage)
         && Objects.equals(width, board.width) && Objects.equals(height, board.height)
-        && Objects.equals(length, board.length) && Objects.equals(imageUrl, board.imageUrl);
+        && Objects.equals(length, board.length) && Objects.equals(weight, board.weight)
+        && Objects.equals(imageUrl, board.imageUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brand, model, power, voltage, width, height, length, imageUrl);
+    return Objects.hash(id, brand, model, power, voltage, width, height, length, weight, imageUrl);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'" + ", power='"
         + getPower() + "'" + ", voltage='" + getVoltage() + "'" + ", width='" + getWidth() + "'" + ", height='"
-        + getHeight() + "'" + ", length='" + getLength() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
+        + getHeight() + "'" + ", length='" + getLength() + "'" + ", weight='" + getWeight() + "'" + ", imageUrl='"
+        + getImageUrl() + "'" + "}";
   }
 
 }

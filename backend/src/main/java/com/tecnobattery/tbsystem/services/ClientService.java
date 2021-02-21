@@ -1,11 +1,12 @@
 package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.ClientDTO;
-import com.tecnobattery.tbsystem.entities.Address;
 import com.tecnobattery.tbsystem.entities.Client;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ClientRepository;
 
 import org.modelmapper.ModelMapper;
@@ -22,23 +23,13 @@ public class ClientService {
   @Autowired
   private ModelMapper mapper;
 
-  public ClientDTO save(String cnpj, String name, String fantasyName, String phone, String email, String postalCode,
-      String publicPlace, String complement, String neighborhood, String city, String state) {
-    Client client = new Client();
-    Address address = new Address();
-    client.setCnpj(cnpj);
-    client.setName(name);
-    client.setFantasyName(fantasyName);
-    client.setPhone(phone);
-    client.setEmail(email);
-    address.setPostalCode(postalCode);
-    address.setPublicPlace(publicPlace);
-    address.setComplement(complement);
-    address.setNeighborhood(neighborhood);
-    address.setCity(city);
-    address.setState(state);
-    client.setAddress(address);
+  public ClientDTO save(Client client) {
 
+    Client clientExists = clientRepository.findByCnpj(client.getCnpj());
+
+    if (clientExists != null && !clientExists.equals(client)) {
+      throw new BusinessException("Já existe um cliente cadastrado com este CNPJ.");
+    }
     return toModel(clientRepository.save(client));
   }
 
@@ -46,6 +37,24 @@ public class ClientService {
   public List<ClientDTO> findAll() {
     List<Client> clients = clientRepository.findAll();
     return toCollectionDTO(clients);
+  }
+
+  @Transactional(readOnly = true)
+  public ClientDTO findById(Long clientId) {
+    Optional<Client> client = clientRepository.findById(clientId);
+    if (client.isPresent()) {
+      return toModel(client.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long clientId) {
+    return clientRepository.existsById(clientId);
+  }
+
+  public void deleteById(Long clientId) {
+    clientRepository.deleteById(clientId);
   }
 
   private ClientDTO toModel(Client client) {
