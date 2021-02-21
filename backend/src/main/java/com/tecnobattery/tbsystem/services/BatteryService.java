@@ -46,6 +46,10 @@ public class BatteryService {
     return batteryRepository.existsById(batteryId);
   }
 
+  public void deleteById(Long batteryId) {
+    batteryRepository.deleteById(batteryId);
+  }
+
   private BatteryDTO toModel(Battery battery) {
     return mapper.map(battery, BatteryDTO.class);
   }
