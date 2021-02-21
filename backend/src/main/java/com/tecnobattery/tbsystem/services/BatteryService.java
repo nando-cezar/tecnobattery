@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.BatteryDTO;
 import com.tecnobattery.tbsystem.entities.Battery;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.BatteryRepository;
 
 import org.modelmapper.ModelMapper;
@@ -23,6 +24,12 @@ public class BatteryService {
   private ModelMapper mapper;
 
   public BatteryDTO save(Battery battery) {
+
+    Battery batteryExists = batteryRepository.findByModel(battery.getModel());
+
+    if (batteryExists != null && !batteryExists.equals(battery)) {
+      throw new BusinessException("Já existe uma bateria cadastrada com este modelo.");
+    }
     return toModel(batteryRepository.save(battery));
   }
 

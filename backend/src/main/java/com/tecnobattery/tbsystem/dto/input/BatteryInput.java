@@ -1,15 +1,23 @@
 package com.tecnobattery.tbsystem.dto.input;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class BatteryInput {
 
   private Long id;
+  @NotBlank
+  @Size(max = 60)
   private String brand;
+  @NotBlank
+  @Size(max = 60)
   private String model;
   private Integer capacity;
   private Integer voltage;
   private Integer diameter;
   private Integer height;
   private Integer weight;
+  @NotBlank
   private String imageUrl;
 
   public Long getId() {

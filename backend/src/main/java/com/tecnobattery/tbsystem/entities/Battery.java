@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_battery")
@@ -22,17 +20,12 @@ public class Battery implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @NotBlank
-  @Size(max = 60)
   private String brand;
-  @NotBlank
-  @Size(max = 60)
   private String model;
   private Integer capacity;
   private Integer voltage;
   private Integer diameter;
   private Integer height;
-  @NotBlank
   private String imageUrl;
 
   public Battery() {
