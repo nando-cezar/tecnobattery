@@ -2,6 +2,7 @@ package com.tecnobattery.tbsystem.dto.input;
 
 public class BatteryInput {
 
+  private Long id;
   private String brand;
   private String model;
   private Integer capacity;
@@ -10,6 +11,14 @@ public class BatteryInput {
   private Integer height;
   private Integer weight;
   private String imageUrl;
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public String getBrand() {
     return this.brand;

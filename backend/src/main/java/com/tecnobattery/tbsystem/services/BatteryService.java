@@ -1,6 +1,7 @@
 package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.BatteryDTO;
@@ -21,17 +22,7 @@ public class BatteryService {
   @Autowired
   private ModelMapper mapper;
 
-  public BatteryDTO save(String brand, String model, Integer capacity, Integer voltage, Integer diameter,
-      Integer height, String imageUrl) {
-    Battery battery = new Battery();
-    battery.setBrand(brand);
-    battery.setModel(model);
-    battery.setCapacity(capacity);
-    battery.setVoltage(voltage);
-    battery.setDiameter(diameter);
-    battery.setHeight(height);
-    battery.setImageUrl(imageUrl);
-
+  public BatteryDTO save(Battery battery) {
     return toModel(batteryRepository.save(battery));
   }
 
@@ -39,6 +30,20 @@ public class BatteryService {
   public List<BatteryDTO> findAll() {
     List<Battery> batterys = batteryRepository.findAll();
     return toCollectionDTO(batterys);
+  }
+
+  @Transactional(readOnly = true)
+  public BatteryDTO findById(Long batteryId) {
+    Optional<Battery> battery = batteryRepository.findById(batteryId);
+    if (battery.isPresent()) {
+      return toModel(battery.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long batteryId) {
+    return batteryRepository.existsById(batteryId);
   }
 
   private BatteryDTO toModel(Battery battery) {
