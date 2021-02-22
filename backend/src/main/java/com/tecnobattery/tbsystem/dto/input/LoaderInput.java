@@ -1,13 +1,19 @@
 package com.tecnobattery.tbsystem.dto.input;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
-public class LoaderInput {
+public class LoaderInput implements Serializable {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   @NotBlank(message = "Marca se encontra em branco ou inválido.")
   @Size(max = 60, message = "Marca deve possuir no máximo 60 caracteres.")

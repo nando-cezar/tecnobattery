@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.dto.ManagementBoardDTO;
+import com.tecnobattery.tbsystem.dto.output.ManagementBoardOutput;
 import com.tecnobattery.tbsystem.services.ManagementBoardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class ManagementBoardController {
   private ManagementBoardService managementBoardService;
 
   @GetMapping
-  public ResponseEntity<List<ManagementBoardDTO>> findAll() {
-    List<ManagementBoardDTO> list = managementBoardService.findAll();
+  public ResponseEntity<List<ManagementBoardOutput>> findAll() {
+    List<ManagementBoardOutput> list = managementBoardService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

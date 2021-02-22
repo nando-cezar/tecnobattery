@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.dto.OrderDTO;
+import com.tecnobattery.tbsystem.dto.output.OrderOutput;
 import com.tecnobattery.tbsystem.dto.input.OrderInput;
 import com.tecnobattery.tbsystem.services.OrderService;
 
@@ -25,14 +25,14 @@ public class OrderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public OrderDTO save(@RequestBody OrderInput order) throws Exception {
+  public OrderOutput save(@RequestBody OrderInput order) throws Exception {
     return orderService.save(order.getClientId(), order.getDescription(), order.getPrice(), order.getProducts(),
         order.getUsers());
   }
 
   @GetMapping
-  public ResponseEntity<List<OrderDTO>> findAll() {
-    List<OrderDTO> list = orderService.findAll();
+  public ResponseEntity<List<OrderOutput>> findAll() {
+    List<OrderOutput> list = orderService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

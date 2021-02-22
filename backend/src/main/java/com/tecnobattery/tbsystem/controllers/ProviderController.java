@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.dto.ProviderDTO;
+import com.tecnobattery.tbsystem.dto.output.ProviderOutput;
 import com.tecnobattery.tbsystem.dto.input.ProviderInput;
 import com.tecnobattery.tbsystem.services.ProviderService;
 
@@ -25,15 +25,15 @@ public class ProviderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ProviderDTO save(@RequestBody ProviderInput provider) {
+  public ProviderOutput save(@RequestBody ProviderInput provider) {
     return providerService.save(provider.getCnpj(), provider.getName(), provider.getFantasyName(), provider.getPhone(),
         provider.getEmail(), provider.getPostalCode(), provider.getPublicPlace(), provider.getComplement(),
         provider.getNeighborhood(), provider.getCity(), provider.getState());
   }
 
   @GetMapping
-  public ResponseEntity<List<ProviderDTO>> findAll() {
-    List<ProviderDTO> list = providerService.findAll();
+  public ResponseEntity<List<ProviderOutput>> findAll() {
+    List<ProviderOutput> list = providerService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

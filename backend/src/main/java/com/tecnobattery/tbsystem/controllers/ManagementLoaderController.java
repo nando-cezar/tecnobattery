@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.dto.ManagementLoaderDTO;
+import com.tecnobattery.tbsystem.dto.output.ManagementLoaderOutput;
 import com.tecnobattery.tbsystem.services.ManagementLoaderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class ManagementLoaderController {
   private ManagementLoaderService managementLoaderService;
 
   @GetMapping
-  public ResponseEntity<List<ManagementLoaderDTO>> findAll() {
-    List<ManagementLoaderDTO> list = managementLoaderService.findAll();
+  public ResponseEntity<List<ManagementLoaderOutput>> findAll() {
+    List<ManagementLoaderOutput> list = managementLoaderService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

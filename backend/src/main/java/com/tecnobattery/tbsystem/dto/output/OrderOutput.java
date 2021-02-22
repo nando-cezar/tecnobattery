@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.dto;
+package com.tecnobattery.tbsystem.dto.output;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -8,22 +8,22 @@ import java.util.List;
 import java.util.Set;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 
-public class OrderDTO implements Serializable {
+public class OrderOutput implements Serializable {
 
   /**
    *
    */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private ClientDTO client;
+  private ClientOutput client;
   private String description;
   private Double price;
   private OrderStatus status;
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
-  private List<ProductDTO> products = new ArrayList<>();
-  private Set<UserDTO> users = new HashSet<>();
-  private List<CommentDTO> comments = new ArrayList<>();
+  private List<ProductOutput> products = new ArrayList<>();
+  private Set<UserOutput> users = new HashSet<>();
+  private List<CommentOutput> comments = new ArrayList<>();
 
   public Long getId() {
     return this.id;
@@ -33,11 +33,11 @@ public class OrderDTO implements Serializable {
     this.id = id;
   }
 
-  public ClientDTO getClient() {
+  public ClientOutput getClient() {
     return this.client;
   }
 
-  public void setClient(ClientDTO client) {
+  public void setClient(ClientOutput client) {
     this.client = client;
   }
 
@@ -81,27 +81,27 @@ public class OrderDTO implements Serializable {
     this.deadline = deadline;
   }
 
-  public List<ProductDTO> getProducts() {
+  public List<ProductOutput> getProducts() {
     return this.products;
   }
 
-  public void setProducts(List<ProductDTO> products) {
+  public void setProducts(List<ProductOutput> products) {
     this.products = products;
   }
 
-  public Set<UserDTO> getUsers() {
+  public Set<UserOutput> getUsers() {
     return this.users;
   }
 
-  public void setUsers(Set<UserDTO> users) {
+  public void setUsers(Set<UserOutput> users) {
     this.users = users;
   }
 
-  public List<CommentDTO> getComments() {
+  public List<CommentOutput> getComments() {
     return this.comments;
   }
 
-  public void setComments(List<CommentDTO> comments) {
+  public void setComments(List<CommentOutput> comments) {
     this.comments = comments;
   }
 

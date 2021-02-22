@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.LoaderDTO;
+import com.tecnobattery.tbsystem.dto.output.LoaderOutput;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.LoaderRepository;
@@ -23,7 +23,7 @@ public class LoaderService {
   @Autowired
   private ModelMapper mapper;
 
-  public LoaderDTO save(Loader loader) {
+  public LoaderOutput save(Loader loader) {
 
     Loader loaderExists = loaderRepository.findByModel(loader.getModel());
 
@@ -34,13 +34,13 @@ public class LoaderService {
   }
 
   @Transactional(readOnly = true)
-  public List<LoaderDTO> findAll() {
+  public List<LoaderOutput> findAll() {
     List<Loader> loaders = loaderRepository.findAll();
     return toCollectionDTO(loaders);
   }
 
   @Transactional(readOnly = true)
-  public LoaderDTO findById(Long loaderId) {
+  public LoaderOutput findById(Long loaderId) {
     Optional<Loader> loader = loaderRepository.findById(loaderId);
     if (loader.isPresent()) {
       return toModel(loader.get());
@@ -57,11 +57,11 @@ public class LoaderService {
     loaderRepository.deleteById(loaderId);
   }
 
-  private LoaderDTO toModel(Loader loader) {
-    return mapper.map(loader, LoaderDTO.class);
+  private LoaderOutput toModel(Loader loader) {
+    return mapper.map(loader, LoaderOutput.class);
   }
 
-  private List<LoaderDTO> toCollectionDTO(List<Loader> loaders) {
+  private List<LoaderOutput> toCollectionDTO(List<Loader> loaders) {
     return loaders.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

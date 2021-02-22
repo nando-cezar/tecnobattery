@@ -1,17 +1,17 @@
-package com.tecnobattery.tbsystem.dto;
+package com.tecnobattery.tbsystem.dto.output;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
-public class ManagementBatteryDTO implements Serializable {
+public class ManagementBatteryOutput implements Serializable {
 
   /**
    *
    */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private ProviderDTO provider;
-  private BatteryDTO battery;
+  private ProviderOutput provider;
+  private BatteryOutput battery;
   private OffsetDateTime moment;
   private Integer amount;
 
@@ -23,19 +23,19 @@ public class ManagementBatteryDTO implements Serializable {
     this.id = id;
   }
 
-  public ProviderDTO getProvider() {
+  public ProviderOutput getProvider() {
     return this.provider;
   }
 
-  public void setProvider(ProviderDTO provider) {
+  public void setProvider(ProviderOutput provider) {
     this.provider = provider;
   }
 
-  public BatteryDTO getBattery() {
+  public BatteryOutput getBattery() {
     return this.battery;
   }
 
-  public void setBattery(BatteryDTO battery) {
+  public void setBattery(BatteryOutput battery) {
     this.battery = battery;
   }
 

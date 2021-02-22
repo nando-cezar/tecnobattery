@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.dto.UserDTO;
+import com.tecnobattery.tbsystem.dto.output.UserOutput;
 import com.tecnobattery.tbsystem.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ public class UserController {
   private UserService userService;
 
   @GetMapping
-  public ResponseEntity<List<UserDTO>> findAll() {
-    List<UserDTO> list = userService.findAll();
+  public ResponseEntity<List<UserOutput>> findAll() {
+    List<UserOutput> list = userService.findAll();
     return ResponseEntity.ok().body(list);
   }
 }

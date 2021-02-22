@@ -1,8 +1,8 @@
-package com.tecnobattery.tbsystem.dto;
+package com.tecnobattery.tbsystem.dto.output;
 
 import java.io.Serializable;
 
-public class LoaderDTO implements Serializable {
+public class BoardOutput implements Serializable {
 
   /**
    *
@@ -98,5 +98,4 @@ public class LoaderDTO implements Serializable {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
-
 }

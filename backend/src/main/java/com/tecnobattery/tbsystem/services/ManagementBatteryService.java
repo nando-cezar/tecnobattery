@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.ManagementBatteryDTO;
+import com.tecnobattery.tbsystem.dto.output.ManagementBatteryOutput;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.entities.ManagementBattery;
 import com.tecnobattery.tbsystem.entities.Provider;
@@ -32,7 +32,7 @@ public class ManagementBatteryService {
   @Autowired
   private ModelMapper mapper;
 
-  public ManagementBatteryDTO save(Long providerId, Long batteryId, OffsetDateTime moment, Integer amount)
+  public ManagementBatteryOutput save(Long providerId, Long batteryId, OffsetDateTime moment, Integer amount)
       throws Exception {
     Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new Exception("Provider: not found"));
     Battery battery = batteryRepository.findById(batteryId).orElseThrow(() -> new Exception("Battery: not found"));
@@ -46,16 +46,16 @@ public class ManagementBatteryService {
   }
 
   @Transactional(readOnly = true)
-  public List<ManagementBatteryDTO> findAll() {
+  public List<ManagementBatteryOutput> findAll() {
     List<ManagementBattery> batterys = managementBatteryRepository.findAll();
     return toCollectionDTO(batterys);
   }
 
-  private ManagementBatteryDTO toModel(ManagementBattery managementBattery) {
-    return mapper.map(managementBattery, ManagementBatteryDTO.class);
+  private ManagementBatteryOutput toModel(ManagementBattery managementBattery) {
+    return mapper.map(managementBattery, ManagementBatteryOutput.class);
   }
 
-  private List<ManagementBatteryDTO> toCollectionDTO(List<ManagementBattery> batterys) {
+  private List<ManagementBatteryOutput> toCollectionDTO(List<ManagementBattery> batterys) {
     return batterys.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

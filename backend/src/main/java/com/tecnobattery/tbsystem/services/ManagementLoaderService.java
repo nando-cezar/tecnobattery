@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.ManagementLoaderDTO;
+import com.tecnobattery.tbsystem.dto.output.ManagementLoaderOutput;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.entities.ManagementLoader;
 import com.tecnobattery.tbsystem.entities.Provider;
@@ -32,7 +32,7 @@ public class ManagementLoaderService {
   @Autowired
   private ModelMapper mapper;
 
-  public ManagementLoaderDTO save(Long providerId, Long loaderId, OffsetDateTime moment, Integer amount)
+  public ManagementLoaderOutput save(Long providerId, Long loaderId, OffsetDateTime moment, Integer amount)
       throws Exception {
     Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new Exception("Provider: not found"));
     Loader loader = loaderRepository.findById(loaderId).orElseThrow(() -> new Exception("Loader: not found"));
@@ -46,16 +46,16 @@ public class ManagementLoaderService {
   }
 
   @Transactional(readOnly = true)
-  public List<ManagementLoaderDTO> findAll() {
+  public List<ManagementLoaderOutput> findAll() {
     List<ManagementLoader> loaders = managementLoaderRepository.findAll();
-    return toCollectionDTO(loaders);
+    return toCollectionOutput(loaders);
   }
 
-  private ManagementLoaderDTO toModel(ManagementLoader managementLoader) {
-    return mapper.map(managementLoader, ManagementLoaderDTO.class);
+  private ManagementLoaderOutput toModel(ManagementLoader managementLoader) {
+    return mapper.map(managementLoader, ManagementLoaderOutput.class);
   }
 
-  private List<ManagementLoaderDTO> toCollectionDTO(List<ManagementLoader> loaders) {
+  private List<ManagementLoaderOutput> toCollectionOutput(List<ManagementLoader> loaders) {
     return loaders.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

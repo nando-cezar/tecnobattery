@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.BoardDTO;
+import com.tecnobattery.tbsystem.dto.output.BoardOutput;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.BoardRepository;
@@ -23,7 +23,7 @@ public class BoardService {
   @Autowired
   private ModelMapper mapper;
 
-  public BoardDTO save(Board board) {
+  public BoardOutput save(Board board) {
 
     Board boardExists = boardRepository.findByModel(board.getModel());
 
@@ -34,13 +34,13 @@ public class BoardService {
   }
 
   @Transactional(readOnly = true)
-  public List<BoardDTO> findAll() {
+  public List<BoardOutput> findAll() {
     List<Board> boards = boardRepository.findAll();
     return toCollectionDTO(boards);
   }
 
   @Transactional(readOnly = true)
-  public BoardDTO findById(Long boardId) {
+  public BoardOutput findById(Long boardId) {
     Optional<Board> board = boardRepository.findById(boardId);
     if (board.isPresent()) {
       return toModel(board.get());
@@ -57,11 +57,11 @@ public class BoardService {
     boardRepository.deleteById(boardId);
   }
 
-  private BoardDTO toModel(Board board) {
-    return mapper.map(board, BoardDTO.class);
+  private BoardOutput toModel(Board board) {
+    return mapper.map(board, BoardOutput.class);
   }
 
-  private List<BoardDTO> toCollectionDTO(List<Board> boards) {
+  private List<BoardOutput> toCollectionDTO(List<Board> boards) {
     return boards.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

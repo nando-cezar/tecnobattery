@@ -1,11 +1,37 @@
 package com.tecnobattery.tbsystem.dto.input;
 
-public class UserInput {
+import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+public class UserInput implements Serializable {
+
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
+  private Long id;
+  @NotBlank(message = "Username se encontra em branco ou inválido.")
+  @Size(max = 20, message = "Username deve possuir no máximo 20 caracteres.")
   private String username;
+  @NotBlank(message = "E-mail se encontra em branco ou inválido.")
+  @Size(max = 100, message = "E-mail deve possuir no máximo 100 caracteres.")
   private String email;
+  @NotBlank(message = "Telefone se encontra em branco ou inválido.")
+  @Size(max = 14, message = "Telefone deve possuir no máximo 14 caracteres.")
   private String phone;
+  @NotBlank(message = "Senha se encontra em branco ou inválido.")
+  @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
   private String password;
+
+  public Long getId() {
+    return this.id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public String getUsername() {
     return this.username;

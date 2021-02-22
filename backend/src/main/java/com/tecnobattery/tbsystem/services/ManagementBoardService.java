@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.ManagementBoardDTO;
+import com.tecnobattery.tbsystem.dto.output.ManagementBoardOutput;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.entities.ManagementBoard;
 import com.tecnobattery.tbsystem.entities.Provider;
@@ -32,7 +32,7 @@ public class ManagementBoardService {
   @Autowired
   private ModelMapper mapper;
 
-  public ManagementBoardDTO save(Long providerId, Long boardId, OffsetDateTime moment, Integer amount)
+  public ManagementBoardOutput save(Long providerId, Long boardId, OffsetDateTime moment, Integer amount)
       throws Exception {
     Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new Exception("Provider: not found"));
     Board board = boardRepository.findById(boardId).orElseThrow(() -> new Exception("Board: not found"));
@@ -46,16 +46,16 @@ public class ManagementBoardService {
   }
 
   @Transactional(readOnly = true)
-  public List<ManagementBoardDTO> findAll() {
+  public List<ManagementBoardOutput> findAll() {
     List<ManagementBoard> boards = managementBoardRepository.findAll();
     return toCollectionDTO(boards);
   }
 
-  private ManagementBoardDTO toModel(ManagementBoard managementBoard) {
-    return mapper.map(managementBoard, ManagementBoardDTO.class);
+  private ManagementBoardOutput toModel(ManagementBoard managementBoard) {
+    return mapper.map(managementBoard, ManagementBoardOutput.class);
   }
 
-  private List<ManagementBoardDTO> toCollectionDTO(List<ManagementBoard> boards) {
+  private List<ManagementBoardOutput> toCollectionDTO(List<ManagementBoard> boards) {
     return boards.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

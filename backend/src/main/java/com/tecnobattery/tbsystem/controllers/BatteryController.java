@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.BatteryDTO;
+import com.tecnobattery.tbsystem.dto.output.BatteryOutput;
 import com.tecnobattery.tbsystem.dto.input.BatteryInput;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.services.BatteryService;
@@ -31,7 +31,7 @@ public class BatteryController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public BatteryDTO save(@Valid @RequestBody BatteryInput batteryInput) {
+  public BatteryOutput save(@Valid @RequestBody BatteryInput batteryInput) {
     Battery battery = new Battery();
     battery.setBrand(batteryInput.getBrand());
     battery.setModel(batteryInput.getModel());
@@ -44,14 +44,14 @@ public class BatteryController {
   }
 
   @GetMapping
-  public ResponseEntity<List<BatteryDTO>> findAll() {
-    List<BatteryDTO> list = batteryService.findAll();
+  public ResponseEntity<List<BatteryOutput>> findAll() {
+    List<BatteryOutput> list = batteryService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{batteryId}")
-  public ResponseEntity<BatteryDTO> findById(@PathVariable Long batteryId) {
-    BatteryDTO battery = batteryService.findById(batteryId);
+  public ResponseEntity<BatteryOutput> findById(@PathVariable Long batteryId) {
+    BatteryOutput battery = batteryService.findById(batteryId);
     if (battery != null) {
       return ResponseEntity.ok(battery);
     }
@@ -59,7 +59,7 @@ public class BatteryController {
   }
 
   @PutMapping("/{batteryId}")
-  public ResponseEntity<BatteryDTO> update(@Valid @PathVariable Long batteryId,
+  public ResponseEntity<BatteryOutput> update(@Valid @PathVariable Long batteryId,
       @RequestBody BatteryInput batteryInput) {
 
     if (!batteryService.existsById(batteryId)) {

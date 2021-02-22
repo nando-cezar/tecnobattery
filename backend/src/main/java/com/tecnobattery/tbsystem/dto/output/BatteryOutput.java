@@ -1,8 +1,8 @@
-package com.tecnobattery.tbsystem.dto;
+package com.tecnobattery.tbsystem.dto.output;
 
 import java.io.Serializable;
 
-public class BoardDTO implements Serializable {
+public class BatteryOutput implements Serializable {
 
   /**
    *
@@ -11,11 +11,10 @@ public class BoardDTO implements Serializable {
   private Long id;
   private String brand;
   private String model;
-  private Integer power;
+  private Integer capacity;
   private Integer voltage;
-  private Integer width;
+  private Integer diameter;
   private Integer height;
-  private Integer length;
   private Integer weight;
   private String imageUrl;
 
@@ -43,12 +42,12 @@ public class BoardDTO implements Serializable {
     this.model = model;
   }
 
-  public Integer getPower() {
-    return this.power;
+  public Integer getCapacity() {
+    return this.capacity;
   }
 
-  public void setPower(Integer power) {
-    this.power = power;
+  public void setCapacity(Integer capacity) {
+    this.capacity = capacity;
   }
 
   public Integer getVoltage() {
@@ -59,12 +58,12 @@ public class BoardDTO implements Serializable {
     this.voltage = voltage;
   }
 
-  public Integer getWidth() {
-    return this.width;
+  public Integer getDiameter() {
+    return this.diameter;
   }
 
-  public void setWidth(Integer width) {
-    this.width = width;
+  public void setDiameter(Integer diameter) {
+    this.diameter = diameter;
   }
 
   public Integer getHeight() {
@@ -73,14 +72,6 @@ public class BoardDTO implements Serializable {
 
   public void setHeight(Integer height) {
     this.height = height;
-  }
-
-  public Integer getLength() {
-    return this.length;
-  }
-
-  public void setLength(Integer length) {
-    this.length = length;
   }
 
   public Integer getWeight() {
@@ -98,4 +89,5 @@ public class BoardDTO implements Serializable {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
+
 }

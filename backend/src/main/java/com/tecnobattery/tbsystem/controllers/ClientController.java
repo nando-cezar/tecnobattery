@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.ClientDTO;
+import com.tecnobattery.tbsystem.dto.output.ClientOutput;
 import com.tecnobattery.tbsystem.dto.input.ClientInput;
 import com.tecnobattery.tbsystem.entities.Address;
 import com.tecnobattery.tbsystem.entities.Client;
@@ -32,7 +32,7 @@ public class ClientController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ClientDTO save(@Valid @RequestBody ClientInput clientInput) {
+  public ClientOutput save(@Valid @RequestBody ClientInput clientInput) {
     Client client = new Client();
     Address address = new Address();
     client.setCnpj(clientInput.getCnpj());
@@ -51,14 +51,14 @@ public class ClientController {
   }
 
   @GetMapping
-  public ResponseEntity<List<ClientDTO>> findAll() {
-    List<ClientDTO> list = clientService.findAll();
+  public ResponseEntity<List<ClientOutput>> findAll() {
+    List<ClientOutput> list = clientService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{clientId}")
-  public ResponseEntity<ClientDTO> findById(@PathVariable Long clientId) {
-    ClientDTO client = clientService.findById(clientId);
+  public ResponseEntity<ClientOutput> findById(@PathVariable Long clientId) {
+    ClientOutput client = clientService.findById(clientId);
     if (client != null) {
       return ResponseEntity.ok(client);
     }
@@ -66,7 +66,7 @@ public class ClientController {
   }
 
   @PutMapping("/{clientId}")
-  public ResponseEntity<ClientDTO> update(@Valid @PathVariable Long clientId, @RequestBody ClientInput clientInput) {
+  public ResponseEntity<ClientOutput> update(@Valid @PathVariable Long clientId, @RequestBody ClientInput clientInput) {
 
     if (!clientService.existsById(clientId)) {
       return ResponseEntity.notFound().build();

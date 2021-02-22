@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.ClientDTO;
+import com.tecnobattery.tbsystem.dto.output.ClientOutput;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ClientRepository;
@@ -23,7 +23,7 @@ public class ClientService {
   @Autowired
   private ModelMapper mapper;
 
-  public ClientDTO save(Client client) {
+  public ClientOutput save(Client client) {
 
     Client clientExists = clientRepository.findByCnpj(client.getCnpj());
 
@@ -34,13 +34,13 @@ public class ClientService {
   }
 
   @Transactional(readOnly = true)
-  public List<ClientDTO> findAll() {
+  public List<ClientOutput> findAll() {
     List<Client> clients = clientRepository.findAll();
     return toCollectionDTO(clients);
   }
 
   @Transactional(readOnly = true)
-  public ClientDTO findById(Long clientId) {
+  public ClientOutput findById(Long clientId) {
     Optional<Client> client = clientRepository.findById(clientId);
     if (client.isPresent()) {
       return toModel(client.get());
@@ -57,11 +57,11 @@ public class ClientService {
     clientRepository.deleteById(clientId);
   }
 
-  private ClientDTO toModel(Client client) {
-    return mapper.map(client, ClientDTO.class);
+  private ClientOutput toModel(Client client) {
+    return mapper.map(client, ClientOutput.class);
   }
 
-  private List<ClientDTO> toCollectionDTO(List<Client> clients) {
+  private List<ClientOutput> toCollectionDTO(List<Client> clients) {
     return clients.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

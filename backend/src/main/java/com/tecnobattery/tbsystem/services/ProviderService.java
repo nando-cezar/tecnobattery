@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.ProviderDTO;
+import com.tecnobattery.tbsystem.dto.output.ProviderOutput;
 import com.tecnobattery.tbsystem.entities.Address;
 import com.tecnobattery.tbsystem.entities.Provider;
 import com.tecnobattery.tbsystem.repositories.ProviderRepository;
@@ -22,8 +22,8 @@ public class ProviderService {
   @Autowired
   private ModelMapper mapper;
 
-  public ProviderDTO save(String cnpj, String name, String fantasyName, String phone, String email, String postalCode,
-      String publicPlace, String complement, String neighborhood, String city, String state) {
+  public ProviderOutput save(String cnpj, String name, String fantasyName, String phone, String email,
+      String postalCode, String publicPlace, String complement, String neighborhood, String city, String state) {
     Provider provider = new Provider();
     Address address = new Address();
     provider.setCnpj(cnpj);
@@ -43,16 +43,16 @@ public class ProviderService {
   }
 
   @Transactional(readOnly = true)
-  public List<ProviderDTO> findAll() {
+  public List<ProviderOutput> findAll() {
     List<Provider> providers = providerRepository.findAll();
     return toCollectionDTO(providers);
   }
 
-  private ProviderDTO toModel(Provider provider) {
-    return mapper.map(provider, ProviderDTO.class);
+  private ProviderOutput toModel(Provider provider) {
+    return mapper.map(provider, ProviderOutput.class);
   }
 
-  private List<ProviderDTO> toCollectionDTO(List<Provider> providers) {
+  private List<ProviderOutput> toCollectionDTO(List<Provider> providers) {
     return providers.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

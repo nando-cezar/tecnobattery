@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.LoaderDTO;
+import com.tecnobattery.tbsystem.dto.output.LoaderOutput;
 import com.tecnobattery.tbsystem.dto.input.LoaderInput;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.services.LoaderService;
@@ -31,7 +31,7 @@ public class LoaderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public LoaderDTO save(@Valid @RequestBody LoaderInput loaderInput) {
+  public LoaderOutput save(@Valid @RequestBody LoaderInput loaderInput) {
     Loader loader = new Loader();
     loader.setBrand(loaderInput.getBrand());
     loader.setModel(loaderInput.getModel());
@@ -46,14 +46,14 @@ public class LoaderController {
   }
 
   @GetMapping
-  public ResponseEntity<List<LoaderDTO>> findAll() {
-    List<LoaderDTO> list = loaderService.findAll();
+  public ResponseEntity<List<LoaderOutput>> findAll() {
+    List<LoaderOutput> list = loaderService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{loaderId}")
-  public ResponseEntity<LoaderDTO> findById(@PathVariable Long loaderId) {
-    LoaderDTO loader = loaderService.findById(loaderId);
+  public ResponseEntity<LoaderOutput> findById(@PathVariable Long loaderId) {
+    LoaderOutput loader = loaderService.findById(loaderId);
     if (loader != null) {
       return ResponseEntity.ok(loader);
     }
@@ -61,7 +61,7 @@ public class LoaderController {
   }
 
   @PutMapping("/{loaderId}")
-  public ResponseEntity<LoaderDTO> update(@Valid @PathVariable Long loaderId, @RequestBody LoaderInput loaderInput) {
+  public ResponseEntity<LoaderOutput> update(@Valid @PathVariable Long loaderId, @RequestBody LoaderInput loaderInput) {
 
     if (!loaderService.existsById(loaderId)) {
       return ResponseEntity.notFound().build();

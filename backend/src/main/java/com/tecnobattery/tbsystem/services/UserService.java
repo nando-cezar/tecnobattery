@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.UserDTO;
+import com.tecnobattery.tbsystem.dto.output.UserOutput;
 import com.tecnobattery.tbsystem.entities.TypeUser;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
@@ -22,7 +22,7 @@ public class UserService {
   @Autowired
   private ModelMapper mapper;
 
-  public UserDTO save(String username, String email, String phone, String password, TypeUser level) {
+  public UserOutput save(String username, String email, String phone, String password, TypeUser level) {
     User user = new User();
     user.setUsername(username);
     user.setEmail(email);
@@ -34,16 +34,16 @@ public class UserService {
   }
 
   @Transactional(readOnly = true)
-  public List<UserDTO> findAll() {
+  public List<UserOutput> findAll() {
     List<User> users = userRepository.findAll();
     return toCollectionDTO(users);
   }
 
-  private UserDTO toModel(User user) {
-    return mapper.map(user, UserDTO.class);
+  private UserOutput toModel(User user) {
+    return mapper.map(user, UserOutput.class);
   }
 
-  private List<UserDTO> toCollectionDTO(List<User> users) {
+  private List<UserOutput> toCollectionDTO(List<User> users) {
     return users.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

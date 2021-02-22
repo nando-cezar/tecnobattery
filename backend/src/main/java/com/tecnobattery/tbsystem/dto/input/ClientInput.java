@@ -1,11 +1,17 @@
 package com.tecnobattery.tbsystem.dto.input;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class ClientInput {
+public class ClientInput implements Serializable {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private Long id;
   @NotBlank(message = "CNPJ se encontra em branco ou inválido.")
   @Size(max = 18, message = "CNPJ deve possuir no máximo 18 caracteres.")

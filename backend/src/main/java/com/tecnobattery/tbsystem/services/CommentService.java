@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.CommentDTO;
+import com.tecnobattery.tbsystem.dto.output.CommentOutput;
 import com.tecnobattery.tbsystem.entities.Comment;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.User;
@@ -32,7 +32,7 @@ public class CommentService {
   @Autowired
   private ModelMapper mapper;
 
-  public CommentDTO save(Long orderId, Long userId, String title, String description) throws Exception {
+  public CommentOutput save(Long orderId, Long userId, String title, String description) throws Exception {
     Order order = orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order: not found"));
     User user = userRepository.findById(userId).orElseThrow(() -> new Exception("User: not found"));
     Comment comment = new Comment();
@@ -46,16 +46,16 @@ public class CommentService {
   }
 
   @Transactional(readOnly = true)
-  public List<CommentDTO> findAll() {
+  public List<CommentOutput> findAll() {
     List<Comment> comments = commentRepository.findAll();
     return toCollectionDTO(comments);
   }
 
-  private CommentDTO toModel(Comment comment) {
-    return mapper.map(comment, CommentDTO.class);
+  private CommentOutput toModel(Comment comment) {
+    return mapper.map(comment, CommentOutput.class);
   }
 
-  private List<CommentDTO> toCollectionDTO(List<Comment> comments) {
+  private List<CommentOutput> toCollectionDTO(List<Comment> comments) {
     return comments.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.OrderDTO;
+import com.tecnobattery.tbsystem.dto.output.OrderOutput;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
@@ -31,7 +31,7 @@ public class OrderService {
   @Autowired
   private ModelMapper mapper;
 
-  public OrderDTO save(Long clientId, String description, Double price, List<Product> products, Set<User> users)
+  public OrderOutput save(Long clientId, String description, Double price, List<Product> products, Set<User> users)
       throws Exception {
     Client client = clientRepository.findById(clientId).orElseThrow(() -> new Exception("Client: not found"));
     Order order = new Order();
@@ -48,22 +48,22 @@ public class OrderService {
   }
 
   @Transactional(readOnly = true)
-  public List<OrderDTO> findAll() {
+  public List<OrderOutput> findAll() {
     List<Order> orderServices = orderRepository.findAll();
     return toCollectionDTO(orderServices);
   }
 
   @Transactional(readOnly = true)
-  public OrderDTO findById(Long orderId) throws Exception {
+  public OrderOutput findById(Long orderId) throws Exception {
     Order order = orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order: not found"));
     return toModel(order);
   }
 
-  private OrderDTO toModel(Order orderService) {
-    return mapper.map(orderService, OrderDTO.class);
+  private OrderOutput toModel(Order orderService) {
+    return mapper.map(orderService, OrderOutput.class);
   }
 
-  private List<OrderDTO> toCollectionDTO(List<Order> orderServices) {
+  private List<OrderOutput> toCollectionDTO(List<Order> orderServices) {
     return orderServices.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 

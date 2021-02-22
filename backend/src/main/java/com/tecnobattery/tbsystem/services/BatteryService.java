@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.tecnobattery.tbsystem.dto.BatteryDTO;
+import com.tecnobattery.tbsystem.dto.output.BatteryOutput;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.BatteryRepository;
@@ -23,7 +23,7 @@ public class BatteryService {
   @Autowired
   private ModelMapper mapper;
 
-  public BatteryDTO save(Battery battery) {
+  public BatteryOutput save(Battery battery) {
 
     Battery batteryExists = batteryRepository.findByModel(battery.getModel());
 
@@ -34,13 +34,13 @@ public class BatteryService {
   }
 
   @Transactional(readOnly = true)
-  public List<BatteryDTO> findAll() {
+  public List<BatteryOutput> findAll() {
     List<Battery> batterys = batteryRepository.findAll();
     return toCollectionDTO(batterys);
   }
 
   @Transactional(readOnly = true)
-  public BatteryDTO findById(Long batteryId) {
+  public BatteryOutput findById(Long batteryId) {
     Optional<Battery> battery = batteryRepository.findById(batteryId);
     if (battery.isPresent()) {
       return toModel(battery.get());
@@ -57,11 +57,11 @@ public class BatteryService {
     batteryRepository.deleteById(batteryId);
   }
 
-  private BatteryDTO toModel(Battery battery) {
-    return mapper.map(battery, BatteryDTO.class);
+  private BatteryOutput toModel(Battery battery) {
+    return mapper.map(battery, BatteryOutput.class);
   }
 
-  private List<BatteryDTO> toCollectionDTO(List<Battery> batterys) {
+  private List<BatteryOutput> toCollectionDTO(List<Battery> batterys) {
     return batterys.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }
