@@ -1,11 +1,12 @@
 package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.ProviderOutput;
-import com.tecnobattery.tbsystem.entities.Address;
 import com.tecnobattery.tbsystem.entities.Provider;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ProviderRepository;
 
 import org.modelmapper.ModelMapper;
@@ -22,23 +23,13 @@ public class ProviderService {
   @Autowired
   private ModelMapper mapper;
 
-  public ProviderOutput save(String cnpj, String name, String fantasyName, String phone, String email,
-      String postalCode, String publicPlace, String complement, String neighborhood, String city, String state) {
-    Provider provider = new Provider();
-    Address address = new Address();
-    provider.setCnpj(cnpj);
-    provider.setName(name);
-    provider.setFantasyName(fantasyName);
-    provider.setPhone(phone);
-    provider.setEmail(email);
-    address.setPostalCode(postalCode);
-    address.setPublicPlace(publicPlace);
-    address.setComplement(complement);
-    address.setNeighborhood(neighborhood);
-    address.setCity(city);
-    address.setState(state);
-    provider.setAddress(address);
+  public ProviderOutput save(Provider provider) {
 
+    Provider providerExists = providerRepository.findByCnpj(provider.getCnpj());
+
+    if (providerExists != null && !providerExists.equals(provider)) {
+      throw new BusinessException("Já existe um fornecedor cadastrado com este CNPJ.");
+    }
     return toModel(providerRepository.save(provider));
   }
 
@@ -46,6 +37,24 @@ public class ProviderService {
   public List<ProviderOutput> findAll() {
     List<Provider> providers = providerRepository.findAll();
     return toCollectionDTO(providers);
+  }
+
+  @Transactional(readOnly = true)
+  public ProviderOutput findById(Long providerId) {
+    Optional<Provider> provider = providerRepository.findById(providerId);
+    if (provider.isPresent()) {
+      return toModel(provider.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long providerId) {
+    return providerRepository.existsById(providerId);
+  }
+
+  public void deleteById(Long providerId) {
+    providerRepository.deleteById(providerId);
   }
 
   private ProviderOutput toModel(Provider provider) {
