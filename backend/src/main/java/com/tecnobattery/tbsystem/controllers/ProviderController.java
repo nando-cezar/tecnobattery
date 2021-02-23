@@ -75,6 +75,7 @@ public class ProviderController {
 
     Provider provider = new Provider();
     Address address = new Address();
+    provider.setId(providerId);
     provider.setCnpj(providerInput.getCnpj());
     provider.setName(providerInput.getName());
     provider.setFantasyName(providerInput.getFantasyName());

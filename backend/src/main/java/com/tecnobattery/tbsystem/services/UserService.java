@@ -1,11 +1,12 @@
 package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.UserOutput;
-import com.tecnobattery.tbsystem.entities.TypeUser;
 import com.tecnobattery.tbsystem.entities.User;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
 
 import org.modelmapper.ModelMapper;
@@ -22,14 +23,13 @@ public class UserService {
   @Autowired
   private ModelMapper mapper;
 
-  public UserOutput save(String username, String email, String phone, String password, TypeUser level) {
-    User user = new User();
-    user.setUsername(username);
-    user.setEmail(email);
-    user.setPhone(phone);
-    user.setPassword(password);
-    user.setLevel(level);
+  public UserOutput save(User user) {
 
+    User userExists = userRepository.findByEmail(user.getEmail());
+
+    if (userExists != null && !userExists.equals(user)) {
+      throw new BusinessException("Já existe um usuário cadastrado com este e-mail.");
+    }
     return toModel(userRepository.save(user));
   }
 
@@ -37,6 +37,24 @@ public class UserService {
   public List<UserOutput> findAll() {
     List<User> users = userRepository.findAll();
     return toCollectionDTO(users);
+  }
+
+  @Transactional(readOnly = true)
+  public UserOutput findById(Long userId) {
+    Optional<User> user = userRepository.findById(userId);
+    if (user.isPresent()) {
+      return toModel(user.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long userId) {
+    return userRepository.existsById(userId);
+  }
+
+  public void deleteById(Long userId) {
+    userRepository.deleteById(userId);
   }
 
   private UserOutput toModel(User user) {

@@ -28,7 +28,7 @@ public class LoaderService {
     Loader loaderExists = loaderRepository.findByModel(loader.getModel());
 
     if (loaderExists != null && !loaderExists.equals(loader)) {
-      throw new BusinessException("Já existe uma placa cadastrada com este modelo.");
+      throw new BusinessException("Já existe uma carregador cadastrada com este modelo.");
     }
     return toModel(loaderRepository.save(loader));
   }

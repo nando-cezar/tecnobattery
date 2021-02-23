@@ -74,6 +74,7 @@ public class ClientController {
 
     Client client = new Client();
     Address address = new Address();
+    client.setId(clientId);
     client.setCnpj(clientInput.getCnpj());
     client.setName(clientInput.getName());
     client.setFantasyName(clientInput.getFantasyName());

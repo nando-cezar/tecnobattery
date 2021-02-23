@@ -1,10 +1,12 @@
 package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.ProductOutput;
 import com.tecnobattery.tbsystem.entities.Product;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ProductRepository;
 
 import org.modelmapper.ModelMapper;
@@ -21,17 +23,13 @@ public class ProductService {
   @Autowired
   private ModelMapper mapper;
 
-  public ProductOutput save(String name, Integer power, Integer capacity, Integer voltage, Double price,
-      String description, String imageUrl) {
-    Product product = new Product();
-    product.setName(name);
-    product.setPower(power);
-    product.setCapacity(capacity);
-    product.setVoltage(voltage);
-    product.setPrice(price);
-    product.setDescription(description);
-    product.setImageUrl(imageUrl);
+  public ProductOutput save(Product product) {
 
+    Product productExists = productRepository.findByName(product.getName());
+
+    if (productExists != null && !productExists.equals(product)) {
+      throw new BusinessException("Já existe um produto cadastrado com este nome.");
+    }
     return toModel(productRepository.save(product));
   }
 
@@ -39,6 +37,24 @@ public class ProductService {
   public List<ProductOutput> findAll() {
     List<Product> products = productRepository.findAll();
     return toCollectionDTO(products);
+  }
+
+  @Transactional(readOnly = true)
+  public ProductOutput findById(Long productId) {
+    Optional<Product> product = productRepository.findById(productId);
+    if (product.isPresent()) {
+      return toModel(product.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long productId) {
+    return productRepository.existsById(productId);
+  }
+
+  public void deleteById(Long productId) {
+    productRepository.deleteById(productId);
   }
 
   private ProductOutput toModel(Product product) {

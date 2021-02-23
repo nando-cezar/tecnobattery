@@ -65,6 +65,7 @@ public class CommentController {
     }
 
     Comment comment = new Comment();
+    comment.setId(commentId);
     comment.setTitle(commentInput.getTitle());
     comment.setDescription(commentInput.getDescription());
     comment.setMoment(OffsetDateTime.now());

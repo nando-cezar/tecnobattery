@@ -1,16 +1,13 @@
 package com.tecnobattery.tbsystem.services;
 
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.OrderOutput;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
-import com.tecnobattery.tbsystem.entities.OrderStatus;
-import com.tecnobattery.tbsystem.entities.Product;
-import com.tecnobattery.tbsystem.entities.User;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ClientRepository;
 import com.tecnobattery.tbsystem.repositories.OrderRepository;
 
@@ -31,32 +28,38 @@ public class OrderService {
   @Autowired
   private ModelMapper mapper;
 
-  public OrderOutput save(Long clientId, String description, Double price, List<Product> products, Set<User> users)
-      throws Exception {
-    Client client = clientRepository.findById(clientId).orElseThrow(() -> new Exception("Client: not found"));
-    Order order = new Order();
-    order.setClient(client);
-    order.setDescription(description);
-    order.setPrice(price);
-    order.setStatus(OrderStatus.PENDENTE);
-    order.setOpening(OffsetDateTime.now());
-    order.setDeadline(null);
-    order.setProducts(products);
-    order.setUsers(users);
+  public OrderOutput save(Order order) {
+    return toModel(orderRepository.save(order));
+  }
 
+  public OrderOutput save(Long clientId, Order order) {
+    Client client = clientRepository.findById(clientId).orElseThrow(() -> new BusinessException("Client: not found"));
+    order.setClient(client);
     return toModel(orderRepository.save(order));
   }
 
   @Transactional(readOnly = true)
   public List<OrderOutput> findAll() {
-    List<Order> orderServices = orderRepository.findAll();
-    return toCollectionDTO(orderServices);
+    List<Order> orders = orderRepository.findAll();
+    return toCollectionDTO(orders);
   }
 
   @Transactional(readOnly = true)
-  public OrderOutput findById(Long orderId) throws Exception {
-    Order order = orderRepository.findById(orderId).orElseThrow(() -> new Exception("Order: not found"));
-    return toModel(order);
+  public OrderOutput findById(Long orderId) {
+    Optional<Order> order = orderRepository.findById(orderId);
+    if (order.isPresent()) {
+      return toModel(order.get());
+    }
+    return null;
+  }
+
+  @Transactional(readOnly = true)
+  public boolean existsById(Long orderId) {
+    return orderRepository.existsById(orderId);
+  }
+
+  public void deleteById(Long orderId) {
+    orderRepository.deleteById(orderId);
   }
 
   private OrderOutput toModel(Order orderService) {

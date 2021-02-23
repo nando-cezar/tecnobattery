@@ -2,8 +2,13 @@ package com.tecnobattery.tbsystem.dto.input;
 
 import java.io.Serializable;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.tecnobattery.tbsystem.entities.TypeUser;
 
 public class UserInput implements Serializable {
 
@@ -16,7 +21,7 @@ public class UserInput implements Serializable {
   @Size(max = 20, message = "Username deve possuir no máximo 20 caracteres.")
   private String username;
   @NotBlank(message = "E-mail se encontra em branco ou inválido.")
-  @Size(max = 100, message = "E-mail deve possuir no máximo 100 caracteres.")
+  @Email(message = "E-mail inválido.")
   private String email;
   @NotBlank(message = "Telefone se encontra em branco ou inválido.")
   @Size(max = 14, message = "Telefone deve possuir no máximo 14 caracteres.")
@@ -24,6 +29,8 @@ public class UserInput implements Serializable {
   @NotBlank(message = "Senha se encontra em branco ou inválido.")
   @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
   private String password;
+  @Enumerated(EnumType.STRING)
+  private TypeUser level;
 
   public Long getId() {
     return this.id;
@@ -63,6 +70,14 @@ public class UserInput implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public TypeUser getLevel() {
+    return this.level;
+  }
+
+  public void setLevel(TypeUser level) {
+    this.level = level;
   }
 
 }
