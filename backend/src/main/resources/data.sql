@@ -72,8 +72,8 @@ INSERT INTO tb_order (client_id, description, price, status, opening, deadline) 
 INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (3, 'Produto BAT 4S3P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z');
 INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (4, 'Produto BAT 1S2P', 100,  'ENTREGUE', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z');
 INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 3S1P', 100,  'ENTREGUE', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 5S6P', 100,  'FABRICANDO', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (5, 'Produto BAT 4S4P', 100,  'FABRICANDO', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 5S6P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (5, 'Produto BAT 4S4P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z');
 INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (6, 'Produto BAT 1S2P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z');
 
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (1,  1, 'Title1',   'Commentario 1', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');

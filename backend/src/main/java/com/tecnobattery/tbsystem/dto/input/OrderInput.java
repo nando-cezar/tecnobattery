@@ -10,9 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.tecnobattery.tbsystem.entities.Product;
-import com.tecnobattery.tbsystem.entities.User;
-
 public class OrderInput implements Serializable {
 
   /**
@@ -27,10 +24,10 @@ public class OrderInput implements Serializable {
   private String description;
   @NotNull(message = "Preço é obrigatório.")
   private Double price;
-  @NotNull
-  private List<Product> products = new ArrayList<>();
-  @NotNull
-  private Set<User> users = new HashSet<>();
+  @NotNull(message = "Produto é obrigatório.")
+  private List<ProductInput> products = new ArrayList<>();
+  @NotNull(message = "Usuário é obrigatório.")
+  private Set<UserInput> users = new HashSet<>();
 
   public Long getId() {
     return this.id;
@@ -64,19 +61,19 @@ public class OrderInput implements Serializable {
     this.price = price;
   }
 
-  public List<Product> getProducts() {
+  public List<ProductInput> getProducts() {
     return this.products;
   }
 
-  public void setProducts(List<Product> products) {
+  public void setProducts(List<ProductInput> products) {
     this.products = products;
   }
 
-  public Set<User> getUsers() {
+  public Set<UserInput> getUsers() {
     return this.users;
   }
 
-  public void setUsers(Set<User> users) {
+  public void setUsers(Set<UserInput> users) {
     this.users = users;
   }
 

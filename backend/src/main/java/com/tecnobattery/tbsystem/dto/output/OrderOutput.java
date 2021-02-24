@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 
 public class OrderOutput implements Serializable {
 
-  /**
+  /** 
    *
    */
   private static final long serialVersionUID = 1L;
@@ -23,7 +24,6 @@ public class OrderOutput implements Serializable {
   private OffsetDateTime deadline;
   private List<ProductOutput> products = new ArrayList<>();
   private Set<UserOutput> users = new HashSet<>();
-  private List<CommentOutput> comments = new ArrayList<>();
 
   public Long getId() {
     return this.id;
@@ -95,14 +95,6 @@ public class OrderOutput implements Serializable {
 
   public void setUsers(Set<UserOutput> users) {
     this.users = users;
-  }
-
-  public List<CommentOutput> getComments() {
-    return this.comments;
-  }
-
-  public void setComments(List<CommentOutput> comments) {
-    this.comments = comments;
   }
 
 }

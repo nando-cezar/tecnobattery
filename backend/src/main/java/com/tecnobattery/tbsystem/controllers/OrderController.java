@@ -39,11 +39,8 @@ public class OrderController {
     order.setPrice(orderInput.getPrice());
     order.setStatus(OrderStatus.PENDENTE);
     order.setOpening(OffsetDateTime.now());
-    order.setDeadline(null);
-    order.setProducts(orderInput.getProducts());
-    order.setUsers(orderInput.getUsers());
 
-    return orderService.save(orderInput.getClientId(), order);
+    return orderService.save(orderInput.getClientId(), orderInput.getProducts(), orderInput.getUsers(), order);
   }
 
   @GetMapping
@@ -62,35 +59,31 @@ public class OrderController {
   }
 
   @PutMapping("/{orderId}")
-  public ResponseEntity<OrderOutput> update(@Valid @PathVariable Long orderId, @RequestBody OrderInput orderInput) {
+  public ResponseEntity<Order> update(@Valid @PathVariable Long orderId, @RequestBody Order order) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();
     }
 
-    Order order = new Order();
     order.setId(orderId);
-    order.setDescription(orderInput.getDescription());
-    order.setPrice(orderInput.getPrice());
-    order.setProducts(orderInput.getProducts());
-    order.setUsers(orderInput.getUsers());
+    order = orderService.save(order);
 
-    return ResponseEntity.ok(orderService.save(order));
+    return ResponseEntity.ok(order);
   }
 
   @PutMapping("/finish/{orderId}")
-  public ResponseEntity<OrderOutput> finish(@Valid @PathVariable Long orderId, @RequestBody OrderInput orderInput) {
+  public ResponseEntity<Order> finish(@Valid @PathVariable Long orderId, @RequestBody Order order) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();
     }
 
-    Order order = new Order();
     order.setId(orderId);
     order.setStatus(OrderStatus.ENTREGUE);
     order.setDeadline(OffsetDateTime.now());
+    order = orderService.save(order);
 
-    return ResponseEntity.ok(orderService.save(order));
+    return ResponseEntity.ok(order);
   }
 
   @DeleteMapping("/{orderId}")

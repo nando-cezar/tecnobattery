@@ -18,7 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -48,9 +47,6 @@ public class Order implements Serializable {
   @ManyToMany
   @JoinTable(name = "tb_order_user", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<User> users = new HashSet<>();
-
-  @OneToMany(mappedBy = "order")
-  private List<Comment> comments = new ArrayList<>();
 
   public Order() {
   }
@@ -140,14 +136,6 @@ public class Order implements Serializable {
     this.users = users;
   }
 
-  public List<Comment> getComments() {
-    return this.comments;
-  }
-
-  public void setComments(List<Comment> comments) {
-    this.comments = comments;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (o == this)
@@ -155,12 +143,12 @@ public class Order implements Serializable {
     if (!(o instanceof Order)) {
       return false;
     }
-    Order orderService = (Order) o;
-    return Objects.equals(id, orderService.id) && Objects.equals(client, orderService.client)
-        && Objects.equals(description, orderService.description) && Objects.equals(price, orderService.price)
-        && Objects.equals(status, orderService.status) && Objects.equals(opening, orderService.opening)
-        && Objects.equals(deadline, orderService.deadline) && Objects.equals(products, orderService.products)
-        && Objects.equals(users, orderService.users);
+    Order order = (Order) o;
+    return Objects.equals(id, order.id) && Objects.equals(client, order.client)
+        && Objects.equals(description, order.description) && Objects.equals(price, order.price)
+        && Objects.equals(status, order.status) && Objects.equals(opening, order.opening)
+        && Objects.equals(deadline, order.deadline) && Objects.equals(products, order.products)
+        && Objects.equals(users, order.users);
   }
 
   @Override
