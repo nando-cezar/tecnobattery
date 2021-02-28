@@ -64,23 +64,8 @@ public class OrderController {
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();
     }
-
+ 
     order.setId(orderId);
-    order = orderService.save(order);
-
-    return ResponseEntity.ok(order);
-  }
-
-  @PutMapping("/finish/{orderId}")
-  public ResponseEntity<Order> finish(@Valid @PathVariable Long orderId, @RequestBody Order order) {
-
-    if (!orderService.existsById(orderId)) {
-      return ResponseEntity.notFound().build();
-    }
-
-    order.setId(orderId);
-    order.setStatus(OrderStatus.ENTREGUE);
-    order.setDeadline(OffsetDateTime.now());
     order = orderService.save(order);
 
     return ResponseEntity.ok(order);
