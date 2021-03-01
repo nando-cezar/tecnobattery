@@ -8,6 +8,7 @@ import com.tecnobattery.tbsystem.dto.output.BatteryOutput;
 import com.tecnobattery.tbsystem.dto.input.BatteryInput;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.services.BatteryService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,24 +30,18 @@ public class BatteryController {
   @Autowired
   private BatteryService batteryService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BatteryOutput save(@Valid @RequestBody BatteryInput batteryInput) {
-    Battery battery = new Battery();
-    battery.setBrand(batteryInput.getBrand());
-    battery.setModel(batteryInput.getModel());
-    battery.setCapacity(batteryInput.getCapacity());
-    battery.setVoltage(batteryInput.getVoltage());
-    battery.setDiameter(batteryInput.getDiameter());
-    battery.setHeight(batteryInput.getHeight());
-    battery.setImageUrl(batteryInput.getImageUrl());
-    return batteryService.save(battery);
+    return batteryService.save(toolModelMapper.toModel(batteryInput, Battery.class));
   }
 
   @GetMapping
   public ResponseEntity<List<BatteryOutput>> findAll() {
-    List<BatteryOutput> list = batteryService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(batteryService.findAll());
   }
 
   @GetMapping("/{batteryId}")
@@ -68,13 +63,7 @@ public class BatteryController {
 
     Battery battery = new Battery();
     battery.setId(batteryId);
-    battery.setBrand(batteryInput.getBrand());
-    battery.setModel(batteryInput.getModel());
-    battery.setCapacity(batteryInput.getCapacity());
-    battery.setVoltage(batteryInput.getVoltage());
-    battery.setDiameter(batteryInput.getDiameter());
-    battery.setHeight(batteryInput.getHeight());
-    battery.setImageUrl(batteryInput.getImageUrl());
+    battery = toolModelMapper.toModel(batteryInput, Battery.class);
 
     return ResponseEntity.ok(batteryService.save(battery));
   }

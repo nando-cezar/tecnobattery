@@ -35,13 +35,13 @@ INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VAL
 INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-54', 'Provider7', 'Provider7', '1234679', 'teste_provider7@teste.com', 7);
 INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-53', 'Provider8', 'Provider8', '1234679', 'teste_provider8@teste.com', 8);
 
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery1', 'ModelBattery1', 100, 1000, 200, 300, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery2', 'ModelBattery2', 100, 2000, 200, 300, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery3', 'ModelBattery3', 100, 3000, 200, 300, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery4', 'ModelBattery4', 100, 1000, 200, 300, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery5', 'ModelBattery5', 100, 5000, 200, 300, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery6', 'ModelBattery6', 100, 3000, 200, 300, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, image_Url) VALUES ('Battery7', 'ModelBattery7', 100, 4000, 200, 300, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery1', 'ModelBattery1', 100, 1000, 200, 300, 30, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery2', 'ModelBattery2', 100, 2000, 200, 300, 30, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery3', 'ModelBattery3', 100, 3000, 200, 300, 30, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery4', 'ModelBattery4', 100, 1000, 200, 300, 30, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery5', 'ModelBattery5', 100, 5000, 200, 300, 30, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery6', 'ModelBattery6', 100, 3000, 200, 300, 30, 'www.teste.com');
+INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery7', 'ModelBattery7', 100, 4000, 200, 300, 30, 'www.teste.com');
 
 INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board1', 'ModelBoard1', 100, 1000, 200, 300, 100, 'www.teste.com');
 INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board2', 'ModelBoard2', 100, 2000, 200, 300, 100, 'www.teste.com');

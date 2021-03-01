@@ -26,13 +26,14 @@ public class Battery implements Serializable {
   private Integer voltage;
   private Integer diameter;
   private Integer height;
+  private Integer weight;
   private String imageUrl;
 
   public Battery() {
   }
 
-  public Battery(Long id, String brand, String model, Integer capacity, Integer voltage, Integer diameter,
-      Integer height, String imageUrl) {
+
+  public Battery(Long id, String brand, String model, Integer capacity, Integer voltage, Integer diameter, Integer height, Integer weight, String imageUrl) {
     this.id = id;
     this.brand = brand;
     this.model = model;
@@ -40,8 +41,10 @@ public class Battery implements Serializable {
     this.voltage = voltage;
     this.diameter = diameter;
     this.height = height;
+    this.weight = weight;
     this.imageUrl = imageUrl;
   }
+  
 
   public Long getId() {
     return this.id;
@@ -99,6 +102,14 @@ public class Battery implements Serializable {
     this.height = height;
   }
 
+  public Integer getWeight() {
+    return this.weight;
+  }
+
+  public void setWeight(Integer weight) {
+    this.weight = weight;
+  }
+
   public String getImageUrl() {
     return this.imageUrl;
   }
@@ -107,30 +118,37 @@ public class Battery implements Serializable {
     this.imageUrl = imageUrl;
   }
 
+
   @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof Battery)) {
-      return false;
-    }
-    Battery battery = (Battery) o;
-    return Objects.equals(id, battery.id) && Objects.equals(brand, battery.brand)
-        && Objects.equals(model, battery.model) && Objects.equals(capacity, battery.capacity)
-        && Objects.equals(voltage, battery.voltage) && Objects.equals(diameter, battery.diameter)
-        && Objects.equals(height, battery.height) && Objects.equals(imageUrl, battery.imageUrl);
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Battery)) {
+            return false;
+        }
+        Battery battery = (Battery) o;
+        return Objects.equals(id, battery.id) && Objects.equals(brand, battery.brand) && Objects.equals(model, battery.model) && Objects.equals(capacity, battery.capacity) && Objects.equals(voltage, battery.voltage) && Objects.equals(diameter, battery.diameter) && Objects.equals(height, battery.height) && Objects.equals(weight, battery.weight) && Objects.equals(imageUrl, battery.imageUrl);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brand, model, capacity, voltage, diameter, height, imageUrl);
+    return Objects.hash(id, brand, model, capacity, voltage, diameter, height, weight, imageUrl);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", brand='" + getBrand() + "'" + ", model='" + getModel() + "'"
-        + ", capacity='" + getCapacity() + "'" + ", voltage='" + getVoltage() + "'" + ", diameter='" + getDiameter()
-        + "'" + ", height='" + getHeight() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
+    return "{" +
+      " id='" + getId() + "'" +
+      ", brand='" + getBrand() + "'" +
+      ", model='" + getModel() + "'" +
+      ", capacity='" + getCapacity() + "'" +
+      ", voltage='" + getVoltage() + "'" +
+      ", diameter='" + getDiameter() + "'" +
+      ", height='" + getHeight() + "'" +
+      ", weight='" + getWeight() + "'" +
+      ", imageUrl='" + getImageUrl() + "'" +
+      "}";
   }
+  
 
 }
