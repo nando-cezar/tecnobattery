@@ -8,6 +8,7 @@ import com.tecnobattery.tbsystem.dto.output.BoardOutput;
 import com.tecnobattery.tbsystem.dto.input.BoardInput;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.services.BoardService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,26 +30,18 @@ public class BoardController {
   @Autowired
   private BoardService boardService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BoardOutput save(@Valid @RequestBody BoardInput boardInput) {
-    Board board = new Board();
-    board.setBrand(boardInput.getBrand());
-    board.setModel(boardInput.getModel());
-    board.setPower(boardInput.getPower());
-    board.setVoltage(boardInput.getVoltage());
-    board.setWidth(boardInput.getWidth());
-    board.setHeight(boardInput.getHeight());
-    board.setLength(boardInput.getLength());
-    board.setWeight(boardInput.getWeight());
-    board.setImageUrl(boardInput.getImageUrl());
-    return boardService.save(board);
+    return boardService.save(toolModelMapper.toModel(boardInput, Board.class));
   }
 
   @GetMapping
   public ResponseEntity<List<BoardOutput>> findAll() {
-    List<BoardOutput> list = boardService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(boardService.findAll());
   }
 
   @GetMapping("/{boardId}")
@@ -61,7 +54,8 @@ public class BoardController {
   }
 
   @PutMapping("/{boardId}")
-  public ResponseEntity<BoardOutput> update(@Valid @PathVariable Long boardId, @RequestBody BoardInput boardInput) {
+  public ResponseEntity<BoardOutput> update(@Valid @PathVariable Long boardId,
+      @RequestBody BoardInput boardInput) {
 
     if (!boardService.existsById(boardId)) {
       return ResponseEntity.notFound().build();
@@ -69,15 +63,7 @@ public class BoardController {
 
     Board board = new Board();
     board.setId(boardId);
-    board.setBrand(boardInput.getBrand());
-    board.setModel(boardInput.getModel());
-    board.setPower(boardInput.getPower());
-    board.setVoltage(boardInput.getVoltage());
-    board.setWidth(boardInput.getWidth());
-    board.setHeight(boardInput.getHeight());
-    board.setLength(boardInput.getLength());
-    board.setWeight(boardInput.getWeight());
-    board.setImageUrl(boardInput.getImageUrl());
+    board = toolModelMapper.toModel(boardInput, Board.class);
 
     return ResponseEntity.ok(boardService.save(board));
   }

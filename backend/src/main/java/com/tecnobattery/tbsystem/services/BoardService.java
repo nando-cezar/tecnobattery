@@ -2,14 +2,13 @@ package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.BoardOutput;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.BoardRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +20,7 @@ public class BoardService {
   private BoardRepository boardRepository;
 
   @Autowired
-  private ModelMapper mapper;
+  private ToolModelMapper toolModelMapper;
 
   public BoardOutput save(Board board) {
 
@@ -30,20 +29,20 @@ public class BoardService {
     if (boardExists != null && !boardExists.equals(board)) {
       throw new BusinessException("Já existe uma placa cadastrada com este modelo.");
     }
-    return toModel(boardRepository.save(board));
+    return toolModelMapper.toModel(boardRepository.save(board), BoardOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<BoardOutput> findAll() {
     List<Board> boards = boardRepository.findAll();
-    return toCollectionDTO(boards);
+    return toolModelMapper.toCollection(boards, BoardOutput.class);
   }
 
   @Transactional(readOnly = true)
   public BoardOutput findById(Long boardId) {
     Optional<Board> board = boardRepository.findById(boardId);
     if (board.isPresent()) {
-      return toModel(board.get());
+      return toolModelMapper.toModel(board.get(), BoardOutput.class);
     }
     return null;
   }
@@ -55,13 +54,5 @@ public class BoardService {
 
   public void deleteById(Long boardId) {
     boardRepository.deleteById(boardId);
-  }
-
-  private BoardOutput toModel(Board board) {
-    return mapper.map(board, BoardOutput.class);
-  }
-
-  private List<BoardOutput> toCollectionDTO(List<Board> boards) {
-    return boards.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }
