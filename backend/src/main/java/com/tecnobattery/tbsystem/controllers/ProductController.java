@@ -46,17 +46,12 @@ public class ProductController {
 
   @GetMapping
   public ResponseEntity<List<ProductOutput>> findAll() {
-    List<ProductOutput> list = productService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(productService.findAll());
   }
 
   @GetMapping("/{productId}")
   public ResponseEntity<ProductOutput> findById(@PathVariable Long productId) {
-    ProductOutput product = productService.findById(productId);
-    if (product != null) {
-      return ResponseEntity.ok(product);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(productService.findById(productId));
   }
 
   @PutMapping("/{productId}")

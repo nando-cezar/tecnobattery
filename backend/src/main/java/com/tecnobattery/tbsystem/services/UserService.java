@@ -2,14 +2,13 @@ package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.UserOutput;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,31 +20,31 @@ public class UserService {
   private UserRepository userRepository;
 
   @Autowired
-  private ModelMapper mapper;
+  private ToolModelMapper toolModelMapper;
 
   public UserOutput save(User user) {
 
     User userExists = userRepository.findByEmail(user.getEmail());
 
-    if (userExists != null && !userExists.equals(user)) {
+    if (userExists != null && userExists.equals(user)) {
       throw new BusinessException("Já existe um usuário cadastrado com este e-mail.");
     }
-    return toModel(userRepository.save(user));
+    return toolModelMapper.toModel(userRepository.save(user), UserOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<UserOutput> findAll() {
     List<User> users = userRepository.findAll();
-    return toCollectionDTO(users);
+    return toolModelMapper.toCollection(users, UserOutput.class);
   }
 
   @Transactional(readOnly = true)
   public UserOutput findById(Long userId) {
     Optional<User> user = userRepository.findById(userId);
     if (user.isPresent()) {
-      return toModel(user.get());
+      return toolModelMapper.toModel(user.get(), UserOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(user.orElseThrow(() -> new BusinessException("User: não encontrada.")), UserOutput.class);
   }
 
   @Transactional(readOnly = true)
@@ -57,11 +56,4 @@ public class UserService {
     userRepository.deleteById(userId);
   }
 
-  private UserOutput toModel(User user) {
-    return mapper.map(user, UserOutput.class);
-  }
-
-  private List<UserOutput> toCollectionDTO(List<User> users) {
-    return users.stream().map(x -> toModel(x)).collect(Collectors.toList());
-  }
 }

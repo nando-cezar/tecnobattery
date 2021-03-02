@@ -2,18 +2,13 @@ package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.CommentOutput;
 import com.tecnobattery.tbsystem.entities.Comment;
-import com.tecnobattery.tbsystem.entities.Order;
-import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.CommentRepository;
-import com.tecnobattery.tbsystem.repositories.OrderRepository;
-import com.tecnobattery.tbsystem.repositories.UserRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,42 +17,28 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
   @Autowired
-  private OrderRepository orderRepository;
-
-  @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
   private CommentRepository commentRepository;
 
   @Autowired
-  private ModelMapper mapper;
+  private ToolModelMapper toolModelMapper;
 
   public CommentOutput save(Comment comment) {
-    return toModel(commentRepository.save(comment));
-  }
-
-  public CommentOutput save(Long orderId, Long userId, Comment comment) {
-    Order order = orderRepository.findById(orderId).orElseThrow(() -> new BusinessException("Order: não encontrada."));
-    User user = userRepository.findById(userId).orElseThrow(() -> new BusinessException("Usuário: não encontrado."));
-    comment.setOrder(order);
-    comment.setUser(user);
-    return toModel(commentRepository.save(comment));
+    return toolModelMapper.toModel(commentRepository.save(comment), CommentOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<CommentOutput> findAll() {
     List<Comment> comments = commentRepository.findAll();
-    return toCollectionDTO(comments);
+    return toolModelMapper.toCollection(comments, CommentOutput.class);
   }
 
   @Transactional(readOnly = true)
   public CommentOutput findById(Long commentId) {
     Optional<Comment> comment = commentRepository.findById(commentId);
     if (comment.isPresent()) {
-      return toModel(comment.get());
+      return toolModelMapper.toModel(comment.get(), CommentOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(comment.orElseThrow(() -> new BusinessException("Comment: não encontrada.")), CommentOutput.class);
   }
 
   @Transactional(readOnly = true)
@@ -67,13 +48,5 @@ public class CommentService {
 
   public void deleteById(Long commentId) {
     commentRepository.deleteById(commentId);
-  }
-
-  private CommentOutput toModel(Comment comment) {
-    return mapper.map(comment, CommentOutput.class);
-  }
-
-  private List<CommentOutput> toCollectionDTO(List<Comment> comments) {
-    return comments.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

@@ -9,6 +9,7 @@ import com.tecnobattery.tbsystem.dto.output.UserOutput;
 import com.tecnobattery.tbsystem.entities.TypeUser;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.services.UserService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,14 +31,13 @@ public class UserController {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public UserOutput save(@Valid @RequestBody UserInput userInput) {
-    User user = new User();
-    user.setUsername(userInput.getUsername());
-    user.setEmail(userInput.getEmail());
-    user.setPhone(userInput.getPhone());
-    user.setPassword(userInput.getPassword());
+    User user = toolModelMapper.toModel(userInput, User.class);
     user.setLevel(TypeUser.ADMINISTRADOR);
 
     return userService.save(user);
@@ -51,11 +51,7 @@ public class UserController {
 
   @GetMapping("/{userId}")
   public ResponseEntity<UserOutput> findById(@PathVariable Long userId) {
-    UserOutput user = userService.findById(userId);
-    if (user != null) {
-      return ResponseEntity.ok(user);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(userService.findById(userId));
   }
 
   @PutMapping("/{userId}")
@@ -65,13 +61,8 @@ public class UserController {
       return ResponseEntity.notFound().build();
     }
 
-    User user = new User();
+    User user = toolModelMapper.toModel(userInput, User.class);
     user.setId(userId);
-    user.setUsername(userInput.getUsername());
-    user.setEmail(userInput.getEmail());
-    user.setPhone(userInput.getPhone());
-    user.setPassword(userInput.getPassword());
-    user.setLevel(userInput.getLevel());
 
     return ResponseEntity.ok(userService.save(user));
   }

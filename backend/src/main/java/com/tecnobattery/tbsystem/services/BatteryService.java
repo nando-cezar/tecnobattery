@@ -26,7 +26,7 @@ public class BatteryService {
 
     Battery batteryExists = batteryRepository.findByModel(battery.getModel());
 
-    if (batteryExists != null && !batteryExists.equals(battery)) {
+    if (batteryExists != null && batteryExists.equals(battery)) {
       throw new BusinessException("Já existe uma bateria cadastrada com este modelo.");
     }
     return toolModelMapper.toModel(batteryRepository.save(battery), BatteryOutput.class);
@@ -44,7 +44,7 @@ public class BatteryService {
     if (battery.isPresent()) {
       return toolModelMapper.toModel(battery.get(), BatteryOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(battery.orElseThrow(() -> new BusinessException("Battery: não encontrada.")), BatteryOutput.class);
   }
 
   @Transactional(readOnly = true)

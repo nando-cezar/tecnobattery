@@ -2,14 +2,13 @@ package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.ProductOutput;
 import com.tecnobattery.tbsystem.entities.Product;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ProductRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,31 +20,31 @@ public class ProductService {
   private ProductRepository productRepository;
 
   @Autowired
-  private ModelMapper mapper;
+  private ToolModelMapper toolModelMapper;
 
   public ProductOutput save(Product product) {
 
     Product productExists = productRepository.findByName(product.getName());
 
-    if (productExists != null && !productExists.equals(product)) {
+    if (productExists != null && productExists.equals(product)) {
       throw new BusinessException("Já existe um produto cadastrado com este nome.");
     }
-    return toModel(productRepository.save(product));
+    return toolModelMapper.toModel(productRepository.save(product), ProductOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<ProductOutput> findAll() {
     List<Product> products = productRepository.findAll();
-    return toCollectionDTO(products);
+    return toolModelMapper.toCollection(products, ProductOutput.class);
   }
 
   @Transactional(readOnly = true)
   public ProductOutput findById(Long productId) {
     Optional<Product> product = productRepository.findById(productId);
     if (product.isPresent()) {
-      return toModel(product.get());
+      return toolModelMapper.toModel(product.get(), ProductOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(product.orElseThrow(() -> new BusinessException("Product: não encontrada.")), ProductOutput.class);
   }
 
   @Transactional(readOnly = true)
@@ -57,11 +56,4 @@ public class ProductService {
     productRepository.deleteById(productId);
   }
 
-  private ProductOutput toModel(Product product) {
-    return mapper.map(product, ProductOutput.class);
-  }
-
-  private List<ProductOutput> toCollectionDTO(List<Product> products) {
-    return products.stream().map(x -> toModel(x)).collect(Collectors.toList());
-  }
 }

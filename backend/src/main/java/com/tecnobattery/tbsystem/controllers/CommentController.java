@@ -7,8 +7,13 @@ import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.output.CommentOutput;
 import com.tecnobattery.tbsystem.entities.Comment;
+import com.tecnobattery.tbsystem.entities.Order;
+import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.dto.input.CommentInput;
 import com.tecnobattery.tbsystem.services.CommentService;
+import com.tecnobattery.tbsystem.services.OrderService;
+import com.tecnobattery.tbsystem.services.UserService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,30 +35,35 @@ public class CommentController {
   @Autowired
   private CommentService commentService;
 
+  @Autowired
+  private OrderService orderService;
+
+  @Autowired
+  private UserService userService;
+
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public CommentOutput save(@Valid @PathVariable Long orderId, @PathVariable Long userId,
       @RequestBody CommentInput commentInput) {
-    Comment comment = new Comment();
-    comment.setTitle(commentInput.getTitle());
-    comment.setDescription(commentInput.getDescription());
+
+    Comment comment = toolModelMapper.toModel(commentInput, Comment.class);
     comment.setMoment(OffsetDateTime.now());
-    return commentService.save(orderId, userId, comment);
+    comment.setOrder(toolModelMapper.toModel(orderService.findById(orderId), Order.class));
+    comment.setUser(toolModelMapper.toModel(userService.findById(userId), User.class));
+    return commentService.save(comment);
   }
 
   @GetMapping
   public ResponseEntity<List<CommentOutput>> findAll() {
-    List<CommentOutput> list = commentService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(commentService.findAll());
   }
 
   @GetMapping("/{commentId}")
   public ResponseEntity<CommentOutput> findById(@PathVariable Long commentId) {
-    CommentOutput comment = commentService.findById(commentId);
-    if (comment != null) {
-      return ResponseEntity.ok(comment);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(commentService.findById(commentId));
   }
 
   @PutMapping("/{commentId}")
@@ -65,10 +75,8 @@ public class CommentController {
     }
 
     Comment comment = new Comment();
+    comment = toolModelMapper.toModel(commentInput, Comment.class);
     comment.setId(commentId);
-    comment.setTitle(commentInput.getTitle());
-    comment.setDescription(commentInput.getDescription());
-    comment.setMoment(OffsetDateTime.now());
 
     return ResponseEntity.ok(commentService.save(comment));
   }

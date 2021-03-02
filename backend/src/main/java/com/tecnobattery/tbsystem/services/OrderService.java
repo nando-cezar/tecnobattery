@@ -2,17 +2,10 @@ package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
-import com.tecnobattery.tbsystem.dto.input.ProductInput;
-import com.tecnobattery.tbsystem.dto.input.UserInput;
 import com.tecnobattery.tbsystem.dto.output.OrderOutput;
-import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
-import com.tecnobattery.tbsystem.entities.Product;
-import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.exception.BusinessException;
-import com.tecnobattery.tbsystem.repositories.ClientRepository;
 import com.tecnobattery.tbsystem.repositories.OrderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
@@ -27,22 +20,9 @@ public class OrderService {
   private OrderRepository orderRepository;
 
   @Autowired
-  private ClientRepository clientRepository;
-
-  @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public Order save(Order order) {
-    return orderRepository.save(order);
-  }
-
-  public OrderOutput save(Long clientId, List<ProductInput> productsInput, Set<UserInput> usersInput, Order order) {
-    Client clientRequest = clientRepository.findById(clientId)
-        .orElseThrow(() -> new BusinessException("Client: not found"));
-
-    order.setClient(clientRequest);
-    order.setProducts(toolModelMapper.toCollection(productsInput, Product.class));
-    order.setUsers(toolModelMapper.toCollection(usersInput, User.class));
+  public OrderOutput save(Order order) {   
     return toolModelMapper.toModel(orderRepository.save(order), OrderOutput.class);
   }
 
@@ -58,7 +38,7 @@ public class OrderService {
     if (order.isPresent()) {
       return toolModelMapper.toModel(order.get(), OrderOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(order.orElseThrow(() -> new BusinessException("Order: não encontrada.")), OrderOutput.class); 
   }
 
   @Transactional(readOnly = true)

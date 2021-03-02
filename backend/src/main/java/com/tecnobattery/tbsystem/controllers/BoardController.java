@@ -46,11 +46,7 @@ public class BoardController {
 
   @GetMapping("/{boardId}")
   public ResponseEntity<BoardOutput> findById(@PathVariable Long boardId) {
-    BoardOutput board = boardService.findById(boardId);
-    if (board != null) {
-      return ResponseEntity.ok(board);
-    }
-    return ResponseEntity.notFound().build();
+      return ResponseEntity.ok(boardService.findById(boardId));
   }
 
   @PutMapping("/{boardId}")
@@ -62,9 +58,9 @@ public class BoardController {
     }
 
     Board board = new Board();
-    board.setId(boardId);
     board = toolModelMapper.toModel(boardInput, Board.class);
-
+    board.setId(boardId);
+    
     return ResponseEntity.ok(boardService.save(board));
   }
 

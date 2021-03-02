@@ -8,6 +8,7 @@ import com.tecnobattery.tbsystem.dto.output.LoaderOutput;
 import com.tecnobattery.tbsystem.dto.input.LoaderInput;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.services.LoaderService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,35 +30,23 @@ public class LoaderController {
   @Autowired
   private LoaderService loaderService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public LoaderOutput save(@Valid @RequestBody LoaderInput loaderInput) {
-    Loader loader = new Loader();
-    loader.setBrand(loaderInput.getBrand());
-    loader.setModel(loaderInput.getModel());
-    loader.setPower(loaderInput.getPower());
-    loader.setVoltage(loaderInput.getVoltage());
-    loader.setWidth(loaderInput.getWidth());
-    loader.setHeight(loaderInput.getHeight());
-    loader.setLength(loaderInput.getLength());
-    loader.setWeight(loaderInput.getWeight());
-    loader.setImageUrl(loaderInput.getImageUrl());
-    return loaderService.save(loader);
+    return loaderService.save(toolModelMapper.toModel(loaderInput, Loader.class));
   }
 
   @GetMapping
   public ResponseEntity<List<LoaderOutput>> findAll() {
-    List<LoaderOutput> list = loaderService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(loaderService.findAll());
   }
 
   @GetMapping("/{loaderId}")
   public ResponseEntity<LoaderOutput> findById(@PathVariable Long loaderId) {
-    LoaderOutput loader = loaderService.findById(loaderId);
-    if (loader != null) {
-      return ResponseEntity.ok(loader);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(loaderService.findById(loaderId));
   }
 
   @PutMapping("/{loaderId}")
@@ -68,16 +57,8 @@ public class LoaderController {
     }
 
     Loader loader = new Loader();
+    loader = toolModelMapper.toModel(loaderInput, Loader.class);
     loader.setId(loaderId);
-    loader.setBrand(loaderInput.getBrand());
-    loader.setModel(loaderInput.getModel());
-    loader.setPower(loaderInput.getPower());
-    loader.setVoltage(loaderInput.getVoltage());
-    loader.setWidth(loaderInput.getWidth());
-    loader.setHeight(loaderInput.getHeight());
-    loader.setLength(loaderInput.getLength());
-    loader.setWeight(loaderInput.getWeight());
-    loader.setImageUrl(loaderInput.getImageUrl());
 
     return ResponseEntity.ok(loaderService.save(loader));
   }

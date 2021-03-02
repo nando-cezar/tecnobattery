@@ -6,10 +6,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.output.OrderOutput;
+import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
+import com.tecnobattery.tbsystem.entities.Product;
+import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.dto.input.OrderInput;
+import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.services.OrderService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,44 +36,49 @@ public class OrderController {
   @Autowired
   private OrderService orderService;
 
+  @Autowired
+  private ClientService clientService;
+
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public OrderOutput save(@Valid @RequestBody OrderInput orderInput) {
-    Order order = new Order();
-    order.setDescription(orderInput.getDescription());
-    order.setPrice(orderInput.getPrice());
+
+    Order order = toolModelMapper.toModel(orderInput, Order.class);
+    order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
     order.setStatus(OrderStatus.PENDENTE);
     order.setOpening(OffsetDateTime.now());
+    order.setProducts(toolModelMapper.toCollection(orderInput.getProducts(), Product.class));
+    order.setUsers(toolModelMapper.toCollection(orderInput.getUsers(), User.class));
 
-    return orderService.save(orderInput.getClientId(), orderInput.getProducts(), orderInput.getUsers(), order);
+    return orderService.save(order);
   }
 
   @GetMapping
   public ResponseEntity<List<OrderOutput>> findAll() {
-    List<OrderOutput> list = orderService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(orderService.findAll());
   }
 
   @GetMapping("/{orderId}")
   public ResponseEntity<OrderOutput> findById(@PathVariable Long orderId) {
-    OrderOutput order = orderService.findById(orderId);
-    if (order != null) {
-      return ResponseEntity.ok(order);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(orderService.findById(orderId));
   }
 
   @PutMapping("/{orderId}")
-  public ResponseEntity<Order> update(@Valid @PathVariable Long orderId, @RequestBody Order order) {
+  public ResponseEntity<OrderOutput> update(@Valid @PathVariable Long orderId, @RequestBody OrderInput orderInput) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();
     }
- 
-    order.setId(orderId);
-    order = orderService.save(order);
 
-    return ResponseEntity.ok(order);
+    Order order = toolModelMapper.toModel(orderInput, Order.class);
+
+    order.setId(orderId);
+    order = toolModelMapper.toModel(orderService.save(order), Order.class);
+
+    return ResponseEntity.ok(toolModelMapper.toModel(order, OrderOutput.class));
   }
 
   @DeleteMapping("/{orderId}")

@@ -46,11 +46,7 @@ public class BatteryController {
 
   @GetMapping("/{batteryId}")
   public ResponseEntity<BatteryOutput> findById(@PathVariable Long batteryId) {
-    BatteryOutput battery = batteryService.findById(batteryId);
-    if (battery != null) {
-      return ResponseEntity.ok(battery);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(batteryService.findById(batteryId));
   }
 
   @PutMapping("/{batteryId}")
@@ -62,8 +58,8 @@ public class BatteryController {
     }
 
     Battery battery = new Battery();
-    battery.setId(batteryId);
     battery = toolModelMapper.toModel(batteryInput, Battery.class);
+    battery.setId(batteryId);
 
     return ResponseEntity.ok(batteryService.save(battery));
   }

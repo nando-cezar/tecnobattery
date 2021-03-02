@@ -26,7 +26,7 @@ public class ProviderService {
 
     Provider providerExists = providerRepository.findByCnpj(provider.getCnpj());
 
-    if (providerExists != null && !providerExists.equals(provider)) {
+    if (providerExists != null && providerExists.equals(provider)) {
       throw new BusinessException("Já existe um fornecedor cadastrado com este CNPJ.");
     }
     return toolModelMapper.toModel(providerRepository.save(provider), ProviderOutput.class);
@@ -44,7 +44,7 @@ public class ProviderService {
     if (provider.isPresent()) {
       return toolModelMapper.toModel(provider.get(), ProviderOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(provider.orElseThrow(() -> new BusinessException("Provider: não encontrada.")), ProviderOutput.class);
   }
 
   @Transactional(readOnly = true)

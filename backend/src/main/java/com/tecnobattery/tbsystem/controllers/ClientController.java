@@ -48,11 +48,7 @@ public class ClientController {
 
   @GetMapping("/{clientId}")
   public ResponseEntity<ClientOutput> findById(@PathVariable Long clientId) {
-    ClientOutput client = clientService.findById(clientId);
-    if (client != null) {
-      return ResponseEntity.ok(client);
-    }
-    return ResponseEntity.notFound().build();
+    return ResponseEntity.ok(clientService.findById(clientId));
   }
 
   @PutMapping("/{clientId}")
@@ -65,6 +61,7 @@ public class ClientController {
     Client client = new Client();
     client = toolModelMapper.toModel(clientInput, Client.class);
     client.setId(clientId);
+
     return ResponseEntity.ok(clientService.save(client));
   }
 

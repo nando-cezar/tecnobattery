@@ -44,7 +44,7 @@ public class ClientService {
     if (client.isPresent()) {
       return toolModelMapper.toModel(client.get(), ClientOutput.class);
     }
-    return null;
+    return toolModelMapper.toModel(client.orElseThrow(() -> new BusinessException("Client: não encontrada.")), ClientOutput.class);
   }
 
   @Transactional(readOnly = true)
