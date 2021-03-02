@@ -2,14 +2,13 @@ package com.tecnobattery.tbsystem.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import com.tecnobattery.tbsystem.dto.output.ClientOutput;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ClientRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,29 +20,29 @@ public class ClientService {
   private ClientRepository clientRepository;
 
   @Autowired
-  private ModelMapper mapper;
+  private ToolModelMapper toolModelMapper;
 
   public ClientOutput save(Client client) {
 
     Client clientExists = clientRepository.findByCnpj(client.getCnpj());
 
-    if (clientExists != null && !clientExists.equals(client)) {
+    if (clientExists != null && clientExists.equals(client)) {
       throw new BusinessException("Já existe um cliente cadastrado com este CNPJ.");
     }
-    return toModel(clientRepository.save(client));
+    return toolModelMapper.toModel(clientRepository.save(client), ClientOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<ClientOutput> findAll() {
     List<Client> clients = clientRepository.findAll();
-    return toCollectionDTO(clients);
+    return toolModelMapper.toCollection(clients, ClientOutput.class);
   }
 
   @Transactional(readOnly = true)
   public ClientOutput findById(Long clientId) {
     Optional<Client> client = clientRepository.findById(clientId);
     if (client.isPresent()) {
-      return toModel(client.get());
+      return toolModelMapper.toModel(client.get(), ClientOutput.class);
     }
     return null;
   }
@@ -55,13 +54,5 @@ public class ClientService {
 
   public void deleteById(Long clientId) {
     clientRepository.deleteById(clientId);
-  }
-
-  private ClientOutput toModel(Client client) {
-    return mapper.map(client, ClientOutput.class);
-  }
-
-  private List<ClientOutput> toCollectionDTO(List<Client> clients) {
-    return clients.stream().map(x -> toModel(x)).collect(Collectors.toList());
   }
 }

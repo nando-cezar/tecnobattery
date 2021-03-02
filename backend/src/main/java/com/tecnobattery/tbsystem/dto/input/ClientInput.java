@@ -2,6 +2,7 @@ package com.tecnobattery.tbsystem.dto.input;
 
 import java.io.Serializable;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -26,24 +27,8 @@ public class ClientInput implements Serializable {
   @NotBlank(message = "E-mail se encontra em branco ou inválido.")
   @Email(message = "E-mail inválido.")
   private String email;
-  @NotBlank(message = "CEP se encontra em branco ou inválido.")
-  @Size(max = 9, message = "CEP deve possuir no máximo 9 caracteres.")
-  private String postalCode;
-  @NotBlank(message = "Logradouro se encontra em branco ou inválido.")
-  @Size(max = 255, message = "Logradouro deve possuir no máximo 255 caracteres.")
-  private String publicPlace;
-  @NotBlank(message = "Complemento se encontra em branco ou inválido.")
-  @Size(max = 255, message = "Complemento deve possuir no máximo 255 caracteres.")
-  private String complement;
-  @NotBlank(message = "Bairro se encontra em branco ou inválido.")
-  @Size(max = 100, message = "Bairro deve possuir no máximo 255 caracteres.")
-  private String neighborhood;
-  @NotBlank(message = "Cidade se encontra em branco ou inválido.")
-  @Size(max = 100, message = "Cidade deve possuir no máximo 255 caracteres.")
-  private String city;
-  @NotBlank(message = "Estado se encontra em branco ou inválido.")
-  @Size(max = 100, message = "Estado deve possuir no máximo 255 caracteres.")
-  private String state;
+  @Valid
+  private AddressInput address;
 
   public Long getId() {
     return this.id;
@@ -93,52 +78,13 @@ public class ClientInput implements Serializable {
     this.email = email;
   }
 
-  public String getPostalCode() {
-    return this.postalCode;
+  public AddressInput getAddress() {
+    return this.address;
   }
 
-  public void setPostalCode(String postalCode) {
-    this.postalCode = postalCode;
+  public void setAddress(AddressInput address) {
+    this.address = address;
   }
 
-  public String getPublicPlace() {
-    return this.publicPlace;
-  }
-
-  public void setPublicPlace(String publicPlace) {
-    this.publicPlace = publicPlace;
-  }
-
-  public String getComplement() {
-    return this.complement;
-  }
-
-  public void setComplement(String complement) {
-    this.complement = complement;
-  }
-
-  public String getNeighborhood() {
-    return this.neighborhood;
-  }
-
-  public void setNeighborhood(String neighborhood) {
-    this.neighborhood = neighborhood;
-  }
-
-  public String getCity() {
-    return this.city;
-  }
-
-  public void setCity(String city) {
-    this.city = city;
-  }
-
-  public String getState() {
-    return this.state;
-  }
-
-  public void setState(String state) {
-    this.state = state;
-  }
 
 }

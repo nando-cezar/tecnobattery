@@ -5,10 +5,10 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.output.ProviderOutput;
-import com.tecnobattery.tbsystem.entities.Address;
 import com.tecnobattery.tbsystem.entities.Provider;
 import com.tecnobattery.tbsystem.dto.input.ProviderInput;
 import com.tecnobattery.tbsystem.services.ProviderService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,24 +30,13 @@ public class ProviderController {
   @Autowired
   private ProviderService providerService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ProviderOutput save(@Valid @RequestBody ProviderInput providerInput) {
-    Provider provider = new Provider();
-    Address address = new Address();
-    provider.setCnpj(providerInput.getCnpj());
-    provider.setName(providerInput.getName());
-    provider.setFantasyName(providerInput.getFantasyName());
-    provider.setPhone(providerInput.getPhone());
-    provider.setEmail(providerInput.getEmail());
-    address.setPostalCode(providerInput.getPostalCode());
-    address.setPublicPlace(providerInput.getPublicPlace());
-    address.setComplement(providerInput.getComplement());
-    address.setNeighborhood(providerInput.getNeighborhood());
-    address.setCity(providerInput.getCity());
-    address.setState(providerInput.getState());
-    provider.setAddress(address);
-    return providerService.save(provider);
+    return providerService.save(toolModelMapper.toModel(providerInput, Provider.class));
   }
 
   @GetMapping
@@ -74,21 +63,8 @@ public class ProviderController {
     }
 
     Provider provider = new Provider();
-    Address address = new Address();
+    provider = toolModelMapper.toModel(providerInput, Provider.class);
     provider.setId(providerId);
-    provider.setCnpj(providerInput.getCnpj());
-    provider.setName(providerInput.getName());
-    provider.setFantasyName(providerInput.getFantasyName());
-    provider.setPhone(providerInput.getPhone());
-    provider.setEmail(providerInput.getEmail());
-    address.setPostalCode(providerInput.getPostalCode());
-    address.setPublicPlace(providerInput.getPublicPlace());
-    address.setComplement(providerInput.getComplement());
-    address.setNeighborhood(providerInput.getNeighborhood());
-    address.setCity(providerInput.getCity());
-    address.setState(providerInput.getState());
-    provider.setAddress(address);
-
     return ResponseEntity.ok(providerService.save(provider));
   }
 

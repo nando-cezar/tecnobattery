@@ -6,9 +6,10 @@ import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.output.ClientOutput;
 import com.tecnobattery.tbsystem.dto.input.ClientInput;
-import com.tecnobattery.tbsystem.entities.Address;
+//import com.tecnobattery.tbsystem.entities.Address;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.services.ClientService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,30 +31,19 @@ public class ClientController {
   @Autowired
   private ClientService clientService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ClientOutput save(@Valid @RequestBody ClientInput clientInput) {
-    Client client = new Client();
-    Address address = new Address();
-    client.setCnpj(clientInput.getCnpj());
-    client.setName(clientInput.getName());
-    client.setFantasyName(clientInput.getFantasyName());
-    client.setPhone(clientInput.getPhone());
-    client.setEmail(clientInput.getEmail());
-    address.setPostalCode(clientInput.getPostalCode());
-    address.setPublicPlace(clientInput.getPublicPlace());
-    address.setComplement(clientInput.getComplement());
-    address.setNeighborhood(clientInput.getNeighborhood());
-    address.setCity(clientInput.getCity());
-    address.setState(clientInput.getState());
-    client.setAddress(address);
-    return clientService.save(client);
+
+    return clientService.save(toolModelMapper.toModel(clientInput, Client.class));
   }
 
   @GetMapping
   public ResponseEntity<List<ClientOutput>> findAll() {
-    List<ClientOutput> list = clientService.findAll();
-    return ResponseEntity.ok().body(list);
+    return ResponseEntity.ok().body(clientService.findAll());
   }
 
   @GetMapping("/{clientId}")
@@ -73,21 +63,8 @@ public class ClientController {
     }
 
     Client client = new Client();
-    Address address = new Address();
+    client = toolModelMapper.toModel(clientInput, Client.class);
     client.setId(clientId);
-    client.setCnpj(clientInput.getCnpj());
-    client.setName(clientInput.getName());
-    client.setFantasyName(clientInput.getFantasyName());
-    client.setPhone(clientInput.getPhone());
-    client.setEmail(clientInput.getEmail());
-    address.setPostalCode(clientInput.getPostalCode());
-    address.setPublicPlace(clientInput.getPublicPlace());
-    address.setComplement(clientInput.getComplement());
-    address.setNeighborhood(clientInput.getNeighborhood());
-    address.setCity(clientInput.getCity());
-    address.setState(clientInput.getState());
-    client.setAddress(address);
-
     return ResponseEntity.ok(clientService.save(client));
   }
 
