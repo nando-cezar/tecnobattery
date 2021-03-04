@@ -74,11 +74,33 @@ public class OrderController {
     }
 
     Order order = toolModelMapper.toModel(orderService.findById(orderId), Order.class);
-    order = toolModelMapper.toModel(orderInput, Order.class);
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
+    order.setDescription(orderInput.getDescription());
+    order.setPrice(orderInput.getPrice());
+    order.setProducts(toolModelMapper.toCollection(orderInput.getProducts(), Product.class));
+    order.setUsers(toolModelMapper.toCollection(orderInput.getUsers(), User.class));
     order.setId(orderId);
 
-    return ResponseEntity.ok(toolModelMapper.toModel(order, OrderOutput.class));
+    return ResponseEntity.ok(orderService.save(order));
+  }
+
+  @PutMapping("finish/{orderId}")
+  public ResponseEntity<OrderOutput> finish(@Valid @PathVariable Long orderId) {
+
+    if (!orderService.existsById(orderId)) {
+      return ResponseEntity.notFound().build();
+    }
+
+    Order order = toolModelMapper.toModel(orderService.findById(orderId), Order.class);
+    
+    if (order.getDeadline() == null) {
+
+      order.setStatus(OrderStatus.ENTREGUE);
+      order.setDeadline(OffsetDateTime.now());
+      order.setId(orderId);
+      return ResponseEntity.ok(orderService.save(order));
+    }
+    return ResponseEntity.badRequest().build();
   }
 
   @DeleteMapping("/{orderId}")
