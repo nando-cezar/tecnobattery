@@ -43,13 +43,13 @@ INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weigh
 INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery6', 'ModelBattery6', 100, 3000, 200, 300, 30, 'www.teste.com');
 INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery7', 'ModelBattery7', 100, 4000, 200, 300, 30, 'www.teste.com');
 
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board1', 'ModelBoard1', 100, 1000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board2', 'ModelBoard2', 100, 2000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board3', 'ModelBoard3', 100, 3000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board4', 'ModelBoard4', 100, 1000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board5', 'ModelBoard5', 100, 5000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board6', 'ModelBoard6', 100, 3000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board7', 'ModelBoard7', 100, 4000, 200, 300, 100, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board1', 'ModelBoard1', 100, 1000, 200, 300, 100, 30, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board2', 'ModelBoard2', 100, 2000, 200, 300, 100, 30, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board3', 'ModelBoard3', 100, 3000, 200, 300, 100, 30, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board4', 'ModelBoard4', 100, 1000, 200, 300, 100, 30, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board5', 'ModelBoard5', 100, 5000, 200, 300, 100, 30, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board6', 'ModelBoard6', 100, 3000, 200, 300, 100, 30, 'www.teste.com');
+INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board7', 'ModelBoard7', 100, 4000, 200, 300, 100, 30, 'www.teste.com');
 
 INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board1', 'ModelBoard1', 100, 1000, 200, 300, 100, 'www.teste.com');
 INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board2', 'ModelBoard2', 100, 2000, 200, 300, 100, 'www.teste.com');

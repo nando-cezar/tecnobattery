@@ -22,12 +22,15 @@ public class ProductService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public ProductOutput save(Product product) {
+  public ProductOutput save(Product product, boolean identifier) {
 
-    Product productExists = productRepository.findByName(product.getName());
+    if (!identifier) {
 
-    if (productExists != null && productExists.equals(product)) {
-      throw new BusinessException("Já existe um produto cadastrado com este nome.");
+      Product productExists = productRepository.findByName(product.getName());
+
+      if (productExists != null && !productExists.equals(product)) {
+        throw new BusinessException("Já existe um produto cadastrado com este nome.");
+      }
     }
     return toolModelMapper.toModel(productRepository.save(product), ProductOutput.class);
   }
@@ -44,7 +47,8 @@ public class ProductService {
     if (product.isPresent()) {
       return toolModelMapper.toModel(product.get(), ProductOutput.class);
     }
-    return toolModelMapper.toModel(product.orElseThrow(() -> new BusinessException("Product: não encontrada.")), ProductOutput.class);
+    return toolModelMapper.toModel(product.orElseThrow(() -> new BusinessException("Product: não encontrada.")),
+        ProductOutput.class);
   }
 
   @Transactional(readOnly = true)

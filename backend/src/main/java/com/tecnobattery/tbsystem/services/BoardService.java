@@ -22,12 +22,15 @@ public class BoardService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public BoardOutput save(Board board) {
+  public BoardOutput save(Board board, boolean identifier) {
 
-    Board boardExists = boardRepository.findByModel(board.getModel());
+    if (!identifier) {
+      
+      Board boardExists = boardRepository.findByModel(board.getModel());
 
-    if (boardExists != null && boardExists.equals(board)) {
-      throw new BusinessException("Já existe uma placa cadastrada com este modelo.");
+      if (boardExists != null && !boardExists.equals(board)) {
+        throw new BusinessException("Já existe uma placa cadastrada com este modelo.");
+      }
     }
     return toolModelMapper.toModel(boardRepository.save(board), BoardOutput.class);
   }
@@ -44,7 +47,8 @@ public class BoardService {
     if (board.isPresent()) {
       return toolModelMapper.toModel(board.get(), BoardOutput.class);
     }
-    return toolModelMapper.toModel(board.orElseThrow(() -> new BusinessException("Board: não encontrada.")), BoardOutput.class);
+    return toolModelMapper.toModel(board.orElseThrow(() -> new BusinessException("Board: não encontrada.")),
+        BoardOutput.class);
   }
 
   @Transactional(readOnly = true)

@@ -73,10 +73,9 @@ public class OrderController {
       return ResponseEntity.notFound().build();
     }
 
-    Order order = toolModelMapper.toModel(orderInput, Order.class);
-
-    order.setId(orderId);
+    Order order = new Order();
     order = toolModelMapper.toModel(orderService.save(order), Order.class);
+    order.setId(orderId);
 
     return ResponseEntity.ok(toolModelMapper.toModel(order, OrderOutput.class));
   }

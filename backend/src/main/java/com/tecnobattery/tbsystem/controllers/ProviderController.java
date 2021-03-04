@@ -36,7 +36,7 @@ public class ProviderController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ProviderOutput save(@Valid @RequestBody ProviderInput providerInput) {
-    return providerService.save(toolModelMapper.toModel(providerInput, Provider.class));
+    return providerService.save(toolModelMapper.toModel(providerInput, Provider.class), false);
   }
 
   @GetMapping
@@ -61,7 +61,7 @@ public class ProviderController {
     Provider provider = new Provider();
     provider = toolModelMapper.toModel(providerInput, Provider.class);
     provider.setId(providerId);
-    return ResponseEntity.ok(providerService.save(provider));
+    return ResponseEntity.ok(providerService.save(provider, true));
   }
 
   @DeleteMapping("/{providerId}")

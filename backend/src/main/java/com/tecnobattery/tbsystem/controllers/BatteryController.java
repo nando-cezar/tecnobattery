@@ -36,7 +36,7 @@ public class BatteryController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BatteryOutput save(@Valid @RequestBody BatteryInput batteryInput) {
-    return batteryService.save(toolModelMapper.toModel(batteryInput, Battery.class));
+    return batteryService.save(toolModelMapper.toModel(batteryInput, Battery.class), false);
   }
 
   @GetMapping
@@ -61,7 +61,7 @@ public class BatteryController {
     battery = toolModelMapper.toModel(batteryInput, Battery.class);
     battery.setId(batteryId);
 
-    return ResponseEntity.ok(batteryService.save(battery));
+    return ResponseEntity.ok(batteryService.save(battery, true));
   }
 
   @DeleteMapping("/{batteryId}")

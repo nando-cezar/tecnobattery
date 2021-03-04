@@ -22,12 +22,15 @@ public class UserService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public UserOutput save(User user) {
+  public UserOutput save(User user, boolean identifier) {
 
-    User userExists = userRepository.findByEmail(user.getEmail());
+    if (!identifier) {
 
-    if (userExists != null && userExists.equals(user)) {
-      throw new BusinessException("Já existe um usuário cadastrado com este e-mail.");
+      User userExists = userRepository.findByEmail(user.getEmail());
+
+      if (userExists != null && !userExists.equals(user)) {
+        throw new BusinessException("Já existe um usuário cadastrado com este e-mail.");
+      }
     }
     return toolModelMapper.toModel(userRepository.save(user), UserOutput.class);
   }
@@ -44,7 +47,8 @@ public class UserService {
     if (user.isPresent()) {
       return toolModelMapper.toModel(user.get(), UserOutput.class);
     }
-    return toolModelMapper.toModel(user.orElseThrow(() -> new BusinessException("User: não encontrada.")), UserOutput.class);
+    return toolModelMapper.toModel(user.orElseThrow(() -> new BusinessException("User: não encontrada.")),
+        UserOutput.class);
   }
 
   @Transactional(readOnly = true)

@@ -22,12 +22,15 @@ public class ProviderService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public ProviderOutput save(Provider provider) {
+  public ProviderOutput save(Provider provider, boolean identifier) {
 
-    Provider providerExists = providerRepository.findByCnpj(provider.getCnpj());
+    if (!identifier) {
 
-    if (providerExists != null && providerExists.equals(provider)) {
-      throw new BusinessException("Já existe um fornecedor cadastrado com este CNPJ.");
+      Provider providerExists = providerRepository.findByCnpj(provider.getCnpj());
+
+      if (providerExists != null && !providerExists.equals(provider)) {
+        throw new BusinessException("Já existe um fornecedor cadastrado com este CNPJ.");
+      }
     }
     return toolModelMapper.toModel(providerRepository.save(provider), ProviderOutput.class);
   }
@@ -44,7 +47,8 @@ public class ProviderService {
     if (provider.isPresent()) {
       return toolModelMapper.toModel(provider.get(), ProviderOutput.class);
     }
-    return toolModelMapper.toModel(provider.orElseThrow(() -> new BusinessException("Provider: não encontrada.")), ProviderOutput.class);
+    return toolModelMapper.toModel(provider.orElseThrow(() -> new BusinessException("Provider: não encontrada.")),
+        ProviderOutput.class);
   }
 
   @Transactional(readOnly = true)

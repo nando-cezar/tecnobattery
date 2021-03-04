@@ -8,6 +8,7 @@ import com.tecnobattery.tbsystem.dto.input.ProductInput;
 import com.tecnobattery.tbsystem.dto.output.ProductOutput;
 import com.tecnobattery.tbsystem.entities.Product;
 import com.tecnobattery.tbsystem.services.ProductService;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,19 +30,13 @@ public class ProductController {
   @Autowired
   private ProductService productService;
 
+  @Autowired
+  private ToolModelMapper toolModelMapper;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public ProductOutput save(@Valid @RequestBody ProductInput productInput) {
-    Product product = new Product();
-    product.setName(productInput.getName());
-    product.setPower(productInput.getPower());
-    product.setCapacity(productInput.getCapacity());
-    product.setVoltage(productInput.getVoltage());
-    product.setPrice(productInput.getPrice());
-    product.setDescription(productInput.getDescription());
-    product.setImageUrl(productInput.getImageUrl());
-
-    return productService.save(product);
+    return productService.save(toolModelMapper.toModel(productInput, Product.class), false);
   }
 
   @GetMapping
@@ -63,16 +58,10 @@ public class ProductController {
     }
 
     Product product = new Product();
+    product = toolModelMapper.toModel(productInput, Product.class);
     product.setId(productId);
-    product.setName(productInput.getName());
-    product.setPower(productInput.getPower());
-    product.setCapacity(productInput.getCapacity());
-    product.setVoltage(productInput.getVoltage());
-    product.setPrice(productInput.getPrice());
-    product.setDescription(productInput.getDescription());
-    product.setImageUrl(productInput.getImageUrl());
 
-    return ResponseEntity.ok(productService.save(product));
+    return ResponseEntity.ok(productService.save(product, true));
   }
 
   @DeleteMapping("/{productId}")

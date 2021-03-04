@@ -22,12 +22,15 @@ public class ClientService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public ClientOutput save(Client client) {
+  public ClientOutput save(Client client, boolean identifier) {
 
-    Client clientExists = clientRepository.findByCnpj(client.getCnpj());
+    if (!identifier) {
 
-    if (clientExists != null && clientExists.equals(client)) {
-      throw new BusinessException("Já existe um cliente cadastrado com este CNPJ.");
+      Client clientExists = clientRepository.findByCnpj(client.getCnpj());
+
+      if (clientExists != null && !clientExists.equals(client)) {
+        throw new BusinessException("Já existe um cliente cadastrado com este CNPJ.");
+      }
     }
     return toolModelMapper.toModel(clientRepository.save(client), ClientOutput.class);
   }
@@ -44,7 +47,8 @@ public class ClientService {
     if (client.isPresent()) {
       return toolModelMapper.toModel(client.get(), ClientOutput.class);
     }
-    return toolModelMapper.toModel(client.orElseThrow(() -> new BusinessException("Client: não encontrada.")), ClientOutput.class);
+    return toolModelMapper.toModel(client.orElseThrow(() -> new BusinessException("Client: não encontrada.")),
+        ClientOutput.class);
   }
 
   @Transactional(readOnly = true)

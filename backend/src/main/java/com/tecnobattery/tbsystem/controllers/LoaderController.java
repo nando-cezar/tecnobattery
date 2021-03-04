@@ -36,7 +36,7 @@ public class LoaderController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public LoaderOutput save(@Valid @RequestBody LoaderInput loaderInput) {
-    return loaderService.save(toolModelMapper.toModel(loaderInput, Loader.class));
+    return loaderService.save(toolModelMapper.toModel(loaderInput, Loader.class), false);
   }
 
   @GetMapping
@@ -60,7 +60,7 @@ public class LoaderController {
     loader = toolModelMapper.toModel(loaderInput, Loader.class);
     loader.setId(loaderId);
 
-    return ResponseEntity.ok(loaderService.save(loader));
+    return ResponseEntity.ok(loaderService.save(loader, true));
   }
 
   @DeleteMapping("/{loaderId}")

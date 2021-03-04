@@ -40,7 +40,7 @@ public class UserController {
     User user = toolModelMapper.toModel(userInput, User.class);
     user.setLevel(TypeUser.ADMINISTRADOR);
 
-    return userService.save(user);
+    return userService.save(user, false);
   }
 
   @GetMapping
@@ -64,7 +64,7 @@ public class UserController {
     User user = toolModelMapper.toModel(userInput, User.class);
     user.setId(userId);
 
-    return ResponseEntity.ok(userService.save(user));
+    return ResponseEntity.ok(userService.save(user, true));
   }
 
   @DeleteMapping("/{userId}")

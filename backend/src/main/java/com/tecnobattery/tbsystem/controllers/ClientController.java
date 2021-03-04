@@ -38,7 +38,7 @@ public class ClientController {
   @ResponseStatus(HttpStatus.CREATED)
   public ClientOutput save(@Valid @RequestBody ClientInput clientInput) {
 
-    return clientService.save(toolModelMapper.toModel(clientInput, Client.class));
+    return clientService.save(toolModelMapper.toModel(clientInput, Client.class), false);
   }
 
   @GetMapping
@@ -62,7 +62,7 @@ public class ClientController {
     client = toolModelMapper.toModel(clientInput, Client.class);
     client.setId(clientId);
 
-    return ResponseEntity.ok(clientService.save(client));
+    return ResponseEntity.ok(clientService.save(client, true));
   }
 
   @DeleteMapping("/{clientId}")

@@ -22,12 +22,15 @@ public class LoaderService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public LoaderOutput save(Loader loader) {
+  public LoaderOutput save(Loader loader, boolean identifier) {
 
-    Loader loaderExists = loaderRepository.findByModel(loader.getModel());
+    if (!identifier) {
 
-    if (loaderExists != null && loaderExists.equals(loader)) {
-      throw new BusinessException("Já existe uma carregador cadastrada com este modelo.");
+      Loader loaderExists = loaderRepository.findByModel(loader.getModel());
+
+      if (loaderExists != null && !loaderExists.equals(loader)) {
+        throw new BusinessException("Já existe uma carregador cadastrada com este modelo.");
+      }
     }
     return toolModelMapper.toModel(loaderRepository.save(loader), LoaderOutput.class);
   }
@@ -44,7 +47,8 @@ public class LoaderService {
     if (loader.isPresent()) {
       return toolModelMapper.toModel(loader.get(), LoaderOutput.class);
     }
-    return toolModelMapper.toModel(loader.orElseThrow(() -> new BusinessException("Loader: não encontrada.")), LoaderOutput.class);
+    return toolModelMapper.toModel(loader.orElseThrow(() -> new BusinessException("Loader: não encontrada.")),
+        LoaderOutput.class);
   }
 
   @Transactional(readOnly = true)

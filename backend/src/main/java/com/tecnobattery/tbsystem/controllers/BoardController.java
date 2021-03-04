@@ -36,7 +36,7 @@ public class BoardController {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public BoardOutput save(@Valid @RequestBody BoardInput boardInput) {
-    return boardService.save(toolModelMapper.toModel(boardInput, Board.class));
+    return boardService.save(toolModelMapper.toModel(boardInput, Board.class), false);
   }
 
   @GetMapping
@@ -61,7 +61,7 @@ public class BoardController {
     board = toolModelMapper.toModel(boardInput, Board.class);
     board.setId(boardId);
     
-    return ResponseEntity.ok(boardService.save(board));
+    return ResponseEntity.ok(boardService.save(board, true));
   }
 
   @DeleteMapping("/{boardId}")
