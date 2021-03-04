@@ -1,18 +1,14 @@
 package com.tecnobattery.tbsystem.services;
 
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.output.ManagementBoardOutput;
-import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.entities.ManagementBoard;
-import com.tecnobattery.tbsystem.entities.Provider;
-import com.tecnobattery.tbsystem.repositories.BoardRepository;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementBoardRepository;
-import com.tecnobattery.tbsystem.repositories.ProviderRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,38 +20,35 @@ public class ManagementBoardService {
   private ManagementBoardRepository managementBoardRepository;
 
   @Autowired
-  private ProviderRepository providerRepository;
+  private ToolModelMapper toolModelMapper;
 
-  @Autowired
-  private BoardRepository boardRepository;
-
-  @Autowired
-  private ModelMapper mapper;
-
-  public ManagementBoardOutput save(Long providerId, Long boardId, OffsetDateTime moment, Integer amount)
-      throws Exception {
-    Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new Exception("Provider: not found"));
-    Board board = boardRepository.findById(boardId).orElseThrow(() -> new Exception("Board: not found"));
-    ManagementBoard managementBoard = new ManagementBoard();
-    managementBoard.setProvider(provider);
-    managementBoard.setBoard(board);
-    managementBoard.setMoment(moment);
-    managementBoard.setAmount(amount);
-
-    return toModel(managementBoardRepository.save(managementBoard));
+  public ManagementBoardOutput save(ManagementBoard managementBoard) {
+    return toolModelMapper.toModel(managementBoardRepository.save(managementBoard), ManagementBoardOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<ManagementBoardOutput> findAll() {
     List<ManagementBoard> boards = managementBoardRepository.findAll();
-    return toCollectionDTO(boards);
+    return toolModelMapper.toCollection(boards, ManagementBoardOutput.class);
   }
 
-  private ManagementBoardOutput toModel(ManagementBoard managementBoard) {
-    return mapper.map(managementBoard, ManagementBoardOutput.class);
+  @Transactional(readOnly = true)
+  public ManagementBoardOutput findById(Long managementBoardId) {
+    Optional<ManagementBoard> managementBoard = managementBoardRepository.findById(managementBoardId);
+    if (managementBoard.isPresent()) {
+      return toolModelMapper.toModel(managementBoard.get(), ManagementBoardOutput.class);
+    }
+    return toolModelMapper.toModel(
+        managementBoard.orElseThrow(() -> new BusinessException("ManagementBoard: não encontrada.")),
+        ManagementBoardOutput.class);
   }
 
-  private List<ManagementBoardOutput> toCollectionDTO(List<ManagementBoard> boards) {
-    return boards.stream().map(x -> toModel(x)).collect(Collectors.toList());
+  @Transactional(readOnly = true)
+  public boolean existsById(Long managementBoardId) {
+    return managementBoardRepository.existsById(managementBoardId);
+  }
+
+  public void deleteById(Long managementBoardId) {
+    managementBoardRepository.deleteById(managementBoardId);
   }
 }

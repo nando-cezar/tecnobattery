@@ -1,18 +1,14 @@
 package com.tecnobattery.tbsystem.services;
 
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.output.ManagementBatteryOutput;
-import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.entities.ManagementBattery;
-import com.tecnobattery.tbsystem.entities.Provider;
-import com.tecnobattery.tbsystem.repositories.BatteryRepository;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementBatteryRepository;
-import com.tecnobattery.tbsystem.repositories.ProviderRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,38 +20,35 @@ public class ManagementBatteryService {
   private ManagementBatteryRepository managementBatteryRepository;
 
   @Autowired
-  private ProviderRepository providerRepository;
+  private ToolModelMapper toolModelMapper;
 
-  @Autowired
-  private BatteryRepository batteryRepository;
-
-  @Autowired
-  private ModelMapper mapper;
-
-  public ManagementBatteryOutput save(Long providerId, Long batteryId, OffsetDateTime moment, Integer amount)
-      throws Exception {
-    Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new Exception("Provider: not found"));
-    Battery battery = batteryRepository.findById(batteryId).orElseThrow(() -> new Exception("Battery: not found"));
-    ManagementBattery managementBattery = new ManagementBattery();
-    managementBattery.setProvider(provider);
-    managementBattery.setBattery(battery);
-    managementBattery.setMoment(moment);
-    managementBattery.setAmount(amount);
-
-    return toModel(managementBatteryRepository.save(managementBattery));
+  public ManagementBatteryOutput save(ManagementBattery managementBattery) {
+    return toolModelMapper.toModel(managementBatteryRepository.save(managementBattery), ManagementBatteryOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<ManagementBatteryOutput> findAll() {
     List<ManagementBattery> batterys = managementBatteryRepository.findAll();
-    return toCollectionDTO(batterys);
+    return toolModelMapper.toCollection(batterys, ManagementBatteryOutput.class);
   }
 
-  private ManagementBatteryOutput toModel(ManagementBattery managementBattery) {
-    return mapper.map(managementBattery, ManagementBatteryOutput.class);
+  @Transactional(readOnly = true)
+  public ManagementBatteryOutput findById(Long managementBatteryId) {
+    Optional<ManagementBattery> managementBattery = managementBatteryRepository.findById(managementBatteryId);
+    if (managementBattery.isPresent()) {
+      return toolModelMapper.toModel(managementBattery.get(), ManagementBatteryOutput.class);
+    }
+    return toolModelMapper.toModel(
+        managementBattery.orElseThrow(() -> new BusinessException("ManagementBattery: não encontrada.")),
+        ManagementBatteryOutput.class);
   }
 
-  private List<ManagementBatteryOutput> toCollectionDTO(List<ManagementBattery> batterys) {
-    return batterys.stream().map(x -> toModel(x)).collect(Collectors.toList());
+  @Transactional(readOnly = true)
+  public boolean existsById(Long managementBatteryId) {
+    return managementBatteryRepository.existsById(managementBatteryId);
+  }
+
+  public void deleteById(Long managementBatteryId) {
+    managementBatteryRepository.deleteById(managementBatteryId);
   }
 }

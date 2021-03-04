@@ -1,18 +1,14 @@
 package com.tecnobattery.tbsystem.services;
 
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.output.ManagementLoaderOutput;
-import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.entities.ManagementLoader;
-import com.tecnobattery.tbsystem.entities.Provider;
-import com.tecnobattery.tbsystem.repositories.LoaderRepository;
+import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementLoaderRepository;
-import com.tecnobattery.tbsystem.repositories.ProviderRepository;
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,38 +20,35 @@ public class ManagementLoaderService {
   private ManagementLoaderRepository managementLoaderRepository;
 
   @Autowired
-  private ProviderRepository providerRepository;
+  private ToolModelMapper toolModelMapper;
 
-  @Autowired
-  private LoaderRepository loaderRepository;
-
-  @Autowired
-  private ModelMapper mapper;
-
-  public ManagementLoaderOutput save(Long providerId, Long loaderId, OffsetDateTime moment, Integer amount)
-      throws Exception {
-    Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new Exception("Provider: not found"));
-    Loader loader = loaderRepository.findById(loaderId).orElseThrow(() -> new Exception("Loader: not found"));
-    ManagementLoader managementLoader = new ManagementLoader();
-    managementLoader.setProvider(provider);
-    managementLoader.setLoader(loader);
-    managementLoader.setMoment(moment);
-    managementLoader.setAmount(amount);
-
-    return toModel(managementLoaderRepository.save(managementLoader));
+  public ManagementLoaderOutput save(ManagementLoader managementLoader) {
+    return toolModelMapper.toModel(managementLoaderRepository.save(managementLoader), ManagementLoaderOutput.class);
   }
 
   @Transactional(readOnly = true)
   public List<ManagementLoaderOutput> findAll() {
     List<ManagementLoader> loaders = managementLoaderRepository.findAll();
-    return toCollectionOutput(loaders);
+    return toolModelMapper.toCollection(loaders, ManagementLoaderOutput.class);
   }
 
-  private ManagementLoaderOutput toModel(ManagementLoader managementLoader) {
-    return mapper.map(managementLoader, ManagementLoaderOutput.class);
+  @Transactional(readOnly = true)
+  public ManagementLoaderOutput findById(Long managementLoaderId) {
+    Optional<ManagementLoader> managementLoader = managementLoaderRepository.findById(managementLoaderId);
+    if (managementLoader.isPresent()) {
+      return toolModelMapper.toModel(managementLoader.get(), ManagementLoaderOutput.class);
+    }
+    return toolModelMapper.toModel(
+        managementLoader.orElseThrow(() -> new BusinessException("ManagementLoader: não encontrada.")),
+        ManagementLoaderOutput.class);
   }
 
-  private List<ManagementLoaderOutput> toCollectionOutput(List<ManagementLoader> loaders) {
-    return loaders.stream().map(x -> toModel(x)).collect(Collectors.toList());
+  @Transactional(readOnly = true)
+  public boolean existsById(Long managementLoaderId) {
+    return managementLoaderRepository.existsById(managementLoaderId);
+  }
+
+  public void deleteById(Long managementLoaderId) {
+    managementLoaderRepository.deleteById(managementLoaderId);
   }
 }
