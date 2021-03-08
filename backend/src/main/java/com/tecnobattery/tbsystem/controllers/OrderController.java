@@ -2,10 +2,12 @@ package com.tecnobattery.tbsystem.controllers;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.output.OrderOutput;
+import com.tecnobattery.tbsystem.dto.output.ProductOutput;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
@@ -14,6 +16,7 @@ import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.dto.input.OrderInput;
 import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.services.OrderService;
+import com.tecnobattery.tbsystem.services.ProductService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,9 @@ public class OrderController {
   private ClientService clientService;
 
   @Autowired
+  private ProductService productService;
+
+  @Autowired
   private ToolModelMapper toolModelMapper;
 
   @PostMapping
@@ -50,7 +56,7 @@ public class OrderController {
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
     order.setStatus(OrderStatus.PENDENTE);
     order.setOpening(OffsetDateTime.now());
-    order.setProducts(toolModelMapper.toCollection(orderInput.getProducts(), Product.class));
+    order.setProducts(toolModelMapper.toCollection(this.getProductsId(orderInput), Product.class));
     order.setUsers(toolModelMapper.toCollection(orderInput.getUsers(), User.class));
 
     return orderService.save(order);
@@ -92,7 +98,7 @@ public class OrderController {
     }
 
     Order order = toolModelMapper.toModel(orderService.findById(orderId), Order.class);
-    
+
     if (order.getDeadline() == null) {
 
       order.setStatus(OrderStatus.ENTREGUE);
@@ -111,4 +117,13 @@ public class OrderController {
     orderService.deleteById(orderId);
     return ResponseEntity.noContent().build();
   }
+
+  private List<ProductOutput> getProductsId(OrderInput orderInput) {
+
+    List<Long> idProducts = orderInput.getProducts().stream().map(x -> x.getId()).collect(Collectors.toList());
+
+    return idProducts.stream().map(x -> productService.findById(x)).collect(Collectors.toList());
+
+  }
+
 }
