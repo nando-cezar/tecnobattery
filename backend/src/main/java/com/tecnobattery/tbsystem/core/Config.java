@@ -1,5 +1,6 @@
 package com.tecnobattery.tbsystem.core;
 
+import com.tecnobattery.tbsystem.tools.ToolConvertIdObject;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.modelmapper.ModelMapper;
@@ -16,5 +17,10 @@ public class Config {
   @Bean
   public ToolModelMapper toolModelMapper() {
     return new ToolModelMapper();
+  }
+
+  @Bean
+  public ToolConvertIdObject toolConvertIdObject() {
+    return new ToolConvertIdObject();
   }
 }

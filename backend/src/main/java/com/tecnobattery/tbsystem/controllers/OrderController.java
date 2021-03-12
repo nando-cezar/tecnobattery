@@ -1,30 +1,22 @@
 package com.tecnobattery.tbsystem.controllers;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.output.OrderOutput;
-import com.tecnobattery.tbsystem.dto.output.ProductOutput;
-import com.tecnobattery.tbsystem.dto.output.UserOutput;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 import com.tecnobattery.tbsystem.entities.Product;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.dto.input.OrderInput;
-import com.tecnobattery.tbsystem.dto.input.ProductInput;
-import com.tecnobattery.tbsystem.dto.input.UserInput;
 import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.services.OrderService;
 import com.tecnobattery.tbsystem.services.ProductService;
 import com.tecnobattery.tbsystem.services.UserService;
+import com.tecnobattery.tbsystem.tools.ToolConvertIdObject;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +51,9 @@ public class OrderController {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
+  @Autowired
+  private ToolConvertIdObject toolConvertIdObject;
+
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public OrderOutput save(@Valid @RequestBody OrderInput orderInput) {
@@ -67,10 +62,10 @@ public class OrderController {
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
     order.setStatus(OrderStatus.PENDENTE);
     order.setOpening(OffsetDateTime.now());
-    order.setProducts(toolModelMapper.toCollection(this.getProductsId(orderInput.getProducts()), Product.class));
-    order.setUsers(toolModelMapper.toCollection(this.getUsersId(orderInput.getUsers()), User.class));
-
-    System.out.println(this.getObjectId(orderInput.getProducts(), productService));
+    order.setProducts(toolModelMapper
+        .toCollection(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService), Product.class));
+    order.setUsers(
+        toolModelMapper.toCollection(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService), User.class));
 
     return orderService.save(order);
   }
@@ -129,48 +124,6 @@ public class OrderController {
     }
     orderService.deleteById(orderId);
     return ResponseEntity.noContent().build();
-  }
-
-  private List<ProductOutput> getProductsId(List<ProductInput> products) {
-
-    List<Long> idProducts = products.stream().map(x -> x.getId()).collect(Collectors.toList());
-
-    return idProducts.stream().map(x -> productService.findById(x)).collect(Collectors.toList());
-
-  }
-
-  private Set<UserOutput> getUsersId(Set<UserInput> users) {
-
-    List<Long> idUsers = users.stream().map(x -> x.getId()).collect(Collectors.toList());
-
-    return idUsers.stream().map(x -> userService.findById(x)).collect(Collectors.toSet());
-
-  }
-
-  private <I, S> List<Object> getObjectId(List<I> input, S service) {
-
-    List<Object> id = input.stream().map(x -> {
-      return x;
-    }).collect(Collectors.toList());
-
-    List<Long> idConvert = new ArrayList<>();
-
-    for (int i = 0; i < id.size(); i++) {
-      idConvert.add(Long.parseLong(id.get(i).toString()));
-    }
-
-    return idConvert.stream().map(x -> {
-
-      try {
-        return service.getClass().getDeclaredMethod("findById", Long.class).invoke(service, x).toString();
-      } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-          | SecurityException e) {
-        e.printStackTrace();
-      }
-      return x;
-
-    }).collect(Collectors.toList());
-
   }
 
 }

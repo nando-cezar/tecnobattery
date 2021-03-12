@@ -80,4 +80,9 @@ public class UserInput implements Serializable {
     this.level = level;
   }
 
+  @Override
+  public String toString() {
+    return String.valueOf(getId());
+  }
+
 }

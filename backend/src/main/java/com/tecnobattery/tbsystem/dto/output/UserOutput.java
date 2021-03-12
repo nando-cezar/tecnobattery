@@ -65,4 +65,10 @@ public class UserOutput implements Serializable {
     this.level = level;
   }
 
+  @Override
+  public String toString() {
+    return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
+        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + "}";
+  }
+
 }
