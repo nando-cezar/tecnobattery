@@ -62,10 +62,8 @@ public class OrderController {
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
     order.setStatus(OrderStatus.PENDENTE);
     order.setOpening(OffsetDateTime.now());
-    order.setProducts(toolModelMapper
-        .toCollection(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService), Product.class));
-    order.setUsers(
-        toolModelMapper.toCollection(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService), User.class));
+    order.setProducts(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService, Product.class));
+    order.setUsers(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService, User.class));
 
     return orderService.save(order);
   }
