@@ -99,4 +99,9 @@ public class ProductInput implements Serializable {
     this.imageUrl = imageUrl;
   }
 
+  @Override
+  public String toString() {
+    return String.valueOf(getId());
+  }
+
 }

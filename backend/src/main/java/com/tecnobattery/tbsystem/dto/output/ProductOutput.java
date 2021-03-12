@@ -80,4 +80,12 @@ public class ProductOutput implements Serializable {
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
   }
+
+  @Override
+  public String toString() {
+    return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", power='" + getPower() + "'"
+        + ", capacity='" + getCapacity() + "'" + ", voltage='" + getVoltage() + "'" + ", price='" + getPrice() + "'"
+        + ", description='" + getDescription() + "'" + ", imageUrl='" + getImageUrl() + "'" + "}";
+  }
+
 }
