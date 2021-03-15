@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.dto.input;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class OrderInput implements Serializable {
+public class OrderRequest implements Serializable {
 
   /**
    *
@@ -25,9 +25,9 @@ public class OrderInput implements Serializable {
   @NotNull(message = "Preço é obrigatório.")
   private Double price;
   @NotNull(message = "Produto é obrigatório.")
-  private List<ProductInput> products = new ArrayList<>();
+  private List<ProductRequest> products = new ArrayList<>();
   @NotNull(message = "Usuário é obrigatório.")
-  private Set<UserInput> users = new HashSet<>();
+  private Set<UserRequest> users = new HashSet<>();
 
   public Long getId() {
     return this.id;
@@ -61,19 +61,19 @@ public class OrderInput implements Serializable {
     this.price = price;
   }
 
-  public List<ProductInput> getProducts() {
+  public List<ProductRequest> getProducts() {
     return this.products;
   }
 
-  public void setProducts(List<ProductInput> products) {
+  public void setProducts(List<ProductRequest> products) {
     this.products = products;
   }
 
-  public Set<UserInput> getUsers() {
+  public Set<UserRequest> getUsers() {
     return this.users;
   }
 
-  public void setUsers(Set<UserInput> users) {
+  public void setUsers(Set<UserRequest> users) {
     this.users = users;
   }
 

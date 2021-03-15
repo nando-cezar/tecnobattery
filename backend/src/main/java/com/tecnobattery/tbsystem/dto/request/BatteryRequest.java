@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.dto.input;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
-public class LoaderInput implements Serializable {
+public class BatteryRequest implements Serializable {
 
   /**
    *
@@ -19,23 +19,20 @@ public class LoaderInput implements Serializable {
   @Size(max = 60, message = "Marca deve possuir no máximo 60 caracteres.")
   private String brand;
   @NotBlank(message = "Modelo se encontra em branco ou inválido.")
-  @Size(max = 60, message = "Marca deve possuir no máximo 60 caracteres.")
+  @Size(max = 60)
   private String model;
-  @NotNull(message = "Potência é obrigatório em watts.")
-  @Range(min = 1, max = 1000, message = "A potência varia entre 1w e 1000w.")
-  private Integer power;
+  @NotNull(message = "Capacidade é obrigatório em mA.")
+  @Range(min = 100, max = 20000, message = "A capacidade varia entre 100mA e 20000mA.")
+  private Integer capacity;
   @NotNull(message = "Tensão é obrigatório em volts.")
-  @Range(min = 1, max = 100, message = "A tensão varia entre 1v e 100v.")
+  @Range(min = 1, max = 10, message = "A tensão varia entre 1v e 10v.")
   private Integer voltage;
-  @NotNull(message = "Largura é obrigatório em mm.")
-  @Range(min = 10, max = 300, message = "A largura varia entre 10mm e 300mm.")
-  private Integer width;
+  @NotNull(message = "Diâmetro é obrigatório em mm.")
+  @Range(min = 10, max = 100, message = "O diâmetro varia entre 10mm e 100mm.")
+  private Integer diameter;
   @NotNull(message = "Altura é obrigatório em mm.")
   @Range(min = 10, max = 100, message = "A altura varia entre 10mm e 100mm.")
   private Integer height;
-  @NotNull(message = "Profundidade é obrigatório em mm.")
-  @Range(min = 10, max = 300, message = "A profundidade varia entre 10mm e 300mm.")
-  private Integer length;
   @NotNull(message = "Peso é obrigatório em grama.")
   @Range(min = 10, max = 2000, message = "O peso varia entre 10g e 2000g.")
   private Integer weight;
@@ -66,12 +63,12 @@ public class LoaderInput implements Serializable {
     this.model = model;
   }
 
-  public Integer getPower() {
-    return this.power;
+  public Integer getCapacity() {
+    return this.capacity;
   }
 
-  public void setPower(Integer power) {
-    this.power = power;
+  public void setCapacity(Integer capacity) {
+    this.capacity = capacity;
   }
 
   public Integer getVoltage() {
@@ -82,12 +79,12 @@ public class LoaderInput implements Serializable {
     this.voltage = voltage;
   }
 
-  public Integer getWidth() {
-    return this.width;
+  public Integer getDiameter() {
+    return this.diameter;
   }
 
-  public void setWidth(Integer width) {
-    this.width = width;
+  public void setDiameter(Integer diameter) {
+    this.diameter = diameter;
   }
 
   public Integer getHeight() {
@@ -96,14 +93,6 @@ public class LoaderInput implements Serializable {
 
   public void setHeight(Integer height) {
     this.height = height;
-  }
-
-  public Integer getLength() {
-    return this.length;
-  }
-
-  public void setLength(Integer length) {
-    this.length = length;
   }
 
   public Integer getWeight() {

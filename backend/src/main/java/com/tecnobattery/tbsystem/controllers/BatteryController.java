@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.BatteryOutput;
-import com.tecnobattery.tbsystem.dto.input.BatteryInput;
+import com.tecnobattery.tbsystem.dto.request.BatteryRequest;
+import com.tecnobattery.tbsystem.dto.response.BatteryResponse;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.services.BatteryService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
@@ -35,23 +35,23 @@ public class BatteryController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public BatteryOutput save(@Valid @RequestBody BatteryInput batteryInput) {
+  public BatteryResponse save(@Valid @RequestBody BatteryRequest batteryInput) {
     return batteryService.save(toolModelMapper.toModel(batteryInput, Battery.class), false);
   }
 
   @GetMapping
-  public ResponseEntity<List<BatteryOutput>> findAll() {
+  public ResponseEntity<List<BatteryResponse>> findAll() {
     return ResponseEntity.ok().body(batteryService.findAll());
   }
 
   @GetMapping("/{batteryId}")
-  public ResponseEntity<BatteryOutput> findById(@PathVariable Long batteryId) {
+  public ResponseEntity<BatteryResponse> findById(@PathVariable Long batteryId) {
     return ResponseEntity.ok(batteryService.findById(batteryId));
   }
 
   @PutMapping("/{batteryId}")
-  public ResponseEntity<BatteryOutput> update(@Valid @PathVariable Long batteryId,
-      @RequestBody BatteryInput batteryInput) {
+  public ResponseEntity<BatteryResponse> update(@Valid @PathVariable Long batteryId,
+      @RequestBody BatteryRequest batteryInput) {
 
     if (!batteryService.existsById(batteryId)) {
       return ResponseEntity.notFound().build();

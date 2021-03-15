@@ -1,8 +1,14 @@
 package com.tecnobattery.tbsystem.twilio.server.sms.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import com.tecnobattery.tbsystem.twilio.model.TwilioConfiguration;
-import com.tecnobattery.tbsystem.twilio.server.sms.listener.SmsSender;
+import com.tecnobattery.tbsystem.twilio.server.sms.listener.SmsListener;
 import com.tecnobattery.tbsystem.twilio.server.sms.model.SmsRequest;
+import com.tecnobattery.tbsystem.twilio.server.sms.model.SmsResponse;
+import com.twilio.base.ResourceSet;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;
@@ -13,14 +19,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("twilio")
-public class TwilioSmsSender implements SmsSender {
+public class TwilioSmsService implements SmsListener {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(TwilioSmsSender.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TwilioSmsService.class);
+
+  @Autowired
+  ToolModelMapper toolModelMapper;
 
   private final TwilioConfiguration twilioConfiguration;
 
   @Autowired
-  public TwilioSmsSender(TwilioConfiguration twilioConfiguration) {
+  public TwilioSmsService(TwilioConfiguration twilioConfiguration) {
     this.twilioConfiguration = twilioConfiguration;
   }
 
@@ -37,6 +46,16 @@ public class TwilioSmsSender implements SmsSender {
     } else {
       throw new IllegalArgumentException("Phone number [" + smsRequest.getToPhoneNumber() + "] is not a valid number!");
     }
+  }
+
+  @Override
+  public List<SmsResponse> recordSms() {
+    ResourceSet<Message> messages = Message.reader().limit(20).read();
+    List<SmsResponse> records = new ArrayList<>();
+    for (Message record : messages) {
+      records.add(toolModelMapper.toModel(record, SmsResponse.class));
+    }
+    return records;
   }
 
   private boolean isPhoneNumberValid(String phoneNumber) {

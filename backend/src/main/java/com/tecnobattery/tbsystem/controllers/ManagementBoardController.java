@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.input.ManagementBoardInput;
-import com.tecnobattery.tbsystem.dto.output.ManagementBoardOutput;
+import com.tecnobattery.tbsystem.dto.request.ManagementBoardRequest;
+import com.tecnobattery.tbsystem.dto.response.ManagementBoardResponse;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.entities.ManagementBoard;
 import com.tecnobattery.tbsystem.entities.Provider;
@@ -46,36 +46,42 @@ public class ManagementBoardController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ManagementBoardOutput save(@Valid @RequestBody ManagementBoardInput managementBoardInput) {
+  public ManagementBoardResponse save(@Valid @RequestBody ManagementBoardRequest managementBoardInput) {
 
     ManagementBoard managementBoard = toolModelMapper.toModel(managementBoardInput, ManagementBoard.class);
-    managementBoard.setBoard(toolModelMapper.toModel(batteryService.findById(managementBoardInput.getBoardId()), Board.class));
-    managementBoard.setProvider(toolModelMapper.toModel(providerService.findById(managementBoardInput.getProviderId()), Provider.class));
+    managementBoard
+        .setBoard(toolModelMapper.toModel(batteryService.findById(managementBoardInput.getBoardId()), Board.class));
+    managementBoard.setProvider(
+        toolModelMapper.toModel(providerService.findById(managementBoardInput.getProviderId()), Provider.class));
     managementBoard.setMoment(OffsetDateTime.now());
 
     return managementBoardService.save(managementBoard);
   }
 
   @GetMapping
-  public ResponseEntity<List<ManagementBoardOutput>> findAll() {
+  public ResponseEntity<List<ManagementBoardResponse>> findAll() {
     return ResponseEntity.ok().body(managementBoardService.findAll());
   }
 
   @GetMapping("/{managementBoardId}")
-  public ResponseEntity<ManagementBoardOutput> findById(@PathVariable Long managementBoardId) {
+  public ResponseEntity<ManagementBoardResponse> findById(@PathVariable Long managementBoardId) {
     return ResponseEntity.ok(managementBoardService.findById(managementBoardId));
   }
 
   @PutMapping("/{managementBoardId}")
-  public ResponseEntity<ManagementBoardOutput> update(@Valid @PathVariable Long managementBoardId, @RequestBody ManagementBoardInput managementBoardInput) {
+  public ResponseEntity<ManagementBoardResponse> update(@Valid @PathVariable Long managementBoardId,
+      @RequestBody ManagementBoardRequest managementBoardInput) {
 
     if (!managementBoardService.existsById(managementBoardId)) {
       return ResponseEntity.notFound().build();
     }
 
-    ManagementBoard managementBoard = toolModelMapper.toModel(managementBoardService.findById(managementBoardId), ManagementBoard.class);
-    managementBoard.setBoard(toolModelMapper.toModel(batteryService.findById(managementBoardInput.getBoardId()), Board.class));
-    managementBoard.setProvider(toolModelMapper.toModel(providerService.findById(managementBoardInput.getProviderId()), Provider.class));
+    ManagementBoard managementBoard = toolModelMapper.toModel(managementBoardService.findById(managementBoardId),
+        ManagementBoard.class);
+    managementBoard
+        .setBoard(toolModelMapper.toModel(batteryService.findById(managementBoardInput.getBoardId()), Board.class));
+    managementBoard.setProvider(
+        toolModelMapper.toModel(providerService.findById(managementBoardInput.getProviderId()), Provider.class));
     managementBoard.setAmount(managementBoardInput.getAmount());
     managementBoard.setId(managementBoardId);
 

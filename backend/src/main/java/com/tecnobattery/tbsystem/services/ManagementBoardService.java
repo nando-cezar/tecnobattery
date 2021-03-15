@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.ManagementBoardOutput;
+import com.tecnobattery.tbsystem.dto.response.ManagementBoardResponse;
 import com.tecnobattery.tbsystem.entities.ManagementBoard;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementBoardRepository;
@@ -22,25 +22,25 @@ public class ManagementBoardService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public ManagementBoardOutput save(ManagementBoard managementBoard) {
-    return toolModelMapper.toModel(managementBoardRepository.save(managementBoard), ManagementBoardOutput.class);
+  public ManagementBoardResponse save(ManagementBoard managementBoard) {
+    return toolModelMapper.toModel(managementBoardRepository.save(managementBoard), ManagementBoardResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<ManagementBoardOutput> findAll() {
+  public List<ManagementBoardResponse> findAll() {
     List<ManagementBoard> boards = managementBoardRepository.findAll();
-    return toolModelMapper.toCollection(boards, ManagementBoardOutput.class);
+    return toolModelMapper.toCollection(boards, ManagementBoardResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public ManagementBoardOutput findById(Long managementBoardId) {
+  public ManagementBoardResponse findById(Long managementBoardId) {
     Optional<ManagementBoard> managementBoard = managementBoardRepository.findById(managementBoardId);
     if (managementBoard.isPresent()) {
-      return toolModelMapper.toModel(managementBoard.get(), ManagementBoardOutput.class);
+      return toolModelMapper.toModel(managementBoard.get(), ManagementBoardResponse.class);
     }
     return toolModelMapper.toModel(
         managementBoard.orElseThrow(() -> new BusinessException("ManagementBoard: não encontrada.")),
-        ManagementBoardOutput.class);
+        ManagementBoardResponse.class);
   }
 
   @Transactional(readOnly = true)

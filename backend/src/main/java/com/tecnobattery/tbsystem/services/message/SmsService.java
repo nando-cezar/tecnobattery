@@ -1,8 +1,11 @@
 package com.tecnobattery.tbsystem.services.message;
 
-import com.tecnobattery.tbsystem.twilio.server.sms.listener.SmsSender;
+import java.util.List;
+
+import com.tecnobattery.tbsystem.twilio.server.sms.listener.SmsListener;
 import com.tecnobattery.tbsystem.twilio.server.sms.model.SmsRequest;
-import com.tecnobattery.tbsystem.twilio.server.sms.service.TwilioSmsSender;
+import com.tecnobattery.tbsystem.twilio.server.sms.model.SmsResponse;
+import com.tecnobattery.tbsystem.twilio.server.sms.service.TwilioSmsService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,14 +14,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class SmsService {
 
-  private final SmsSender smsSender;
+  private final SmsListener smsListener;
 
   @Autowired
-  public SmsService(@Qualifier("twilio") TwilioSmsSender twilioSmsSender) {
-    this.smsSender = twilioSmsSender;
+  public SmsService(@Qualifier("twilio") TwilioSmsService twilioSmsService) {
+    this.smsListener = twilioSmsService;
   }
 
   public void sendSms(SmsRequest smsRequest) {
-    smsSender.sendSms(smsRequest);
+    smsListener.sendSms(smsRequest);
+  }
+
+  public List<SmsResponse> recordSms() {
+    return smsListener.recordSms();
   }
 }

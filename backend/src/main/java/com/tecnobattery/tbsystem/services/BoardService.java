@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.BoardOutput;
+import com.tecnobattery.tbsystem.dto.response.BoardResponse;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.BoardRepository;
@@ -22,33 +22,33 @@ public class BoardService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public BoardOutput save(Board board, boolean identifier) {
+  public BoardResponse save(Board board, boolean identifier) {
 
     if (!identifier) {
-      
+
       Board boardExists = boardRepository.findByModel(board.getModel());
 
       if (boardExists != null && !boardExists.equals(board)) {
         throw new BusinessException("Já existe uma placa cadastrada com este modelo.");
       }
     }
-    return toolModelMapper.toModel(boardRepository.save(board), BoardOutput.class);
+    return toolModelMapper.toModel(boardRepository.save(board), BoardResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<BoardOutput> findAll() {
+  public List<BoardResponse> findAll() {
     List<Board> boards = boardRepository.findAll();
-    return toolModelMapper.toCollection(boards, BoardOutput.class);
+    return toolModelMapper.toCollection(boards, BoardResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public BoardOutput findById(Long boardId) {
+  public BoardResponse findById(Long boardId) {
     Optional<Board> board = boardRepository.findById(boardId);
     if (board.isPresent()) {
-      return toolModelMapper.toModel(board.get(), BoardOutput.class);
+      return toolModelMapper.toModel(board.get(), BoardResponse.class);
     }
     return toolModelMapper.toModel(board.orElseThrow(() -> new BusinessException("Board: não encontrada.")),
-        BoardOutput.class);
+        BoardResponse.class);
   }
 
   @Transactional(readOnly = true)

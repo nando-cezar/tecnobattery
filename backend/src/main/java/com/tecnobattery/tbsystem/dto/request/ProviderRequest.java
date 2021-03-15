@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.dto.input;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class ClientInput implements Serializable {
+public class ProviderRequest implements Serializable {
 
   /**
    *
@@ -28,7 +28,7 @@ public class ClientInput implements Serializable {
   @Email(message = "E-mail inválido.")
   private String email;
   @Valid
-  private AddressInput address;
+  private AddressRequest address;
 
   public Long getId() {
     return this.id;
@@ -77,14 +77,4 @@ public class ClientInput implements Serializable {
   public void setEmail(String email) {
     this.email = email;
   }
-
-  public AddressInput getAddress() {
-    return this.address;
-  }
-
-  public void setAddress(AddressInput address) {
-    this.address = address;
-  }
-
-
 }

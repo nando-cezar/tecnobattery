@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.input.ManagementLoaderInput;
-import com.tecnobattery.tbsystem.dto.output.ManagementLoaderOutput;
+import com.tecnobattery.tbsystem.dto.request.ManagementLoaderRequest;
+import com.tecnobattery.tbsystem.dto.response.ManagementLoaderResponse;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.entities.ManagementLoader;
 import com.tecnobattery.tbsystem.entities.Provider;
@@ -46,36 +46,42 @@ public class ManagementLoaderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ManagementLoaderOutput save(@Valid @RequestBody ManagementLoaderInput managementLoaderInput) {
+  public ManagementLoaderResponse save(@Valid @RequestBody ManagementLoaderRequest managementLoaderInput) {
 
     ManagementLoader managementLoader = toolModelMapper.toModel(managementLoaderInput, ManagementLoader.class);
-    managementLoader.setLoader(toolModelMapper.toModel(batteryService.findById(managementLoaderInput.getLoaderId()), Loader.class));
-    managementLoader.setProvider(toolModelMapper.toModel(providerService.findById(managementLoaderInput.getProviderId()), Provider.class));
+    managementLoader
+        .setLoader(toolModelMapper.toModel(batteryService.findById(managementLoaderInput.getLoaderId()), Loader.class));
+    managementLoader.setProvider(
+        toolModelMapper.toModel(providerService.findById(managementLoaderInput.getProviderId()), Provider.class));
     managementLoader.setMoment(OffsetDateTime.now());
 
     return managementLoaderService.save(managementLoader);
   }
 
   @GetMapping
-  public ResponseEntity<List<ManagementLoaderOutput>> findAll() {
+  public ResponseEntity<List<ManagementLoaderResponse>> findAll() {
     return ResponseEntity.ok().body(managementLoaderService.findAll());
   }
 
   @GetMapping("/{managementLoaderId}")
-  public ResponseEntity<ManagementLoaderOutput> findById(@PathVariable Long managementLoaderId) {
+  public ResponseEntity<ManagementLoaderResponse> findById(@PathVariable Long managementLoaderId) {
     return ResponseEntity.ok(managementLoaderService.findById(managementLoaderId));
   }
 
   @PutMapping("/{managementLoaderId}")
-  public ResponseEntity<ManagementLoaderOutput> update(@Valid @PathVariable Long managementLoaderId, @RequestBody ManagementLoaderInput managementLoaderInput) {
+  public ResponseEntity<ManagementLoaderResponse> update(@Valid @PathVariable Long managementLoaderId,
+      @RequestBody ManagementLoaderRequest managementLoaderInput) {
 
     if (!managementLoaderService.existsById(managementLoaderId)) {
       return ResponseEntity.notFound().build();
     }
 
-    ManagementLoader managementLoader = toolModelMapper.toModel(managementLoaderService.findById(managementLoaderId), ManagementLoader.class);
-    managementLoader.setLoader(toolModelMapper.toModel(batteryService.findById(managementLoaderInput.getLoaderId()), Loader.class));
-    managementLoader.setProvider(toolModelMapper.toModel(providerService.findById(managementLoaderInput.getProviderId()), Provider.class));
+    ManagementLoader managementLoader = toolModelMapper.toModel(managementLoaderService.findById(managementLoaderId),
+        ManagementLoader.class);
+    managementLoader
+        .setLoader(toolModelMapper.toModel(batteryService.findById(managementLoaderInput.getLoaderId()), Loader.class));
+    managementLoader.setProvider(
+        toolModelMapper.toModel(providerService.findById(managementLoaderInput.getProviderId()), Provider.class));
     managementLoader.setAmount(managementLoaderInput.getAmount());
     managementLoader.setId(managementLoaderId);
 

@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.LoaderOutput;
-import com.tecnobattery.tbsystem.dto.input.LoaderInput;
+import com.tecnobattery.tbsystem.dto.request.LoaderRequest;
+import com.tecnobattery.tbsystem.dto.response.LoaderResponse;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.services.LoaderService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
@@ -35,22 +35,23 @@ public class LoaderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public LoaderOutput save(@Valid @RequestBody LoaderInput loaderInput) {
+  public LoaderResponse save(@Valid @RequestBody LoaderRequest loaderInput) {
     return loaderService.save(toolModelMapper.toModel(loaderInput, Loader.class), false);
   }
 
   @GetMapping
-  public ResponseEntity<List<LoaderOutput>> findAll() {
+  public ResponseEntity<List<LoaderResponse>> findAll() {
     return ResponseEntity.ok().body(loaderService.findAll());
   }
 
   @GetMapping("/{loaderId}")
-  public ResponseEntity<LoaderOutput> findById(@PathVariable Long loaderId) {
+  public ResponseEntity<LoaderResponse> findById(@PathVariable Long loaderId) {
     return ResponseEntity.ok(loaderService.findById(loaderId));
   }
 
   @PutMapping("/{loaderId}")
-  public ResponseEntity<LoaderOutput> update(@Valid @PathVariable Long loaderId, @RequestBody LoaderInput loaderInput) {
+  public ResponseEntity<LoaderResponse> update(@Valid @PathVariable Long loaderId,
+      @RequestBody LoaderRequest loaderInput) {
 
     if (!loaderService.existsById(loaderId)) {
       return ResponseEntity.notFound().build();

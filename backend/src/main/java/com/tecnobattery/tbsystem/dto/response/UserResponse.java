@@ -1,10 +1,10 @@
-package com.tecnobattery.tbsystem.dto.output;
+package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 
 import com.tecnobattery.tbsystem.entities.TypeUser;
 
-public class UserOutput implements Serializable {
+public class UserResponse implements Serializable {
 
   /**
    *

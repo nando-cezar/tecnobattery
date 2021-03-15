@@ -1,11 +1,11 @@
-package com.tecnobattery.tbsystem.dto.input;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class AddressInput implements Serializable {
+public class AddressRequest implements Serializable {
 
     /**
      *

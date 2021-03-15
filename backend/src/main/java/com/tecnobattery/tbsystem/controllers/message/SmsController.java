@@ -1,11 +1,15 @@
 package com.tecnobattery.tbsystem.controllers.message;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.services.message.SmsService;
 import com.tecnobattery.tbsystem.twilio.server.sms.model.SmsRequest;
+import com.tecnobattery.tbsystem.twilio.server.sms.model.SmsResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +29,10 @@ public class SmsController {
   @PostMapping
   public void sendSms(@Valid @RequestBody SmsRequest smsRequest) {
     smsService.sendSms(smsRequest);
+  }
+
+  @GetMapping
+  public List<SmsResponse> recordSms() {
+    return smsService.recordSms();
   }
 }

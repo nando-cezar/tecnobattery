@@ -1,20 +1,34 @@
-package com.tecnobattery.tbsystem.dto.output;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
-public class ProviderOutput implements Serializable {
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+public class ClientRequest implements Serializable {
 
   /**
    *
    */
   private static final long serialVersionUID = 1L;
   private Long id;
+  @NotBlank(message = "CNPJ se encontra em branco ou inválido.")
+  @Size(max = 18, message = "CNPJ deve possuir no máximo 18 caracteres.")
   private String cnpj;
+  @NotBlank(message = "Nome se encontra em branco ou inválido.")
   private String name;
+  @NotBlank(message = "Nome Fantasia se encontra em branco ou inválido.")
   private String fantasyName;
+  @NotBlank(message = "Telefone se encontra em branco ou inválido.")
+  @Size(max = 14, message = "Marca deve possuir no máximo 14 caracteres.")
   private String phone;
+  @NotBlank(message = "E-mail se encontra em branco ou inválido.")
+  @Email(message = "E-mail inválido.")
   private String email;
-  private AddressOutput address;
+  @Valid
+  private AddressRequest address;
 
   public Long getId() {
     return this.id;
@@ -64,11 +78,11 @@ public class ProviderOutput implements Serializable {
     this.email = email;
   }
 
-  public AddressOutput getAddress() {
+  public AddressRequest getAddress() {
     return this.address;
   }
 
-  public void setAddress(AddressOutput address) {
+  public void setAddress(AddressRequest address) {
     this.address = address;
   }
 

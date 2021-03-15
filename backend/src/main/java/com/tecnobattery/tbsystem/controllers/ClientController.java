@@ -4,9 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.ClientOutput;
-import com.tecnobattery.tbsystem.dto.input.ClientInput;
-//import com.tecnobattery.tbsystem.entities.Address;
+import com.tecnobattery.tbsystem.dto.request.ClientRequest;
+import com.tecnobattery.tbsystem.dto.response.ClientResponse;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
@@ -36,23 +35,24 @@ public class ClientController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ClientOutput save(@Valid @RequestBody ClientInput clientInput) {
+  public ClientResponse save(@Valid @RequestBody ClientRequest clientInput) {
 
     return clientService.save(toolModelMapper.toModel(clientInput, Client.class), false);
   }
 
   @GetMapping
-  public ResponseEntity<List<ClientOutput>> findAll() {
+  public ResponseEntity<List<ClientResponse>> findAll() {
     return ResponseEntity.ok().body(clientService.findAll());
   }
 
   @GetMapping("/{clientId}")
-  public ResponseEntity<ClientOutput> findById(@PathVariable Long clientId) {
+  public ResponseEntity<ClientResponse> findById(@PathVariable Long clientId) {
     return ResponseEntity.ok(clientService.findById(clientId));
   }
 
   @PutMapping("/{clientId}")
-  public ResponseEntity<ClientOutput> update(@Valid @PathVariable Long clientId, @RequestBody ClientInput clientInput) {
+  public ResponseEntity<ClientResponse> update(@Valid @PathVariable Long clientId,
+      @RequestBody ClientRequest clientInput) {
 
     if (!clientService.existsById(clientId)) {
       return ResponseEntity.notFound().build();

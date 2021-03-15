@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.UserOutput;
+import com.tecnobattery.tbsystem.dto.response.UserResponse;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.UserRepository;
@@ -22,7 +22,7 @@ public class UserService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public UserOutput save(User user, boolean identifier) {
+  public UserResponse save(User user, boolean identifier) {
 
     if (!identifier) {
 
@@ -32,23 +32,23 @@ public class UserService {
         throw new BusinessException("Já existe um usuário cadastrado com este e-mail.");
       }
     }
-    return toolModelMapper.toModel(userRepository.save(user), UserOutput.class);
+    return toolModelMapper.toModel(userRepository.save(user), UserResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<UserOutput> findAll() {
+  public List<UserResponse> findAll() {
     List<User> users = userRepository.findAll();
-    return toolModelMapper.toCollection(users, UserOutput.class);
+    return toolModelMapper.toCollection(users, UserResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public UserOutput findById(Long userId) {
+  public UserResponse findById(Long userId) {
     Optional<User> user = userRepository.findById(userId);
     if (user.isPresent()) {
-      return toolModelMapper.toModel(user.get(), UserOutput.class);
+      return toolModelMapper.toModel(user.get(), UserResponse.class);
     }
     return toolModelMapper.toModel(user.orElseThrow(() -> new BusinessException("User: não encontrada.")),
-        UserOutput.class);
+        UserResponse.class);
   }
 
   @Transactional(readOnly = true)

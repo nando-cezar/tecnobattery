@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.LoaderOutput;
+import com.tecnobattery.tbsystem.dto.response.LoaderResponse;
 import com.tecnobattery.tbsystem.entities.Loader;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.LoaderRepository;
@@ -22,7 +22,7 @@ public class LoaderService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public LoaderOutput save(Loader loader, boolean identifier) {
+  public LoaderResponse save(Loader loader, boolean identifier) {
 
     if (!identifier) {
 
@@ -32,23 +32,23 @@ public class LoaderService {
         throw new BusinessException("Já existe uma carregador cadastrada com este modelo.");
       }
     }
-    return toolModelMapper.toModel(loaderRepository.save(loader), LoaderOutput.class);
+    return toolModelMapper.toModel(loaderRepository.save(loader), LoaderResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<LoaderOutput> findAll() {
+  public List<LoaderResponse> findAll() {
     List<Loader> loaders = loaderRepository.findAll();
-    return toolModelMapper.toCollection(loaders, LoaderOutput.class);
+    return toolModelMapper.toCollection(loaders, LoaderResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public LoaderOutput findById(Long loaderId) {
+  public LoaderResponse findById(Long loaderId) {
     Optional<Loader> loader = loaderRepository.findById(loaderId);
     if (loader.isPresent()) {
-      return toolModelMapper.toModel(loader.get(), LoaderOutput.class);
+      return toolModelMapper.toModel(loader.get(), LoaderResponse.class);
     }
     return toolModelMapper.toModel(loader.orElseThrow(() -> new BusinessException("Loader: não encontrada.")),
-        LoaderOutput.class);
+        LoaderResponse.class);
   }
 
   @Transactional(readOnly = true)

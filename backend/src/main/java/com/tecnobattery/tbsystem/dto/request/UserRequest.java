@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.dto.input;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 
 import com.tecnobattery.tbsystem.entities.TypeUser;
 
-public class UserInput implements Serializable {
+public class UserRequest implements Serializable {
 
   /**
    *

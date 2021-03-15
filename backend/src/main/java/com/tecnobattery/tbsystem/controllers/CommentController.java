@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.CommentOutput;
+import com.tecnobattery.tbsystem.dto.request.CommentResquest;
+import com.tecnobattery.tbsystem.dto.response.CommentResponse;
 import com.tecnobattery.tbsystem.entities.Comment;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.User;
-import com.tecnobattery.tbsystem.dto.input.CommentInput;
 import com.tecnobattery.tbsystem.services.CommentService;
 import com.tecnobattery.tbsystem.services.OrderService;
 import com.tecnobattery.tbsystem.services.UserService;
@@ -46,8 +46,8 @@ public class CommentController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public CommentOutput save(@Valid @PathVariable Long orderId, @PathVariable Long userId,
-      @RequestBody CommentInput commentInput) {
+  public CommentResponse save(@Valid @PathVariable Long orderId, @PathVariable Long userId,
+      @RequestBody CommentResquest commentInput) {
 
     Comment comment = toolModelMapper.toModel(commentInput, Comment.class);
     comment.setMoment(OffsetDateTime.now());
@@ -57,18 +57,18 @@ public class CommentController {
   }
 
   @GetMapping
-  public ResponseEntity<List<CommentOutput>> findAll() {
+  public ResponseEntity<List<CommentResponse>> findAll() {
     return ResponseEntity.ok().body(commentService.findAll());
   }
 
   @GetMapping("/{commentId}")
-  public ResponseEntity<CommentOutput> findById(@PathVariable Long commentId) {
+  public ResponseEntity<CommentResponse> findById(@PathVariable Long commentId) {
     return ResponseEntity.ok(commentService.findById(commentId));
   }
 
   @PutMapping("/{commentId}")
-  public ResponseEntity<CommentOutput> update(@Valid @PathVariable Long commentId,
-      @RequestBody CommentInput commentInput) {
+  public ResponseEntity<CommentResponse> update(@Valid @PathVariable Long commentId,
+      @RequestBody CommentResquest commentInput) {
 
     if (!commentService.existsById(commentId)) {
       return ResponseEntity.notFound().build();

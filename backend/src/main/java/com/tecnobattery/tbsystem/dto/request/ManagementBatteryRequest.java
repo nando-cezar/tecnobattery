@@ -1,8 +1,8 @@
-package com.tecnobattery.tbsystem.dto.input;
+package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
-public class ManagementLoaderInput implements Serializable {
+public class ManagementBatteryRequest implements Serializable {
 
     /**
      *
@@ -10,9 +10,8 @@ public class ManagementLoaderInput implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private Long providerId;
-    private Long loaderId;
+    private Long batteryId;
     private Integer amount;
-
 
     public Long getId() {
         return this.id;
@@ -30,12 +29,12 @@ public class ManagementLoaderInput implements Serializable {
         this.providerId = providerId;
     }
 
-    public Long getLoaderId() {
-        return this.loaderId;
+    public Long getBatteryId() {
+        return this.batteryId;
     }
 
-    public void setLoaderId(Long loaderId) {
-        this.loaderId = loaderId;
+    public void setBatteryId(Long batteryId) {
+        this.batteryId = batteryId;
     }
 
     public Integer getAmount() {

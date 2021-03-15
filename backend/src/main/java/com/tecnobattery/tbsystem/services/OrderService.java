@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.OrderOutput;
+import com.tecnobattery.tbsystem.dto.response.OrderResponse;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.OrderRepository;
@@ -22,23 +22,24 @@ public class OrderService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public OrderOutput save(Order order) {   
-    return toolModelMapper.toModel(orderRepository.save(order), OrderOutput.class);
+  public OrderResponse save(Order order) {
+    return toolModelMapper.toModel(orderRepository.save(order), OrderResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<OrderOutput> findAll() {
+  public List<OrderResponse> findAll() {
     List<Order> orders = orderRepository.findAll();
-    return toolModelMapper.toCollection(orders, OrderOutput.class);
+    return toolModelMapper.toCollection(orders, OrderResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public OrderOutput findById(Long orderId) {
+  public OrderResponse findById(Long orderId) {
     Optional<Order> order = orderRepository.findById(orderId);
     if (order.isPresent()) {
-      return toolModelMapper.toModel(order.get(), OrderOutput.class);
+      return toolModelMapper.toModel(order.get(), OrderResponse.class);
     }
-    return toolModelMapper.toModel(order.orElseThrow(() -> new BusinessException("Order: não encontrada.")), OrderOutput.class); 
+    return toolModelMapper.toModel(order.orElseThrow(() -> new BusinessException("Order: não encontrada.")),
+        OrderResponse.class);
   }
 
   @Transactional(readOnly = true)

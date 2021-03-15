@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.dto.output;
+package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -12,21 +12,21 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 
 @JsonInclude(Include.NON_NULL)
-public class OrderOutput implements Serializable {
+public class OrderResponse implements Serializable {
 
   /** 
    *
    */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private ClientOutput client;
+  private ClientResponse client;
   private String description;
   private Double price;
   private OrderStatus status;
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
-  private List<ProductOutput> products = new ArrayList<>();
-  private Set<UserOutput> users = new HashSet<>();
+  private List<ProductResponse> products = new ArrayList<>();
+  private Set<UserResponse> users = new HashSet<>();
 
   public Long getId() {
     return this.id;
@@ -36,11 +36,11 @@ public class OrderOutput implements Serializable {
     this.id = id;
   }
 
-  public ClientOutput getClient() {
+  public ClientResponse getClient() {
     return this.client;
   }
 
-  public void setClient(ClientOutput client) {
+  public void setClient(ClientResponse client) {
     this.client = client;
   }
 
@@ -84,19 +84,19 @@ public class OrderOutput implements Serializable {
     this.deadline = deadline;
   }
 
-  public List<ProductOutput> getProducts() {
+  public List<ProductResponse> getProducts() {
     return this.products;
   }
 
-  public void setProducts(List<ProductOutput> products) {
+  public void setProducts(List<ProductResponse> products) {
     this.products = products;
   }
 
-  public Set<UserOutput> getUsers() {
+  public Set<UserResponse> getUsers() {
     return this.users;
   }
 
-  public void setUsers(Set<UserOutput> users) {
+  public void setUsers(Set<UserResponse> users) {
     this.users = users;
   }
 

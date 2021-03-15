@@ -1,8 +1,8 @@
-package com.tecnobattery.tbsystem.dto.output;
+package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 
-public class AddressOutput implements Serializable {
+public class AddressResponse implements Serializable {
 
   /**
    *

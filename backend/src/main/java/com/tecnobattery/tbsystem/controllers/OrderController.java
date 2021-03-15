@@ -5,13 +5,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.OrderOutput;
+import com.tecnobattery.tbsystem.dto.request.OrderRequest;
+import com.tecnobattery.tbsystem.dto.response.OrderResponse;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 import com.tecnobattery.tbsystem.entities.Product;
 import com.tecnobattery.tbsystem.entities.User;
-import com.tecnobattery.tbsystem.dto.input.OrderInput;
 import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.services.OrderService;
 import com.tecnobattery.tbsystem.services.ProductService;
@@ -56,7 +56,7 @@ public class OrderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public OrderOutput save(@Valid @RequestBody OrderInput orderInput) {
+  public OrderResponse save(@Valid @RequestBody OrderRequest orderInput) {
 
     Order order = toolModelMapper.toModel(orderInput, Order.class);
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
@@ -69,17 +69,17 @@ public class OrderController {
   }
 
   @GetMapping
-  public ResponseEntity<List<OrderOutput>> findAll() {
+  public ResponseEntity<List<OrderResponse>> findAll() {
     return ResponseEntity.ok().body(orderService.findAll());
   }
 
   @GetMapping("/{orderId}")
-  public ResponseEntity<OrderOutput> findById(@PathVariable Long orderId) {
+  public ResponseEntity<OrderResponse> findById(@PathVariable Long orderId) {
     return ResponseEntity.ok(orderService.findById(orderId));
   }
 
   @PutMapping("/{orderId}")
-  public ResponseEntity<OrderOutput> update(@Valid @PathVariable Long orderId, @RequestBody OrderInput orderInput) {
+  public ResponseEntity<OrderResponse> update(@Valid @PathVariable Long orderId, @RequestBody OrderRequest orderInput) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();
@@ -97,7 +97,7 @@ public class OrderController {
   }
 
   @PutMapping("finish/{orderId}")
-  public ResponseEntity<OrderOutput> finish(@Valid @PathVariable Long orderId) {
+  public ResponseEntity<OrderResponse> finish(@Valid @PathVariable Long orderId) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();

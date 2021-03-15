@@ -1,9 +1,9 @@
-package com.tecnobattery.tbsystem.dto.output;
+package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
-public class CommentOutput implements Serializable {
+public class CommentResponse implements Serializable {
 
   /** 
    *

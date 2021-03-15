@@ -1,8 +1,8 @@
-package com.tecnobattery.tbsystem.dto.output;
+package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 
-public class ClientOutput implements Serializable {
+public class ClientResponse implements Serializable {
 
   /**
    *
@@ -14,7 +14,7 @@ public class ClientOutput implements Serializable {
   private String fantasyName;
   private String phone;
   private String email;
-  private AddressOutput address;
+  private AddressResponse address;
 
   public Long getId() {
     return this.id;
@@ -64,11 +64,11 @@ public class ClientOutput implements Serializable {
     this.email = email;
   }
 
-  public AddressOutput getAddress() {
+  public AddressResponse getAddress() {
     return this.address;
   }
 
-  public void setAddress(AddressOutput address) {
+  public void setAddress(AddressResponse address) {
     this.address = address;
   }
 

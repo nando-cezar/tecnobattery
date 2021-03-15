@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.BoardOutput;
-import com.tecnobattery.tbsystem.dto.input.BoardInput;
+import com.tecnobattery.tbsystem.dto.request.BoardRequest;
+import com.tecnobattery.tbsystem.dto.response.BoardResponse;
 import com.tecnobattery.tbsystem.entities.Board;
 import com.tecnobattery.tbsystem.services.BoardService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
@@ -35,23 +35,22 @@ public class BoardController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public BoardOutput save(@Valid @RequestBody BoardInput boardInput) {
+  public BoardResponse save(@Valid @RequestBody BoardRequest boardInput) {
     return boardService.save(toolModelMapper.toModel(boardInput, Board.class), false);
   }
 
   @GetMapping
-  public ResponseEntity<List<BoardOutput>> findAll() {
+  public ResponseEntity<List<BoardResponse>> findAll() {
     return ResponseEntity.ok().body(boardService.findAll());
   }
 
   @GetMapping("/{boardId}")
-  public ResponseEntity<BoardOutput> findById(@PathVariable Long boardId) {
-      return ResponseEntity.ok(boardService.findById(boardId));
+  public ResponseEntity<BoardResponse> findById(@PathVariable Long boardId) {
+    return ResponseEntity.ok(boardService.findById(boardId));
   }
 
   @PutMapping("/{boardId}")
-  public ResponseEntity<BoardOutput> update(@Valid @PathVariable Long boardId,
-      @RequestBody BoardInput boardInput) {
+  public ResponseEntity<BoardResponse> update(@Valid @PathVariable Long boardId, @RequestBody BoardRequest boardInput) {
 
     if (!boardService.existsById(boardId)) {
       return ResponseEntity.notFound().build();
@@ -60,7 +59,7 @@ public class BoardController {
     Board board = new Board();
     board = toolModelMapper.toModel(boardInput, Board.class);
     board.setId(boardId);
-    
+
     return ResponseEntity.ok(boardService.save(board, true));
   }
 

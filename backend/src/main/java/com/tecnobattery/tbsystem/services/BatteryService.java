@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.BatteryOutput;
+import com.tecnobattery.tbsystem.dto.response.BatteryResponse;
 import com.tecnobattery.tbsystem.entities.Battery;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.BatteryRepository;
@@ -22,7 +22,7 @@ public class BatteryService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public BatteryOutput save(Battery battery, boolean identifier) {
+  public BatteryResponse save(Battery battery, boolean identifier) {
 
     if (!identifier) {
 
@@ -32,23 +32,23 @@ public class BatteryService {
         throw new BusinessException("Já existe uma bateria cadastrada com este modelo.");
       }
     }
-    return toolModelMapper.toModel(batteryRepository.save(battery), BatteryOutput.class);
+    return toolModelMapper.toModel(batteryRepository.save(battery), BatteryResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<BatteryOutput> findAll() {
+  public List<BatteryResponse> findAll() {
     List<Battery> batterys = batteryRepository.findAll();
-    return toolModelMapper.toCollection(batterys, BatteryOutput.class);
+    return toolModelMapper.toCollection(batterys, BatteryResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public BatteryOutput findById(Long batteryId) {
+  public BatteryResponse findById(Long batteryId) {
     Optional<Battery> battery = batteryRepository.findById(batteryId);
     if (battery.isPresent()) {
-      return toolModelMapper.toModel(battery.get(), BatteryOutput.class);
+      return toolModelMapper.toModel(battery.get(), BatteryResponse.class);
     }
     return toolModelMapper.toModel(battery.orElseThrow(() -> new BusinessException("Battery: não encontrada.")),
-        BatteryOutput.class);
+        BatteryResponse.class);
   }
 
   @Transactional(readOnly = true)

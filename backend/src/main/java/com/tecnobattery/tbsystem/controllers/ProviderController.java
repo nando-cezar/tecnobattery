@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.output.ProviderOutput;
+import com.tecnobattery.tbsystem.dto.request.ProviderRequest;
+import com.tecnobattery.tbsystem.dto.response.ProviderResponse;
 import com.tecnobattery.tbsystem.entities.Provider;
-import com.tecnobattery.tbsystem.dto.input.ProviderInput;
 import com.tecnobattery.tbsystem.services.ProviderService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
@@ -35,24 +35,24 @@ public class ProviderController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ProviderOutput save(@Valid @RequestBody ProviderInput providerInput) {
+  public ProviderResponse save(@Valid @RequestBody ProviderRequest providerInput) {
     return providerService.save(toolModelMapper.toModel(providerInput, Provider.class), false);
   }
 
   @GetMapping
-  public ResponseEntity<List<ProviderOutput>> findAll() {
-    List<ProviderOutput> list = providerService.findAll();
+  public ResponseEntity<List<ProviderResponse>> findAll() {
+    List<ProviderResponse> list = providerService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{providerId}")
-  public ResponseEntity<ProviderOutput> findById(@PathVariable Long providerId) {
+  public ResponseEntity<ProviderResponse> findById(@PathVariable Long providerId) {
     return ResponseEntity.ok(providerService.findById(providerId));
   }
 
   @PutMapping("/{providerId}")
-  public ResponseEntity<ProviderOutput> update(@Valid @PathVariable Long providerId,
-      @RequestBody ProviderInput providerInput) {
+  public ResponseEntity<ProviderResponse> update(@Valid @PathVariable Long providerId,
+      @RequestBody ProviderRequest providerInput) {
 
     if (!providerService.existsById(providerId)) {
       return ResponseEntity.notFound().build();

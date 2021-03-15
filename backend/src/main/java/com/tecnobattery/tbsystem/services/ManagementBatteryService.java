@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.ManagementBatteryOutput;
+import com.tecnobattery.tbsystem.dto.response.ManagementBatteryResponse;
 import com.tecnobattery.tbsystem.entities.ManagementBattery;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementBatteryRepository;
@@ -22,25 +22,26 @@ public class ManagementBatteryService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public ManagementBatteryOutput save(ManagementBattery managementBattery) {
-    return toolModelMapper.toModel(managementBatteryRepository.save(managementBattery), ManagementBatteryOutput.class);
+  public ManagementBatteryResponse save(ManagementBattery managementBattery) {
+    return toolModelMapper.toModel(managementBatteryRepository.save(managementBattery),
+        ManagementBatteryResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<ManagementBatteryOutput> findAll() {
+  public List<ManagementBatteryResponse> findAll() {
     List<ManagementBattery> batterys = managementBatteryRepository.findAll();
-    return toolModelMapper.toCollection(batterys, ManagementBatteryOutput.class);
+    return toolModelMapper.toCollection(batterys, ManagementBatteryResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public ManagementBatteryOutput findById(Long managementBatteryId) {
+  public ManagementBatteryResponse findById(Long managementBatteryId) {
     Optional<ManagementBattery> managementBattery = managementBatteryRepository.findById(managementBatteryId);
     if (managementBattery.isPresent()) {
-      return toolModelMapper.toModel(managementBattery.get(), ManagementBatteryOutput.class);
+      return toolModelMapper.toModel(managementBattery.get(), ManagementBatteryResponse.class);
     }
     return toolModelMapper.toModel(
         managementBattery.orElseThrow(() -> new BusinessException("ManagementBattery: não encontrada.")),
-        ManagementBatteryOutput.class);
+        ManagementBatteryResponse.class);
   }
 
   @Transactional(readOnly = true)

@@ -3,7 +3,7 @@ package com.tecnobattery.tbsystem.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.tecnobattery.tbsystem.dto.output.CommentOutput;
+import com.tecnobattery.tbsystem.dto.response.CommentResponse;
 import com.tecnobattery.tbsystem.entities.Comment;
 import com.tecnobattery.tbsystem.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.CommentRepository;
@@ -22,23 +22,24 @@ public class CommentService {
   @Autowired
   private ToolModelMapper toolModelMapper;
 
-  public CommentOutput save(Comment comment) {
-    return toolModelMapper.toModel(commentRepository.save(comment), CommentOutput.class);
+  public CommentResponse save(Comment comment) {
+    return toolModelMapper.toModel(commentRepository.save(comment), CommentResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public List<CommentOutput> findAll() {
+  public List<CommentResponse> findAll() {
     List<Comment> comments = commentRepository.findAll();
-    return toolModelMapper.toCollection(comments, CommentOutput.class);
+    return toolModelMapper.toCollection(comments, CommentResponse.class);
   }
 
   @Transactional(readOnly = true)
-  public CommentOutput findById(Long commentId) {
+  public CommentResponse findById(Long commentId) {
     Optional<Comment> comment = commentRepository.findById(commentId);
     if (comment.isPresent()) {
-      return toolModelMapper.toModel(comment.get(), CommentOutput.class);
+      return toolModelMapper.toModel(comment.get(), CommentResponse.class);
     }
-    return toolModelMapper.toModel(comment.orElseThrow(() -> new BusinessException("Comment: não encontrada.")), CommentOutput.class);
+    return toolModelMapper.toModel(comment.orElseThrow(() -> new BusinessException("Comment: não encontrada.")),
+        CommentResponse.class);
   }
 
   @Transactional(readOnly = true)

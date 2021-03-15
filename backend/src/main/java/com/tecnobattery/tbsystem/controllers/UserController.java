@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.input.UserInput;
-import com.tecnobattery.tbsystem.dto.output.UserOutput;
+import com.tecnobattery.tbsystem.dto.request.UserRequest;
+import com.tecnobattery.tbsystem.dto.response.UserResponse;
 import com.tecnobattery.tbsystem.entities.TypeUser;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.services.UserService;
@@ -36,7 +36,7 @@ public class UserController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public UserOutput save(@Valid @RequestBody UserInput userInput) {
+  public UserResponse save(@Valid @RequestBody UserRequest userInput) {
     User user = toolModelMapper.toModel(userInput, User.class);
     user.setLevel(TypeUser.ADMINISTRADOR);
 
@@ -44,18 +44,18 @@ public class UserController {
   }
 
   @GetMapping
-  public ResponseEntity<List<UserOutput>> findAll() {
-    List<UserOutput> list = userService.findAll();
+  public ResponseEntity<List<UserResponse>> findAll() {
+    List<UserResponse> list = userService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{userId}")
-  public ResponseEntity<UserOutput> findById(@PathVariable Long userId) {
+  public ResponseEntity<UserResponse> findById(@PathVariable Long userId) {
     return ResponseEntity.ok(userService.findById(userId));
   }
 
   @PutMapping("/{userId}")
-  public ResponseEntity<UserOutput> update(@Valid @PathVariable Long userId, @RequestBody UserInput userInput) {
+  public ResponseEntity<UserResponse> update(@Valid @PathVariable Long userId, @RequestBody UserRequest userInput) {
 
     if (!userService.existsById(userId)) {
       return ResponseEntity.notFound().build();

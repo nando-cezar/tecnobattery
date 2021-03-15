@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import com.tecnobattery.tbsystem.dto.input.ProductInput;
-import com.tecnobattery.tbsystem.dto.output.ProductOutput;
+import com.tecnobattery.tbsystem.dto.request.ProductRequest;
+import com.tecnobattery.tbsystem.dto.response.ProductResponse;
 import com.tecnobattery.tbsystem.entities.Product;
 import com.tecnobattery.tbsystem.services.ProductService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
@@ -35,23 +35,23 @@ public class ProductController {
 
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public ProductOutput save(@Valid @RequestBody ProductInput productInput) {
+  public ProductResponse save(@Valid @RequestBody ProductRequest productInput) {
     return productService.save(toolModelMapper.toModel(productInput, Product.class), false);
   }
 
   @GetMapping
-  public ResponseEntity<List<ProductOutput>> findAll() {
+  public ResponseEntity<List<ProductResponse>> findAll() {
     return ResponseEntity.ok().body(productService.findAll());
   }
 
   @GetMapping("/{productId}")
-  public ResponseEntity<ProductOutput> findById(@PathVariable Long productId) {
+  public ResponseEntity<ProductResponse> findById(@PathVariable Long productId) {
     return ResponseEntity.ok(productService.findById(productId));
   }
 
   @PutMapping("/{productId}")
-  public ResponseEntity<ProductOutput> update(@Valid @PathVariable Long productId,
-      @RequestBody ProductInput productInput) {
+  public ResponseEntity<ProductResponse> update(@Valid @PathVariable Long productId,
+      @RequestBody ProductRequest productInput) {
 
     if (!productService.existsById(productId)) {
       return ResponseEntity.notFound().build();
