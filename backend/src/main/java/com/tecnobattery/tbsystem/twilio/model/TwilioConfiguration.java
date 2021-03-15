@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.config;
+package com.tecnobattery.tbsystem.twilio.model;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
@@ -9,15 +9,17 @@ public class TwilioConfiguration {
 
   private String accountSid;
   private String authToken;
-  private String trialNumber;
+  private String messagingServiceSid;
+  private String phoneNumber;
 
   public TwilioConfiguration() {
   }
 
-  public TwilioConfiguration(String accountSid, String authToken, String trialNumber) {
+  public TwilioConfiguration(String accountSid, String authToken, String messagingServiceSid, String phoneNumber) {
     this.accountSid = accountSid;
     this.authToken = authToken;
-    this.trialNumber = trialNumber;
+    this.messagingServiceSid = messagingServiceSid;
+    this.phoneNumber = phoneNumber;
   }
 
   public String getAccountSid() {
@@ -36,12 +38,20 @@ public class TwilioConfiguration {
     this.authToken = authToken;
   }
 
-  public String getTrialNumber() {
-    return this.trialNumber;
+  public String getMessagingServiceSid() {
+    return this.messagingServiceSid;
   }
 
-  public void setTrialNumber(String trialNumber) {
-    this.trialNumber = trialNumber;
+  public void setMessagingServiceSid(String messagingServiceSid) {
+    this.messagingServiceSid = messagingServiceSid;
+  }
+
+  public String getPhoneNumber() {
+    return this.phoneNumber;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
 }
