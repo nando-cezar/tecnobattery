@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.management;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/orders/{orderId}/{userId}/comments")
-public class CommentController {
+@RequestMapping(value = "management/orders/{orderId}/{userId}/comments")
+public class CommentManagementController {
 
   @Autowired
   private CommentService commentService;

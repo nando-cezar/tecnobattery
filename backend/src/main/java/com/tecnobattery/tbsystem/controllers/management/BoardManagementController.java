@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.management;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/boards")
-public class BoardController {
+@RequestMapping(value = "management/api/v1/boards")
+public class BoardManagementController {
 
   @Autowired
   private BoardService boardService;

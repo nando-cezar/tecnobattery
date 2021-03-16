@@ -21,8 +21,8 @@ public class ProviderRequest implements Serializable {
   private String name;
   @NotBlank(message = "Nome Fantasia se encontra em branco ou inválido.")
   private String fantasyName;
-  @NotBlank(message = "Telefone se encontra em branco ou inválido.")
-  @Size(max = 14, message = "Marca deve possuir no máximo 14 caracteres.")
+  @NotBlank(message = "Número de telefone se encontra em branco ou inválido.")
+  @Size(max = 14, message = "Número de telefone deve possuir no máximo 14 caracteres.")
   private String phone;
   @NotBlank(message = "E-mail se encontra em branco ou inválido.")
   @Email(message = "E-mail inválido.")

@@ -2,4 +2,4 @@ twilio:
   account_sid: ACd87f64c2c3acfcde3d2dc77eab1e5d8f
   auth_token: 11718d1d5c8ab5c3c98ad271cabf6cee
   messaging_service_sid: MG2f457c174ef0d78c9e0e5eefee953a4e
-  phone_number: +18188050182 
+  from_phone_number: +18188050182 

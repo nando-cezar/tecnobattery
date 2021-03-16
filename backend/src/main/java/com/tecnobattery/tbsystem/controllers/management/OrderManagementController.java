@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.management;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -33,8 +33,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/orders")
-public class OrderController {
+@RequestMapping(value = "management/api/v1/orders")
+public class OrderManagementController {
 
   @Autowired
   private OrderService orderService;

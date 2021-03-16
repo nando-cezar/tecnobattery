@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.management;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/products")
-public class ProductController {
+@RequestMapping(value = "management/api/v1/products")
+public class ProductManagementController {
 
   @Autowired
   private ProductService productService;

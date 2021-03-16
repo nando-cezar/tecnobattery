@@ -1,11 +1,11 @@
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('a123456', 'teste1@teste.com', '123345456', 'teste1', 'ADMINISTRADOR');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('b123456', 'teste2@teste.com', '123345456', 'teste2', 'ADMINISTRADOR');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('c123456', 'teste3@teste.com', '123345456', 'teste3', 'ADMINISTRADOR');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('d123456', 'teste4@teste.com', '123345456', 'teste4', 'PADRAO');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('e123456', 'teste5@teste.com', '123345456', 'teste5', 'PADRAO');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('f123456', 'teste6@teste.com', '123345456', 'teste6', 'ADMINISTRADOR');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('g123456', 'teste7@teste.com', '123345456', 'teste7', 'ADMINISTRADOR');
-INSERT INTO tb_user (username, email, phone, password, level) VALUES ('h123456', 'teste8@teste.com', '123345456', 'teste8', 'ADMINISTRADOR');
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('a123456', 'teste1@teste.com', '123345456', 'teste1', 'ADMIN', true);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('b123456', 'teste2@teste.com', '123345456', 'teste2', 'ADMIN', true);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('c123456', 'teste3@teste.com', '123345456', 'teste3', 'ADMIN', true);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('d123456', 'teste4@teste.com', '123345456', 'teste4', 'EMPLOYEE', false);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('e123456', 'teste5@teste.com', '123345456', 'teste5', 'EMPLOYEE', false);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('f123456', 'teste6@teste.com', '123345456', 'teste6', 'ADMIN', true);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('g123456', 'teste7@teste.com', '123345456', 'teste7', 'ADMIN', true);
+INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('h123456', 'teste8@teste.com', '123345456', 'teste8', 'ADMIN', true);
  
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace2', 'Complement2', 'Neighborhood2', 'City2', 'State2');

@@ -10,16 +10,16 @@ public class TwilioConfiguration {
   private String accountSid;
   private String authToken;
   private String messagingServiceSid;
-  private String phoneNumber;
+  private String fromPhoneNumber;
 
   public TwilioConfiguration() {
   }
 
-  public TwilioConfiguration(String accountSid, String authToken, String messagingServiceSid, String phoneNumber) {
+  public TwilioConfiguration(String accountSid, String authToken, String messagingServiceSid, String fromPhoneNumber) {
     this.accountSid = accountSid;
     this.authToken = authToken;
     this.messagingServiceSid = messagingServiceSid;
-    this.phoneNumber = phoneNumber;
+    this.fromPhoneNumber = fromPhoneNumber;
   }
 
   public String getAccountSid() {
@@ -46,12 +46,12 @@ public class TwilioConfiguration {
     this.messagingServiceSid = messagingServiceSid;
   }
 
-  public String getPhoneNumber() {
-    return this.phoneNumber;
+  public String getFromPhoneNumber() {
+    return this.fromPhoneNumber;
   }
 
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
+  public void setFromPhoneNumber(String fromPhoneNumber) {
+    this.fromPhoneNumber = fromPhoneNumber;
   }
 
 }

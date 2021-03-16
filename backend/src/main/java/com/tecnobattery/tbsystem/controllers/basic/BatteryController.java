@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.basic;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/batterys")
+@RequestMapping(value = "/api/v1/batterys")
 public class BatteryController {
 
   @Autowired

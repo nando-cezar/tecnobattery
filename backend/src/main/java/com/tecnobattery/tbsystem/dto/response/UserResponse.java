@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 
-import com.tecnobattery.tbsystem.entities.TypeUser;
+import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
 
 public class UserResponse implements Serializable {
 
@@ -15,7 +15,8 @@ public class UserResponse implements Serializable {
   private String email;
   private String phone;
   private String password;
-  private TypeUser level;
+  private ApplicationUserRoles roles;
+  private boolean active;
 
   public Long getId() {
     return this.id;
@@ -57,18 +58,30 @@ public class UserResponse implements Serializable {
     this.password = password;
   }
 
-  public TypeUser getLevel() {
-    return this.level;
+  public ApplicationUserRoles getRoles() {
+    return this.roles;
   }
 
-  public void setLevel(TypeUser level) {
-    this.level = level;
+  public void setRoles(ApplicationUserRoles roles) {
+    this.roles = roles;
+  }
+
+  public boolean isActive() {
+    return this.active;
+  }
+
+  public boolean getActive() {
+    return this.active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
-        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + "}";
+        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", roles='" + getRoles() + "'" + "}";
   }
 
 }

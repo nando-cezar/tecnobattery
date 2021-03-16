@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
+
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
@@ -27,18 +29,21 @@ public class User implements Serializable {
   private String phone;
   private String password;
   @Enumerated(EnumType.STRING)
-  private TypeUser level;
+  private ApplicationUserRoles roles;
+  private boolean active;
 
   public User() {
   }
 
-  public User(Long id, String username, String email, String phone, String password, TypeUser level) {
+  public User(Long id, String username, String email, String phone, String password, ApplicationUserRoles roles,
+      boolean active) {
     this.id = id;
     this.username = username;
     this.email = email;
     this.phone = phone;
     this.password = password;
-    this.level = level;
+    this.roles = roles;
+    this.active = active;
   }
 
   public Long getId() {
@@ -81,12 +86,24 @@ public class User implements Serializable {
     this.password = password;
   }
 
-  public TypeUser getLevel() {
-    return this.level;
+  public ApplicationUserRoles getRoles() {
+    return this.roles;
   }
 
-  public void setLevel(TypeUser level) {
-    this.level = level;
+  public void setRoles(ApplicationUserRoles roles) {
+    this.roles = roles;
+  }
+
+  public boolean isActive() {
+    return this.active;
+  }
+
+  public boolean getActive() {
+    return this.active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
   @Override
@@ -99,19 +116,19 @@ public class User implements Serializable {
     User user = (User) o;
     return Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(email, user.email)
         && Objects.equals(phone, user.phone) && Objects.equals(password, user.password)
-        && Objects.equals(level, user.level);
+        && Objects.equals(roles, user.roles) && active == user.active;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, username, email, phone, password, level);
+    return Objects.hash(id, username, email, phone, password, roles, active);
   }
 
   @Override
   public String toString() {
     return "{" + " id='" + getId() + "'" + ", username='" + getUsername() + "'" + ", email='" + getEmail() + "'"
-        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", level='" + getLevel() + "'" + "'"
-        + "'" + "}";
+        + ", phone='" + getPhone() + "'" + ", password='" + getPassword() + "'" + ", roles='" + getRoles() + "'"
+        + ", active='" + isActive() + "'" + "}";
   }
 
 }

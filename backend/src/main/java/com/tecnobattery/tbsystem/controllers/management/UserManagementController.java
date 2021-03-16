@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.management;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.validation.Valid;
 
 import com.tecnobattery.tbsystem.dto.request.UserRequest;
 import com.tecnobattery.tbsystem.dto.response.UserResponse;
-import com.tecnobattery.tbsystem.entities.TypeUser;
+import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
 import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.services.UserService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
@@ -14,6 +14,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +26,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "management/api/v1/users")
+public class UserManagementController {
 
   @Autowired
   private UserService userService;
@@ -38,7 +39,9 @@ public class UserController {
   @ResponseStatus(HttpStatus.CREATED)
   public UserResponse save(@Valid @RequestBody UserRequest userInput) {
     User user = toolModelMapper.toModel(userInput, User.class);
-    user.setLevel(TypeUser.ADMINISTRADOR);
+    user.setRoles(ApplicationUserRoles.ADMIN);
+    user.setActive(true);
+    user.setPassword(new BCryptPasswordEncoder().encode(userInput.getPassword()));
 
     return userService.save(user, false);
   }

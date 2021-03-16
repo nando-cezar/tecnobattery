@@ -38,7 +38,7 @@ public class TwilioSmsService implements SmsListener {
 
     if (isPhoneNumberValid(smsRequest.getToPhoneNumber())) {
       PhoneNumber to = new PhoneNumber(smsRequest.getToPhoneNumber());
-      PhoneNumber from = new PhoneNumber(twilioConfiguration.getPhoneNumber());
+      PhoneNumber from = new PhoneNumber(twilioConfiguration.getFromPhoneNumber());
       String message = smsRequest.getBodyMessage();
       MessageCreator creator = Message.creator(to, from, message);
       creator.create();

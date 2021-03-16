@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.controllers;
+package com.tecnobattery.tbsystem.controllers.management;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/managementBatterys")
-public class ManagementBatteryController {
+@RequestMapping(value = "management/api/v1/managementBatterys")
+public class RecordsBatteryManagementController {
 
   @Autowired
   private ManagementBatteryService managementBatteryService;

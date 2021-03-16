@@ -8,7 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.tecnobattery.tbsystem.entities.TypeUser;
+import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
 
 public class UserRequest implements Serializable {
 
@@ -30,7 +30,8 @@ public class UserRequest implements Serializable {
   @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
   private String password;
   @Enumerated(EnumType.STRING)
-  private TypeUser level;
+  private ApplicationUserRoles roles;
+  private boolean active;
 
   public Long getId() {
     return this.id;
@@ -72,12 +73,24 @@ public class UserRequest implements Serializable {
     this.password = password;
   }
 
-  public TypeUser getLevel() {
-    return this.level;
+  public ApplicationUserRoles getRoles() {
+    return this.roles;
   }
 
-  public void setLevel(TypeUser level) {
-    this.level = level;
+  public void setRoles(ApplicationUserRoles roles) {
+    this.roles = roles;
+  }
+
+  public boolean isActive() {
+    return this.active;
+  }
+
+  public boolean getActive() {
+    return this.active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
   @Override
