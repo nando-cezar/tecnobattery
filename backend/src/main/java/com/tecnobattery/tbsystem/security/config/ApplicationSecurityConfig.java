@@ -2,12 +2,14 @@ package com.tecnobattery.tbsystem.security.config;
 
 import java.util.Arrays;
 
+import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserPermission;
 import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -44,7 +46,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     http.cors().and().csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests().antMatchers("/", "index", "/css/*", "/js/*").permitAll().antMatchers("/api/**")
-        .hasRole(ApplicationUserRoles.EMPLOYEE.name()).antMatchers("/management/api/**")
+        .hasRole(ApplicationUserRoles.EMPLOYEE.name()).antMatchers(HttpMethod.POST, "/management/api/**")
+        .hasAuthority(ApplicationUserPermission.GLOBAL_WRITE.getPermission())
+        .antMatchers(HttpMethod.PUT, "/management/api/**")
+        .hasAuthority(ApplicationUserPermission.GLOBAL_WRITE.getPermission())
+        .antMatchers(HttpMethod.DELETE, "/management/api/**")
+        .hasAuthority(ApplicationUserPermission.GLOBAL_WRITE.getPermission())
+        .antMatchers(HttpMethod.GET, "/management/api/**")
         .hasAnyRole(ApplicationUserRoles.ADMIN.name(), ApplicationUserRoles.ADMINTRAINEE.name()).anyRequest()
         .authenticated().and().httpBasic();
 
@@ -55,13 +63,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
   protected UserDetailsService userDetailsService() {
 
     UserDetails userEmployee = User.builder().username("userEmployee").password(passwordEncoder.encode("passworde"))
-        .roles(ApplicationUserRoles.EMPLOYEE.name()).build();
+        // .roles(ApplicationUserRoles.EMPLOYEE.name())
+        .authorities(ApplicationUserRoles.EMPLOYEE.getGrantedAuthorities()).build();
 
     UserDetails userAdmin = User.builder().username("userAdmin").password(passwordEncoder.encode("passworda"))
-        .roles(ApplicationUserRoles.ADMIN.name()).build();
+        // .roles(ApplicationUserRoles.ADMIN.name())
+        .authorities(ApplicationUserRoles.ADMIN.getGrantedAuthorities()).build();
 
     UserDetails userAdminTrainne = User.builder().username("userAdminTrainee")
-        .password(passwordEncoder.encode("passworda")).roles(ApplicationUserRoles.ADMINTRAINEE.name()).build();
+        .password(passwordEncoder.encode("passworda"))
+        // .roles(ApplicationUserRoles.ADMINTRAINEE.name())
+        .authorities(ApplicationUserRoles.ADMINTRAINEE.getGrantedAuthorities()).build();
 
     return new InMemoryUserDetailsManager(userEmployee, userAdmin, userAdminTrainne);
   }

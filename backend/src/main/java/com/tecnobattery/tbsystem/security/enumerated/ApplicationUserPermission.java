@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.security.enumerated;
 
 public enum ApplicationUserPermission {
 
-  EMPLOYEE_READ("employee:read"), EMPLOYEE_WRITE("employee:write");
+  GLOBAL_READ("global:read"), GLOBAL_WRITE("global:write");
 
   private final String permission;
 
