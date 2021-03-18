@@ -13,6 +13,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "management/api/v1/products")
+@RequestMapping(value = "/management/api/v1/products")
 public class ProductManagementController {
 
   @Autowired
@@ -34,22 +35,26 @@ public class ProductManagementController {
   private ToolModelMapper toolModelMapper;
 
   @PostMapping
+  @PreAuthorize("hasAuthority('global:write')")
   @ResponseStatus(HttpStatus.CREATED)
   public ProductResponse save(@Valid @RequestBody ProductRequest productInput) {
     return productService.save(toolModelMapper.toModel(productInput, Product.class), false);
   }
 
   @GetMapping
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<List<ProductResponse>> findAll() {
     return ResponseEntity.ok().body(productService.findAll());
   }
 
   @GetMapping("/{productId}")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<ProductResponse> findById(@PathVariable Long productId) {
     return ResponseEntity.ok(productService.findById(productId));
   }
 
   @PutMapping("/{productId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<ProductResponse> update(@Valid @PathVariable Long productId,
       @RequestBody ProductRequest productInput) {
 
@@ -65,6 +70,7 @@ public class ProductManagementController {
   }
 
   @DeleteMapping("/{productId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<Void> deleteById(@PathVariable Long productId) {
     if (!productService.existsById(productId)) {
       return ResponseEntity.notFound().build();

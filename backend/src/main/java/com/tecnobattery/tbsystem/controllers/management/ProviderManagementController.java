@@ -13,6 +13,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "management/api/v1/providers")
+@RequestMapping(value = "/management/api/v1/providers")
 public class ProviderManagementController {
 
   @Autowired
@@ -34,23 +35,27 @@ public class ProviderManagementController {
   private ToolModelMapper toolModelMapper;
 
   @PostMapping
+  @PreAuthorize("hasAuthority('global:write')")
   @ResponseStatus(HttpStatus.CREATED)
   public ProviderResponse save(@Valid @RequestBody ProviderRequest providerInput) {
     return providerService.save(toolModelMapper.toModel(providerInput, Provider.class), false);
   }
 
   @GetMapping
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<List<ProviderResponse>> findAll() {
     List<ProviderResponse> list = providerService.findAll();
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping("/{providerId}")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<ProviderResponse> findById(@PathVariable Long providerId) {
     return ResponseEntity.ok(providerService.findById(providerId));
   }
 
   @PutMapping("/{providerId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<ProviderResponse> update(@Valid @PathVariable Long providerId,
       @RequestBody ProviderRequest providerInput) {
 
@@ -65,6 +70,7 @@ public class ProviderManagementController {
   }
 
   @DeleteMapping("/{providerId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<Void> deleteById(@PathVariable Long providerId) {
     if (!providerService.existsById(providerId)) {
       return ResponseEntity.notFound().build();

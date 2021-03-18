@@ -18,6 +18,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "management/api/v1/managementBatterys")
+@RequestMapping(value = "/management/api/v1/managementBatterys")
 public class RecordsBatteryManagementController {
 
   @Autowired
@@ -45,6 +46,7 @@ public class RecordsBatteryManagementController {
   private ToolModelMapper toolModelMapper;
 
   @PostMapping
+  @PreAuthorize("hasAuthority('global:write')")
   @ResponseStatus(HttpStatus.CREATED)
   public ManagementBatteryResponse save(@Valid @RequestBody ManagementBatteryRequest managementBatteryInput) {
 
@@ -59,16 +61,19 @@ public class RecordsBatteryManagementController {
   }
 
   @GetMapping
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<List<ManagementBatteryResponse>> findAll() {
     return ResponseEntity.ok().body(managementBatteryService.findAll());
   }
 
   @GetMapping("/{managementBatteryId}")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<ManagementBatteryResponse> findById(@PathVariable Long managementBatteryId) {
     return ResponseEntity.ok(managementBatteryService.findById(managementBatteryId));
   }
 
   @PutMapping("/{managementBatteryId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<ManagementBatteryResponse> update(@Valid @PathVariable Long managementBatteryId,
       @RequestBody ManagementBatteryRequest managementBatteryInput) {
 
@@ -89,6 +94,7 @@ public class RecordsBatteryManagementController {
   }
 
   @DeleteMapping("/{managementBatteryId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<Void> deleteById(@PathVariable Long managementBatteryId) {
     if (!managementBatteryService.existsById(managementBatteryId)) {
       return ResponseEntity.notFound().build();

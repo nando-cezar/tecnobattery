@@ -22,6 +22,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "management/api/v1/orders")
+@RequestMapping(value = "/management/api/v1/orders")
 public class OrderManagementController {
 
   @Autowired
@@ -55,6 +56,7 @@ public class OrderManagementController {
   private ToolConvertIdObject toolConvertIdObject;
 
   @PostMapping
+  @PreAuthorize("hasAuthority('global:write')")
   @ResponseStatus(HttpStatus.CREATED)
   public OrderResponse save(@Valid @RequestBody OrderRequest orderInput) {
 
@@ -69,16 +71,19 @@ public class OrderManagementController {
   }
 
   @GetMapping
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<List<OrderResponse>> findAll() {
     return ResponseEntity.ok().body(orderService.findAll());
   }
 
   @GetMapping("/{orderId}")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<OrderResponse> findById(@PathVariable Long orderId) {
     return ResponseEntity.ok(orderService.findById(orderId));
   }
 
   @PutMapping("/{orderId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<OrderResponse> update(@Valid @PathVariable Long orderId, @RequestBody OrderRequest orderInput) {
 
     if (!orderService.existsById(orderId)) {
@@ -97,6 +102,7 @@ public class OrderManagementController {
   }
 
   @PutMapping("finish/{orderId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<OrderResponse> finish(@Valid @PathVariable Long orderId) {
 
     if (!orderService.existsById(orderId)) {
@@ -116,6 +122,7 @@ public class OrderManagementController {
   }
 
   @DeleteMapping("/{orderId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<Void> deleteById(@PathVariable Long orderId) {
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();

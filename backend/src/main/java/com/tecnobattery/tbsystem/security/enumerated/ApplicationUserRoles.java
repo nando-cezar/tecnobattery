@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static com.tecnobattery.tbsystem.security.enumerated.ApplicationUserPermission.*;
 
 public enum ApplicationUserRoles {
-  EMPLOYEE(Sets.newHashSet()), ADMIN(Sets.newHashSet(GLOBAL_READ, GLOBAL_WRITE)),
+  EMPLOYEE(Sets.newHashSet()), ADMIN(Sets.newHashSet(GLOBAL_WRITE, GLOBAL_READ)),
   ADMINTRAINEE(Sets.newHashSet(GLOBAL_READ));
 
   private final Set<ApplicationUserPermission> permissions;

@@ -18,6 +18,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/managementLoaders")
+@RequestMapping(value = "/management/api/v1/managementLoaders")
 public class RecordsLoaderManagementController {
 
   @Autowired
@@ -45,6 +46,7 @@ public class RecordsLoaderManagementController {
   private ToolModelMapper toolModelMapper;
 
   @PostMapping
+  @PreAuthorize("hasAuthority('global:write')")
   @ResponseStatus(HttpStatus.CREATED)
   public ManagementLoaderResponse save(@Valid @RequestBody ManagementLoaderRequest managementLoaderInput) {
 
@@ -59,16 +61,19 @@ public class RecordsLoaderManagementController {
   }
 
   @GetMapping
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<List<ManagementLoaderResponse>> findAll() {
     return ResponseEntity.ok().body(managementLoaderService.findAll());
   }
 
   @GetMapping("/{managementLoaderId}")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
   public ResponseEntity<ManagementLoaderResponse> findById(@PathVariable Long managementLoaderId) {
     return ResponseEntity.ok(managementLoaderService.findById(managementLoaderId));
   }
 
   @PutMapping("/{managementLoaderId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<ManagementLoaderResponse> update(@Valid @PathVariable Long managementLoaderId,
       @RequestBody ManagementLoaderRequest managementLoaderInput) {
 
@@ -89,6 +94,7 @@ public class RecordsLoaderManagementController {
   }
 
   @DeleteMapping("/{managementLoaderId}")
+  @PreAuthorize("hasAuthority('global:write')")
   public ResponseEntity<Void> deleteById(@PathVariable Long managementLoaderId) {
     if (!managementLoaderService.existsById(managementLoaderId)) {
       return ResponseEntity.notFound().build();

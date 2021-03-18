@@ -18,6 +18,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,6 +44,7 @@ public class CommentController {
   private ToolModelMapper toolModelMapper;
 
   @PostMapping
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   @ResponseStatus(HttpStatus.CREATED)
   public CommentResponse save(@Valid @PathVariable Long orderId, @PathVariable Long userId,
       @RequestBody CommentResquest commentInput) {
@@ -55,11 +57,13 @@ public class CommentController {
   }
 
   @GetMapping
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   public ResponseEntity<List<CommentResponse>> findAll() {
     return ResponseEntity.ok().body(commentService.findAll());
   }
 
   @GetMapping("/{commentId}")
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   public ResponseEntity<CommentResponse> findById(@PathVariable Long commentId) {
     return ResponseEntity.ok(commentService.findById(commentId));
   }

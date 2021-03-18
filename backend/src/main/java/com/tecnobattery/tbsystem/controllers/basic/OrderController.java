@@ -22,6 +22,7 @@ import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,6 +55,7 @@ public class OrderController {
   private ToolConvertIdObject toolConvertIdObject;
 
   @PostMapping
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   @ResponseStatus(HttpStatus.CREATED)
   public OrderResponse save(@Valid @RequestBody OrderRequest orderInput) {
 
@@ -68,16 +70,19 @@ public class OrderController {
   }
 
   @GetMapping
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   public ResponseEntity<List<OrderResponse>> findAll() {
     return ResponseEntity.ok().body(orderService.findAll());
   }
 
   @GetMapping("/{orderId}")
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   public ResponseEntity<OrderResponse> findById(@PathVariable Long orderId) {
     return ResponseEntity.ok(orderService.findById(orderId));
   }
 
   @PutMapping("finish/{orderId}")
+  @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
   public ResponseEntity<OrderResponse> finish(@Valid @PathVariable Long orderId) {
 
     if (!orderService.existsById(orderId)) {
