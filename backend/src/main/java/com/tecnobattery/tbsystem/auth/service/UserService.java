@@ -1,20 +1,23 @@
-package com.tecnobattery.tbsystem.services;
+package com.tecnobattery.tbsystem.auth.service;
 
 import java.util.List;
 import java.util.Optional;
 
+import com.tecnobattery.tbsystem.auth.model.User;
+import com.tecnobattery.tbsystem.auth.repository.UserRepository;
 import com.tecnobattery.tbsystem.dto.response.UserResponse;
-import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.exception.BusinessException;
-import com.tecnobattery.tbsystem.repositories.UserRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
   @Autowired
   private UserRepository userRepository;
@@ -58,6 +61,12 @@ public class UserService {
 
   public void deleteById(Long userId) {
     userRepository.deleteById(userId);
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return userRepository.findByUsername(username)
+        .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", username)));
   }
 
 }

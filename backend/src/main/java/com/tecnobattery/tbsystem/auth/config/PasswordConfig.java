@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.security.config;
+package com.tecnobattery.tbsystem.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

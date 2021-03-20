@@ -5,17 +5,17 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.tecnobattery.tbsystem.auth.model.User;
+import com.tecnobattery.tbsystem.auth.service.UserService;
 import com.tecnobattery.tbsystem.dto.request.OrderRequest;
 import com.tecnobattery.tbsystem.dto.response.OrderResponse;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
 import com.tecnobattery.tbsystem.entities.OrderStatus;
 import com.tecnobattery.tbsystem.entities.Product;
-import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.services.OrderService;
 import com.tecnobattery.tbsystem.services.ProductService;
-import com.tecnobattery.tbsystem.services.UserService;
 import com.tecnobattery.tbsystem.tools.ToolConvertIdObject;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 

@@ -20,6 +20,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.tecnobattery.tbsystem.auth.model.User;
+
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {

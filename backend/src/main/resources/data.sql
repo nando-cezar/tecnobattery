@@ -1,11 +1,12 @@
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('a123456', 'teste1@teste.com', '123345456', 'teste1', 'ADMIN', true);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('b123456', 'teste2@teste.com', '123345456', 'teste2', 'ADMIN', true);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('c123456', 'teste3@teste.com', '123345456', 'teste3', 'ADMIN', true);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('d123456', 'teste4@teste.com', '123345456', 'teste4', 'EMPLOYEE', false);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('e123456', 'teste5@teste.com', '123345456', 'teste5', 'EMPLOYEE', false);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('f123456', 'teste6@teste.com', '123345456', 'teste6', 'ADMIN', true);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('g123456', 'teste7@teste.com', '123345456', 'teste7', 'ADMIN', true);
-INSERT INTO tb_user (username, email, phone, password, roles, active) VALUES ('h123456', 'teste8@teste.com', '123345456', 'teste8', 'ADMIN', true);
+
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('ADMIN', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste1', 'teste1@teste.com', '12346789', true, true, true, true);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('ADMIN', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste2', 'teste2@teste.com', '12346789', true, true, true, true);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('ADMINTRAINEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste3', 'teste3@teste.com', '12346789', true, true, true, true);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('ADMINTRAINEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste4', 'teste4@teste.com', '12346789', false, false, false, false);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('ADMINTRAINEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste5', 'teste5@teste.com', '12346789', false, false, false, false);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('ADMIN', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste6', 'teste6@teste.com', '12346789', true, true, true, true);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('EMPLOYEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste7', 'teste7@teste.com', '12346789', true, true, true, true);
+INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('EMPLOYEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste8', 'teste8@teste.com', '12346789', true, true, true, true);
  
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace2', 'Complement2', 'Neighborhood2', 'City2', 'State2');

@@ -5,14 +5,14 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.tecnobattery.tbsystem.auth.model.User;
+import com.tecnobattery.tbsystem.auth.service.UserService;
 import com.tecnobattery.tbsystem.dto.request.CommentResquest;
 import com.tecnobattery.tbsystem.dto.response.CommentResponse;
 import com.tecnobattery.tbsystem.entities.Comment;
 import com.tecnobattery.tbsystem.entities.Order;
-import com.tecnobattery.tbsystem.entities.User;
 import com.tecnobattery.tbsystem.services.CommentService;
 import com.tecnobattery.tbsystem.services.OrderService;
-import com.tecnobattery.tbsystem.services.UserService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;

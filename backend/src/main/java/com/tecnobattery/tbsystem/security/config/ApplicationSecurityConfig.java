@@ -2,11 +2,14 @@ package com.tecnobattery.tbsystem.security.config;
 
 import java.util.concurrent.TimeUnit;
 
-import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
+import com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserRoles;
+import com.tecnobattery.tbsystem.auth.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +25,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
+
+  @Autowired
+  private UserService userService;
 
   private final PasswordEncoder passwordEncoder;
 
@@ -62,5 +68,18 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorities(ApplicationUserRoles.ADMINTRAINEE.getGrantedAuthorities()).build();
 
     return new InMemoryUserDetailsManager(userEmployee, userAdmin, userAdminTrainne);
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.authenticationProvider(daoAuthenticationProvider());
+  }
+
+  @Bean
+  public DaoAuthenticationProvider daoAuthenticationProvider() {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setPasswordEncoder(passwordEncoder);
+    provider.setUserDetailsService(userService);
+    return provider;
   }
 }

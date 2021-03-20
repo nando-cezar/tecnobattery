@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.security.enumerated;
+package com.tecnobattery.tbsystem.auth.enumerated;
 
 public enum ApplicationUserPermission {
 

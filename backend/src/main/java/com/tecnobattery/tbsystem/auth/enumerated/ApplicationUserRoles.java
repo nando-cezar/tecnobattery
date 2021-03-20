@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.security.enumerated;
+package com.tecnobattery.tbsystem.auth.enumerated;
 
 import com.google.common.collect.Sets;
 
@@ -7,7 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.tecnobattery.tbsystem.security.enumerated.ApplicationUserPermission.*;
+import static com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserPermission.*;
 
 public enum ApplicationUserRoles {
   EMPLOYEE(Sets.newHashSet()), ADMIN(Sets.newHashSet(GLOBAL_WRITE, GLOBAL_READ)),

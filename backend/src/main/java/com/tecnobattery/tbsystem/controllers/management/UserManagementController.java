@@ -4,18 +4,18 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.tecnobattery.tbsystem.auth.model.User;
+import com.tecnobattery.tbsystem.auth.service.UserService;
 import com.tecnobattery.tbsystem.dto.request.UserRequest;
 import com.tecnobattery.tbsystem.dto.response.UserResponse;
-import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
-import com.tecnobattery.tbsystem.entities.User;
-import com.tecnobattery.tbsystem.services.UserService;
+import com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserRoles;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +30,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/management/api/v1/users")
 public class UserManagementController {
 
+  private final PasswordEncoder passwordEncoder;
+
+  @Autowired
+  public UserManagementController(PasswordEncoder passwordEncoder) {
+    this.passwordEncoder = passwordEncoder;
+  }
+
   @Autowired
   private UserService userService;
 
@@ -41,10 +48,8 @@ public class UserManagementController {
   @ResponseStatus(HttpStatus.CREATED)
   public UserResponse save(@Valid @RequestBody UserRequest userInput) {
     User user = toolModelMapper.toModel(userInput, User.class);
-    user.setRoles(ApplicationUserRoles.ADMIN);
-    user.setActive(true);
-    user.setPassword(new BCryptPasswordEncoder().encode(userInput.getPassword()));
-
+    user.setRole(ApplicationUserRoles.ADMIN);
+    user.setPassword(passwordEncoder.encode(userInput.getPassword()));
     return userService.save(user, false);
   }
 

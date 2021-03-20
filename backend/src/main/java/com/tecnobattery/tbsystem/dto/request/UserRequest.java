@@ -2,13 +2,9 @@ package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.tecnobattery.tbsystem.security.enumerated.ApplicationUserRoles;
 
 public class UserRequest implements Serializable {
 
@@ -17,6 +13,9 @@ public class UserRequest implements Serializable {
    */
   private static final long serialVersionUID = 1L;
   private Long id;
+  @NotBlank(message = "Senha se encontra em branco ou inválido.")
+  @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
+  private String password;
   @NotBlank(message = "Username se encontra em branco ou inválido.")
   @Size(max = 20, message = "Username deve possuir no máximo 20 caracteres.")
   private String username;
@@ -25,13 +24,11 @@ public class UserRequest implements Serializable {
   private String email;
   @NotBlank(message = "Telefone se encontra em branco ou inválido.")
   @Size(max = 14, message = "Telefone deve possuir no máximo 14 caracteres.")
-  private String phone;
-  @NotBlank(message = "Senha se encontra em branco ou inválido.")
-  @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
-  private String password;
-  @Enumerated(EnumType.STRING)
-  private ApplicationUserRoles roles;
-  private boolean active;
+  private String phoneNumber;
+  private boolean isAccountNonExpired;
+  private boolean isAccountNonLocked;
+  private boolean isCredentialsNonExpired;
+  private boolean isEnabled;
 
   public Long getId() {
     return this.id;
@@ -39,6 +36,14 @@ public class UserRequest implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getPassword() {
+    return this.password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getUsername() {
@@ -57,40 +62,60 @@ public class UserRequest implements Serializable {
     this.email = email;
   }
 
-  public String getPhone() {
-    return this.phone;
+  public String getPhoneNumber() {
+    return this.phoneNumber;
   }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
-  public String getPassword() {
-    return this.password;
+  public boolean isIsAccountNonExpired() {
+    return this.isAccountNonExpired;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  public boolean getIsAccountNonExpired() {
+    return this.isAccountNonExpired;
   }
 
-  public ApplicationUserRoles getRoles() {
-    return this.roles;
+  public void setIsAccountNonExpired(boolean isAccountNonExpired) {
+    this.isAccountNonExpired = isAccountNonExpired;
   }
 
-  public void setRoles(ApplicationUserRoles roles) {
-    this.roles = roles;
+  public boolean isIsAccountNonLocked() {
+    return this.isAccountNonLocked;
   }
 
-  public boolean isActive() {
-    return this.active;
+  public boolean getIsAccountNonLocked() {
+    return this.isAccountNonLocked;
   }
 
-  public boolean getActive() {
-    return this.active;
+  public void setIsAccountNonLocked(boolean isAccountNonLocked) {
+    this.isAccountNonLocked = isAccountNonLocked;
   }
 
-  public void setActive(boolean active) {
-    this.active = active;
+  public boolean isIsCredentialsNonExpired() {
+    return this.isCredentialsNonExpired;
+  }
+
+  public boolean getIsCredentialsNonExpired() {
+    return this.isCredentialsNonExpired;
+  }
+
+  public void setIsCredentialsNonExpired(boolean isCredentialsNonExpired) {
+    this.isCredentialsNonExpired = isCredentialsNonExpired;
+  }
+
+  public boolean isIsEnabled() {
+    return this.isEnabled;
+  }
+
+  public boolean getIsEnabled() {
+    return this.isEnabled;
+  }
+
+  public void setIsEnabled(boolean isEnabled) {
+    this.isEnabled = isEnabled;
   }
 
   @Override

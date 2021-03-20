@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.tecnobattery.tbsystem.auth.model.User;
+
 @Entity
 @Table(name = "tb_comment")
 public class Comment implements Serializable {
