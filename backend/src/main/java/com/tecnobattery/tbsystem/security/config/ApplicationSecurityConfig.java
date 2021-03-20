@@ -1,9 +1,11 @@
 package com.tecnobattery.tbsystem.security.config;
 
-import java.util.concurrent.TimeUnit;
+import javax.crypto.SecretKey;
 
-import com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserRoles;
 import com.tecnobattery.tbsystem.auth.service.UserService;
+import com.tecnobattery.tbsystem.jwt.token.JwtTokenVerifier;
+import com.tecnobattery.tbsystem.jwt.config.JwtConfig;
+import com.tecnobattery.tbsystem.jwt.filter.JwtUsernameAndPasswordAuthenticationFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,12 +16,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -31,9 +29,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final PasswordEncoder passwordEncoder;
 
+  private final SecretKey secretKey;
+  private final JwtConfig jwtConfig;
+
   @Autowired
-  public ApplicationSecurityConfig(PasswordEncoder passwordEncoder) {
+  public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, SecretKey secretKey, JwtConfig jwtConfig) {
     this.passwordEncoder = passwordEncoder;
+    this.secretKey = secretKey;
+    this.jwtConfig = jwtConfig;
   }
 
   @Override
@@ -43,31 +46,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
      * );
      */
     http.csrf().disable();
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
+    http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
     http.authorizeRequests().antMatchers("/", "index", "/css/*", "/js/*").permitAll().anyRequest().authenticated();
-    http.formLogin().loginPage("/login").permitAll().defaultSuccessUrl("/main", true).passwordParameter("password")
-        .usernameParameter("username");
-    http.rememberMe().tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)).key("key")
-        .rememberMeParameter("remember-me");
-    http.logout().logoutUrl("/logout").logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-        .clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID", "remember-me")
-        .logoutSuccessUrl("/login");
-  }
-
-  @Override
-  @Bean
-  protected UserDetailsService userDetailsService() {
-
-    UserDetails userEmployee = User.builder().username("userEmployee").password(passwordEncoder.encode("passworde"))
-        .authorities(ApplicationUserRoles.EMPLOYEE.getGrantedAuthorities()).build();
-
-    UserDetails userAdmin = User.builder().username("userAdmin").password(passwordEncoder.encode("passworda"))
-        .authorities(ApplicationUserRoles.ADMIN.getGrantedAuthorities()).build();
-
-    UserDetails userAdminTrainne = User.builder().username("userAdminTrainee")
-        .password(passwordEncoder.encode("passworda"))
-        .authorities(ApplicationUserRoles.ADMINTRAINEE.getGrantedAuthorities()).build();
-
-    return new InMemoryUserDetailsManager(userEmployee, userAdmin, userAdminTrainne);
   }
 
   @Override
