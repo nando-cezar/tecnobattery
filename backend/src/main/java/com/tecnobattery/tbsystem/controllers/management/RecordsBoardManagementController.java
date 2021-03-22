@@ -15,7 +15,6 @@ import com.tecnobattery.tbsystem.services.ManagementBoardService;
 import com.tecnobattery.tbsystem.services.ProviderService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,21 +28,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/management/api/v1/managementBoards")
+@AllArgsConstructor
 public class RecordsBoardManagementController {
 
-  @Autowired
-  private ManagementBoardService managementBoardService;
-
-  @Autowired
-  private BoardService batteryService;
-
-  @Autowired
-  private ProviderService providerService;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final ManagementBoardService managementBoardService;
+  private final BoardService batteryService;
+  private final ProviderService providerService;
+  private final ToolModelMapper toolModelMapper;
 
   @PostMapping
   @PreAuthorize("hasAuthority('global:write')")

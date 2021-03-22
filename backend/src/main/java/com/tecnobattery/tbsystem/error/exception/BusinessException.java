@@ -1,4 +1,4 @@
-package com.tecnobattery.tbsystem.exception;
+package com.tecnobattery.tbsystem.error.exception;
 
 public class BusinessException extends RuntimeException {
 

@@ -2,7 +2,7 @@ package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 
-import com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserRoles;
+import com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserRole;
 
 public class UserResponse implements Serializable {
 
@@ -11,7 +11,7 @@ public class UserResponse implements Serializable {
    */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private ApplicationUserRoles role;
+  private ApplicationUserRole role;
   private String password;
   private String username;
   private String email;
@@ -29,11 +29,11 @@ public class UserResponse implements Serializable {
     this.id = id;
   }
 
-  public ApplicationUserRoles getRole() {
+  public ApplicationUserRole getRole() {
     return this.role;
   }
 
-  public void setRole(ApplicationUserRoles role) {
+  public void setRole(ApplicationUserRole role) {
     this.role = role;
   }
 

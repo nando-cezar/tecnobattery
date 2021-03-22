@@ -10,6 +10,17 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class OrderRequest implements Serializable {
 
   /**
@@ -28,53 +39,5 @@ public class OrderRequest implements Serializable {
   private List<ProductRequest> products = new ArrayList<>();
   @NotNull(message = "Usuário é obrigatório.")
   private Set<UserRequest> users = new HashSet<>();
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Long getClientId() {
-    return this.clientId;
-  }
-
-  public void setClientId(Long clientId) {
-    this.clientId = clientId;
-  }
-
-  public String getDescription() {
-    return this.description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Double getPrice() {
-    return this.price;
-  }
-
-  public void setPrice(Double price) {
-    this.price = price;
-  }
-
-  public List<ProductRequest> getProducts() {
-    return this.products;
-  }
-
-  public void setProducts(List<ProductRequest> products) {
-    this.products = products;
-  }
-
-  public Set<UserRequest> getUsers() {
-    return this.users;
-  }
-
-  public void setUsers(Set<UserRequest> users) {
-    this.users = users;
-  }
 
 }

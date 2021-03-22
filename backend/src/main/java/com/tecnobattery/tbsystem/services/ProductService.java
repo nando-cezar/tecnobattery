@@ -5,22 +5,21 @@ import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.response.ProductResponse;
 import com.tecnobattery.tbsystem.entities.Product;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ProductRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class ProductService {
 
-  @Autowired
-  private ProductRepository productRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final ProductRepository productRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public ProductResponse save(Product product, boolean identifier) {
 

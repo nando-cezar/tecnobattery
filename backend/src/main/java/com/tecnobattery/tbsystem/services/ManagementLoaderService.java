@@ -5,22 +5,21 @@ import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.response.ManagementLoaderResponse;
 import com.tecnobattery.tbsystem.entities.ManagementLoader;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementLoaderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class ManagementLoaderService {
 
-  @Autowired
-  private ManagementLoaderRepository managementLoaderRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final ManagementLoaderRepository managementLoaderRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public ManagementLoaderResponse save(ManagementLoader managementLoader) {
     return toolModelMapper.toModel(managementLoaderRepository.save(managementLoader), ManagementLoaderResponse.class);

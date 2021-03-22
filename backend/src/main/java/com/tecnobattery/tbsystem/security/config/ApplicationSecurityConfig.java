@@ -7,7 +7,6 @@ import com.tecnobattery.tbsystem.jwt.token.JwtTokenVerifier;
 import com.tecnobattery.tbsystem.jwt.config.JwtConfig;
 import com.tecnobattery.tbsystem.jwt.filter.JwtUsernameAndPasswordAuthenticationFilter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,27 +16,20 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import lombok.AllArgsConstructor;
 
 @Configuration
+@AllArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Autowired
   private UserService userService;
-
-  private final PasswordEncoder passwordEncoder;
-
+  private final BCryptPasswordEncoder bCryptPasswordEncoder;
   private final SecretKey secretKey;
   private final JwtConfig jwtConfig;
-
-  @Autowired
-  public ApplicationSecurityConfig(PasswordEncoder passwordEncoder, SecretKey secretKey, JwtConfig jwtConfig) {
-    this.passwordEncoder = passwordEncoder;
-    this.secretKey = secretKey;
-    this.jwtConfig = jwtConfig;
-  }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -60,7 +52,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public DaoAuthenticationProvider daoAuthenticationProvider() {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    provider.setPasswordEncoder(passwordEncoder);
+    provider.setPasswordEncoder(bCryptPasswordEncoder);
     provider.setUserDetailsService(userService);
     return provider;
   }

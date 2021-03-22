@@ -5,22 +5,21 @@ import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.response.OrderResponse;
 import com.tecnobattery.tbsystem.entities.Order;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.OrderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class OrderService {
 
-  @Autowired
-  private OrderRepository orderRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final OrderRepository orderRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public OrderResponse save(Order order) {
     return toolModelMapper.toModel(orderRepository.save(order), OrderResponse.class);

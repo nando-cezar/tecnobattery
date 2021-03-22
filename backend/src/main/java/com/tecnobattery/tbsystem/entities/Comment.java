@@ -2,7 +2,6 @@ package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +12,17 @@ import javax.persistence.Table;
 
 import com.tecnobattery.tbsystem.auth.model.User;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_comment")
 public class Comment implements Serializable {
@@ -32,87 +42,12 @@ public class Comment implements Serializable {
   private String description;
   private OffsetDateTime moment;
 
-  public Comment() {
-  }
-
-  public Comment(Long id, Order order, User user, String title, String description, OffsetDateTime moment) {
-    this.id = id;
+  public Comment(Order order, User user, String title, String description, OffsetDateTime moment) {
     this.order = order;
     this.user = user;
     this.title = title;
     this.description = description;
     this.moment = moment;
-  }
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Order getOrder() {
-    return this.order;
-  }
-
-  public void setOrder(Order order) {
-    this.order = order;
-  }
-
-  public User getUser() {
-    return this.user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public String getTitle() {
-    return this.title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getDescription() {
-    return this.description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public OffsetDateTime getMoment() {
-    return this.moment;
-  }
-
-  public void setMoment(OffsetDateTime moment) {
-    this.moment = moment;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof Comment)) {
-      return false;
-    }
-    Comment comment = (Comment) o;
-    return Objects.equals(id, comment.id) && Objects.equals(order, comment.order) && Objects.equals(user, comment.user)
-        && Objects.equals(description, comment.description) && Objects.equals(moment, comment.moment);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, order, user, description, moment);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", order='" + getOrder() + "'" + ", user='" + getUser() + "'"
-        + ", description='" + getDescription() + "'" + ", moment='" + getMoment() + "'" + "}";
   }
 
 }

@@ -9,13 +9,13 @@ import java.util.stream.Collectors;
 
 import static com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserPermission.*;
 
-public enum ApplicationUserRoles {
+public enum ApplicationUserRole {
   EMPLOYEE(Sets.newHashSet()), ADMIN(Sets.newHashSet(GLOBAL_WRITE, GLOBAL_READ)),
   ADMINTRAINEE(Sets.newHashSet(GLOBAL_READ));
 
   private final Set<ApplicationUserPermission> permissions;
 
-  ApplicationUserRoles(Set<ApplicationUserPermission> permissions) {
+  ApplicationUserRole(Set<ApplicationUserPermission> permissions) {
     this.permissions = permissions;
   }
 

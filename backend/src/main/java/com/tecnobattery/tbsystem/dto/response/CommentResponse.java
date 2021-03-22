@@ -3,6 +3,17 @@ package com.tecnobattery.tbsystem.dto.response;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class CommentResponse implements Serializable {
 
   /** 
@@ -13,37 +24,5 @@ public class CommentResponse implements Serializable {
   private String title;
   private String description;
   private OffsetDateTime moment;
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getTitle() {
-    return this.title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getDescription() {
-    return this.description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public OffsetDateTime getMoment() {
-    return this.moment;
-  }
-
-  public void setMoment(OffsetDateTime moment) {
-    this.moment = moment;
-  }
 
 }

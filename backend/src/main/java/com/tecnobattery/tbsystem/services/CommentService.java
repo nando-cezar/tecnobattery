@@ -5,22 +5,21 @@ import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.response.CommentResponse;
 import com.tecnobattery.tbsystem.entities.Comment;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.CommentRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class CommentService {
 
-  @Autowired
-  private CommentRepository commentRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final CommentRepository commentRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public CommentResponse save(Comment comment) {
     return toolModelMapper.toModel(commentRepository.save(comment), CommentResponse.class);

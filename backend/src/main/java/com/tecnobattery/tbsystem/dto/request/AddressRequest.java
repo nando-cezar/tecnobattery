@@ -5,6 +5,17 @@ import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class AddressRequest implements Serializable {
 
     /**
@@ -29,53 +40,5 @@ public class AddressRequest implements Serializable {
     @NotBlank(message = "Estado se encontra em branco ou inválido.")
     @Size(max = 100, message = "Estado deve possuir no máximo 255 caracteres.")
     private String state;
-
-    public String getPostalCode() {
-        return this.postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getPublicPlace() {
-        return this.publicPlace;
-    }
-
-    public void setPublicPlace(String publicPlace) {
-        this.publicPlace = publicPlace;
-    }
-
-    public String getComplement() {
-        return this.complement;
-    }
-
-    public void setComplement(String complement) {
-        this.complement = complement;
-    }
-
-    public String getNeighborhood() {
-        return this.neighborhood;
-    }
-
-    public void setNeighborhood(String neighborhood) {
-        this.neighborhood = neighborhood;
-    }
-
-    public String getCity() {
-        return this.city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return this.state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 
 }

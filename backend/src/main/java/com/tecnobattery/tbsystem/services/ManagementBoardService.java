@@ -5,22 +5,21 @@ import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.response.ManagementBoardResponse;
 import com.tecnobattery.tbsystem.entities.ManagementBoard;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.ManagementBoardRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class ManagementBoardService {
 
-  @Autowired
-  private ManagementBoardRepository managementBoardRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final ManagementBoardRepository managementBoardRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public ManagementBoardResponse save(ManagementBoard managementBoard) {
     return toolModelMapper.toModel(managementBoardRepository.save(managementBoard), ManagementBoardResponse.class);

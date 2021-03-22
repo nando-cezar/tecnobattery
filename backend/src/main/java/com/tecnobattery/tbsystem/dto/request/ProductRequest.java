@@ -8,6 +8,15 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
 public class ProductRequest implements Serializable {
 
   /**
@@ -34,70 +43,6 @@ public class ProductRequest implements Serializable {
   private String description;
   @NotBlank(message = "URL da imagem se encontra em branco ou inválido.")
   private String imageUrl;
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Integer getPower() {
-    return this.power;
-  }
-
-  public void setPower(Integer power) {
-    this.power = power;
-  }
-
-  public Integer getCapacity() {
-    return this.capacity;
-  }
-
-  public void setCapacity(Integer capacity) {
-    this.capacity = capacity;
-  }
-
-  public Integer getVoltage() {
-    return this.voltage;
-  }
-
-  public void setVoltage(Integer voltage) {
-    this.voltage = voltage;
-  }
-
-  public Double getPrice() {
-    return this.price;
-  }
-
-  public void setPrice(Double price) {
-    this.price = price;
-  }
-
-  public String getDescription() {
-    return this.description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getImageUrl() {
-    return this.imageUrl;
-  }
-
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
-  }
 
   @Override
   public String toString() {

@@ -5,22 +5,21 @@ import java.util.Optional;
 
 import com.tecnobattery.tbsystem.dto.response.LoaderResponse;
 import com.tecnobattery.tbsystem.entities.Loader;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.repositories.LoaderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class LoaderService {
 
-  @Autowired
-  private LoaderRepository loaderRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final LoaderRepository loaderRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public LoaderResponse save(Loader loader, boolean identifier) {
 

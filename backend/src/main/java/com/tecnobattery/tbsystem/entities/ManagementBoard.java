@@ -2,7 +2,6 @@ package com.tecnobattery.tbsystem.entities;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,6 +12,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "tb_management_board")
 public class ManagementBoard implements Serializable {
@@ -31,79 +41,11 @@ public class ManagementBoard implements Serializable {
   private OffsetDateTime moment;
   private Integer amount;
 
-  public ManagementBoard() {
-  }
-
-  public ManagementBoard(Long id, Provider provider, Board board, OffsetDateTime moment, Integer amount) {
-    this.id = id;
+  public ManagementBoard(Provider provider, Board board, OffsetDateTime moment, Integer amount) {
     this.provider = provider;
     this.board = board;
     this.moment = moment;
     this.amount = amount;
-  }
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Provider getProvider() {
-    return this.provider;
-  }
-
-  public void setProvider(Provider provider) {
-    this.provider = provider;
-  }
-
-  public Board getBoard() {
-    return this.board;
-  }
-
-  public void setBoard(Board board) {
-    this.board = board;
-  }
-
-  public OffsetDateTime getMoment() {
-    return this.moment;
-  }
-
-  public void setMoment(OffsetDateTime moment) {
-    this.moment = moment;
-  }
-
-  public Integer getAmount() {
-    return this.amount;
-  }
-
-  public void setAmount(Integer amount) {
-    this.amount = amount;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (o == this)
-      return true;
-    if (!(o instanceof ManagementBoard)) {
-      return false;
-    }
-    ManagementBoard managementBoard = (ManagementBoard) o;
-    return Objects.equals(id, managementBoard.id) && Objects.equals(provider, managementBoard.provider)
-        && Objects.equals(board, managementBoard.board) && Objects.equals(moment, managementBoard.moment)
-        && Objects.equals(amount, managementBoard.amount);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, provider, board, moment, amount);
-  }
-
-  @Override
-  public String toString() {
-    return "{" + " id='" + getId() + "'" + ", provider='" + getProvider() + "'" + ", board='" + getBoard() + "'"
-        + ", moment='" + getMoment() + "'" + ", amount='" + getAmount() + "'" + "}";
   }
 
 }

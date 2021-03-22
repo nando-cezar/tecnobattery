@@ -11,15 +11,14 @@ import com.tecnobattery.tbsystem.dto.request.OrderRequest;
 import com.tecnobattery.tbsystem.dto.response.OrderResponse;
 import com.tecnobattery.tbsystem.entities.Client;
 import com.tecnobattery.tbsystem.entities.Order;
-import com.tecnobattery.tbsystem.entities.OrderStatus;
 import com.tecnobattery.tbsystem.entities.Product;
+import com.tecnobattery.tbsystem.entities.enumerated.OrderStatus;
 import com.tecnobattery.tbsystem.services.ClientService;
 import com.tecnobattery.tbsystem.services.OrderService;
 import com.tecnobattery.tbsystem.services.ProductService;
 import com.tecnobattery.tbsystem.tools.ToolConvertIdObject;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,27 +31,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/api/v1/orders")
+@AllArgsConstructor
 public class OrderController {
 
-  @Autowired
-  private OrderService orderService;
-
-  @Autowired
-  private ClientService clientService;
-
-  @Autowired
-  private ProductService productService;
-
-  @Autowired
-  private UserService userService;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
-
-  @Autowired
-  private ToolConvertIdObject toolConvertIdObject;
+  private final OrderService orderService;
+  private final ClientService clientService;
+  private final ProductService productService;
+  private final UserService userService;
+  private final ToolModelMapper toolModelMapper;
+  private final ToolConvertIdObject toolConvertIdObject;
 
   @PostMapping
   @PreAuthorize("hasRole('ROLE_EMPLOYEE')")

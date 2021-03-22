@@ -3,6 +3,17 @@ package com.tecnobattery.tbsystem.dto.response;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class ManagementBatteryResponse implements Serializable {
 
   /**
@@ -14,45 +25,5 @@ public class ManagementBatteryResponse implements Serializable {
   private BatteryResponse battery;
   private OffsetDateTime moment;
   private Integer amount;
-
-  public Long getId() {
-    return this.id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public ProviderResponse getProvider() {
-    return this.provider;
-  }
-
-  public void setProvider(ProviderResponse provider) {
-    this.provider = provider;
-  }
-
-  public BatteryResponse getBattery() {
-    return this.battery;
-  }
-
-  public void setBattery(BatteryResponse battery) {
-    this.battery = battery;
-  }
-
-  public OffsetDateTime getMoment() {
-    return this.moment;
-  }
-
-  public void setMoment(OffsetDateTime moment) {
-    this.moment = moment;
-  }
-
-  public Integer getAmount() {
-    return this.amount;
-  }
-
-  public void setAmount(Integer amount) {
-    this.amount = amount;
-  }
 
 }

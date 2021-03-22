@@ -1,9 +1,11 @@
-package com.tecnobattery.tbsystem.exceptionhandler;
+package com.tecnobattery.tbsystem.error.exceptionhandler.api;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exceptionhandler.model.Field;
+import com.tecnobattery.tbsystem.error.exceptionhandler.model.Problem;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,11 +37,11 @@ public class ApiExpectionHandler extends ResponseEntityExceptionHandler {
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
       HttpStatus status, WebRequest request) {
 
-    var fields = new ArrayList<Problem.Field>();
+    var fields = new ArrayList<Field>();
     for (ObjectError error : ex.getBindingResult().getAllErrors()) {
       String name = ((FieldError) error).getField();
       String message = error.getDefaultMessage();
-      fields.add(new Problem.Field(name, message));
+      fields.add(new Field(name, message));
     }
 
     var problem = new Problem();

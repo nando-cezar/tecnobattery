@@ -15,7 +15,6 @@ import com.tecnobattery.tbsystem.services.CommentService;
 import com.tecnobattery.tbsystem.services.OrderService;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,21 +28,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.AllArgsConstructor;
+
 @RestController
 @RequestMapping(value = "/management/orders/{orderId}/{userId}/comments")
+@AllArgsConstructor
 public class CommentManagementController {
 
-  @Autowired
-  private CommentService commentService;
-
-  @Autowired
-  private OrderService orderService;
-
-  @Autowired
-  private UserService userService;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final CommentService commentService;
+  private final OrderService orderService;
+  private final UserService userService;
+  private final ToolModelMapper toolModelMapper;
 
   @PostMapping
   @PreAuthorize("hasAuthority('global:write')")

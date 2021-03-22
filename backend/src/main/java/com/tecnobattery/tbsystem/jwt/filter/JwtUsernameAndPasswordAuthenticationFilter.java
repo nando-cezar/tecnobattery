@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tecnobattery.tbsystem.jwt.config.JwtConfig;
-import com.tecnobattery.tbsystem.jwt.key.JwtSecretKey;
 import com.tecnobattery.tbsystem.jwt.model.UsernameAndPasswordAuthenticationRequest;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +21,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
 
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -62,8 +60,9 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
       Authentication authResult) throws IOException, ServletException {
 
     String token = Jwts.builder().setSubject(authResult.getName()).claim("authorities", authResult.getAuthorities())
-        .setIssuedAt(new Date()).setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(2))).signWith(secretKey)
-        .compact();
+        .setIssuedAt(new Date())
+        .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
+        .signWith(secretKey).compact();
 
     response.addHeader(jwtConfig.getAuthorizationHeader(), jwtConfig.getTokenPrefix() + token);
   }

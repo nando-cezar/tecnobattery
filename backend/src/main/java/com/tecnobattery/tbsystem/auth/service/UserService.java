@@ -6,24 +6,22 @@ import java.util.Optional;
 import com.tecnobattery.tbsystem.auth.model.User;
 import com.tecnobattery.tbsystem.auth.repository.UserRepository;
 import com.tecnobattery.tbsystem.dto.response.UserResponse;
-import com.tecnobattery.tbsystem.exception.BusinessException;
+import com.tecnobattery.tbsystem.error.exception.BusinessException;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class UserService implements UserDetailsService {
 
-  @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
+  private final UserRepository userRepository;
+  private final ToolModelMapper toolModelMapper;
 
   public UserResponse save(User user, boolean identifier) {
 
@@ -38,13 +36,11 @@ public class UserService implements UserDetailsService {
     return toolModelMapper.toModel(userRepository.save(user), UserResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<UserResponse> findAll() {
     List<User> users = userRepository.findAll();
     return toolModelMapper.toCollection(users, UserResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public UserResponse findById(Long userId) {
     Optional<User> user = userRepository.findById(userId);
     if (user.isPresent()) {
@@ -54,7 +50,6 @@ public class UserService implements UserDetailsService {
         UserResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long userId) {
     return userRepository.existsById(userId);
   }
