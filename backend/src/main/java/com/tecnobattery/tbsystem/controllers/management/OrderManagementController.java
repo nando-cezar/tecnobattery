@@ -80,7 +80,7 @@ public class OrderManagementController {
 
   @PutMapping("/{orderId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<OrderResponse> update(@Valid @PathVariable Long orderId, @RequestBody OrderRequest orderInput) {
+  public ResponseEntity<OrderResponse> update(@PathVariable Long orderId, @Valid @RequestBody OrderRequest orderInput) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();

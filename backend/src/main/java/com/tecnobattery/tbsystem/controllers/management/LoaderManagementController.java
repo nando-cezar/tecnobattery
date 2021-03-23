@@ -54,8 +54,8 @@ public class LoaderManagementController {
 
   @PutMapping("/{loaderId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<LoaderResponse> update(@Valid @PathVariable Long loaderId,
-      @RequestBody LoaderRequest loaderInput) {
+  public ResponseEntity<LoaderResponse> update(@PathVariable Long loaderId,
+      @Valid @RequestBody LoaderRequest loaderInput) {
 
     if (!loaderService.existsById(loaderId)) {
       return ResponseEntity.notFound().build();

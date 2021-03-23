@@ -55,8 +55,8 @@ public class ProviderManagementController {
 
   @PutMapping("/{providerId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<ProviderResponse> update(@Valid @PathVariable Long providerId,
-      @RequestBody ProviderRequest providerInput) {
+  public ResponseEntity<ProviderResponse> update(@PathVariable Long providerId,
+      @Valid @RequestBody ProviderRequest providerInput) {
 
     if (!providerService.existsById(providerId)) {
       return ResponseEntity.notFound().build();

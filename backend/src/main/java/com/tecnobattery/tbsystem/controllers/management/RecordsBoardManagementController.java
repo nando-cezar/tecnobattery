@@ -69,8 +69,8 @@ public class RecordsBoardManagementController {
 
   @PutMapping("/{managementBoardId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<ManagementBoardResponse> update(@Valid @PathVariable Long managementBoardId,
-      @RequestBody ManagementBoardRequest managementBoardInput) {
+  public ResponseEntity<ManagementBoardResponse> update(@PathVariable Long managementBoardId,
+      @Valid @RequestBody ManagementBoardRequest managementBoardInput) {
 
     if (!managementBoardService.existsById(managementBoardId)) {
       return ResponseEntity.notFound().build();

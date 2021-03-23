@@ -61,7 +61,7 @@ public class UserManagementController {
 
   @PutMapping("/{userId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<UserResponse> update(@Valid @PathVariable Long userId, @RequestBody UserRequest userInput) {
+  public ResponseEntity<UserResponse> update(@PathVariable Long userId, @Valid @RequestBody UserRequest userInput) {
 
     if (!userService.existsById(userId)) {
       return ResponseEntity.notFound().build();

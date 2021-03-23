@@ -23,7 +23,7 @@ public class ClientResponse implements Serializable {
   private String cnpj;
   private String name;
   private String fantasyName;
-  private String phone;
+  private String phoneNumber;
   private String email;
   private AddressResponse address;
 

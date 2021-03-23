@@ -69,8 +69,8 @@ public class RecordsLoaderManagementController {
 
   @PutMapping("/{managementLoaderId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<ManagementLoaderResponse> update(@Valid @PathVariable Long managementLoaderId,
-      @RequestBody ManagementLoaderRequest managementLoaderInput) {
+  public ResponseEntity<ManagementLoaderResponse> update(@PathVariable Long managementLoaderId,
+      @Valid @RequestBody ManagementLoaderRequest managementLoaderInput) {
 
     if (!managementLoaderService.existsById(managementLoaderId)) {
       return ResponseEntity.notFound().build();

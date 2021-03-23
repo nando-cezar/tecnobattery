@@ -67,8 +67,8 @@ public class CommentManagementController {
 
   @PutMapping("/{commentId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<CommentResponse> update(@Valid @PathVariable Long commentId,
-      @RequestBody CommentResquest commentInput) {
+  public ResponseEntity<CommentResponse> update(@PathVariable Long commentId,
+      @Valid @RequestBody CommentResquest commentInput) {
 
     if (!commentService.existsById(commentId)) {
       return ResponseEntity.notFound().build();

@@ -4,7 +4,10 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.tecnobattery.tbsystem.twilio.server.phone_number.listener.ValidPhoneNumber;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,8 +34,8 @@ public class UserRequest implements Serializable {
   @NotBlank(message = "E-mail se encontra em branco ou inválido.")
   @Email(message = "E-mail inválido.")
   private String email;
-  @NotBlank(message = "Telefone se encontra em branco ou inválido.")
-  @Size(max = 14, message = "Telefone deve possuir no máximo 14 caracteres.")
+  @NotNull(message = "Telefone se encontra em branco ou inválido.")
+  @ValidPhoneNumber(message = "Telefone inválido.")
   private String phoneNumber;
   private boolean isAccountNonExpired;
   private boolean isAccountNonLocked;

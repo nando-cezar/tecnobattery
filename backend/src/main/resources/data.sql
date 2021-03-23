@@ -18,23 +18,23 @@ INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, cit
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace8', 'Complement8', 'Neighborhood8', 'City8', 'State8');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace9', 'Complement9', 'Neighborhood9', 'City9', 'State9');
 
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-52', 'Client1', 'Cliente1', '1234679', 'teste_client1@teste.com', 1);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-59', 'Client2', 'Cliente2', '1234679', 'teste_client2@teste.com', 2);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-58', 'Client3', 'Cliente3', '1234679', 'teste_client3@teste.com', 3);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-57', 'Client4', 'Cliente4', '1234679', 'teste_client4@teste.com', 4);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-56', 'Client5', 'Cliente5', '1234679', 'teste_client5@teste.com', 5);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-55', 'Client6', 'Cliente6', '1234679', 'teste_client6@teste.com', 6);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-54', 'Client7', 'Cliente7', '1234679', 'teste_client6@teste.com', 7);
-INSERT INTO tb_client (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-53', 'Client8', 'Cliente8', '1234679', 'teste_client8@teste.com', 8);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-52', 'Client1', 'Cliente1', '1234679', 'teste_client1@teste.com', 1);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-59', 'Client2', 'Cliente2', '1234679', 'teste_client2@teste.com', 2);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-58', 'Client3', 'Cliente3', '1234679', 'teste_client3@teste.com', 3);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-57', 'Client4', 'Cliente4', '1234679', 'teste_client4@teste.com', 4);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-56', 'Client5', 'Cliente5', '1234679', 'teste_client5@teste.com', 5);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-55', 'Client6', 'Cliente6', '1234679', 'teste_client6@teste.com', 6);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-54', 'Client7', 'Cliente7', '1234679', 'teste_client6@teste.com', 7);
+INSERT INTO tb_client (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-53', 'Client8', 'Cliente8', '1234679', 'teste_client8@teste.com', 8);
  
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-52', 'Provider1', 'Provider1', '1234679', 'teste_provider1@teste.com', 1);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-59', 'Provider2', 'Provider2', '1234679', 'teste_provider2@teste.com', 2);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-58', 'Provider3', 'Provider3', '1234679', 'teste_provider3@teste.com', 3);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-57', 'Provider4', 'Provider4', '1234679', 'teste_provider4@teste.com', 4);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-56', 'Provider5', 'Provider5', '1234679', 'teste_provider5@teste.com', 5);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-55', 'Provider6', 'Provider6', '1234679', 'teste_provider6@teste.com', 6);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-54', 'Provider7', 'Provider7', '1234679', 'teste_provider7@teste.com', 7);
-INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone, email, address_id) VALUES ('02.905.450/0001-53', 'Provider8', 'Provider8', '1234679', 'teste_provider8@teste.com', 8);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-52', 'Provider1', 'Provider1', '1234679', 'teste_provider1@teste.com', 1);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-59', 'Provider2', 'Provider2', '1234679', 'teste_provider2@teste.com', 2);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-58', 'Provider3', 'Provider3', '1234679', 'teste_provider3@teste.com', 3);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-57', 'Provider4', 'Provider4', '1234679', 'teste_provider4@teste.com', 4);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-56', 'Provider5', 'Provider5', '1234679', 'teste_provider5@teste.com', 5);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-55', 'Provider6', 'Provider6', '1234679', 'teste_provider6@teste.com', 6);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-54', 'Provider7', 'Provider7', '1234679', 'teste_provider7@teste.com', 7);
+INSERT INTO tb_provider (cnpj, name, fantasy_Name, phone_number, email, address_id) VALUES ('02.905.450/0001-53', 'Provider8', 'Provider8', '1234679', 'teste_provider8@teste.com', 8);
 
 INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery1', 'ModelBattery1', 100, 1000, 200, 300, 30, 'www.teste.com');
 INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery2', 'ModelBattery2', 100, 2000, 200, 300, 30, 'www.teste.com');

@@ -35,16 +35,16 @@ public class Client implements Serializable {
   private String cnpj;
   private String name;
   private String fantasyName;
-  private String phone;
+  private String phoneNumber;
   private String email;
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
 
-  public Client(String cnpj, String name, String fantasyName, String phone, String email, Address address) {
+  public Client(String cnpj, String name, String fantasyName, String phoneNumber, String email, Address address) {
     this.cnpj = cnpj;
     this.name = name;
     this.fantasyName = fantasyName;
-    this.phone = phone;
+    this.phoneNumber = phoneNumber;
     this.email = email;
     this.address = address;
   }

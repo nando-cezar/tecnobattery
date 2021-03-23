@@ -54,7 +54,7 @@ public class BoardManagementController {
 
   @PutMapping("/{boardId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<BoardResponse> update(@Valid @PathVariable Long boardId, @RequestBody BoardRequest boardInput) {
+  public ResponseEntity<BoardResponse> update(@PathVariable Long boardId, @Valid @RequestBody BoardRequest boardInput) {
 
     if (!boardService.existsById(boardId)) {
       return ResponseEntity.notFound().build();

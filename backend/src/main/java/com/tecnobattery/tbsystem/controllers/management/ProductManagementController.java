@@ -54,8 +54,8 @@ public class ProductManagementController {
 
   @PutMapping("/{productId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<ProductResponse> update(@Valid @PathVariable Long productId,
-      @RequestBody ProductRequest productInput) {
+  public ResponseEntity<ProductResponse> update(@PathVariable Long productId,
+      @Valid @RequestBody ProductRequest productInput) {
 
     if (!productService.existsById(productId)) {
       return ResponseEntity.notFound().build();

@@ -22,7 +22,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
@@ -51,18 +50,15 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
     try {
 
-      Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+      Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
 
-      Claims body = claimsJws.getBody();
-
-      String username = body.getSubject();
-
-      var authorities = (List<Map<String, String>>) body.get("authorities");
+      var authorities = getAuthorities(claims);
 
       Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
           .map(m -> new SimpleGrantedAuthority(m.get("authority"))).collect(Collectors.toSet());
 
-      Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, simpleGrantedAuthorities);
+      Authentication authentication = new UsernamePasswordAuthenticationToken(claims.getSubject(), null,
+          simpleGrantedAuthorities);
 
       SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -71,6 +67,11 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     }
 
     filterChain.doFilter(request, response);
+  }
+
+  @SuppressWarnings("unchecked")
+  private List<Map<String, String>> getAuthorities(Claims claims) {
+    return (List<Map<String, String>>) claims.get("authorities");
   }
 
 }

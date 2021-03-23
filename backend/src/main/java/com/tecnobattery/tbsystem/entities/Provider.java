@@ -38,7 +38,7 @@ public class Provider implements Serializable {
   private String name;
   private String fantasyName;
   private String cnpj;
-  private String phone;
+  private String phoneNumber;
   @NotBlank
   @Email
   @Size(max = 255)
@@ -46,11 +46,11 @@ public class Provider implements Serializable {
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
 
-  public Provider(String name, String fantasyName, String cnpj, String phone, String email, Address address) {
+  public Provider(String name, String fantasyName, String cnpj, String phoneNumber, String email, Address address) {
     this.name = name;
     this.fantasyName = fantasyName;
     this.cnpj = cnpj;
-    this.phone = phone;
+    this.phoneNumber = phoneNumber;
     this.email = email;
     this.address = address;
   }

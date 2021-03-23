@@ -54,8 +54,8 @@ public class BatteryManagementController {
 
   @PutMapping("/{batteryId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<BatteryResponse> update(@Valid @PathVariable Long batteryId,
-      @RequestBody BatteryRequest batteryInput) {
+  public ResponseEntity<BatteryResponse> update(@PathVariable Long batteryId,
+      @Valid @RequestBody BatteryRequest batteryInput) {
 
     if (!batteryService.existsById(batteryId)) {
       return ResponseEntity.notFound().build();

@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+
+import com.tecnobattery.tbsystem.twilio.server.phone_number.listener.ValidPhoneNumber;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -34,9 +36,9 @@ public class ProviderRequest implements Serializable {
   private String name;
   @NotBlank(message = "Nome Fantasia se encontra em branco ou inválido.")
   private String fantasyName;
-  @NotBlank(message = "Número de telefone se encontra em branco ou inválido.")
-  @Size(max = 14, message = "Número de telefone deve possuir no máximo 14 caracteres.")
-  private String phone;
+  @NotNull(message = "Telefone se encontra em branco ou inválido.")
+  @ValidPhoneNumber(message = "Telefone inválido.")
+  private String phoneNumber;
   @NotBlank(message = "E-mail se encontra em branco ou inválido.")
   @Email(message = "E-mail inválido.")
   private String email;

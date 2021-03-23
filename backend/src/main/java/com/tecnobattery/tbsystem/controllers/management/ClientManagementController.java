@@ -55,8 +55,8 @@ public class ClientManagementController {
 
   @PutMapping("/{clientId}")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<ClientResponse> update(@Valid @PathVariable Long clientId,
-      @RequestBody ClientRequest clientInput) {
+  public ResponseEntity<ClientResponse> update(@PathVariable Long clientId,
+      @Valid @RequestBody ClientRequest clientInput) {
 
     if (!clientService.existsById(clientId)) {
       return ResponseEntity.notFound().build();
