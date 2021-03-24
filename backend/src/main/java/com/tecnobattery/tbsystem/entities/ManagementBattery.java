@@ -3,7 +3,6 @@ package com.tecnobattery.tbsystem.entities;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -36,7 +35,7 @@ public class ManagementBattery implements Serializable {
   private Long id;
   @ManyToOne
   private Provider provider;
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne
   private Battery battery;
   private OffsetDateTime moment;
   private Integer amount;

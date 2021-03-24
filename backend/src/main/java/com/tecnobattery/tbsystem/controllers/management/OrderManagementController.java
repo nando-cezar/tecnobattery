@@ -92,9 +92,9 @@ public class OrderManagementController {
     return ResponseEntity.ok(orderService.save(order));
   }
 
-  @PutMapping("finish/{orderId}")
+  @PutMapping("/{orderId}/delivered")
   @PreAuthorize("hasAuthority('global:write')")
-  public ResponseEntity<OrderResponse> finish(@Valid @PathVariable Long orderId) {
+  public ResponseEntity<OrderResponse> setDelivered(@Valid @PathVariable Long orderId) {
 
     if (!orderService.existsById(orderId)) {
       return ResponseEntity.notFound().build();
