@@ -2,9 +2,7 @@ package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,7 +34,7 @@ public class OrderResponse implements Serializable {
   private OrderStatus status;
   private OffsetDateTime opening;
   private OffsetDateTime deadline;
-  private List<ProductResponse> products = new ArrayList<>();
   private Set<UserResponse> users = new HashSet<>();
+  private Set<ProductResponse> products = new HashSet<>();
 
 }

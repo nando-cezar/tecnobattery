@@ -1,9 +1,7 @@
 package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotBlank;
@@ -36,7 +34,7 @@ public class OrderRequest implements Serializable {
   @NotNull(message = "Preço é obrigatório.")
   private Double price;
   @NotNull(message = "Produto é obrigatório.")
-  private List<ProductRequest> products = new ArrayList<>();
+  private Set<ProductRequest> products = new HashSet<>();
   @NotNull(message = "Usuário é obrigatório.")
   private Set<UserRequest> users = new HashSet<>();
 

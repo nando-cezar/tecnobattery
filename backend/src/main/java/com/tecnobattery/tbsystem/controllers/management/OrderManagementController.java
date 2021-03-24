@@ -19,7 +19,6 @@ import com.tecnobattery.tbsystem.services.ProductService;
 import com.tecnobattery.tbsystem.tools.ToolConvertIdObject;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,12 +43,8 @@ public class OrderManagementController {
   private final ClientService clientService;
   private final ProductService productService;
   private final UserService userService;
-
-  @Autowired
-  private ToolModelMapper toolModelMapper;
-
-  @Autowired
-  private ToolConvertIdObject toolConvertIdObject;
+  private final ToolModelMapper toolModelMapper;
+  private final ToolConvertIdObject toolConvertIdObject;
 
   @PostMapping
   @PreAuthorize("hasAuthority('global:write')")
@@ -58,7 +53,7 @@ public class OrderManagementController {
 
     Order order = toolModelMapper.toModel(orderInput, Order.class);
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
-    order.setStatus(OrderStatus.PENDENTE);
+    order.setStatus(OrderStatus.PENDING);
     order.setOpening(OffsetDateTime.now());
     order.setProducts(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService, Product.class));
     order.setUsers(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService, User.class));
@@ -90,8 +85,8 @@ public class OrderManagementController {
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
     order.setDescription(orderInput.getDescription());
     order.setPrice(orderInput.getPrice());
-    order.setProducts(toolModelMapper.toCollection(orderInput.getProducts(), Product.class));
-    order.setUsers(toolModelMapper.toCollection(orderInput.getUsers(), User.class));
+    order.setProducts(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService, Product.class));
+    order.setUsers(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService, User.class));
     order.setId(orderId);
 
     return ResponseEntity.ok(orderService.save(order));
@@ -109,7 +104,7 @@ public class OrderManagementController {
 
     if (order.getDeadline() == null) {
 
-      order.setStatus(OrderStatus.ENTREGUE);
+      order.setStatus(OrderStatus.DELIVERED);
       order.setDeadline(OffsetDateTime.now());
       order.setId(orderId);
       return ResponseEntity.ok(orderService.save(order));

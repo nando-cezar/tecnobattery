@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.OrderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -25,13 +24,10 @@ public class OrderService {
     return toolModelMapper.toModel(orderRepository.save(order), OrderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<OrderResponse> findAll() {
-    List<Order> orders = orderRepository.findAll();
-    return toolModelMapper.toCollection(orders, OrderResponse.class);
+    return toolModelMapper.toCollection(orderRepository.findOrdersWithProducts(), OrderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public OrderResponse findById(Long orderId) {
     Optional<Order> order = orderRepository.findById(orderId);
     if (order.isPresent()) {
@@ -41,7 +37,6 @@ public class OrderService {
         OrderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long orderId) {
     return orderRepository.existsById(orderId);
   }

@@ -37,8 +37,7 @@ public class UserService implements UserDetailsService {
   }
 
   public List<UserResponse> findAll() {
-    List<User> users = userRepository.findAll();
-    return toolModelMapper.toCollection(users, UserResponse.class);
+    return toolModelMapper.toCollection(userRepository.findAll(), UserResponse.class);
   }
 
   public UserResponse findById(Long userId) {

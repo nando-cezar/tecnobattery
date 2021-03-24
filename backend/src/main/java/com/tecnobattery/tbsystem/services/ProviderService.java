@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.ProviderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -34,13 +33,10 @@ public class ProviderService {
     return toolModelMapper.toModel(providerRepository.save(provider), ProviderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<ProviderResponse> findAll() {
-    List<Provider> providers = providerRepository.findAll();
-    return toolModelMapper.toCollection(providers, ProviderResponse.class);
+    return toolModelMapper.toCollection(providerRepository.findAll(), ProviderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public ProviderResponse findById(Long providerId) {
     Optional<Provider> provider = providerRepository.findById(providerId);
     if (provider.isPresent()) {
@@ -50,7 +46,6 @@ public class ProviderService {
         ProviderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long providerId) {
     return providerRepository.existsById(providerId);
   }

@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.ManagementBatteryRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -26,13 +25,10 @@ public class ManagementBatteryService {
         ManagementBatteryResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<ManagementBatteryResponse> findAll() {
-    List<ManagementBattery> batterys = managementBatteryRepository.findAll();
-    return toolModelMapper.toCollection(batterys, ManagementBatteryResponse.class);
+    return toolModelMapper.toCollection(managementBatteryRepository.findAll(), ManagementBatteryResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public ManagementBatteryResponse findById(Long managementBatteryId) {
     Optional<ManagementBattery> managementBattery = managementBatteryRepository.findById(managementBatteryId);
     if (managementBattery.isPresent()) {
@@ -43,7 +39,6 @@ public class ManagementBatteryService {
         ManagementBatteryResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long managementBatteryId) {
     return managementBatteryRepository.existsById(managementBatteryId);
   }

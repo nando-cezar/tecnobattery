@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.CommentRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -25,13 +24,10 @@ public class CommentService {
     return toolModelMapper.toModel(commentRepository.save(comment), CommentResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<CommentResponse> findAll() {
-    List<Comment> comments = commentRepository.findAll();
-    return toolModelMapper.toCollection(comments, CommentResponse.class);
+    return toolModelMapper.toCollection(commentRepository.findAll(), CommentResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public CommentResponse findById(Long commentId) {
     Optional<Comment> comment = commentRepository.findById(commentId);
     if (comment.isPresent()) {
@@ -41,7 +37,6 @@ public class CommentService {
         CommentResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long commentId) {
     return commentRepository.existsById(commentId);
   }

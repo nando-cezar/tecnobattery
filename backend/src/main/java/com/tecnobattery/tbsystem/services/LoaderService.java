@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.LoaderRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -34,13 +33,10 @@ public class LoaderService {
     return toolModelMapper.toModel(loaderRepository.save(loader), LoaderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<LoaderResponse> findAll() {
-    List<Loader> loaders = loaderRepository.findAll();
-    return toolModelMapper.toCollection(loaders, LoaderResponse.class);
+    return toolModelMapper.toCollection(loaderRepository.findAll(), LoaderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public LoaderResponse findById(Long loaderId) {
     Optional<Loader> loader = loaderRepository.findById(loaderId);
     if (loader.isPresent()) {
@@ -50,7 +46,6 @@ public class LoaderService {
         LoaderResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long loaderId) {
     return loaderRepository.existsById(loaderId);
   }

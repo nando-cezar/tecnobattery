@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/orders/{orderId}/{userId}/comments")
+@RequestMapping(value = "api/v1/orders/{orderId}/{userId}/comments")
 @AllArgsConstructor
 public class CommentController {
 

@@ -24,5 +24,6 @@ public class CommentResponse implements Serializable {
   private String title;
   private String description;
   private OffsetDateTime moment;
+  private UserResponse user;
 
 }

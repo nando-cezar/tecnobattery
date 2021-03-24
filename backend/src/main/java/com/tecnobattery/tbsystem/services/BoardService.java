@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.BoardRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -34,13 +33,10 @@ public class BoardService {
     return toolModelMapper.toModel(boardRepository.save(board), BoardResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<BoardResponse> findAll() {
-    List<Board> boards = boardRepository.findAll();
-    return toolModelMapper.toCollection(boards, BoardResponse.class);
+    return toolModelMapper.toCollection(boardRepository.findAll(), BoardResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public BoardResponse findById(Long boardId) {
     Optional<Board> board = boardRepository.findById(boardId);
     if (board.isPresent()) {
@@ -50,7 +46,6 @@ public class BoardService {
         BoardResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long boardId) {
     return boardRepository.existsById(boardId);
   }

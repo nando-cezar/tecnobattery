@@ -69,13 +69,13 @@ INSERT INTO tb_product (name, power, capacity, voltage, price, description, imag
 INSERT INTO tb_product (name, power, capacity, voltage, price, description, image_Url) VALUES ('Macarrão Fusili',    38, 38, 4000, 4000, 'fsdf', 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/macarrao_fusili.jpg');
 INSERT INTO tb_product (name, power, capacity, voltage, price, description, image_Url) VALUES ('Macarrão Penne',     37, 37, 4000, 4000, 'fsdf', 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/macarrao_penne.jpg');
 
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (1, 'Produto BAT 2S2P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (3, 'Produto BAT 4S3P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (4, 'Produto BAT 1S2P', 100,  'ENTREGUE', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 3S1P', 100,  'ENTREGUE', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 5S6P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (5, 'Produto BAT 4S4P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z');
-INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (6, 'Produto BAT 1S2P', 100,  'PENDENTE', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (1, 'Produto BAT 2S2P', 100,  'PENDING', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (3, 'Produto BAT 4S3P', 100,  'PENDING', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T15:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (4, 'Produto BAT 1S2P', 100,  'DELIVERED', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T16:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 3S1P', 100,  'DELIVERED', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T12:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (2, 'Produto BAT 5S6P', 100,  'PENDING', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T08:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (5, 'Produto BAT 4S4P', 100,  'PENDING', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T14:00:00Z');
+INSERT INTO tb_order (client_id, description, price, status, opening, deadline) VALUES (6, 'Produto BAT 1S2P', 100,  'PENDING', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z', TIMESTAMP WITH TIME ZONE '2021-01-01T09:00:00Z');
 
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (1,  1, 'Title1',   'Commentario 1', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (2,  1, 'Title2',   'Commentario 2', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
@@ -109,26 +109,25 @@ INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES 
 INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (5,  7, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
 
 INSERT INTO tb_order_user (order_id, user_id) VALUES (1 , 1);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (1 , 4);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (2 , 2);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (2 , 5);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (2 , 8);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (3 , 3);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (3 , 4);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (4 , 2);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (4 , 6);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (5 , 4);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (5 , 6);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (6 , 5);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (6 , 1);
-INSERT INTO tb_order_user (order_id, user_id) VALUES (7 , 7);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (1 , 2);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (2 , 3);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (2 , 4);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (3 , 5);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (3 , 6);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (4 , 7);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (4 , 8);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (5 , 1);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (5 , 2);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (6 , 3);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (6 , 4);
 INSERT INTO tb_order_user (order_id, user_id) VALUES (7 , 5);
+INSERT INTO tb_order_user (order_id, user_id) VALUES (7 , 6);
 
 INSERT INTO tb_order_product (order_id, product_id) VALUES (1 , 1);
-INSERT INTO tb_order_product (order_id, product_id) VALUES (4 , 1);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (1 , 2);
 INSERT INTO tb_order_product (order_id, product_id) VALUES (2 , 2);
-INSERT INTO tb_order_product (order_id, product_id) VALUES (5 , 2); 
-INSERT INTO tb_order_product (order_id, product_id) VALUES (7 , 2);
-INSERT INTO tb_order_product (order_id, product_id) VALUES (3 , 3);
-INSERT INTO tb_order_product (order_id, product_id) VALUES (4 , 3);
-INSERT INTO tb_order_product (order_id, product_id) VALUES (2 , 4);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (3 , 4); 
+INSERT INTO tb_order_product (order_id, product_id) VALUES (4 , 5);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (5 , 1);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (6 , 2);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (7 , 3);

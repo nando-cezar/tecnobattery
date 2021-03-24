@@ -52,7 +52,7 @@ public class OrderController {
 
     Order order = toolModelMapper.toModel(orderInput, Order.class);
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
-    order.setStatus(OrderStatus.PENDENTE);
+    order.setStatus(OrderStatus.PENDING);
     order.setOpening(OffsetDateTime.now());
     order.setProducts(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService, Product.class));
     order.setUsers(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService, User.class));
@@ -84,7 +84,7 @@ public class OrderController {
 
     if (order.getDeadline() == null) {
 
-      order.setStatus(OrderStatus.ENTREGUE);
+      order.setStatus(OrderStatus.DELIVERED);
       order.setDeadline(OffsetDateTime.now());
       order.setId(orderId);
       return ResponseEntity.ok(orderService.save(order));

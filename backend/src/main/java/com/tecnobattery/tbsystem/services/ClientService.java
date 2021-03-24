@@ -10,7 +10,6 @@ import com.tecnobattery.tbsystem.repositories.ClientRepository;
 import com.tecnobattery.tbsystem.tools.ToolModelMapper;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 
@@ -34,13 +33,10 @@ public class ClientService {
     return toolModelMapper.toModel(clientRepository.save(client), ClientResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public List<ClientResponse> findAll() {
-    List<Client> clients = clientRepository.findAll();
-    return toolModelMapper.toCollection(clients, ClientResponse.class);
+    return toolModelMapper.toCollection(clientRepository.findAll(), ClientResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public ClientResponse findById(Long clientId) {
     Optional<Client> client = clientRepository.findById(clientId);
     if (client.isPresent()) {
@@ -50,7 +46,6 @@ public class ClientService {
         ClientResponse.class);
   }
 
-  @Transactional(readOnly = true)
   public boolean existsById(Long clientId) {
     return clientRepository.existsById(clientId);
   }
