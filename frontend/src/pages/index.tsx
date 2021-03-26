@@ -1,9 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
 
-import RocketseatLogo from '../assets/rocketseat.svg'
-
 import { Container } from '../styles/pages/Home'
+
+import TecnobatteryLogo from '../assets/tecnobattery.svg'
 
 const Home: React.FC = () => {
   return (
@@ -12,9 +12,9 @@ const Home: React.FC = () => {
         <title>Homepage</title>
       </Head>
 
-      <RocketseatLogo />
-      <h1>ReactJS Structure</h1>
-      <p>A ReactJS + Next.js structure made by Rocketseat.</p>
+      <TecnobatteryLogo />
+      <h1>Tecnobattery Eletronics</h1>
+      <p>Procure a oportunidade de energizar o seu negócio agora.</p>
     </Container>
   )
 }
