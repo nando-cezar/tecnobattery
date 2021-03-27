@@ -43,7 +43,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
      * http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()
      * );
      */
-    http.csrf().and().cors().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.cors().disable();
+    http.csrf().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
     http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
     http.authorizeRequests().antMatchers("/", "index", "/css/*", "/js/*").permitAll().anyRequest().authenticated();
