@@ -5,8 +5,11 @@ import Divider from '../components/Divider'
 import Input from '../components/Input'
 
 import TecnobatteryLogo from '../assets/tecnobattery.svg'
+import React from 'react'
+import InputPassword from '../components/InputPassword'
 
 export default function Home() {
+
   return (
     <Grid
       as="main"
@@ -40,13 +43,11 @@ export default function Home() {
       >
         <Input
           placeholder="E-mail"
+          type="email"
         />
 
-        <Input
-          placeholder="Senha"
-          marginTop={2}
-        />
-
+        <InputPassword />
+        
         <Link
           alignSelf="flex-start"
           marginTop={2}
