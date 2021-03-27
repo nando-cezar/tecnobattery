@@ -44,7 +44,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
      * );
      */
     http.cors().disable();
-    http.csrf().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
     http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
     http.authorizeRequests().antMatchers("/", "index", "/css/*", "/js/*").permitAll().anyRequest().authenticated();
