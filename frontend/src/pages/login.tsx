@@ -8,11 +8,13 @@ import TecnobatteryLogo from '../assets/tecnobattery.svg'
 import React from 'react'
 import InputPassword from '../components/InputPassword'
 
+import router from 'next/router'
+
 import axios from "axios"
 
 export default function Home() {
 
-  const URL = "https://app-tecnobattery.herokuapp.com"
+  const URL = "http://localhost:8080"
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -26,28 +28,21 @@ export default function Home() {
 
     const options = {
       headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Authorization",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE",
-        "Content-Type": "application/json;charset=UTF-8"
+        "Content-Type": "application/json"
       }
     };
-    axios.post(endpoint, body,options).then(function (response) {
-      console.log(response.headers);
-      console.log(response.status);
-      console.log(response.config);
-      console.log(response.data);
-      //localStorage.setItem("Authorization", response.headers['Authorization']) 
-      //return handleDashboard()
+    axios.post(endpoint, body, options).then(function (response) {
+      localStorage.setItem("Authorization", response.data) 
+      return handleDashboard()
     }).catch(function (error) {
-      console.log(error)
+      alert(error.response.data.message + " " + error.response.data.timestamp)
     })
   }
 
   const handleDashboard = () => {
-    axios.get(URL + "/clients", { headers: { Authorization: localStorage.getItem('Authorization') } }).then(res => {
-      if (res.data === "success") {
-        this.props.history.push("/test");
+    axios.get(URL + "/management/api/v1/clients/7", { headers: { Authorization: localStorage.getItem('Authorization') } }).then(res => {
+      if (res.status === 200 ) {
+        router.push('/')
       } else {
         alert("Authentication failure");
       }

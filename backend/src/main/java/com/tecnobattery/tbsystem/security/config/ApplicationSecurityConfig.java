@@ -22,7 +22,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -48,11 +47,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
       http.headers().frameOptions().disable();
     }
-    http.cors().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().anyRequest().permitAll();
-    http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+    http.cors().and().csrf().disable();
+    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    // http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
     http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
+    http.authorizeRequests().anyRequest().permitAll();
+
   }
 
   @Override
