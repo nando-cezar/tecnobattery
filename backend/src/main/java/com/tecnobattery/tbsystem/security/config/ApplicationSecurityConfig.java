@@ -69,13 +69,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
-    final CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(ImmutableList.of("*"));
+    final CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+    configuration.setAllowedOrigins(ImmutableList.of(CorsConfiguration.ALL));
     configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
     configuration.setAllowCredentials(true);
-    configuration.setAllowedHeaders(ImmutableList.of("Cache-Control", "Access-Control-Allow-Headers",
-        "Access-Control-Request-Method", "Access-Control-Allow-Origin", "Access-Control-Expose-Headers", "Origin",
-        "X-Requested-With", "Content-Type", "Accept", "X-XSRF-TOKEN", "Authorization"));
+    configuration.setAllowedHeaders(ImmutableList.of(CorsConfiguration.ALL));
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;

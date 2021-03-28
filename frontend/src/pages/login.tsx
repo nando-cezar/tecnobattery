@@ -12,7 +12,7 @@ import axios from "axios"
 
 export default function Home() {
 
-  const URL = "https://app-tecnobattery.herokuapp.com"
+  const URL = "https://cors-anywhere.herokuapp.com/https://app-tecnobattery.herokuapp.com"
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -32,8 +32,7 @@ export default function Home() {
         "Content-Type": "application/json;charset=UTF-8"
       }
     };
-
-    axios.post(endpoint, body, options).then(function (response) {
+    axios.post(endpoint, body).then(function (response) {
       console.log(response.headers);
       console.log(response.status);
       console.log(response.config);
