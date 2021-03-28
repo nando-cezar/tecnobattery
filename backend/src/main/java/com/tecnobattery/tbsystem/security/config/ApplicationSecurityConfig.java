@@ -51,7 +51,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
      * http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()
      * );
      */
-    http.cors().and().csrf().disable();
+    http.cors();
+    http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
     http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
@@ -73,7 +74,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
-    final CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+    final CorsConfiguration configuration = new CorsConfiguration();
     configuration.setAllowedOrigins(ImmutableList.of("*"));
     configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
     configuration.setAllowCredentials(true);
