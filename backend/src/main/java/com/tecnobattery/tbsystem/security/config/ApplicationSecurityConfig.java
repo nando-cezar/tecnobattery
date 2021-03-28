@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.crypto.SecretKey;
 
+import com.google.common.collect.ImmutableList;
 import com.tecnobattery.tbsystem.auth.service.UserService;
 import com.tecnobattery.tbsystem.jwt.token.JwtTokenVerifier;
 import com.tecnobattery.tbsystem.jwt.config.JwtConfig;
@@ -72,11 +73,14 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
-    CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
-    configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
-    configuration.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+    final CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(ImmutableList.of("*"));
+    configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+    configuration.setAllowCredentials(true);
+    configuration.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
   }
+
 }
