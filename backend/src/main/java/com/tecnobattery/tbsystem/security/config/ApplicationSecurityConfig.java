@@ -74,8 +74,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
     configuration.setAllowCredentials(true);
     configuration.setAllowedHeaders(ImmutableList.of("Cache-Control", "Access-Control-Allow-Headers",
-        "Access-Control-Request-Method", "Access-Control-Allow-Origin", "Access-Control-Expose-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept", "XSRF-TOKEN", "Authorization"));
+        "Access-Control-Request-Method", "Access-Control-Allow-Origin", "Access-Control-Expose-Headers", "Origin",
+        "X-Requested-With", "Content-Type", "Accept", "X-XSRF-TOKEN", "Authorization"));
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;

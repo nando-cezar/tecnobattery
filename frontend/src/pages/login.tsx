@@ -26,11 +26,13 @@ export default function Home() {
 
     const options = {
       headers: {
-        'Accept': 'application/json'
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Authorization",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE",
+        "Content-Type": "application/json;charset=UTF-8"
       }
     };
-    axios.defaults.headers.post['Content-Type'] = 'application/json';
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+
     axios.post(endpoint, body, options).then(function (response) {
       console.log(response.headers);
       console.log(response.status);
