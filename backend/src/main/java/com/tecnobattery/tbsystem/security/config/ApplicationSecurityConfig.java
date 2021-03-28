@@ -49,10 +49,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
       http.headers().frameOptions().disable();
     }
     http.cors().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.authorizeRequests().anyRequest().permitAll();
     http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
     http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
-    http.authorizeRequests().anyRequest().permitAll();
   }
 
   @Override
