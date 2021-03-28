@@ -12,7 +12,7 @@ import axios from "axios"
 
 export default function Home() {
 
-  const URL = "https://cors-anywhere.herokuapp.com/https://app-tecnobattery.herokuapp.com"
+  const URL = "https://app-tecnobattery.herokuapp.com"
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
