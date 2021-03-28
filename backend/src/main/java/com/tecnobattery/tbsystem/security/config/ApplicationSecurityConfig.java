@@ -47,7 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
       http.headers().frameOptions().disable();
     }
-
+    http.cors();
     http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     http.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig, secretKey));
     http.addFilterAfter(new JwtTokenVerifier(secretKey, jwtConfig), JwtUsernameAndPasswordAuthenticationFilter.class);
@@ -73,10 +73,9 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     configuration.setAllowedOrigins(ImmutableList.of("*"));
     configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
     configuration.setAllowCredentials(true);
-    configuration.setAllowedHeaders(
-        ImmutableList.of("Cache-Control", "Access-Control-Allow-Headers", "Access-Control-Request-Method",
-            "Origin, X-Requested-With, Content-Type, Accept", "XSRF-TOKEN", "Authorization"));
-    configuration.addExposedHeader("Access-Control-Allow-Origin");
+    configuration.setAllowedHeaders(ImmutableList.of("Cache-Control", "Access-Control-Allow-Headers",
+        "Access-Control-Request-Method", "Access-Control-Allow-Origin", "Access-Control-Expose-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept", "XSRF-TOKEN", "Authorization"));
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;

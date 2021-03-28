@@ -17,7 +17,7 @@ export default function Home() {
   const handleFormSubmit = (event) => {
     event.preventDefault();
 
-    const endpoint = URL+"/login";
+    const endpoint = URL + "/login";
 
     const body = {
       username: "teste1",
@@ -26,25 +26,25 @@ export default function Home() {
 
     const options = {
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
       }
     };
-    
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios.post(endpoint, body, options).then(function (response) {
-      console.log(response.headers.Authorization);
+      console.log(response.headers);
       console.log(response.status);
       console.log(response.config);
       console.log(response.headers);
       //localStorage.setItem("Authorization", response.headers['Authorization']) 
       //return handleDashboard()
-    }).catch(function (error){
+    }).catch(function (error) {
       console.log(error)
     })
   }
 
   const handleDashboard = () => {
-    axios.get( URL+"/clients", { headers: { Authorization: localStorage.getItem('Authorization')} }).then(res => {
+    axios.get(URL + "/clients", { headers: { Authorization: localStorage.getItem('Authorization') } }).then(res => {
       if (res.data === "success") {
         this.props.history.push("/test");
       } else {
@@ -68,10 +68,10 @@ export default function Home() {
       alignItems="center"
     >
       <Flex gridArea="logo" flexDir="column" alignItems="flex-start">
-        <Link 
+        <Link
           href="/"
-          _focus={{ border:'none' }} 
-          >
+          _focus={{ border: 'none' }}
+        >
           <TecnobatteryLogo />
         </Link>
 
