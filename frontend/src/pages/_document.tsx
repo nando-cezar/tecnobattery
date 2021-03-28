@@ -8,6 +8,7 @@ import Document, {
   NextScript
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import Particlesbg from './../components/Particlesbg';
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -39,6 +40,7 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
+
       <Html lang="pt">
         <Head>
           <meta charSet="utf-8" />
@@ -51,8 +53,8 @@ export default class MyDocument extends Document {
           <link rel="icon" href="https://rocketseat.com.br/favicon.ico" />
         </Head>
         <body>
-          <Main />
-          <NextScript />
+            <Main />
+            <NextScript />
         </body>
       </Html>
     )

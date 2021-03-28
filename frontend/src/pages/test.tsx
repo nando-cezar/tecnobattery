@@ -5,9 +5,8 @@ import { Container } from '../styles/pages/Home'
 
 import TecnobatteryLogo from '../assets/tecnobattery.svg'
 import { Link } from '@chakra-ui/core'
-import Particlesbg from '../components/Particlesbg'
 
-const Home: React.FC = () => {
+const Test: React.FC = () => {
   return (
     <>   
       <Container>
@@ -15,7 +14,7 @@ const Home: React.FC = () => {
           <title>Homepage</title>
         </Head>
         <TecnobatteryLogo />
-        <h1>Tecnobattery Eletronics</h1>
+        <h1>Test</h1>
         <Link
           href="/login"
           alignSelf="flex"
@@ -32,4 +31,4 @@ const Home: React.FC = () => {
   )
 }
 
-export default Home
+export default Test

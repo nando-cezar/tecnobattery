@@ -8,7 +8,50 @@ import TecnobatteryLogo from '../assets/tecnobattery.svg'
 import React from 'react'
 import InputPassword from '../components/InputPassword'
 
+import axios from "axios"
+
 export default function Home() {
+
+  const URL = "https://app-tecnobattery.herokuapp.com"
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const endpoint = URL+"/login";
+
+    const body = {
+      username: "teste1",
+      password: "123456"
+    };
+
+    const options = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    };
+    
+    axios.post(endpoint, body, options).then(function (response) {
+      console.log(response.headers.Authorization);
+      console.log(response.status);
+      console.log(response.config);
+      console.log(response.headers);
+      //localStorage.setItem("Authorization", response.headers['Authorization']) 
+      //return handleDashboard()
+    }).catch(function (error){
+      console.log(error)
+    })
+  }
+
+  const handleDashboard = () => {
+    axios.get( URL+"/clients", { headers: { Authorization: localStorage.getItem('Authorization')} }).then(res => {
+      if (res.data === "success") {
+        this.props.history.push("/test");
+      } else {
+        alert("Authentication failure");
+      }
+    });
+  }
 
   return (
     <Grid
@@ -25,7 +68,13 @@ export default function Home() {
       alignItems="center"
     >
       <Flex gridArea="logo" flexDir="column" alignItems="flex-start">
-        <TecnobatteryLogo />
+        <Link 
+          href="/"
+          _focus={{ border:'none' }} 
+          >
+          <TecnobatteryLogo />
+        </Link>
+
 
         <Heading size="2xl" lineHeight="shorter" marginTop={16}>
           Faça seu login na plataforma
@@ -47,7 +96,7 @@ export default function Home() {
         />
 
         <InputPassword />
-        
+
         <Link
           alignSelf="flex-start"
           marginTop={2}
@@ -65,6 +114,7 @@ export default function Home() {
           borderRadius="sm"
           marginTop={6}
           _hover={{ backgroundColor: 'red.600' }}
+          onClick={handleFormSubmit}
         >
           ENTRAR
         </Button>
