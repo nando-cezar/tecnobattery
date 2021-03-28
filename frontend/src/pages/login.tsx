@@ -32,11 +32,11 @@ export default function Home() {
         "Content-Type": "application/json;charset=UTF-8"
       }
     };
-    axios.post(endpoint, body, options).then(function (response) {
+    axios.post(endpoint, body).then(function (response) {
       console.log(response.headers);
       console.log(response.status);
       console.log(response.config);
-      console.log(response.headers);
+      console.log(response.data);
       //localStorage.setItem("Authorization", response.headers['Authorization']) 
       //return handleDashboard()
     }).catch(function (error) {
