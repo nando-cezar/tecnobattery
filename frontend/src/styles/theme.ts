@@ -1,7 +1,9 @@
-import { theme, DefaultTheme } from '@chakra-ui/core'
+import { extendTheme, theme } from "@chakra-ui/react"
 
-const customTheme: DefaultTheme = {
-  ...theme,
+const config: any = {
+  initialColorMode: "dark",
+  useSystemColorMode: 
+  theme, 
   fonts: {
     body: 'Roboto, system-ui, sans-serif',
     heading: 'Roboto, system-ui, sans-serif',
@@ -34,4 +36,6 @@ const customTheme: DefaultTheme = {
   },
 }
 
-export default customTheme;
+const themeChakra = extendTheme({ config })
+
+export default themeChakra

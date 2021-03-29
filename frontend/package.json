@@ -8,27 +8,34 @@
     "start": "next start"
   },
   "dependencies": {
-    "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/icons": "^1.0.7",
+    "@chakra-ui/react": "^1.4.1",
     "@chakra-ui/system": "^1.5.1",
     "@emotion/core": "^10.0.35",
-    "@emotion/react": "^11.1.5",
-    "@emotion/styled": "^10.0.27",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
     "add": "^2.0.6",
     "axios": "^0.21.1",
     "babel-plugin-inline-react-svg": "^2.0.1",
     "emotion-theming": "^10.0.27",
-    "next": "9.5.2",
+    "framer-motion": "4",
+    "next": "10.0.9",
     "next-images": "^1.7.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-tsparticles": "^1.24.2",
-    "styled-components": "^5.2.1",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@types/node": "^14.6.0",
     "@types/react": "^16.9.46",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "styled-components": "^5.2.1",
     "typescript": "^3.9.7"
   }
 }

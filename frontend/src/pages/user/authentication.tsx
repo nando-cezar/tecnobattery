@@ -1,20 +1,21 @@
-// import Head from 'next/head'
-
-import { Heading, Grid, Flex, Link, Button, Text } from '@chakra-ui/core'
-import Divider from '../components/Divider'
-import Input from '../components/Input'
-
-import TecnobatteryLogo from '../assets/tecnobattery.svg'
 import React from 'react'
-import InputPassword from '../components/InputPassword'
+
+import { Heading, Grid, Flex, Link, Button, Text } from '@chakra-ui/react' 
+import Divider from '../../components/Divider'
+import Input from '../../components/Input'
+
+import TecnobatteryLogo from '../../assets/tecnobattery.svg'
+
+import InputPassword from '../../components/InputPassword'
 
 import router from 'next/router'
 
 import axios from "axios"
 
-export default function Home() {
+export default function Authentication() {
 
-  const URL = "http://localhost:8080"
+  const URL = "https://app-tecnobattery.herokuapp.com"
+  
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -42,7 +43,7 @@ export default function Home() {
   const handleDashboard = () => {
     axios.get(URL + "/management/api/v1/clients/7", { headers: { Authorization: localStorage.getItem('Authorization') } }).then(res => {
       if (res.status === 200 ) {
-        router.push('/')
+        router.push('/test')
       } else {
         alert("Authentication failure");
       }
@@ -125,7 +126,9 @@ export default function Home() {
           <Link
             color="red.600"
             fontWeight="bold"
-            _hover={{ color: 'red.500' }}
+            _hover={{ color: 'red.50  0' }}
+            href="/user/register"
+            _focus={{ border: 'none' }}
           >
             Registre-se
           </Link>

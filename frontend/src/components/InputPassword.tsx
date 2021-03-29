@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Input as ChakraInput, InputGroup, InputProps as ChakraInputProps, InputRightElement } from '@chakra-ui/core'
+import { Button, Input as ChakraInput, InputGroup, InputProps as ChakraInputProps, InputRightElement } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 
 const InputPassword: React.FC<ChakraInputProps> = (props) => {
