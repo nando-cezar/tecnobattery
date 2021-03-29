@@ -43,7 +43,7 @@ export default function Authentication() {
   const handleDashboard = () => {
     axios.get(URL + "/management/api/v1/clients/7", { headers: { Authorization: localStorage.getItem('Authorization') } }).then(res => {
       if (res.status === 200 ) {
-        router.push('/test')
+        router.push('/dashboard')
       } else {
         alert("Authentication failure");
       }
@@ -71,7 +71,6 @@ export default function Authentication() {
         >
           <TecnobatteryLogo />
         </Link>
-
 
         <Heading size="2xl" lineHeight="shorter" marginTop={16}>
           Faça seu login na plataforma
