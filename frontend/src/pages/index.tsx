@@ -8,7 +8,7 @@ import { Link } from '@chakra-ui/react'
 import db from '../../db.json'
 
 import TecnobatteryLogo from '../assets/tecnobattery.svg'
-import Footer from '../components/Footer'
+import Footer from '../components/application/structure/Footer'
 
 
 const Container = styled.div`
@@ -38,7 +38,7 @@ const Home: React.FC = () => {
         <TecnobatteryLogo />
         <h1>{db.subtitle}</h1>
         <Link
-          href="/user/authentication"
+          href="application/user/authentication"
           alignSelf="flex"
           marginTop={2}
           fontSize={20}

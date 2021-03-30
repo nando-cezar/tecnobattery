@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Center, Link, SimpleGrid, Text } from '@chakra-ui/react'
+import { Center, Link, SimpleGrid, Text } from '@chakra-ui/react'
 
-import db from '../../db.json'
+import db from '../../../../db.json'
 
-import YouTubeIcon from '../assets/youtube.svg'
-import InstagramIcon from '../assets/instagram.svg'
-import LinkedinIcon from '../assets/linkedin.svg'
+import YouTubeIcon from '../../../assets/youtube.svg'
+import InstagramIcon from '../../../assets/instagram.svg'
+import LinkedinIcon from '../../../assets/linkedin.svg'
 
 const Footer: React.FC = () => {
   return (

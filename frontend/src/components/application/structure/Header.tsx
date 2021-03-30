@@ -2,11 +2,11 @@ import { AddIcon, CloseIcon, EditIcon, ExternalLinkIcon, HamburgerIcon, RepeatIc
 import { Center, Flex, Grid, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import React from 'react';
 import styled from 'styled-components'
-import ModalConfig from './ModalConfig';
-import ModalHelp from './ModalHelp';
+import ModalConfig from '../modal/ModalConfig'
+import ModalHelp from '../modal/ModalHelp'
 
 import router from 'next/router'
-import ColorMode from './ColorMode';
+import ColorMode from '../actions/ColorMode'
 
 const NavBar = styled.nav`      
     background-color: #D73232;
@@ -16,9 +16,9 @@ const NavBar = styled.nav`
 `;
 
 const Header: React.FC = () => {
-
+  
   const handleClose = () => {
-    router.push('/user/authentication')
+    router.push('/application/user/authentication')
     localStorage.clear
   }
 

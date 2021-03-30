@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
 
-import db from '../../db.json'
-import { SettingsIcon } from '@chakra-ui/icons';
+import db from '../../../../db.json'
+import { InfoIcon } from '@chakra-ui/icons';
 
-const ModalConfig: React.FC = () => {
+const ModalHelp: React.FC = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -14,7 +14,7 @@ const ModalConfig: React.FC = () => {
         size="md"
         variant="outline"
         aria-label="Options"
-        icon={<SettingsIcon />}
+        icon={<InfoIcon />}
         onClick={onOpen}
       />
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -38,4 +38,4 @@ const ModalConfig: React.FC = () => {
   );
 }
 
-export default ModalConfig;
+export default ModalHelp;

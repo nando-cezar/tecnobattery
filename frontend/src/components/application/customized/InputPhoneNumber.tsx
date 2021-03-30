@@ -3,11 +3,7 @@ import {Input as ChakraInput, InputGroup, InputLeftAddon, InputProps as ChakraIn
 
 const InputPhoneNumber: React.FC<ChakraInputProps> = (props) => {
 
-  const [show, setShow] = React.useState(false)
-  const handleClick = () => setShow(!show)
-
   return (
-
     <InputGroup marginTop={2} size="md">
       <InputLeftAddon height="50px" children="+234" />
       <ChakraInput
