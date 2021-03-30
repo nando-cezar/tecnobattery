@@ -1,43 +1,60 @@
 import React, { useEffect, useState } from 'react'
 
-import { Heading, Grid, Flex, Link, Button, Text, useDisclosure, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogCloseButton, AlertDialogBody, AlertDialogFooter } from '@chakra-ui/react'
+import { Heading, Grid, Flex, Link, Button, Text, useToast } from '@chakra-ui/react'
 import Divider from '../../../components/application/customized/Divider'
 import Input from '../../../components/application/customized/Input'
 import TecnobatteryLogo from '../../../assets/tecnobattery.svg'
 import InputPassword from '../../../components/application/customized/InputPassword'
 import router from 'next/router'
 import DrawerRegister from '../../../components/management/user/DrawerRegister'
-import { authenticationUser } from '../../../connection/api'
+import { authenticationUser } from '../../../server/connection/api'
 import SpinnerChakra from '../../../components/application/actions/SpinnerChakra'
+import ModalRecoveryUser from '../../../components/management/user/ModalRecoveryUser'
+import { Facebook } from '@material-ui/icons'
+import { Head } from 'next/document'
+
+import db from '../../../../db.json'
 
 export default function Authentication() {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef()
+
+  const toast = useToast()
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+      setLoading(false)
+    }, 3000)
     return () => clearTimeout(timer);
   }, [])
 
   const handleSubmit = (event) => {
 
-    event.preventDefault();
-
+    event.preventDefault()
+    setLoading(true)
     authenticationUser(username, password)
       .then(response => {
+        setLoading(false)
         localStorage.setItem("Authorization", response.data)
         router.push('/application/management/dashboard')
+        toast({
+          title: " Autenticação efetuada sucesso.",
+          status: "success",
+          duration: 1500,
+          isClosable: true,
+        })
       })
       .catch(error => {
-        setError(error.response.data)
-        onOpen
+        setLoading(false)
+        toast({
+          title: error.response.status + " Erro na autenticação.",
+          description: error.response.message,
+          status: "error",
+          duration: 1500,
+          isClosable: true,
+        })
       })
   }
 
@@ -51,10 +68,10 @@ export default function Authentication() {
           templateColumns="1fr 480px 480px 1fr"
           templateRows="1fr 480px 1fr"
           templateAreas="
-        '. . . .'
-        '. logo form .'
-        '. . . .'
-      "
+            '. . . .'
+            '. logo form .'
+            '. . . .'
+          "
           justifyContent="center"
           alignItems="center"
         >
@@ -65,36 +82,10 @@ export default function Authentication() {
             >
               <TecnobatteryLogo />
             </Link>
-
-            <Heading size="2xl" lineHeight="shorter" marginTop={16}>
-              Faça seu login na plataforma
+            <Heading as="h1" fontSize={["sm", "md", "lg", "xl"]} lineHeight="shorter" marginTop={16}>
+              Faça seu login agora
             </Heading>
           </Flex>
-          {error != null &&
-            
-            <AlertDialog
-              motionPreset="slideInBottom"
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
-              isOpen={isOpen}
-              isCentered
-            >
-              <AlertDialogOverlay />
-
-              <AlertDialogContent>
-                <AlertDialogHeader>Messagem</AlertDialogHeader>
-                <AlertDialogCloseButton />
-                <AlertDialogBody>
-                  {error}
-              </AlertDialogBody>
-                <AlertDialogFooter>
-                  <Button ref={cancelRef} onClick={onClose}>
-                    Ok
-                </Button>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          }
           <Flex
             gridArea="form"
             height="100%"
@@ -117,16 +108,7 @@ export default function Authentication() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <Link
-              alignSelf="flex-start"
-              marginTop={2}
-              fontSize="sm"
-              color="red.600"
-              fontWeight="bold"
-              _hover={{ color: 'red.500' }}
-            >
-              Esqueci minha senha
-        </Link>
+            <ModalRecoveryUser />
 
             <Button
               backgroundColor="red.500"
@@ -137,7 +119,7 @@ export default function Authentication() {
               onClick={handleSubmit}
             >
               ENTRAR
-        </Button>
+            </Button>
 
             <Text
               textAlign="center"
@@ -161,8 +143,9 @@ export default function Authentication() {
                 borderRadius="sm"
                 _hover={{ backgroundColor: 'red.500' }}
               >
+                <Facebook />
                 FACEBOOK
-          </Button>
+              </Button>
             </Flex>
           </Flex>
         </Grid>

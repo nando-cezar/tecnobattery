@@ -2,8 +2,7 @@ import { extendTheme, theme } from "@chakra-ui/react"
 
 const config: any = {
   initialColorMode: "dark",
-  useSystemColorMode: 
-  theme, 
+  useSystemColorMode: false,
   fonts: {
     body: 'Roboto, system-ui, sans-serif',
     heading: 'Roboto, system-ui, sans-serif',

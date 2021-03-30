@@ -18,7 +18,7 @@ const DrawerRegister: React.FC = () => {
         color="red.600"
         fontWeight="bold"
         _hover={{ color: 'red.500' }}
-        ref={btnRef} 
+        ref={btnRef}
         onClick={onOpen}
         _focus={{ border: 'none' }}
       >
@@ -32,7 +32,6 @@ const DrawerRegister: React.FC = () => {
       >
         <DrawerOverlay>
           <DrawerContent>
-            <DrawerCloseButton />
             <DrawerHeader>Crie sua conta</DrawerHeader>
 
             <DrawerBody>
@@ -50,15 +49,12 @@ const DrawerRegister: React.FC = () => {
 
             <DrawerFooter>
               <Button
-                variant="outline"
-                mr={3}
-                onClick={onClose}
-              >
-                Cancelar
-              </Button>
-              <Button
-                colorScheme="blue"
+                height="50px"
+                flex="1"
+                backgroundColor="gray.600"
+                borderRadius="sm"
                 _hover={{ backgroundColor: 'red.500' }}
+
               >
                 Registrar
               </Button>

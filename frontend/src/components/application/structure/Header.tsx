@@ -1,4 +1,4 @@
-import { AddIcon, CloseIcon, EditIcon, ExternalLinkIcon, HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
+import { AddIcon, EditIcon, ExternalLinkIcon, HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
 import { Center, Flex, Grid, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
 import React from 'react';
 import styled from 'styled-components'
@@ -7,9 +7,10 @@ import ModalHelp from '../modal/ModalHelp'
 
 import router from 'next/router'
 import ColorMode from '../actions/ColorMode'
+import { ExitToApp } from '@material-ui/icons';
 
 const NavBar = styled.nav`      
-    background-color: #D73232;
+    background-color:transparent;
     width: 100vw;
     height: 60px;
     padding: 8px;
@@ -19,7 +20,7 @@ const Header: React.FC = () => {
   
   const handleClose = () => {
     router.push('/application/user/authentication')
-    localStorage.clear
+    localStorage.removeItem('Authorization')
   }
 
   return (
@@ -58,7 +59,7 @@ const Header: React.FC = () => {
             size="md"
             variant="outline"
             aria-label="Options"
-            icon={<CloseIcon />}
+            icon={<ExitToApp />}
             onClick={handleClose}
           />
         </Grid>

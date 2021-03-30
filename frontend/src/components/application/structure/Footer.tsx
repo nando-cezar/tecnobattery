@@ -1,35 +1,45 @@
 import React from 'react';
-import { Center, Link, SimpleGrid, Text } from '@chakra-ui/react'
+import { Center, Flex, Grid, Link, SimpleGrid, Text } from '@chakra-ui/react'
 
 import db from '../../../../db.json'
-
-import YouTubeIcon from '../../../assets/youtube.svg'
-import InstagramIcon from '../../../assets/instagram.svg'
-import LinkedinIcon from '../../../assets/linkedin.svg'
+import { Instagram, LinkedIn, YouTube } from '@material-ui/icons';
 
 const Footer: React.FC = () => {
   return (
     <footer>
-      <SimpleGrid columns={1}>
-        <Center>
-          <Text fontSize="md">
+      <Grid
+        as="main"
+        height="auto"
+        templateColumns="1fr"
+        templateRows="10px 1fr 1fr 10px"
+        templateAreas="
+            '.'
+            'description'
+            'links'
+            '.'
+          "
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Flex gridArea="description" flexDir="column" alignItems="center">
+          <Text fontSize={["sm", "md", "lg", "xl"]}>
             {db.footer}
           </Text>
-        </Center>
-        <Center marginTop={2}>
+        </Flex>
+        <Flex gridArea="links" flexDir="column" alignItems="center">
           <SimpleGrid columns={3} spacing={10}>
             <Link href="#" >
-              <YouTubeIcon />
+              <YouTube />
             </Link>
             <Link href="#" >
-              <LinkedinIcon />
+              <LinkedIn />
             </Link>
             <Link href="#" >
-              <InstagramIcon />
+              <Instagram />
             </Link>
           </SimpleGrid>
-        </Center>
-      </SimpleGrid>
+        </Flex>
+      </Grid>
     </footer>
   );
 }
