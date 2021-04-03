@@ -37,7 +37,6 @@ public class ClientManagementController {
   @PreAuthorize("hasAuthority('global:write')")
   @ResponseStatus(HttpStatus.CREATED)
   public ClientResponse save(@Valid @RequestBody ClientRequest clientInput) {
-
     return clientService.save(toolModelMapper.toModel(clientInput, Client.class), false);
   }
 

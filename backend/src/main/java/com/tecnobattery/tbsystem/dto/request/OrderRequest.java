@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,17 +26,19 @@ public class OrderRequest implements Serializable {
    *
    */
   private static final long serialVersionUID = 1L;
-  private Long id;
+  private final Long id;
   @NotNull(message = "Cliente é obrigatório.")
-  private Long clientId;
+  private final Long clientId;
   @NotBlank(message = "Descrição se encontra em branco ou inválido.")
   @Size(max = 255, message = "Nome deve possuir no máximo 255 caracteres.")
-  private String description;
+  private final String description;
   @NotNull(message = "Preço é obrigatório.")
-  private Double price;
+  private final Double price;
+  @Valid
   @NotNull(message = "Produto é obrigatório.")
-  private Set<ProductRequest> products = new HashSet<>();
+  private final Set<ProductRequest> products = new HashSet<>();
+  @Valid
   @NotNull(message = "Usuário é obrigatório.")
-  private Set<UserRequest> users = new HashSet<>();
+  private final Set<UserRequest> users = new HashSet<>();
 
 }

@@ -1,13 +1,11 @@
 package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import com.tecnobattery.tbsystem.twilio.server.phone_number.listener.ValidPhoneNumber;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -28,21 +26,19 @@ public class ProviderRequest implements Serializable {
    *
    */
   private static final long serialVersionUID = 1L;
-  private Long id;
+  private final Long id;
   @NotBlank(message = "CNPJ se encontra em branco ou inválido.")
   @CNPJ(message = "CNPJ inválido.")
-  private String cnpj;
+  private final String cnpj;
   @NotBlank(message = "Nome se encontra em branco ou inválido.")
-  private String name;
+  private final String name;
   @NotBlank(message = "Nome Fantasia se encontra em branco ou inválido.")
-  private String fantasyName;
-  @NotNull(message = "Telefone se encontra em branco ou inválido.")
-  @ValidPhoneNumber(message = "Telefone inválido.")
-  private String phoneNumber;
-  @NotBlank(message = "E-mail se encontra em branco ou inválido.")
-  @Email(message = "E-mail inválido.")
-  private String email;
+  private final String fantasyName;
   @Valid
-  private AddressRequest address;
+  private final AddressRequest address;
+  @Valid
+  private final Set<TelephoneRequest> telephones = new HashSet<>();
+  @Valid
+  private final Set<EmailRequest> emails = new HashSet<>();
 
 }

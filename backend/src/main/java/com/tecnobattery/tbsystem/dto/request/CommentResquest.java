@@ -22,12 +22,12 @@ public class CommentResquest implements Serializable {
    *
    */
   private static final long serialVersionUID = 1L;
-  private Long id;
+  private final Long id;
   @NotBlank(message = "Título se encontra em branco ou inválido.")
   @Size(max = 100, message = "Título deve possuir no máximo 100 caracteres.")
-  private String title;
+  private final String title;
   @NotBlank(message = "Descrição se encontra em branco ou inválido.")
   @Size(max = 255, message = "Descrição deve possuir no máximo 255 caracteres.")
-  private String description;
+  private final String description;
 
 }

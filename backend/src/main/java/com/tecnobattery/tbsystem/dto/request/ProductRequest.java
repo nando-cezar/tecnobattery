@@ -23,26 +23,26 @@ public class ProductRequest implements Serializable {
    *
    */
   private static final long serialVersionUID = 1L;
-  private Long id;
+  private final Long id;
   @NotBlank(message = "Nome se encontra em branco ou inválido.")
   @Size(max = 20, message = "Nome deve possuir no máximo 20 caracteres.")
-  private String name;
+  private final String name;
   @NotNull(message = "Potência é obrigatório em watts.")
   @Range(min = 1, max = 100000, message = "A potência varia entre 1w e 100000w.")
-  private Integer power;
+  private final Integer power;
   @NotNull(message = "Capacidade é obrigatório em mA.")
   @Range(min = 100, max = 20000, message = "A capacidade varia entre 100mA e 20000mA.")
-  private Integer capacity;
+  private final Integer capacity;
   @NotNull(message = "Tensão é obrigatório em volts.")
   @Range(min = 1, max = 10000, message = "A tensão varia entre 1v e 10000v.")
-  private Integer voltage;
+  private final Integer voltage;
   @NotNull(message = "Preço é obrigatório.")
-  private Double price;
+  private final Double price;
   @NotBlank(message = "Descrição se encontra em branco ou inválido.")
   @Size(max = 255, message = "Nome deve possuir no máximo 255 caracteres.")
-  private String description;
+  private final String description;
   @NotBlank(message = "URL da imagem se encontra em branco ou inválido.")
-  private String imageUrl;
+  private final String imageUrl;
 
   @Override
   public String toString() {

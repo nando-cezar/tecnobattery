@@ -1,5 +1,5 @@
 twilio:
-  account_sid: ACd87f64c2c3acfcde3d2dc77eab1e5d8f
-  auth_token: 11718d1d5c8ab5c3c98ad271cabf6cee
-  messaging_service_sid: MG2f457c174ef0d78c9e0e5eefee953a4e
-  from_phone_number: +18188050182 
+  account_sid: AC2570551bc1575e088620a99cf52f8b0a
+  auth_token: 7b08c63e2efd59ab26944c17a11aa5b2
+  messaging_service_sid: MGcf5fa2c12ca5bda7505ad895f18d3496
+  from_phone_number: +18574251677

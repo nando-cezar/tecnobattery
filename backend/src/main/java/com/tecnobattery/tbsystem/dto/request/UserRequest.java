@@ -24,23 +24,23 @@ public class UserRequest implements Serializable {
    *
    */
   private static final long serialVersionUID = 1L;
-  private Long id;
+  private final Long id;
   @NotBlank(message = "Senha se encontra em branco ou inválido.")
   @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
-  private String password;
+  private final String password;
   @NotBlank(message = "Username se encontra em branco ou inválido.")
   @Size(max = 20, message = "Username deve possuir no máximo 20 caracteres.")
-  private String username;
+  private final String username;
   @NotBlank(message = "E-mail se encontra em branco ou inválido.")
   @Email(message = "E-mail inválido.")
-  private String email;
+  private final String email;
   @NotNull(message = "Telefone se encontra em branco ou inválido.")
   @ValidPhoneNumber(message = "Telefone inválido.")
-  private String phoneNumber;
-  private boolean isAccountNonExpired;
-  private boolean isAccountNonLocked;
-  private boolean isCredentialsNonExpired;
-  private boolean isEnabled;
+  private final String phoneNumber;
+  private final boolean isAccountNonExpired;
+  private final boolean isAccountNonLocked;
+  private final boolean isCredentialsNonExpired;
+  private final boolean isEnabled;
 
   @Override
   public String toString() {

@@ -8,6 +8,42 @@ INSERT INTO tb_user (role, password, username, email, phone_number, is_account_n
 INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('EMPLOYEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste7', 'teste7@teste.com', '12346789', true, true, true, true);
 INSERT INTO tb_user (role, password, username, email, phone_number, is_account_non_expired, is_account_non_locked, is_credentials_non_expired, is_enabled) VALUES ('EMPLOYEE', '$2a$10$/RnTMUf..xYCoj5ksJQHYOfOSvdNvslP9BZj0h6rtKXGHE2SwyEC6', 'teste8', 'teste8@teste.com', '12346789', true, true, true, true);
  
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+INSERT INTO tb_telephone (number) VALUES ('+557191913523');
+
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
+
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace2', 'Complement2', 'Neighborhood2', 'City2', 'State2');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace3', 'Complement3', 'Neighborhood3', 'City3', 'State3');
@@ -131,3 +167,39 @@ INSERT INTO tb_order_product (order_id, product_id) VALUES (4 , 5);
 INSERT INTO tb_order_product (order_id, product_id) VALUES (5 , 1);
 INSERT INTO tb_order_product (order_id, product_id) VALUES (6 , 2);
 INSERT INTO tb_order_product (order_id, product_id) VALUES (7 , 3);
+
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (1,1);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (1,2);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (2,3);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (2,4);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (3,5);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (4,6);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (5,7);
+INSERT INTO tb_client_telephone (client_id, telephone_id) VALUES (5,8);
+
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (1,9);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (1,10);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (2,11);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (2,12);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (3,13);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (4,14);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (5,15);
+INSERT INTO tb_provider_telephone (provider_id, telephone_id) VALUES (5,16);
+
+INSERT INTO tb_client_email (client_id, email_id) VALUES (1,1);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (1,2);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (2,3);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (2,4);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (3,5);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (4,6);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (5,7);
+INSERT INTO tb_client_email (client_id, email_id) VALUES (5,8);
+
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (1,9);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (1,10);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (2,11);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (2,12);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (3,13);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (4,14);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (5,15);
+INSERT INTO tb_provider_email (provider_id, email_id) VALUES (5,16);

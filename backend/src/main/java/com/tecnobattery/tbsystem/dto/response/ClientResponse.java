@@ -1,6 +1,8 @@
 package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,8 +25,8 @@ public class ClientResponse implements Serializable {
   private String cnpj;
   private String name;
   private String fantasyName;
-  private String phoneNumber;
-  private String email;
   private AddressResponse address;
+  private Set<TelephoneResponse> telephones = new HashSet<>();
+  private Set<EmailResponse> emails = new HashSet<>();
 
 }

@@ -1,8 +1,6 @@
 package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,18 +13,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ProviderResponse implements Serializable {
+public class TelephoneResponse implements Serializable {
 
-  /**
-   *
-   */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private String cnpj;
-  private String name;
-  private String fantasyName;
-  private AddressResponse address;
-  private Set<TelephoneResponse> telephones = new HashSet<>();
-  private Set<EmailResponse> emails = new HashSet<>();
+  private String number;
 
 }
