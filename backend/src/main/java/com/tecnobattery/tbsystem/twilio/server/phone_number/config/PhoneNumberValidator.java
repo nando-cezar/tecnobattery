@@ -12,7 +12,7 @@ public class PhoneNumberValidator implements ConstraintValidator<ValidPhoneNumbe
 
     value = value.replaceAll("[\\s()-]", "");
 
-    if ("".equals(value) && value.length() <= 15 && !value.contains("+")) {
+    if (!(value.length() <= 15) || !value.contains("+")) {
       return false;
     }
     return true;

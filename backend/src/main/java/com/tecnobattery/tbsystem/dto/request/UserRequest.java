@@ -1,13 +1,12 @@
 package com.tecnobattery.tbsystem.dto.request;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.validation.constraints.Email;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import com.tecnobattery.tbsystem.twilio.server.phone_number.listener.ValidPhoneNumber;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,12 +30,10 @@ public class UserRequest implements Serializable {
   @NotBlank(message = "Username se encontra em branco ou inválido.")
   @Size(max = 20, message = "Username deve possuir no máximo 20 caracteres.")
   private final String username;
-  @NotBlank(message = "E-mail se encontra em branco ou inválido.")
-  @Email(message = "E-mail inválido.")
-  private final String email;
-  @NotNull(message = "Telefone se encontra em branco ou inválido.")
-  @ValidPhoneNumber(message = "Telefone inválido.")
-  private final String phoneNumber;
+  @Valid
+  private final Set<TelephoneRequest> telephones = new HashSet<>();
+  @Valid
+  private final Set<EmailRequest> emails = new HashSet<>();
   private final boolean isAccountNonExpired;
   private final boolean isAccountNonLocked;
   private final boolean isCredentialsNonExpired;

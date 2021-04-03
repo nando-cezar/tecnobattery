@@ -27,11 +27,9 @@ public class UserService implements UserDetailsService {
 
     if (!identifier) {
 
-      User userExists = userRepository.findByEmail(user.getEmail());
+      userRepository.findByUsername(user.getUsername())
+          .orElseThrow(() -> new BusinessException("Não existe um usuário cadastrado com este e-mail."));
 
-      if (userExists != null && !userExists.equals(user)) {
-        throw new BusinessException("Já existe um usuário cadastrado com este e-mail.");
-      }
     }
     return toolModelMapper.toModel(userRepository.save(user), UserResponse.class);
   }

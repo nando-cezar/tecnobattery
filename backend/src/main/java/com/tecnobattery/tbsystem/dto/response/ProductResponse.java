@@ -21,9 +21,6 @@ public class ProductResponse implements Serializable {
   private static final long serialVersionUID = 1L;
   private Long id;
   private String name;
-  private Integer power;
-  private Integer capacity;
-  private Integer voltage;
   private Double price;
   private String description;
   private String imageUrl;

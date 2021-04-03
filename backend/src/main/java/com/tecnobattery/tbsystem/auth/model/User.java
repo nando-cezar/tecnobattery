@@ -1,16 +1,25 @@
 package com.tecnobattery.tbsystem.auth.model;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.tecnobattery.tbsystem.auth.enumerated.ApplicationUserRole;
+import com.tecnobattery.tbsystem.entities.Email;
+import com.tecnobattery.tbsystem.entities.Telephone;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -41,24 +50,31 @@ public class User implements UserDetails {
   private ApplicationUserRole role;
   private String password;
   private String username;
-  private String email;
-  private String phoneNumber;
   private boolean isAccountNonExpired;
   private boolean isAccountNonLocked;
   private boolean isCredentialsNonExpired;
   private boolean isEnabled;
 
-  public User(ApplicationUserRole role, String password, String username, String email, String phoneNumber,
-      boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(name = "tb_user_telephone", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "telephone_id"))
+  private Set<Telephone> telephones = new HashSet<>();
+
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @JoinTable(name = "tb_user_email", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "email_id"))
+  private Set<Email> emails = new HashSet<>();
+
+  public User(ApplicationUserRole role, String password, String username, boolean isAccountNonExpired,
+      boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, Set<Telephone> telephones,
+      Set<Email> emails) {
     this.role = role;
     this.password = password;
     this.username = username;
-    this.email = email;
-    this.phoneNumber = phoneNumber;
     this.isAccountNonExpired = isAccountNonExpired;
     this.isAccountNonLocked = isAccountNonLocked;
     this.isCredentialsNonExpired = isCredentialsNonExpired;
     this.isEnabled = isEnabled;
+    this.telephones = telephones;
+    this.emails = emails;
   }
 
   @Override
