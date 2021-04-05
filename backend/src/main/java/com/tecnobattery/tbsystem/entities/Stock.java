@@ -23,8 +23,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "tb_management_loader")
-public class ManagementLoader implements Serializable {
+@Table(name = "tb_stock")
+public class Stock implements Serializable {
 
   /**
    *
@@ -36,13 +36,13 @@ public class ManagementLoader implements Serializable {
   @ManyToOne
   private Provider provider;
   @OneToOne
-  private Loader loader;
+  private Feedstock feedstock;
   private OffsetDateTime moment;
   private Integer amount;
 
-  public ManagementLoader(Provider provider, Loader loader, OffsetDateTime moment, Integer amount) {
+  public Stock(Provider provider, Feedstock feedstock, OffsetDateTime moment, Integer amount) {
     this.provider = provider;
-    this.loader = loader;
+    this.feedstock = feedstock;
     this.moment = moment;
     this.amount = amount;
   }

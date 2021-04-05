@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -20,11 +21,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "tb_board")
-public class Board implements Serializable {
+@Table(name = "tb_feedstock")
+public class Feedstock implements Serializable {
 
   /**
-   *
+   * 
    */
   private static final long serialVersionUID = 1L;
   @Id
@@ -32,25 +33,33 @@ public class Board implements Serializable {
   private Long id;
   private String brand;
   private String model;
-  private Integer power;
+  @ManyToOne
+  private Category category;
+  private Integer capacity;
   private Integer voltage;
-  private Integer width;
+  private Integer power;
+  private Integer diameter;
   private Integer height;
+  private Integer width;
   private Integer length;
   private Integer weight;
   private String imageUrl;
+  private String description;
 
-  public Board(String brand, String model, Integer power, Integer voltage, Integer width, Integer height,
-      Integer length, Integer weight, String imageUrl) {
+  public Feedstock(String brand, String model, Integer capacity, Integer voltage, Integer power, Integer diameter,
+      Integer height, Integer width, Integer length, Integer weight, String imageUrl, String description) {
     this.brand = brand;
     this.model = model;
-    this.power = power;
+    this.capacity = capacity;
     this.voltage = voltage;
-    this.width = width;
+    this.power = power;
+    this.diameter = diameter;
     this.height = height;
+    this.width = width;
     this.length = length;
     this.weight = weight;
     this.imageUrl = imageUrl;
+    this.description = description;
   }
 
 }

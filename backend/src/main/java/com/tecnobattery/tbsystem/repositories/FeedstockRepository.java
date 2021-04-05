@@ -2,16 +2,16 @@ package com.tecnobattery.tbsystem.repositories;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.entities.Battery;
+import com.tecnobattery.tbsystem.entities.Feedstock;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
-public interface BatteryRepository extends JpaRepository<Battery, Long> {
+public interface FeedstockRepository extends JpaRepository<Feedstock, Long> {
 
-  Battery findByModel(String model);
+  Feedstock findByModel(String model);
 
-  List<Battery> findByBrandContaining(String brand);
+  List<Feedstock> findByBrandContaining(String brand);
 
 }

@@ -44,6 +44,9 @@ INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
 INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
 INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
 
+INSERT INTO tb_category(name) VALUES ('Category1');
+INSERT INTO tb_category(name) VALUES ('Category2');
+
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace2', 'Complement2', 'Neighborhood2', 'City2', 'State2');
 INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace3', 'Complement3', 'Neighborhood3', 'City3', 'State3');
@@ -71,30 +74,14 @@ INSERT INTO tb_provider (cnpj, name, fantasy_Name, address_id) VALUES ('02.905.4
 INSERT INTO tb_provider (cnpj, name, fantasy_Name, address_id) VALUES ('02.905.450/0001-55', 'Provider6', 'Provider6', 6);
 INSERT INTO tb_provider (cnpj, name, fantasy_Name, address_id) VALUES ('02.905.450/0001-54', 'Provider7', 'Provider7', 7);
 INSERT INTO tb_provider (cnpj, name, fantasy_Name, address_id) VALUES ('02.905.450/0001-53', 'Provider8', 'Provider8', 8);
-
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery1', 'ModelBattery1', 100, 1000, 200, 300, 30, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery2', 'ModelBattery2', 100, 2000, 200, 300, 30, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery3', 'ModelBattery3', 100, 3000, 200, 300, 30, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery4', 'ModelBattery4', 100, 1000, 200, 300, 30, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery5', 'ModelBattery5', 100, 5000, 200, 300, 30, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery6', 'ModelBattery6', 100, 3000, 200, 300, 30, 'www.teste.com');
-INSERT INTO tb_battery (brand, model, capacity, voltage, diameter, height, weight, image_Url) VALUES ('Battery7', 'ModelBattery7', 100, 4000, 200, 300, 30, 'www.teste.com');
-
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board1', 'ModelBoard1', 100, 1000, 200, 300, 100, 30, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board2', 'ModelBoard2', 100, 2000, 200, 300, 100, 30, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board3', 'ModelBoard3', 100, 3000, 200, 300, 100, 30, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board4', 'ModelBoard4', 100, 1000, 200, 300, 100, 30, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board5', 'ModelBoard5', 100, 5000, 200, 300, 100, 30, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board6', 'ModelBoard6', 100, 3000, 200, 300, 100, 30, 'www.teste.com');
-INSERT INTO tb_board (brand, model, power, voltage, width, height, length, weight, image_Url) VALUES ('Board7', 'ModelBoard7', 100, 4000, 200, 300, 100, 30, 'www.teste.com');
-
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board1', 'ModelBoard1', 100, 1000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board2', 'ModelBoard2', 100, 2000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board3', 'ModelBoard3', 100, 3000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board4', 'ModelBoard4', 100, 1000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board5', 'ModelBoard5', 100, 5000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board6', 'ModelBoard6', 100, 3000, 200, 300, 100, 'www.teste.com');
-INSERT INTO tb_loader (brand, model, power, voltage, width, height, length, image_Url) VALUES ('Board7', 'ModelBoard7', 100, 4000, 200, 300, 100, 'www.teste.com');
+ 
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery1','ModelBattery1', 1,  100, 1000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery2','ModelBattery2', 1,  100, 2000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery3','ModelBattery3', 1,  100, 3000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery4','ModelBattery4', 1,  100, 1000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery5','ModelBattery5', 1,  100, 5000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery6','ModelBattery6', 1,  100, 3000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
+INSERT INTO tb_feedstock (brand, model, category_id, capacity, voltage, power, diameter, height, width, length, weight, image_Url, description) VALUES ('Battery7','ModelBattery7', 1,  100, 4000, 200, 300, 30, 30, 30, 30, 'www.teste.com', 'descriptionTESTE');
 
 INSERT INTO tb_product (name, price, description, image_Url) VALUES ('Pizza Bacon',        1000, 'fsdf', 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/pizza_bacon.jpg' );
 INSERT INTO tb_product (name, price, description, image_Url) VALUES ('Pizza Moda da Casa', 2000, 'fsdf', 'https://raw.githubusercontent.com/devsuperior/sds2/master/assets/pizza_moda.jpg');
@@ -120,29 +107,13 @@ INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (4,
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (5,  3, 'Title5',   'Commentario 5', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
 INSERT INTO tb_comment(order_id, user_id, title, description, moment) VALUES (6,  3, 'Title6',   'Commentario 6', TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z');
 
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (1,  1, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (1,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (2,  3, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (3,  4, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (3,  5, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (4,  6, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_battery(provider_id, battery_id, moment, amount) VALUES (5,  7, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (1,  1, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (1,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (2,  3, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (3,  4, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (3,  5, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (4,  6, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_board(provider_id, board_id, moment, amount) VALUES (5,  7, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (1,  1, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (1,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (2,  3, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (3,  4, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (3,  5, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (4,  6, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
-INSERT INTO tb_management_loader(provider_id, loader_id, moment, amount) VALUES (5,  7, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (1,  1, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (1,  2, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (2,  3, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (3,  4, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (3,  5, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (4,  6, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
+INSERT INTO tb_stock(provider_id, feedstock_id, moment, amount) VALUES (5,  7, TIMESTAMP WITH TIME ZONE '2021-01-01T10:00:00Z', 20);
 
 INSERT INTO tb_order_user (order_id, user_id) VALUES (1 , 1);
 INSERT INTO tb_order_user (order_id, user_id) VALUES (1 , 2);

@@ -2,6 +2,9 @@ package com.tecnobattery.tbsystem.dto.response;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +16,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class BatteryResponse implements Serializable {
+@JsonInclude(Include.NON_NULL)
+public class FeedstockResponse implements Serializable {
 
   /**
    *
@@ -22,11 +26,16 @@ public class BatteryResponse implements Serializable {
   private Long id;
   private String brand;
   private String model;
+  private CategoryResponse category;
   private Integer capacity;
   private Integer voltage;
+  private Integer power;
   private Integer diameter;
   private Integer height;
+  private Integer width;
+  private Integer length;
   private Integer weight;
   private String imageUrl;
+  private String description;
 
 }

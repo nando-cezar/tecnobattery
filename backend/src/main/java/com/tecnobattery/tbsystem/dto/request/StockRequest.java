@@ -18,7 +18,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ManagementBoardRequest implements Serializable {
+public class StockRequest implements Serializable {
 
     /**
      *
@@ -27,8 +27,8 @@ public class ManagementBoardRequest implements Serializable {
     private final Long id;
     @NotNull(message = "Fornecedor é obrigatório.")
     private final Long providerId;
-    @NotNull(message = "Bateria é obrigatório.")
-    private final Long boardId;
+    @NotNull(message = "Matéria-prima é obrigatório.")
+    private final Long feedstockId;
     @NotBlank(message = "Quantidade inválida.")
     @Max(9999)
     @Min(1)

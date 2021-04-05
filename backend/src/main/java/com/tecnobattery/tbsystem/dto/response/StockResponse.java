@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ManagementLoaderResponse implements Serializable {
+public class StockResponse implements Serializable {
 
   /**
    *
@@ -22,7 +22,7 @@ public class ManagementLoaderResponse implements Serializable {
   private static final long serialVersionUID = 1L;
   private Long id;
   private ProviderResponse provider;
-  private LoaderResponse loader;
+  private FeedstockResponse feedstock;
   private OffsetDateTime moment;
   private Integer amount;
 

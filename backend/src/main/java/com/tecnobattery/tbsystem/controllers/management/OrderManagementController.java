@@ -57,6 +57,7 @@ public class OrderManagementController {
     order.setOpening(OffsetDateTime.now());
     order.setProducts(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService, Product.class));
     order.setUsers(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService, User.class));
+    order.setPrice(order.getProducts().stream().mapToDouble(product -> product.getPrice().doubleValue()).sum());
 
     return orderService.save(order);
   }
@@ -84,7 +85,7 @@ public class OrderManagementController {
     Order order = toolModelMapper.toModel(orderService.findById(orderId), Order.class);
     order.setClient(toolModelMapper.toModel(clientService.findById(orderInput.getClientId()), Client.class));
     order.setDescription(orderInput.getDescription());
-    order.setPrice(orderInput.getPrice());
+    orderInput.getProducts().stream().forEach(product -> order.setPrice(product.getPrice()));
     order.setProducts(toolConvertIdObject.getObjectId(orderInput.getProducts(), productService, Product.class));
     order.setUsers(toolConvertIdObject.getObjectId(orderInput.getUsers(), userService, User.class));
     order.setId(orderId);

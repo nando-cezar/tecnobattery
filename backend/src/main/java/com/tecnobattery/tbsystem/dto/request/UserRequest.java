@@ -25,7 +25,7 @@ public class UserRequest implements Serializable {
   private static final long serialVersionUID = 1L;
   private final Long id;
   @NotBlank(message = "Senha se encontra em branco ou inválido.")
-  @Size(max = 20, message = "Senha deve possuir no máximo 14 caracteres.")
+  @Size(max = 20, message = "Senha deve possuir no máximo 20 caracteres.")
   private final String password;
   @NotBlank(message = "Username se encontra em branco ou inválido.")
   @Size(max = 20, message = "Username deve possuir no máximo 20 caracteres.")

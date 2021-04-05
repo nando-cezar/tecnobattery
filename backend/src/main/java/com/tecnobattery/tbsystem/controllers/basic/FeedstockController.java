@@ -2,8 +2,8 @@ package com.tecnobattery.tbsystem.controllers.basic;
 
 import java.util.List;
 
-import com.tecnobattery.tbsystem.dto.response.BoardResponse;
-import com.tecnobattery.tbsystem.services.BoardService;
+import com.tecnobattery.tbsystem.dto.response.FeedstockResponse;
+import com.tecnobattery.tbsystem.services.FeedstockService;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/api/v1/boards")
+@RequestMapping(value = "/api/v1/feedstocks")
 @AllArgsConstructor
-public class BoardController {
+public class FeedstockController {
 
-  private final BoardService boardService;
+  private final FeedstockService loaderService;
 
   @GetMapping
   @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
-  public ResponseEntity<List<BoardResponse>> findAll() {
-    return ResponseEntity.ok().body(boardService.findAll());
+  public ResponseEntity<List<FeedstockResponse>> findAll() {
+    return ResponseEntity.ok().body(loaderService.findAll());
   }
 
-  @GetMapping("/{boardId}")
+  @GetMapping("/{loaderId}")
   @PreAuthorize("hasRole('ROLE_EMPLOYEE')")
-  public ResponseEntity<BoardResponse> findById(@PathVariable Long boardId) {
-    return ResponseEntity.ok(boardService.findById(boardId));
+  public ResponseEntity<FeedstockResponse> findById(@PathVariable Long loaderId) {
+    return ResponseEntity.ok(loaderService.findById(loaderId));
   }
 }
