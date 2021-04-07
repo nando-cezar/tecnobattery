@@ -3,7 +3,7 @@
   <img src="https://github.com/nando-cezar/repository-img/blob/master/frontend_tecnobattery.png">
 </p>
 <p align="center">
-  <img src="https://github.com/nando-cezar/repository-img/blob/master/frontend_tecnobattery (1).png">
+  <img src="https://github.com/nando-cezar/repository-img/blob/master/frontend_tecnobattery(1).png">
 </p>
 
 > Status: Under development :warning:
