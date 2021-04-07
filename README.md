@@ -1,6 +1,9 @@
 # SYSTEMS: TECNOBATTERY
 <p align="center">
-  <img src="https://github.com/nando-cezar/repository-img/blob/master/1610214531743.jpg">
+  <img src="https://github.com/nando-cezar/repository-img/blob/master/frontend_tecnobattery.jpg">
+</p>
+<p align="center">
+  <img src="https://github.com/nando-cezar/repository-img/blob/master/frontend_tecnobattery (1).jpg">
 </p>
 
 > Status: Under development :warning:
