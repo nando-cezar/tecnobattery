@@ -41,8 +41,7 @@ public class Provider implements Serializable {
   private String name;
   private String fantasyName;
   private String cnpj;
-  private String phoneNumber;
-  private String email;
+
   @OneToOne(cascade = CascadeType.ALL)
   private Address address;
 
@@ -54,13 +53,11 @@ public class Provider implements Serializable {
   @JoinTable(name = "tb_provider_email", joinColumns = @JoinColumn(name = "provider_id"), inverseJoinColumns = @JoinColumn(name = "email_id"))
   private Set<Email> emails = new HashSet<>();
 
-  public Provider(String name, String fantasyName, String cnpj, String phoneNumber, String email, Address address,
-      Set<Telephone> telephones, Set<Email> emails) {
+  public Provider(String name, String fantasyName, String cnpj, Address address, Set<Telephone> telephones,
+      Set<Email> emails) {
     this.name = name;
     this.fantasyName = fantasyName;
     this.cnpj = cnpj;
-    this.phoneNumber = phoneNumber;
-    this.email = email;
     this.address = address;
     this.telephones = telephones;
     this.emails = emails;
