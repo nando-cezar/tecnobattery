@@ -7,6 +7,7 @@ import Header from '../../../components/application/structure/Header'
 import SpinnerChakra from '../../../components/application/actions/SpinnerChakra'
 import { useToast } from '@chakra-ui/react'
 import router from 'next/router'
+import BoxItem from '../../../components/application/structure/BoxItem'
 
 const Dashboard: React.FC = () => {
 
@@ -47,6 +48,7 @@ const Dashboard: React.FC = () => {
       {!loading &&
         <>
           <Header />
+          <BoxItem />
         </>
       }
     </>
