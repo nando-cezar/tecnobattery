@@ -30,17 +30,16 @@ public class Address implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String postalCode;
-  private String publicPlace;
+  private String cep;
+  private String street;
   private String complement;
   private String neighborhood;
   private String city;
   private String state;
 
-  public Address(String postalCode, String publicPlace, String complement, String neighborhood, String city,
-      String state) {
-    this.postalCode = postalCode;
-    this.publicPlace = publicPlace;
+  public Address(String cep, String street, String complement, String neighborhood, String city, String state) {
+    this.cep = cep;
+    this.street = street;
     this.complement = complement;
     this.neighborhood = neighborhood;
     this.city = city;

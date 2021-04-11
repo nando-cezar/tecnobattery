@@ -24,10 +24,10 @@ public class AddressRequest implements Serializable {
     private static final long serialVersionUID = 1L;
     @NotBlank(message = "CEP se encontra em branco ou inválido.")
     @Size(max = 9, message = "CEP deve possuir no máximo 9 caracteres.")
-    private final String postalCode;
+    private final String cep;
     @NotBlank(message = "Logradouro se encontra em branco ou inválido.")
     @Size(max = 255, message = "Logradouro deve possuir no máximo 255 caracteres.")
-    private final String publicPlace;
+    private final String street;
     @NotBlank(message = "Complemento se encontra em branco ou inválido.")
     @Size(max = 255, message = "Complemento deve possuir no máximo 255 caracteres.")
     private final String complement;

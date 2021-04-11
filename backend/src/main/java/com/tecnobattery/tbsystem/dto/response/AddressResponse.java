@@ -20,8 +20,8 @@ public class AddressResponse implements Serializable {
    */
   private static final long serialVersionUID = 1L;
   private Long id;
-  private String postalCode;
-  private String publicPlace;
+  private String cep;
+  private String street;
   private String complement;
   private String neighborhood;
   private String city;

@@ -47,15 +47,15 @@ INSERT INTO tb_email (address) VALUES ('nandocezar22@gmail.com');
 INSERT INTO tb_category(name) VALUES ('Category1');
 INSERT INTO tb_category(name) VALUES ('Category2');
 
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace2', 'Complement2', 'Neighborhood2', 'City2', 'State2');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace3', 'Complement3', 'Neighborhood3', 'City3', 'State3');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace4', 'Complement4', 'Neighborhood4', 'City4', 'State4');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace5', 'Complement5', 'Neighborhood5', 'City5', 'State5');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace6', 'Complement6', 'Neighborhood6', 'City6', 'State6');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace7', 'Complement7', 'Neighborhood7', 'City7', 'State7');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace8', 'Complement8', 'Neighborhood8', 'City8', 'State8');
-INSERT INTO tb_address (postal_Code, public_Place, complement, neighborhood, city, state) VALUES ('12345', 'publicPlace9', 'Complement9', 'Neighborhood9', 'City9', 'State9');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310355', 'street1', 'Complement1', 'Neighborhood1', 'City1', 'State1');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310300', 'street2', 'Complement2', 'Neighborhood2', 'City2', 'State2');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310200', 'street3', 'Complement3', 'Neighborhood3', 'City3', 'State3');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310500', 'street4', 'Complement4', 'Neighborhood4', 'City4', 'State4');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310600', 'street5', 'Complement5', 'Neighborhood5', 'City5', 'State5');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310800', 'street6', 'Complement6', 'Neighborhood6', 'City6', 'State6');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310700', 'street7', 'Complement7', 'Neighborhood7', 'City7', 'State7');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310000', 'street8', 'Complement8', 'Neighborhood8', 'City8', 'State8');
+INSERT INTO tb_address (cep, street, complement, neighborhood, city, state) VALUES ('41310010', 'street9', 'Complement9', 'Neighborhood9', 'City9', 'State9');
 
 INSERT INTO tb_client (cnpj, name, fantasy_Name, address_id) VALUES ('02.905.450/0001-52', 'Client1', 'Cliente1', 1);
 INSERT INTO tb_client (cnpj, name, fantasy_Name, address_id) VALUES ('02.905.450/0001-59', 'Client2', 'Cliente2', 2);
