@@ -1,5 +1,5 @@
 import { AddIcon, EditIcon, ExternalLinkIcon, HamburgerIcon, RepeatIcon } from '@chakra-ui/icons';
-import { Center, Flex, Grid, IconButton, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react';
+import { Center, Flex, Grid, IconButton, Menu, MenuButton, MenuItem, MenuList, Spacer } from '@chakra-ui/react';
 import React from 'react';
 import styled from 'styled-components'
 import ModalConfig from '../modal/ModalConfig'
@@ -11,7 +11,7 @@ import { ExitToApp } from '@material-ui/icons';
 
 const NavBar = styled.nav`      
     background-color:transparent;
-    width: 100vw;
+    width: 100%;
     height: 60px;
     padding: 8px;
 `;
@@ -25,7 +25,7 @@ const Header: React.FC = () => {
 
   return (
     <NavBar>
-      <Flex justifyContent='space-between'>
+      <Flex>
         <Center>
           <Menu>
             <MenuButton
@@ -38,19 +38,20 @@ const Header: React.FC = () => {
             <MenuList>
               <MenuItem icon={<AddIcon />} command="⌘T">
                 New Tab
-          </MenuItem>
+              </MenuItem>
               <MenuItem icon={<ExternalLinkIcon />} command="⌘N">
                 New Window
-            </MenuItem>
+              </MenuItem>
               <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
                 Open Closed Tab
-          </MenuItem>
+              </MenuItem>
               <MenuItem icon={<EditIcon />} command="⌘O">
                 Open File...
-          </MenuItem>
+              </MenuItem>
             </MenuList>
           </Menu>
         </Center>
+        <Spacer />
         <Grid templateColumns="repeat(4, 1fr)" gap={2}>
           <ColorMode />
           <ModalHelp />

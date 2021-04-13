@@ -1,8 +1,8 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Badge, Box } from '@chakra-ui/react';
+import { Badge, Box, Center, Flex, Grid } from '@chakra-ui/react';
 import React from 'react';
 
-const BoxItem: React.FC = () => {
+const BoxCard: React.FC = () => {
   const property = {
     imageUrl: "https://bit.ly/2Z4KKcF",
     imageAlt: "Rear view of modern home with pool",
@@ -70,4 +70,4 @@ const BoxItem: React.FC = () => {
   )
 }
 
-export default BoxItem;
+export default BoxCard;

@@ -7,7 +7,7 @@ import Header from '../../../components/application/structure/Header'
 import SpinnerChakra from '../../../components/application/actions/SpinnerChakra'
 import { useToast } from '@chakra-ui/react'
 import router from 'next/router'
-import BoxItem from '../../../components/application/structure/BoxItem'
+import BoxList from '../../../components/application/structure/BoxList'
 
 const Dashboard: React.FC = () => {
 
@@ -27,14 +27,14 @@ const Dashboard: React.FC = () => {
 
   function verifed() {
     alert(localStorage.getItem('Authorization'))
-    if(localStorage.getItem('Authorization').length == 0){
+    if (localStorage.getItem('Authorization').length == 0) {
       toast({
         title: "Token inválido.",
         description: "Efetue o login novamente",
         status: "error",
         duration: 1500,
         isClosable: true,
-      }) 
+      })
       localStorage.removeItem('Authorization')
       router.push('/')
     }
@@ -48,7 +48,7 @@ const Dashboard: React.FC = () => {
       {!loading &&
         <>
           <Header />
-          <BoxItem />
+          <BoxList />
         </>
       }
     </>

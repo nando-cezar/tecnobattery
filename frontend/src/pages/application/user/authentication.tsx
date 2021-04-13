@@ -11,9 +11,6 @@ import { authenticationUser } from '../../../server/connection/api'
 import SpinnerChakra from '../../../components/application/actions/SpinnerChakra'
 import ModalRecoveryUser from '../../../components/management/user/ModalRecoveryUser'
 import { Facebook } from '@material-ui/icons'
-import { Head } from 'next/document'
-
-import db from '../../../../db.json'
 
 export default function Authentication() {
 
